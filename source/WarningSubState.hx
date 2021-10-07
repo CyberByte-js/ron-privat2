@@ -28,12 +28,12 @@ class WarningSubState extends MusicBeatState
 		if (controls.ACCEPT)
 		{
 			leftState = true;
-			FlxG.switchState(new MainMenuState());
+			FlxG.switchState(new Warning2SubState());
 		}
 		if (controls.BACK)
 		{
 			leftState = true;
-			FlxG.switchState(new MainMenuState());
+			FlxG.switchState(new Warning2SubState());
 		}
 		super.update(elapsed);
 	}
