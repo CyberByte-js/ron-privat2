@@ -15,6 +15,7 @@ Trojan-Virus-b:ron-usb-b:2
 File-Manipulation-b:ron-usb-b:2
 Atelophobia-b:ateloron:2
 Factory-Reset-b:factorytankman-b:2
+Slammed:ron:3
 Trouble:ron:0
 Bijuu:ron:0
 
