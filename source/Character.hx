@@ -800,6 +800,21 @@ class Character extends FlxSprite
 				addOffset("singLEFT", 98, -27);
 				addOffset("singRIGHT", -89, -51);
 				addOffset("singDOWN", 40, -120);
+			case 'bambi-new':
+				frames = Paths.getSparrowAtlas('bambi/bambiRemake');
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 54, 3);
+				addOffset("singRIGHT", -50, 0);
+				addOffset("singLEFT", 20, -7);
+				addOffset("singDOWN", -5, -43);
+
+				playAnim('idle');
 		}
 
 		dance();
