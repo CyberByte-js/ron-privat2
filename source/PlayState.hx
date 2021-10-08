@@ -904,7 +904,7 @@ class PlayState extends MusicBeatState
 				// evilTrail.scrollFactor.set(1.1, 1.1);
 				}
 			
-				case 'NOGFHAHA':
+				case 'glitch':
 					gf.y -= 626742734737;
 		}
 
