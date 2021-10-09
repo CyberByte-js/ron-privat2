@@ -34,17 +34,17 @@ class Caching extends MusicBeatState
 
         FlxG.worldBounds.set(0,0);
 
-        text = new FlxText(FlxG.width / 2, FlxG.height / 2 + 300,0,"Loading...");
+        text = new FlxText(FlxG.width / 2, FlxG.height / 2 + 300,0,"loading...");
+		text.setFormat(Paths.font("w95.otf"), 34, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
         text.size = 34;
         text.alignment = FlxTextAlign.CENTER;
         text.alpha = 0;
 
-        kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('KadeEngineLogo'));
-        kadeLogo.x -= kadeLogo.width / 2;
-        kadeLogo.y -= kadeLogo.height / 2 + 100;
+        kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('loading'));
+		kadeLogo.screenCenter();
         text.y -= kadeLogo.height / 2 - 125;
         text.x -= 170;
-        kadeLogo.setGraphicSize(Std.int(kadeLogo.width * 0.6));
+        kadeLogo.setGraphicSize(Std.int(kadeLogo.width * 0.5));
 
         kadeLogo.alpha = 0;
 
@@ -71,7 +71,7 @@ class Caching extends MusicBeatState
             var alpha = HelperFunctions.truncateFloat(done / toBeDone * 100,2) / 100;
             kadeLogo.alpha = alpha;
             text.alpha = alpha;
-            text.text = "Loading... (" + done + "/" + toBeDone + ")";
+            text.text = "loading... (" + done + "/" + toBeDone + ")";
         }
 
         super.update(elapsed);

@@ -5,6 +5,7 @@ import Controls.KeyboardScheme;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.addons.display.FlxBackdrop;
 import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -49,7 +50,8 @@ class MainMenuState extends MusicBeatState
 	public static var kadeEngineVer:String = "KE 1.5.4" + nightly;
 	public static var gameVer:String = "0.2.7.1";
 
-	var magenta:FlxSprite;
+	var cloud:FlxBackdrop;
+	var city:FlxBackdrop;
 	var camFollow:FlxObject;
 	public static var finishedFunnyMove:Bool = false;
 
@@ -69,35 +71,54 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('menuBG'));
-		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0.10;
-		bg.setGraphicSize(Std.int(bg.width * 1.1));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuSunset'));
+		bg.scrollFactor.set();
 		bg.updateHitbox();
 		bg.screenCenter();
+		add(bg);
+		
+		cloud = new FlxBackdrop(Paths.image('menuClouds'), 32, 0, true, true, 0, -250);
+		cloud.scrollFactor.set(0.1);
+		add(cloud);
+		
+		city = new FlxBackdrop(Paths.image('menuCity'), 32, 0, true, true, 0, -250);
+		city.scrollFactor.set(0.2);
+		add(city);
+		
+		var road:FlxSprite = new FlxSprite();
+		road.frames = Paths.getSparrowAtlas('menuRoad');
+		road.scrollFactor.set();
+		road.animation.addByPrefix('road instance 1', 'road instance 1', 24, true);
+		road.antialiasing = true;
+		road.screenCenter(X);
+		road.x += 130;
+		add(road);
+		road.animation.play('road instance 1');
+		
+		var car:FlxSprite = new FlxSprite(597.5, 289);
+		car.frames = Paths.getSparrowAtlas('menuCar');
+		car.animation.addByPrefix('car instance 1', 'car instance 1', 24, true);
+		car.antialiasing = true;
+		add(car);
+		car.scrollFactor.set();
+		car.animation.play('car instance 1');
+		
 		if(FlxG.save.data.antialiasing)
 			{
 				bg.antialiasing = true;
 			}
-		add(bg);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
-		magenta.scrollFactor.x = 0;
-		magenta.scrollFactor.y = 0.10;
-		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
-		magenta.updateHitbox();
-		magenta.screenCenter();
-		magenta.visible = false;
-		if(FlxG.save.data.antialiasing)
-			{
-				magenta.antialiasing = true;
-			}
-		magenta.color = 0xFFfd719b;
-		add(magenta);
-		// magenta.scrollFactor.set();
+		var logoBl:FlxSprite = new FlxSprite(160, -380);
+		logoBl.scale.set(0.5, 0.5);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.antialiasing = true;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, true);
+		logoBl.updateHitbox();
+		add(logoBl);
+		logoBl.animation.play('bump');
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -106,14 +127,13 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, FlxG.height * 1.6);
+			var menuItem:FlxSprite = new FlxSprite(40, FlxG.height * 1.6);
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.setGraphicSize(Std.int(menuItem.width * 0.95));
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
 			if(FlxG.save.data.antialiasing)
@@ -156,6 +176,8 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		cloud.x += 1;
+		city.x += 2;
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -206,9 +228,6 @@ class MainMenuState extends MusicBeatState
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
-					
-					if (FlxG.save.data.flashing)
-						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
@@ -245,11 +264,6 @@ class MainMenuState extends MusicBeatState
 		}
 
 		super.update(elapsed);
-
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.screenCenter(X);
-		});
 	}
 	
 	function goToState()
@@ -294,7 +308,7 @@ class MainMenuState extends MusicBeatState
 			if (spr.ID == curSelected && finishedFunnyMove)
 			{
 				spr.animation.play('selected');
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
+				//camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
 			}
 
 			spr.updateHitbox();

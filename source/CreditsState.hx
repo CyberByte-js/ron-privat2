@@ -172,46 +172,48 @@ class CreditsState extends MusicBeatState
 		{
             switch(curSelected)
             {
-                case 0: //1
+                case 0:
                     FlxG.openURL("https://gamebanana.com/members/1846650");
-                case 1: //2
+                case 1:
                     FlxG.openURL("https://gamebanana.com/members/1782968");
-				case 2: //3
+				case 2:
 					FlxG.openURL("https://gamebanana.com/members/1714082");
-				case 3: //4
+				case 3:
 					FlxG.openURL("https://clips.twitch.tv/CuriousBrainyFriseePogChamp-3GIEA2MKSohYB8VW");
-				case 4: //5
+				case 4:
 					FlxG.openURL("https://gamebanana.com/members/1797091");
-				case 5: //6
+				case 5:
 					FlxG.openURL("https://gamebanana.com/members/1878606");
-				case 6: //7
+				case 6:
 					FlxG.openURL("https://gamejolt.com/@Ekical");
-				case 7: //8
+				case 7:
 					FlxG.openURL("https://gamebanana.com/members/1966530");
-				case 8: //9
+				case 8:
 					FlxG.openURL("https://www.youtube.com/channel/UC-jtjO3youJyDbpH67uDn_g");
-				case 9: //10
+				case 9:
 					FlxG.openURL("https://gamebanana.com/members/1795346");
-				case 10: //11
+				case 10:
+					FlxG.openURL("https://gamebanana.com/members/1864849");
+				case 11:
 					FlxG.openURL("https://gamejolt.com/@firey7k");
-				case 11: //12
-					FlxG.openURL("https://gamebanana.com/members/1771319");
-				case 12: //13
+				case 12:
 					FlxG.openURL("https://gamebanana.com/members/1916432");
-				case 13: //14
+				case 13:
 					FlxG.openURL("https://www.youtube.com/channel/UCLATrFLIwMFqvWLDKJ3GXjw");
-				case 14: //15
+				case 14:
 					FlxG.openURL("https://gamebanana.com/members/1800032");
-				case 15: //16
+				case 15:
 					FlxG.openURL("https://gamebanana.com/members/1663640");
-				case 16: //17
+				case 16:
 					FlxG.openURL("https://gamebanana.com/members/1934701");
-				case 17: //18
+				case 17:
 					FlxG.openURL("https://gamebanana.com/members/1775077");
-				case 18: //19
+				case 18:
 					FlxG.openURL("https://gamebanana.com/members/1774971");
-				case 19: //20
+				case 19:
 					FlxG.openURL("https://gamebanana.com/members/1805202");
+				case 20:
+					FlxG.openURL("https://gamebanana.com/members/1981735");
             }
 		}
 	}

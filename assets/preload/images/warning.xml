@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="warning.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="popup2 instance 10000" x="0" y="0" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10001" x="0" y="0" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10002" x="838" y="0" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10003" x="0" y="646" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10004" x="838" y="646" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10005" x="0" y="1292" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10006" x="838" y="1292" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10007" x="0" y="1938" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10008" x="838" y="1938" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10009" x="0" y="2584" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10010" x="838" y="2584" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10011" x="0" y="3230" width="838" height="646"/>
+	<SubTexture name="popup2 instance 10012" x="838" y="3230" width="838" height="646"/>
+</TextureAtlas>

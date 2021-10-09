@@ -170,11 +170,14 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		// bg.antialiasing = true;
-		// bg.setGraphicSize(Std.int(bg.width * 0.6));
-		// bg.updateHitbox();
-		add(bg);
+				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('bg'));
+				bg.setGraphicSize(Std.int(bg.width * 4));
+				bg.setGraphicSize(Std.int(bg.height * 4));
+				bg.antialiasing = true;
+				bg.scrollFactor.set();
+				bg.screenCenter(XY);
+				bg.active = false;
+				add(bg);
 
 		if(Main.watermarks) {
 			logoBl = new FlxSprite(-150, -100);
@@ -186,7 +189,7 @@ class TitleState extends MusicBeatState
 			// logoBl.screenCenter();
 			// logoBl.color = FlxColor.BLACK;
 		} else {
-			logoBl = new FlxSprite(-150, -100);
+			logoBl = new FlxSprite(-100, -90);
 			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 			logoBl.antialiasing = true;
 			logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
@@ -196,15 +199,15 @@ class TitleState extends MusicBeatState
 			// logoBl.color = FlxColor.BLACK;
 		}
 
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
+		gfDance = new FlxSprite(FlxG.width * 0.62, FlxG.height * 0.3);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
-		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+		gfDance.animation.addByPrefix('idle', "GF Dancing Beat", 24);
 		gfDance.antialiasing = true;
 		add(gfDance);
 		add(logoBl);
 
-		titleText = new FlxSprite(100, FlxG.height * 0.8);
+		titleText = new FlxSprite(40, FlxG.height * 0.7);
+		titleText.scale.set(0.7, 0.7);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
 		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
 		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
@@ -226,7 +229,7 @@ class TitleState extends MusicBeatState
 		add(credGroup);
 		textGroup = new FlxGroup();
 
-		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF513300);
 		credGroup.add(blackScreen);
 
 		credTextShit = new Alphabet(0, 0, "Riskerman\nCyberByte\nfunkycode-time", true);
@@ -328,7 +331,7 @@ class TitleState extends MusicBeatState
 				{
 					returnedData[0] = data.substring(0, data.indexOf(';'));
 					returnedData[1] = data.substring(data.indexOf('-'), data.length);
-					FlxG.switchState(new OutdatedSubState());
+					FlxG.switchState(new WarningSubState());
 				}
 				
 				http.onError = function (error) {
@@ -394,11 +397,7 @@ class TitleState extends MusicBeatState
 				
 			danceLeft = !danceLeft;
 	
-			if (danceLeft)
-				gfDance.animation.play('danceRight');
-			else
-				gfDance.animation.play('danceLeft');
-	
+			gfDance.animation.play('idle');
 			}
 		}
 		

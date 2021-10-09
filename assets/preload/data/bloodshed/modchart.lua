@@ -8,7 +8,6 @@ function setDefault(id)
 end
 
 function start (song)
-    showOnlyStrums = true
     for i=0,3 do
         tweenPosXAngle(i, _G['defaultStrum'..i..'X'] + 1250,getActorAngle(i), 0.5, 'setDefault')
     end

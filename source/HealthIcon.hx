@@ -17,6 +17,7 @@ class HealthIcon extends FlxSprite
 
 		antialiasing = true;
 		animation.add('bf', [0, 1], 0, false, isPlayer);
+		animation.add('bf-run', [0, 1], 0, false, isPlayer);
 		animation.add('bf-car', [0, 1], 0, false, isPlayer);
 		animation.add('bf-christmas', [0, 1], 0, false, isPlayer);
 		animation.add('bf-pixel', [21, 21], 0, false, isPlayer);
@@ -43,7 +44,8 @@ class HealthIcon extends FlxSprite
 		// ty :)
 		animation.add('ron', [24, 25], 0, false, isPlayer);
 		animation.add('ron-mad', [26, 27], 0, false, isPlayer);		
-		animation.add('hellron', [28, 29], 0, false, isPlayer);		
+		animation.add('hellron', [28, 29], 0, false, isPlayer);	
+		animation.add('hellron-crazy', [45, 45], 0, false, isPlayer);			
 		animation.add('ateloron', [28, 29], 0, false, isPlayer);
 		animation.add('ron-usb', [30, 31], 0, false, isPlayer);		
 		animation.add('factorytankman', [32, 33], 0, false, isPlayer);
@@ -57,7 +59,6 @@ class HealthIcon extends FlxSprite
 		animation.add('factorytankman-2', [42, 43], 0, false, isPlayer);
 		animation.add('hellron-2', [38, 39], 0, false, isPlayer);
 		animation.add('gf-in', [44], 0, false, isPlayer);
-		animation.add('bambi-new', [44, 45], 0, false, isPlayer);
 		animation.play(char);
 
 		switch(char)

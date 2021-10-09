@@ -105,8 +105,7 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.scrollFactor.set();
 			add(portraitLeft);
 			portraitLeft.visible = false;
-		}
-		else if (PlayState.SONG.song.toLowerCase() == 'bloodshed')
+		} else if (PlayState.SONG.song.toLowerCase() == 'bloodshed')
 		{
 			portraitLeft = new FlxSprite(-1500, 10);
 			portraitLeft.frames = Paths.getSparrowAtlas('portraits/hellronPortrait', 'shared');
@@ -116,12 +115,7 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.scrollFactor.set();
 			add(portraitLeft);
 			portraitLeft.visible = false;
-		}
-		else if (PlayState.SONG.song.toLowerCase() == 'ron'
-			|| PlayState.SONG.song.toLowerCase() == 'trojan-virus'
-			|| PlayState.SONG.song.toLowerCase() == 'file-manipulation'
-			|| PlayState.SONG.song.toLowerCase() == 'atelophobia'
-			|| PlayState.SONG.song.toLowerCase() == 'factory-reset')
+		} else if (PlayState.SONG.song.toLowerCase() == 'ron' || PlayState.SONG.song.toLowerCase() == 'trojan-virus' || PlayState.SONG.song.toLowerCase() == 'file-manipulation' || PlayState.SONG.song.toLowerCase() == 'atelophobia')
 		{
 			portraitLeft = new FlxSprite(-1500, 10);
 			portraitLeft.frames = Paths.getSparrowAtlas('portraits/ronPortrait', 'shared');
@@ -132,39 +126,15 @@ class DialogueBox extends FlxSpriteGroup
 			add(portraitLeft);
 			portraitLeft.visible = false;
 		}
-		
-		if (PlayState.SONG.song.toLowerCase() == 'ron'
-			|| PlayState.SONG.song.toLowerCase() == 'ayo'
-			|| PlayState.SONG.song.toLowerCase() == 'bloodshed'
-			|| PlayState.SONG.song.toLowerCase() == 'trojan-virus'
-			|| PlayState.SONG.song.toLowerCase() == 'file-manipulation'
-			|| PlayState.SONG.song.toLowerCase() == 'atelophobia')
-		{
-			portraitRight = new FlxSprite(30, 90);
-			portraitRight.frames = Paths.getSparrowAtlas('portraits/bfPortrait', 'shared');
-			portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter instance', 24, false);
-			portraitRight.setGraphicSize(Std.int(portraitRight.width * 0.8));
-			portraitRight.updateHitbox();
-			portraitRight.scrollFactor.set();
-			add(portraitRight);
-			portraitRight.visible = false;
-		}
-		else if (PlayState.SONG.song.toLowerCase() == 'factory-reset')
-		{
-			portraitRight = new FlxSprite(30, 90);
-			portraitRight.frames = Paths.getSparrowAtlas('portraits/gfPortrait', 'shared');
-			portraitRight.animation.addByPrefix('enter', 'Girlfriend portrait enter instance', 24, false);
-			portraitRight.setGraphicSize(Std.int(portraitRight.width * 0.8));
-			portraitRight.updateHitbox();
-			portraitRight.scrollFactor.set();
-			add(portraitRight);
-			portraitRight.visible = false;
-		}
-		
 
-		
-
-		
+		portraitRight = new FlxSprite(30, 90);
+		portraitRight.frames = Paths.getSparrowAtlas('portraits/bfPortrait', 'shared');
+		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter instance', 24, false);
+		portraitRight.setGraphicSize(Std.int(portraitRight.width * 0.8));
+		portraitRight.updateHitbox();
+		portraitRight.scrollFactor.set();
+		add(portraitRight);
+		portraitRight.visible = false;
 
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
@@ -239,16 +209,11 @@ class DialogueBox extends FlxSpriteGroup
 						FlxG.sound.music.fadeOut(2.2, 0);
 					else if (PlayState.SONG.song.toLowerCase() == 'atelophobia')
 					{
-						if (!PlayState.atelophobiaCutsceneDone)
-						{
-							PlayState.atelophobiaCutsceneDone = true;
-							finishThing = function() { };
-							video.playMP4(Paths.video('atelscene'), new PlayState(), false, false, false);
-						}
-						else
-						{
-							FlxG.sound.music.fadeOut(2.2, 0);
-						}
+
+					}
+					else
+					{
+						FlxG.sound.music.fadeOut(2.2, 0);
 					}
 					new FlxTimer().start(0.2, function(tmr:FlxTimer)
 					{
