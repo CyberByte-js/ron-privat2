@@ -913,7 +913,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			
-				case 'NOGFHAHA':
+				case 'glitch':
 					gf.y -= 626742734737;
 		}
 
