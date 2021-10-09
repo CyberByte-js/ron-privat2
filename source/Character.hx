@@ -801,7 +801,7 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -89, -51);
 				addOffset("singDOWN", 40, -120);
 			case 'bambi-new':
-				frames = Paths.getSparrowAtlas('bambi/bambiRemake');
+				frames = Paths.getSparrowAtlas('ron/characters/bambiRemake');
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singDOWN', 'down', 24, false);
 				animation.addByPrefix('singUP', 'up', 24, false);
