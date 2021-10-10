@@ -349,6 +349,8 @@ class PlayState extends MusicBeatState
 		{
 			case 'ron':
 						dialogue = CoolUtil.coolTextFile(Paths.txt('ron/ronIsBack'));
+			case 'wasted':
+						dialogue = CoolUtil.coolTextFile(Paths.txt('wasted/dialog'));
 			case 'ayo':
 						dialogue = CoolUtil.coolTextFile(Paths.txt('ayo/diaman'));
 			case 'bloodshed':
@@ -778,23 +780,24 @@ class PlayState extends MusicBeatState
 			case 'glitch':
 				defaultCamZoom = 0.9;
 				curStage = 'glitch';
-				var bg:FlxSprite = new FlxSprite(-300, -100).loadGraphic(Paths.image('ron/bg/png'));
-					bg.setGraphicSize(Std.int(bg.width * 1.7));
-					bg.setGraphicSize(Std.int(bg.height * 1.7));
-					bg.antialiasing = true;
-					bg.scrollFactor.set(0.9, 0.9);
-					bg.active = false;
-					add(bg);
-					case 'NOGFHAHA':
-						defaultCamZoom = 0.9;
-						curStage = 'NOGFHAHA';
-						var bg:FlxSprite = new FlxSprite(-300, -100).loadGraphic(Paths.image('ron/bg/png'));
-							bg.setGraphicSize(Std.int(bg.width * 1.7));
-							bg.setGraphicSize(Std.int(bg.height * 1.7));
-							bg.antialiasing = true;
-							bg.scrollFactor.set(0.9, 0.9);
-							bg.active = false;
-							add(bg);
+				var bg:FlxSprite = new FlxSprite();
+				bg.frames = Paths.getSparrowAtlas(Paths.image('updateron/bg/atelo_bg'));
+				bg.animation.addByPrefix('idle', 'bg instance 1', 24, true);
+				bg.animation.play('idle');
+				bg.scrollFactor.set(0.05, 0.05);
+				bg.screenCenter();
+				add(bg);
+				var lamp:FlxSprite = new FlxSprite(-300, -100);
+				lamp.frames = Paths.getSparrowAtlas(Paths.image('updateron/bg/atelo_lamp'));
+				lamp.animation.addByPrefix('idle', 'lamppost instance 1', 24, true);
+				lamp.animation.play('idle');
+				lamp.scrollFactor.set(0.9, 0.9);
+				add(lamp);
+				var ground:FlxSprite = new FlxSprite(-300, -100).loadGraphic(Paths.image('updateron/bg/atelo_ground'));
+				ground.antialiasing = true;
+				ground.scrollFactor.set(0.9, 0.9);
+				ground.active = false;
+				add(ground);
 			case 'baka':
 				{
 					defaultCamZoom = 0.9;
@@ -915,8 +918,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			
-				case 'glitch':
-					gf.y -= 626742734737;
+				//gf disappears anyway lmao we dont need this
 		}
 
 		if (!PlayStateChangeables.Optimize)
@@ -1057,6 +1059,7 @@ class PlayState extends MusicBeatState
 		
 		scoreTxt.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		add(scoreTxt);
+		scoreTxt.screenCenter(X);
 
 		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY", 20);
 		replayTxt.setFormat(Paths.font("w95.otf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -1095,6 +1098,10 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'ron':
+				dad.x += 70;
+				dad.y += 250;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'ron-angry':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
@@ -1223,6 +1230,8 @@ class PlayState extends MusicBeatState
 					});
 				case 'ron':
 					schoolIntro(doof);
+				case 'wasted':
+					schoolIntro(doof);
 				case 'ayo':
 					schoolIntro(doof);
 				case 'bloodshed':
@@ -1233,6 +1242,9 @@ class PlayState extends MusicBeatState
 				case 'file-manipulation':
 					schoolIntro(doof);
 				case 'atelophobia':
+					camFollow.y = dad.getMidpoint().y;
+					camFollow.x = dad.getMidpoint().x + 300;
+					FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
 					schoolIntro(doof);
 				case 'bloodshed-b':
 					startCountdown();
@@ -1747,7 +1759,18 @@ class PlayState extends MusicBeatState
 				var skin = 'NOTE_assets';
 
 				var gottaHitNote:Bool = section.mustHitSection;
-				
+
+				if (songNotes[1] > 3)
+				{
+					gottaHitNote = !section.mustHitSection;
+				}
+
+				var oldNote:Note;
+				if (unspawnNotes.length > 0)
+					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
+				else
+					oldNote = null;
+		
 				if (gottaHitNote == false) {
 					skin = 'ronsip';
 					switch (dad.curCharacter)
@@ -1770,17 +1793,6 @@ class PlayState extends MusicBeatState
 							skin = 'bhell';
 					}
 				}
-
-				if (songNotes[1] > 3)
-				{
-					gottaHitNote = !section.mustHitSection;
-				}
-
-				var oldNote:Note;
-				if (unspawnNotes.length > 0)
-					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
-				else
-					oldNote = null;
 
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, skin);
 
@@ -2230,7 +2242,9 @@ class PlayState extends MusicBeatState
 
 		var lengthInPx = scoreTxt.textField.length * scoreTxt.frameHeight; // bad way but does more or less a better job
 
-		scoreTxt.x = (originalX - (lengthInPx / 2)) + 550;
+		
+		//scoreTxt.x = (originalX - (lengthInPx / 2)) + 550;
+		scoreTxt.screenCenter(X);
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{

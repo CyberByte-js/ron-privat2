@@ -53,7 +53,7 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			FlxG.sound.playMusic(Paths.music('bloodshed-dialogue-mus'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
-		} else if (PlayState.SONG.song.toLowerCase() == 'ron' || PlayState.SONG.song.toLowerCase() == 'ayo' || PlayState.SONG.song.toLowerCase() == 'trojan-virus' || PlayState.SONG.song.toLowerCase() == 'file-manipulation' || PlayState.SONG.song.toLowerCase() == 'atelophobia' || PlayState.SONG.song.toLowerCase() == 'factory-reset')
+		} else if (PlayState.SONG.song.toLowerCase() == 'ron' || PlayState.SONG.song.toLowerCase() == 'ayo' || PlayState.SONG.song.toLowerCase() == 'wasted' || PlayState.SONG.song.toLowerCase() == 'trojan-virus' || PlayState.SONG.song.toLowerCase() == 'file-manipulation' || PlayState.SONG.song.toLowerCase() == 'atelophobia' || PlayState.SONG.song.toLowerCase() == 'factory-reset')
 		{
 			FlxG.sound.playMusic(Paths.music('talking-in-a-cool-way'), 0);
 			FlxG.sound.music.fadeIn(1, 0, 0.8);
@@ -77,7 +77,7 @@ class DialogueBox extends FlxSpriteGroup
 		var hasDialog = false;
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'ron' | 'ayo' | 'bloodshed' | 'trojan-virus' | 'file-manipulation' | 'atelophobia' | 'factory-reset':
+			case 'ron' | 'ayo' | 'wasted' | 'bloodshed' | 'trojan-virus' | 'file-manipulation' | 'atelophobia' | 'factory-reset':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking', 'shared');
 				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
