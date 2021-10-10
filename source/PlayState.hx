@@ -1117,6 +1117,9 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'bambi':
+				dad.y += 400;
+				healthBar.createFilledBar(0xFFFFD800, 0xFF31B0D1);
 			case 'ateloron':
 				dad.x += 70;
 				dad.y += 250;

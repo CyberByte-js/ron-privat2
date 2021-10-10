@@ -29,7 +29,8 @@ class StoryMenuState extends MusicBeatState
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
 		['Ron', 'Ayo', 'Bloodshed'],
-		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset']
+		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset'],
+		['Slammed', 'Frosting Over']
 	];
 	var curDifficulty:Int = 1;
 
@@ -38,13 +39,15 @@ class StoryMenuState extends MusicBeatState
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
 		['ron', 'bf', 'gf'],
-		['ron2', 'bf', 'gf']
+		['ron2', 'bf', 'gf'],
+		['', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = [
 		"Tutorial but less cooler B(",
 		"VS COOL GUY B)",
-		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron"
+		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron",
+		"Bambi VS Ron"
 	];
 
 	var txtWeekTitle:FlxText;
