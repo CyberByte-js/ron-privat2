@@ -1608,7 +1608,10 @@ class PlayState extends MusicBeatState
 
 		if (!paused)
 		{
-			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
+			if ((sys.FileSystem.exists(Paths.censoredinst(PlayState.SONG.song))) && (FlxG.save.data.coolronweekcopyright))
+				FlxG.sound.playMusic(Paths.censoredinst(PlayState.SONG.song), 1, false);
+			else
+				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		}
 
 		FlxG.sound.music.onComplete = endSong;
@@ -1794,7 +1797,7 @@ class PlayState extends MusicBeatState
 				{
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true);
+					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true, skin);
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
 
