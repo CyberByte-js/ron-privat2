@@ -19,12 +19,12 @@ class WarningSubState extends MusicBeatState
 	override function create()
 	{
 		super.create();
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF007D7D);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('warning/warnBg'));
 		bg.screenCenter();
 		bg.scrollFactor.set();
 		add(bg);
 		popup = new FlxSprite();
-		popup.frames = Paths.getSparrowAtlas("official");
+		popup.frames = Paths.getSparrowAtlas("warning/official");
 		popup.animation.addByPrefix('popup1 instance 1', 'popup1 instance 1', 24, false);
 		popup.scrollFactor.set();
 		popup.updateHitbox();
@@ -42,7 +42,7 @@ class WarningSubState extends MusicBeatState
 					popup.animation.play('popup1 instance 1');
 					secstate = 1;
 				case 1:
-					popup.frames = Paths.getSparrowAtlas("warning");
+					popup.frames = Paths.getSparrowAtlas("warning/warning");
 					popup.animation.addByPrefix('popup2 instance 1', 'popup2 instance 1', 24, false);
 					popup.scrollFactor.set();
 					popup.updateHitbox();
@@ -50,14 +50,14 @@ class WarningSubState extends MusicBeatState
 					popup.animation.play('popup2 instance 1');
 					secstate = 2;
 				case 2:
-					popup.frames = Paths.getSparrowAtlas("other");
+					popup.frames = Paths.getSparrowAtlas("warning/other");
 					popup.animation.addByPrefix('popup3 instance 1', 'popup3 instance 1', 24, false);
 					popup.scrollFactor.set();
 					popup.updateHitbox();
 					popup.screenCenter();
 					popup.animation.play('popup3 instance 1');
 					secstate = 3;
-					var black:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFFFFFFF);
+					var black:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
 					black.screenCenter();
 					black.scrollFactor.set();
 					black.alpha = 0;
