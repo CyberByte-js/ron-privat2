@@ -356,12 +356,12 @@ class PlayState extends MusicBeatState
 			case 'trojan-virus':
 				{					
 					dialogue = [
-						":dad:I will commit genocide on the entire human race if you dont give up rn",
-						":dad:Like deadass Ill kill all of " + user + "s family",
+						":TrojanronPortrait:I will commit genocide on the entire human race if you dont give up rn",
+						":TrojanronPortrait:Like deadass Ill kill all of " + user + "s family",
 						":bf:who is that",
-						":dad:what",
+						":TrojanronPortrait:what",
 						":bf:i do not know that person",
-						":dad:mmhwhatever just know that im going to kill you",
+						":TrojanronPortraitLmao:mmhwhatever just know that im going to kill you",
 						":bf:guh??",
 						];
 				}
@@ -712,13 +712,15 @@ class PlayState extends MusicBeatState
 				bg.scale.y = 1;
 				bg.active = false;
 				bg.antialiasing = true;
+				bg.screenCenter();
 				bg.scrollFactor.set(0.1, 0.1);
 				add(bg);
 				
 				var clouds:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/pissedRon_clouds'));
 				clouds.updateHitbox();
-				clouds.scale.x = 1;
-				clouds.scale.y = 1;
+				clouds.scale.x = 0.7;
+				clouds.scale.y = 0.7;
+				clouds.screenCenter();
 				clouds.active = false;
 				clouds.antialiasing = true;
 				clouds.scrollFactor.set(0.2, 0.2);
@@ -833,7 +835,7 @@ class PlayState extends MusicBeatState
 				var glitchSprite = new FlxEffectSprite(bg, [glitchEffect]);
 				add(glitchSprite);*/
 				
-				var ground:FlxSprite = new FlxSprite(-537, -250).loadGraphic(Paths.image('updateron/bg/happyRon_ground'));
+				var ground:FlxSprite = new FlxSprite(-537, -290).loadGraphic(Paths.image('updateron/bg/happyRon_ground'));
 				ground.updateHitbox();
 				ground.active = false;
 				ground.antialiasing = true;

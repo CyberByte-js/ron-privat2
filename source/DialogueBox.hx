@@ -21,8 +21,8 @@ class DialogueBox extends FlxSpriteGroup
 	var box:FlxSprite;
 
 	
-
 	var curCharacter:String = '';
+
 
 	var dialogue:Alphabet;
 	var dialogueList:Array<String> = [];
@@ -49,7 +49,6 @@ class DialogueBox extends FlxSpriteGroup
 	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
 	{
 		super();
-
 		if (PlayState.SONG.song.toLowerCase() == 'bloodshed')
 		{
 			FlxG.sound.playMusic(Paths.music('bloodshed-dialogue-mus'), 0);
@@ -95,37 +94,18 @@ class DialogueBox extends FlxSpriteGroup
 		if (!hasDialog)
 			return;
 
-		if (PlayState.SONG.song.toLowerCase() == 'ayo')
-		{
-			portraitLeft = new FlxSprite(-1500, 10);
-			portraitLeft.frames = Paths.getSparrowAtlas('portraits/madronPortrait', 'shared');
-			portraitLeft.animation.addByPrefix('enter', 'Ron Enter', 24, false);
-			portraitLeft.setGraphicSize(Std.int(portraitLeft.width + PlayState.daPixelZoom * 0.175));
-			portraitLeft.updateHitbox();
-			portraitLeft.scrollFactor.set();
-			add(portraitLeft);
-			portraitLeft.visible = false;
-		} else if (PlayState.SONG.song.toLowerCase() == 'bloodshed')
-		{
-			portraitLeft = new FlxSprite(-1500, 10);
-			portraitLeft.frames = Paths.getSparrowAtlas('portraits/hellronPortrait', 'shared');
-			portraitLeft.animation.addByPrefix('enter', 'Ron Enter', 24, false);
-			portraitLeft.setGraphicSize(Std.int(portraitLeft.width + PlayState.daPixelZoom * 0.175));
-			portraitLeft.updateHitbox();
-			portraitLeft.scrollFactor.set();
-			add(portraitLeft);
-			portraitLeft.visible = false;
-		} else if (PlayState.SONG.song.toLowerCase() == 'ron' || PlayState.SONG.song.toLowerCase() == 'trojan-virus' || PlayState.SONG.song.toLowerCase() == 'file-manipulation' || PlayState.SONG.song.toLowerCase() == 'atelophobia')
-		{
-			portraitLeft = new FlxSprite(-1500, 10);
-			portraitLeft.frames = Paths.getSparrowAtlas('portraits/ronPortrait', 'shared');
-			portraitLeft.animation.addByPrefix('enter', 'Ron Enter', 24, false);
-			portraitLeft.setGraphicSize(Std.int(portraitLeft.width + PlayState.daPixelZoom * 0.175));
-			portraitLeft.updateHitbox();
-			portraitLeft.scrollFactor.set();
-			add(portraitLeft);
-			portraitLeft.visible = false;
-		}
+		portraitLeft = new FlxSprite();
+		portraitLeft.frames = Paths.getSparrowAtlas('updateron/portraits/ronPortrait', 'shared');
+		portraitLeft.animation.addByPrefix('ron Portrait Enter', 'ron Portrait Enter', 24, false);
+		portraitLeft.setGraphicSize(Std.int(portraitLeft.width + PlayState.daPixelZoom * 0.175));
+		portraitLeft.updateHitbox();
+		portraitLeft.scrollFactor.set();
+		portraitLeft.screenCenter();
+		portraitLeft.x -= 80;
+		portraitLeft.y += 100;
+		portraitLeft.scale.set(0.8, 0.8);
+		add(portraitLeft);
+		portraitLeft.visible = false;
 
 		portraitRight = new FlxSprite(30, 90);
 		portraitRight.frames = Paths.getSparrowAtlas('portraits/bfPortrait', 'shared');
@@ -142,7 +122,6 @@ class DialogueBox extends FlxSpriteGroup
 		add(box);
 
 		box.screenCenter(X);
-		portraitLeft.screenCenter(X);
 
 		handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
 		add(handSelect);
@@ -260,24 +239,38 @@ class DialogueBox extends FlxSpriteGroup
 		// swagDialogue.text = ;
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
-		switch (curCharacter)
+		if (curCharacter == 'bf')
 		{
-			case 'dad':
-				portraitRight.visible = false;
-				if (!portraitLeft.visible)
-				{
-					portraitLeft.visible = true;
-					portraitLeft.animation.play('enter');
-				}
-			case 'bf':
-				portraitLeft.visible = false;
-				if (!portraitRight.visible)
-				{
-					portraitRight.visible = true;
-					trace('bf pog!!!');
-					portraitRight.animation.play('enter');
-					swagDialogue.sounds =  [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
-				}
+			portraitLeft.visible = false;
+			if (!portraitRight.visible)
+			{
+				portraitRight.visible = true;
+				trace('bf pog!!!');
+				portraitRight.animation.play('enter');
+				swagDialogue.sounds =  [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
+			}
+		}
+		else
+		{
+			remove(portraitLeft);
+			portraitLeft = new FlxSprite();
+			portraitLeft.frames = Paths.getSparrowAtlas('updateron/portraits/'+curCharacter, 'shared');
+			portraitLeft.animation.addByPrefix('ron Portrait Enter', 'ron Portrait Enter', 24, false);
+			portraitLeft.setGraphicSize(Std.int(portraitLeft.width + PlayState.daPixelZoom * 0.175));
+			portraitLeft.updateHitbox();
+			portraitLeft.scrollFactor.set();
+			portraitLeft.screenCenter();
+			portraitLeft.x -= 80;
+			portraitLeft.y += 100;
+			portraitLeft.scale.set(0.8, 0.8);
+			portraitLeft.visible = false;
+			add(portraitLeft);
+			portraitRight.visible = false;
+			if (!portraitLeft.visible)
+			{
+				portraitLeft.visible = true;
+				portraitLeft.animation.play('ron Portrait Enter');
+			}
 		}
 	}
 	function cleanDialog():Void
