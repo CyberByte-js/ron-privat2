@@ -4130,6 +4130,22 @@ class PlayState extends MusicBeatState
 				health -= 0.005;				
 			}
 		}
+		
+		if (curSong == 'wasted')
+		{
+			if (curStep == 828)
+			{
+				camFollow.x = dad.getGraphicMidpoint().x + 300;
+				camFollow.y = dad.getGraphicMidpoint().y;
+				FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
+				FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
+				var xx = dad.x;
+				var yy = dad.y;
+				remove(dad);
+				dad = new Character(xx, yy, 'ron-mad');
+				add(dad);
+			}
+		}
 	
 		super.stepHit();
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)

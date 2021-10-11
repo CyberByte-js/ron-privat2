@@ -34,11 +34,11 @@ class Caching extends MusicBeatState
 
         FlxG.worldBounds.set(0,0);
 
-        text = new FlxText(FlxG.width / 2, FlxG.height / 2 + 300,0,"loading...");
+        text = new FlxText(FlxG.width / 2, FlxG.height / 4,0,"loading...");
 		text.setFormat(Paths.font("w95.otf"), 34, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
         text.size = 34;
         text.alignment = FlxTextAlign.CENTER;
-        text.alpha = 0;
+		text.screenCenter(XY);
 
         kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('loading'));
 		kadeLogo.screenCenter();
@@ -72,6 +72,7 @@ class Caching extends MusicBeatState
             kadeLogo.alpha = alpha;
             text.alpha = alpha;
             text.text = "loading... (" + done + "/" + toBeDone + ")";
+			text.screenCenter(XY);
         }
 
         super.update(elapsed);

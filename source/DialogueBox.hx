@@ -107,9 +107,16 @@ class DialogueBox extends FlxSpriteGroup
 		add(portraitLeft);
 		portraitLeft.visible = false;
 
-		portraitRight = new FlxSprite(30, 90);
-		portraitRight.frames = Paths.getSparrowAtlas('portraits/bfPortrait', 'shared');
-		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter instance', 24, false);
+		portraitRight = new FlxSprite();
+		portraitRight.frames = Paths.getSparrowAtlas('updateron/portraits/bf', 'shared');
+		portraitRight.animation.addByPrefix('bf', 'FTalk', 24, false);
+		portraitRight.animation.addByPrefix('BTalk', 'BTalk', 24, false);
+		portraitRight.animation.addByPrefix('FTalk', 'FTalk', 24, false);
+		portraitRight.animation.addByPrefix('Fear', 'Fear', 24, false);
+		portraitRight.animation.addByPrefix('Special', 'Special', 24, false);
+		portraitRight.screenCenter();
+		portraitRight.x += 250;
+		portraitRight.y += 40;
 		portraitRight.setGraphicSize(Std.int(portraitRight.width * 0.8));
 		portraitRight.updateHitbox();
 		portraitRight.scrollFactor.set();
@@ -239,18 +246,7 @@ class DialogueBox extends FlxSpriteGroup
 		// swagDialogue.text = ;
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
-		if (curCharacter == 'bf')
-		{
-			portraitLeft.visible = false;
-			if (!portraitRight.visible)
-			{
-				portraitRight.visible = true;
-				trace('bf pog!!!');
-				portraitRight.animation.play('enter');
-				swagDialogue.sounds =  [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
-			}
-		}
-		else
+		if (curCharacter != 'bf')
 		{
 			remove(portraitLeft);
 			portraitLeft = new FlxSprite();
@@ -270,6 +266,17 @@ class DialogueBox extends FlxSpriteGroup
 			{
 				portraitLeft.visible = true;
 				portraitLeft.animation.play('ron Portrait Enter');
+			}
+		}
+		else
+		{
+			portraitLeft.visible = false;
+			if (!portraitRight.visible)
+			{
+				portraitRight.visible = true;
+				trace('bf pog!!!');
+				portraitRight.animation.play(curCharacter);
+				swagDialogue.sounds =  [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
 			}
 		}
 	}
