@@ -778,22 +778,26 @@ class PlayState extends MusicBeatState
 				add(blackeffect);
 			}
 			case 'glitch':
-				defaultCamZoom = 0.9;
+				defaultCamZoom = 0.7;
 				curStage = 'glitch';
 				var bg:FlxSprite = new FlxSprite();
-				bg.frames = Paths.getSparrowAtlas(Paths.image('updateron/bg/atelo_bg'));
+				bg.frames = Paths.getSparrowAtlas('updateron/bg/atelo_bg');
+				bg.scale.set(2,2);
 				bg.animation.addByPrefix('idle', 'bg instance 1', 24, true);
 				bg.animation.play('idle');
 				bg.scrollFactor.set(0.05, 0.05);
 				bg.screenCenter();
 				add(bg);
-				var lamp:FlxSprite = new FlxSprite(-300, -100);
-				lamp.frames = Paths.getSparrowAtlas(Paths.image('updateron/bg/atelo_lamp'));
+				var lamp:FlxSprite = new FlxSprite(550, 100);
+				lamp.frames = Paths.getSparrowAtlas('updateron/bg/atelo_lamp');
+				lamp.scale.set(2,2);
 				lamp.animation.addByPrefix('idle', 'lamppost instance 1', 24, true);
 				lamp.animation.play('idle');
 				lamp.scrollFactor.set(0.9, 0.9);
 				add(lamp);
-				var ground:FlxSprite = new FlxSprite(-300, -100).loadGraphic(Paths.image('updateron/bg/atelo_ground'));
+				var ground:FlxSprite = new FlxSprite().loadGraphic(Paths.image('updateron/bg/atelo_ground'));
+				ground.scale.set(2,2);
+				ground.screenCenter(X);
 				ground.antialiasing = true;
 				ground.scrollFactor.set(0.9, 0.9);
 				ground.active = false;
