@@ -73,6 +73,7 @@ class Caching extends MusicBeatState
             text.alpha = alpha;
             text.text = "loading... (" + done + "/" + toBeDone + ")";
 			text.screenCenter(XY);
+			text.y = FlxG.height / 8;
         }
 
         super.update(elapsed);

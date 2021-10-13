@@ -93,6 +93,7 @@ class PlayState extends MusicBeatState
 	public static var bads:Int = 0;
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
+	public var video:MP4Handler = new MP4Handler();
 
 	public static var songPosBG:FlxSprite;
 	public static var songPosBar:FlxBar;
@@ -108,7 +109,7 @@ class PlayState extends MusicBeatState
 	public var luigi:Bool = false;
 
 	var halloweenLevel:Bool = false;
-
+	
 	var songLength:Float = 0;
 	var kadeEngineWatermark:FlxText;
 	
@@ -1130,7 +1131,7 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'bambi':
+			case 'bambi-new':
 				dad.y += 400;
 				healthBar.createFilledBar(0xFFFFD800, 0xFF31B0D1);
 			case 'ateloron':
@@ -3063,7 +3064,12 @@ class PlayState extends MusicBeatState
 					PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
 					FlxG.sound.music.stop();
 
-					LoadingState.loadAndSwitchState(new PlayState());
+					if (SONG.song.toLowerCase() == 'bloodshed') 
+					{
+						video.playMP4(Paths.video('bloodshed'), new PlayState(), false, false, false);
+					} else {
+						LoadingState.loadAndSwitchState(new PlayState());
+					}
 				}
 			}
 			else
