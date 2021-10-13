@@ -288,6 +288,7 @@ class TitleState extends MusicBeatState
 		}
 
 		var pressedEnter:Bool = controls.ACCEPT;
+		var pressedSkip:Bool = false;
 
 		#if mobile
 		for (touch in FlxG.touches.list)
@@ -299,7 +300,7 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
-		if (pressedEnter && !transitioning && skippedIntro)
+		if (pressedEnter && !pressedSkip && !transitioning && skippedIntro)
 		{
 			#if !switch
 			NGio.unlockMedal(60960);
@@ -347,6 +348,13 @@ class TitleState extends MusicBeatState
 		if (pressedEnter && !skippedIntro && initialized)
 		{
 			skipIntro();
+		}
+		
+		if (!pressedEnter && !pressedSkip && FlxG.keys.justPressed.S && !transitioning && skippedIntro)
+		{
+			// im too tired to keep waiting for the stupid Other states so im just putting a skip button
+			pressedSkip = true;
+			FlxG.switchState(new MainMenuState());
 		}
 
 		super.update(elapsed);

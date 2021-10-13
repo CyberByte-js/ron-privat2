@@ -193,6 +193,7 @@ class PlayState extends MusicBeatState
 	var bottomBoppers:FlxSprite;
 	var santa:FlxSprite;
 	var satan:FlxSprite;
+	var Estatic:FlxSprite;
 
 	var fc:Bool = true;
 	var fx:FlxSprite;
@@ -789,7 +790,15 @@ class PlayState extends MusicBeatState
 				bg.scrollFactor.set(0.05, 0.05);
 				bg.screenCenter();
 				add(bg);
-				var lamp:FlxSprite = new FlxSprite(550, 100);
+				var popup:FlxSprite = new FlxSprite();
+				popup.frames = Paths.getSparrowAtlas('updateron/bg/atelo_popup_animated');
+				popup.scale.set(4,4);
+				popup.animation.addByPrefix('idle', 'popups instance 1', 24, true);
+				popup.animation.play('idle');
+				popup.scrollFactor.set(0.05, 0.05);
+				popup.screenCenter();
+				add(popup);
+				var lamp:FlxSprite = new FlxSprite(900, 100);
 				lamp.frames = Paths.getSparrowAtlas('updateron/bg/atelo_lamp');
 				lamp.scale.set(2,2);
 				lamp.animation.addByPrefix('idle', 'lamppost instance 1', 24, true);
@@ -803,6 +812,22 @@ class PlayState extends MusicBeatState
 				ground.scrollFactor.set(0.9, 0.9);
 				ground.active = false;
 				add(ground);
+				var error:FlxSprite = new FlxSprite(900, 550);
+				error.frames = Paths.getSparrowAtlas('updateron/bg/error');
+				error.scale.set(2,2);
+				error.animation.addByPrefix('idle', 'error instance 1', 24, true);
+				error.animation.play('idle');
+				error.updateHitbox();
+				error.antialiasing = true;
+				add(error);
+				var error2:FlxSprite = new FlxSprite(-650, 550);
+				error2.frames = Paths.getSparrowAtlas('updateron/bg/error');
+				error2.scale.set(2,2);
+				error2.animation.addByPrefix('idle', 'error instance 1', 24, true);
+				error2.animation.play('idle');
+				error2.updateHitbox();
+				error2.antialiasing = true;
+				add(error2);
 			case 'baka':
 				{
 					defaultCamZoom = 0.9;
@@ -817,15 +842,89 @@ class PlayState extends MusicBeatState
 				}
 			case 'win':
 				{
-					defaultCamZoom = 0.9;
+					defaultCamZoom = 0.8;
 					curStage = 'win';
-					var bg:FlxSprite = new FlxSprite(-100, -100).loadGraphic(Paths.image('ron/bg/bg'));
-					bg.setGraphicSize(Std.int(bg.width * 2));
-					bg.setGraphicSize(Std.int(bg.height * 2));
-					bg.antialiasing = true;
-					bg.scrollFactor.set(0.9, 0.9);
-					bg.active = false;
+					var bg:FlxSprite = new FlxSprite();
+					bg.frames = Paths.getSparrowAtlas('updateron/bg/trojan_bg');
+					bg.scale.set(4,4);
+					bg.animation.addByPrefix('idle', 'bg instance 1', 24, true);
+					bg.animation.play('idle');
+					bg.scrollFactor.set(0.05, 0.05);
+					bg.screenCenter();
 					add(bg);
+					var console:FlxSprite = new FlxSprite();
+					console.frames = Paths.getSparrowAtlas('updateron/bg/trojan_console');
+					console.scale.set(4,4);
+					console.animation.addByPrefix('idle', 'ezgif.com-gif-maker (7)_gif instance 1', 24, true);
+					console.animation.play('idle');
+					console.scrollFactor.set(0.05, 0.05);
+					console.screenCenter();
+					console.alpha = 0.3;
+					add(console);
+					var popup:FlxSprite = new FlxSprite();
+					popup.frames = Paths.getSparrowAtlas('updateron/bg/atelo_popup_animated');
+					popup.scale.set(4,4);
+					popup.animation.addByPrefix('idle', 'popups instance 1', 24, true);
+					popup.animation.play('idle');
+					popup.scrollFactor.set(0.05, 0.05);
+					popup.screenCenter();
+					add(popup);
+					var lamp:FlxSprite = new FlxSprite(900, 100);
+					lamp.frames = Paths.getSparrowAtlas('updateron/bg/glitch_lamp');
+					lamp.scale.set(2,2);
+					lamp.animation.addByPrefix('idle', 'lamppost', 24, true);
+					lamp.animation.play('idle');
+					lamp.scrollFactor.set(0.9, 0.9);
+					add(lamp);
+					var ground:FlxSprite = new FlxSprite(-537, -290).loadGraphic(Paths.image('updateron/bg/trojan_ground'));
+					ground.updateHitbox();
+					ground.active = false;
+					ground.antialiasing = true;
+					add(ground);
+					var error:FlxSprite = new FlxSprite(900, 550);
+					error.frames = Paths.getSparrowAtlas('updateron/bg/error');
+					error.scale.set(2,2);
+					error.animation.addByPrefix('idle', 'error instance 1', 24, true);
+					error.animation.play('idle');
+					error.updateHitbox();
+					error.antialiasing = true;
+					add(error);
+					Estatic = new FlxSprite();
+					Estatic.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
+					Estatic.scale.set(4,4);
+					Estatic.animation.addByPrefix('idle', 'static instance 1', 24, true);
+					Estatic.animation.play('idle');
+					Estatic.scrollFactor.set();
+					Estatic.screenCenter();
+				}
+			case 'trouble' :
+				{
+					defaultCamZoom = 0.9;
+					curStage = 'trouble';
+					var bg:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/nothappy_sky'));
+					bg.updateHitbox();
+					bg.scale.x = 1.2;
+					bg.scale.y = 1.2;
+					bg.active = false;
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.1, 0.1);
+					add(bg);
+					/*var glitchEffect = new FlxGlitchEffect(8,10,0.4,FlxGlitchDirection.HORIZONTAL);
+					var glitchSprite = new FlxEffectSprite(bg, [glitchEffect]);
+					add(glitchSprite);*/
+					
+					var ground:FlxSprite = new FlxSprite(-537, -250).loadGraphic(Paths.image('updateron/bg/nothappy_ground'));
+					ground.updateHitbox();
+					ground.active = false;
+					ground.antialiasing = true;
+					add(ground);
+
+					var deadbob:FlxSprite = new FlxSprite(-700, 600).loadGraphic(Paths.image('updateron/bg/GoodHeDied'));
+					deadbob.updateHitbox();
+					deadbob.active = false;
+					deadbob.antialiasing = true;
+					add(deadbob);
+					
 				}
 			default:
 			{
@@ -1244,8 +1343,10 @@ class PlayState extends MusicBeatState
 					add(fx);
 				case 'trojan-virus':
 					schoolIntro(doof);
+					add(Estatic);
 				case 'file-manipulation':
 					schoolIntro(doof);
+					add(Estatic);
 				case 'atelophobia':
 					camFollow.y = dad.getMidpoint().y;
 					camFollow.x = dad.getMidpoint().x + 300;
@@ -4127,13 +4228,19 @@ class PlayState extends MusicBeatState
 			{
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
-				health -= 0.005;
+				if (health > 0.3)
+					health -= 0.14;
+				else
+					health = 0.2;
 			}
 			if ((curStep >= 1280) && (curStep <= 1536))
 			{
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
-				health -= 0.005;				
+				if (health > 0.03)
+					health -= 0.014;
+				else
+					health = 0.02;			
 			}
 		}
 		

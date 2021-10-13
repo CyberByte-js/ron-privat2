@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="trojan_static.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="static instance 10000" x="0" y="0" width="640" height="480"/>
+	<SubTexture name="static instance 10001" x="640" y="0" width="640" height="480"/>
+	<SubTexture name="static instance 10002" x="1280" y="0" width="640" height="480"/>
+	<SubTexture name="static instance 10003" x="0" y="480" width="640" height="480"/>
+	<SubTexture name="static instance 10004" x="640" y="480" width="640" height="480"/>
+	<SubTexture name="static instance 10005" x="1280" y="480" width="640" height="480"/>
+	<SubTexture name="static instance 10006" x="0" y="960" width="640" height="480"/>
+	<SubTexture name="static instance 10007" x="640" y="960" width="640" height="480"/>
+</TextureAtlas>
