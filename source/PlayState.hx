@@ -377,6 +377,8 @@ class PlayState extends MusicBeatState
 				{
 					dialogue = CoolUtil.coolTextFile(Paths.txt('atelophobia/dialoge'));
 				}
+			case 'factory-reset':
+						dialogue = CoolUtil.coolTextFile(Paths.txt('factory-reset/dialogueIForgor'));
 		}
 		
 

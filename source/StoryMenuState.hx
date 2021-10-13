@@ -29,8 +29,7 @@ class StoryMenuState extends MusicBeatState
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
 		['Ron', 'Wasted', 'Ayo', 'Bloodshed'],
-		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset'],
-		['Slammed', 'Frosting Over']
+		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset']
 	];
 	var curDifficulty:Int = 1;
 
@@ -46,8 +45,7 @@ class StoryMenuState extends MusicBeatState
 	var weekNames:Array<String> = [
 		"Tutorial but less cooler B(",
 		"VS COOL GUY B)",
-		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron",
-		"Bambi VS Ron"
+		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron"
 	];
 
 	var txtWeekTitle:FlxText;
