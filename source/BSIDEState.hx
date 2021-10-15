@@ -27,7 +27,7 @@ class BSIDEState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial-b'],
-		['Ron-b', 'Ayo-b', 'Bloodshed-b'],
+		['Ron-b', 'Wasted-b', 'Ayo-b', 'Bloodshed-b'],
 		['Trojan-Virus-b', 'File-Manipulation-b', 'Atelophobia-b', 'Factory-Reset-b']
 	];
 	var curDifficulty:Int = 1;

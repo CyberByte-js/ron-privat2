@@ -1211,6 +1211,11 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'ronangry-b':
+				dad.x += 70;
+				dad.y += 250;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+				healthBar.createFilledBar(0xFFFF00DC, 0xFF31B0D1);
 			case 'ron-mad':
 				dad.x += 70;
 				dad.y += 250;
@@ -1232,9 +1237,6 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'bambi-new':
-				dad.y += 400;
-				healthBar.createFilledBar(0xFFFFD800, 0xFF31B0D1);
 			case 'ateloron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1892,6 +1894,8 @@ class PlayState extends MusicBeatState
 						case 'ronb':
 							skin = 'evik';
 						case 'ronmad-b':
+							skin = 'evik';
+						case 'ronangry-b':
 							skin = 'evik';
 						case 'hellron-2':
 							skin = 'bhell';

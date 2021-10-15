@@ -66,6 +66,7 @@ class CreditsState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false, true);
+			songText.screenCenter(X);
 			songText.isMenuItem = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
@@ -130,7 +131,7 @@ class CreditsState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
+		
 		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -246,6 +247,7 @@ class CreditsState extends MusicBeatState
 		for (item in grpSongs.members)
 		{
 			item.targetY = bullShit - curSelected;
+			item.screenCenter(X);
 			bullShit++;
 
 			item.alpha = 0.6;
