@@ -10,6 +10,7 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
+import flixel.addons.display.FlxBackdrop;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
@@ -46,7 +47,7 @@ class TitleState extends MusicBeatState
 {
 	static var initialized:Bool = false;
 
-	var blackScreen:FlxSprite;
+	var blackScreen:FlxBackdrop;
 	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
@@ -170,6 +171,7 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
+
 				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('bg'));
 				bg.setGraphicSize(Std.int(bg.width * 4));
 				bg.setGraphicSize(Std.int(bg.height * 4));
@@ -221,6 +223,15 @@ class TitleState extends MusicBeatState
 		logo.screenCenter();
 		logo.antialiasing = true;
 		// add(logo);
+		
+		blackScreen = new FlxBackdrop(Paths.image('scroll'), 0.2, 0.2, true, true);
+		new FlxTimer().start(0.005, function(tmr:FlxTimer)
+		{
+			blackScreen.x += 1;
+			tmr.reset(0.005);
+		});
+		add(blackScreen);
+
 
 		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
 		// FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
@@ -228,9 +239,6 @@ class TitleState extends MusicBeatState
 		credGroup = new FlxGroup();
 		add(credGroup);
 		textGroup = new FlxGroup();
-
-		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, 0xFF513300);
-		credGroup.add(blackScreen);
 
 		credTextShit = new Alphabet(0, 0, "Riskerman\nCyberByte\nfunkycode-time", true);
 		credTextShit.screenCenter();
@@ -321,7 +329,7 @@ class TitleState extends MusicBeatState
 
 			MainMenuState.firstStart = true;
 
-			new FlxTimer().start(2, function(tmr:FlxTimer)
+			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				// Get current version of Kade Engine
 				
@@ -480,6 +488,7 @@ class TitleState extends MusicBeatState
 
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
+			blackScreen.alpha = 0;
 			skippedIntro = true;
 		}
 	}

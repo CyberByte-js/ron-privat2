@@ -194,6 +194,7 @@ class PlayState extends MusicBeatState
 	var santa:FlxSprite;
 	var satan:FlxSprite;
 	var Estatic:FlxSprite;
+	var firebg:FlxSprite;
 
 	var fc:Bool = true;
 	var fx:FlxSprite;
@@ -321,10 +322,6 @@ class PlayState extends MusicBeatState
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
 
-		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(detailsText + " " + SONG.song + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "\nAcc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC);
-		#end
-
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -340,6 +337,21 @@ class PlayState extends MusicBeatState
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial', 'tutorial');
+			
+		// Updating Discord Rich Presence.
+		var iconsong:String = 'normal';
+		if (SONG.song.toLowerCase() == 'bloodshed')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'trojan-virus')
+			iconsong = 'trojan';
+		if (SONG.song.toLowerCase() == 'file-manipulation')
+			iconsong = 'trojan';
+		if (SONG.song.toLowerCase() == 'atelophobia')
+			iconsong = 'atelo';
+		if (SONG.song.toLowerCase() == 'factory-reset')
+			iconsong = 'reset';
+		DiscordClient.changePresenceIcon(iconsong, detailsText + " " + SONG.song + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "\nAcc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC);
+		#end
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
@@ -751,6 +763,15 @@ class PlayState extends MusicBeatState
 				bg.scrollFactor.set(0.05, 0.05);
 				bg.active = false;
 				add(bg);
+				firebg = new FlxSprite();
+				firebg.frames = Paths.getSparrowAtlas('updateron/bg/escape_fire');
+				firebg.scale.set(6,6);
+				firebg.animation.addByPrefix('idle', 'fire instance 1', 24, true);
+				firebg.animation.play('idle');
+				firebg.scrollFactor.set();
+				firebg.screenCenter();
+				firebg.alpha = 0;
+				add(firebg);
 				satan = new FlxSprite(300, 200).loadGraphic(Paths.image('updateron/bg/hellRon_satan'));
 				satan.antialiasing = true;
 				satan.screenCenter(XY);
@@ -1351,6 +1372,12 @@ class PlayState extends MusicBeatState
 				case 'file-manipulation':
 					schoolIntro(doof);
 					add(Estatic);
+				case 'trojan-virus-b:
+					add(Estatic);
+					startCountdown();
+				case 'file-manipulation-b':
+					add(Estatic);
+					startCountdown();
 				case 'atelophobia':
 					camFollow.y = dad.getMidpoint().y;
 					camFollow.x = dad.getMidpoint().x + 300;
@@ -4173,6 +4200,39 @@ class PlayState extends MusicBeatState
 				case 518:
 					defaultCamZoom = 0.85;
 					satan.angle = 0;
+				case 776:
+					defaultCamZoom = 0.9;
+					FlxTween.tween(firebg, {alpha: 1}, 1, {ease: FlxEase.quadInOut});
+				case 792:
+					defaultCamZoom = 0.95;
+				case 808:
+					defaultCamZoom = 1;
+				case 824:
+					defaultCamZoom = 1.05;
+				case 840:
+					defaultCamZoom = 1.1;
+				case 856:
+					defaultCamZoom = 1.15;
+				case 872:
+					defaultCamZoom = 1.2;
+				case 888:
+					defaultCamZoom = 1.25;
+				case 904:
+					defaultCamZoom = 0.95;
+				case 920:
+					defaultCamZoom = 1.05;
+				case 936:
+					defaultCamZoom = 1.15;
+				case 952:
+					defaultCamZoom = 1.25;
+				case 968:
+					defaultCamZoom = 0.95;
+				case 984:
+					defaultCamZoom = 1.05;
+				case 1000:
+					defaultCamZoom = 1.15;
+				case 1016:
+					defaultCamZoom = 1.25;
 			}
 			if ((curStep >= 259) && (curStep <= 518))
 			{
@@ -4181,6 +4241,19 @@ class PlayState extends MusicBeatState
 				satan.angle += 5;
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
+			}
+			else if ((curStep >= 776) && (curStep <= 1070))
+			{
+				if (fx.alpha > 0)
+					fx.alpha -= 0.05;
+				satan.angle += 10;
+				FlxG.camera.shake(0.015, 0.1);
+				camHUD.shake(0.0015, 0.15);
+			}
+			else
+			{
+				if (fx.alpha > 0.3)
+					fx.alpha -= 0.05;
 			}
 		}
 		
