@@ -1372,7 +1372,7 @@ class PlayState extends MusicBeatState
 				case 'file-manipulation':
 					schoolIntro(doof);
 					add(Estatic);
-				case 'trojan-virus-b:
+				case 'trojan-virus-b':
 					add(Estatic);
 					startCountdown();
 				case 'file-manipulation-b':
