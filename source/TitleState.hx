@@ -167,7 +167,8 @@ class TitleState extends MusicBeatState
 
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		
-			FlxG.camera.zoom = 2;
+			FlxG.camera.zoom = 3;
+			FlxG.camera.angle = 10;
 			
 			FlxTween.tween(FlxG.camera, {zoom: 1, angle: 0}, 1, {
 				ease: FlxEase.quadInOut
@@ -260,7 +261,15 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = true;
-
+		
+		var blackeffect:FlxSprite = new FlxSprite().makeGraphic(FlxG.width*3, FlxG.height*3, FlxColor.BLACK);
+		blackeffect.updateHitbox();
+		blackeffect.antialiasing = true;
+		blackeffect.screenCenter(XY);
+		blackeffect.scrollFactor.set();
+		add(blackeffect);
+		
+		FlxTween.tween(blackeffect, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		FlxG.mouse.visible = false;
