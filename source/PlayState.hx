@@ -999,9 +999,6 @@ class PlayState extends MusicBeatState
 			if (curSong == 'Bloodshed')
 				gfCheck = 'gf-run';
 		} else {gfCheck = SONG.gfVersion;}
-		
-		if (StringTools.contains(SONG.song.toLowerCase(), '-b'))
-			gfCheck = 'gf-b';
 
 		var curGf:String = '';
 		switch (gfCheck)
@@ -1027,13 +1024,10 @@ class PlayState extends MusicBeatState
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
-
-		
-		
-		if (StringTools.contains(SONG.song.toLowerCase(), '-b'))
-			boyfriend = new Boyfriend(770, 450, 'bf-b');
-		else
-			boyfriend = new Boyfriend(770, 450, SONG.player1);
+		boyfriend = new Boyfriend(770, 450, SONG.player1);
+		var bfcolor = 0xFF31B0D1;
+		if (SONG.player1 == 'bf-b')
+			bfcolor = 0xFFFF45FF;
 
 		// REPOSITIONING PER STAGE
 		switch (curStage)
@@ -1236,6 +1230,8 @@ class PlayState extends MusicBeatState
 					camPos.x += 600;
 					tweenCamIn();
 				}
+				
+			healthBar.createFilledBar(0xFFFFD800, bfcolor);
 
 			case 'ron':
 				dad.x += 70;
@@ -1249,7 +1245,7 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFF00DC, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFF00DC, bfcolor);
 			case 'ron-mad':
 				dad.x += 70;
 				dad.y += 250;
@@ -1258,7 +1254,7 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFF00DC, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFF00DC, bfcolor);
 			case 'hellron-crazy':
 				dad.x += 70;
 				dad.y += 290;
@@ -1267,6 +1263,7 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 310;
 				camPos.set(dad.getGraphicMidpoint().x + 150, dad.getGraphicMidpoint().y + 300);
+				healthBar.createFilledBar(0xFF000000, bfcolor);
 			case 'susron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1275,42 +1272,42 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFF000000, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFF000000, bfcolor);
 			case 'ronb':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFF00DC, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFF00DC, bfcolor);
 			case 'ron-usb':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFF000000, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFF000000, bfcolor);
 			case 'factorytankman':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFF877000, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFF877000, bfcolor);
 			case 'factorytankman-b':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFF8E007B, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFF8E007B, bfcolor);
 			case 'ron-usb-b':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFFFFFF, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'hellron-2':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFFFFFF, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'ateloron-b':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFFFFFF, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 		}
 
 		strumLineNotes.cameras = [camHUD];

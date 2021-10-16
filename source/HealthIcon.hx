@@ -17,6 +17,7 @@ class HealthIcon extends FlxSprite
 
 		antialiasing = true;
 		animation.add('bf', [0, 1], 0, false, isPlayer);
+		animation.add('bf-b', [50, 51], 0, false, isPlayer);
 		animation.add('bf-run', [0, 1], 0, false, isPlayer);
 		animation.add('bf-car', [0, 1], 0, false, isPlayer);
 		animation.add('bf-christmas', [0, 1], 0, false, isPlayer);
@@ -33,6 +34,7 @@ class HealthIcon extends FlxSprite
 		animation.add('spirit', [23, 23], 0, false, isPlayer);
 		animation.add('bf-old', [14, 15], 0, false, isPlayer);
 		animation.add('gf', [16], 0, false, isPlayer);
+		animation.add('gf-b', [52], 0, false, isPlayer);
 		animation.add('gf-christmas', [16], 0, false, isPlayer);
 		animation.add('gf-pixel', [16], 0, false, isPlayer);
 		animation.add('parents-christmas', [17, 18], 0, false, isPlayer);
@@ -60,7 +62,7 @@ class HealthIcon extends FlxSprite
 		animation.add('tankmantrojan-2', [40, 41], 0, false, isPlayer);
 		animation.add('factorytankman-2', [42, 43], 0, false, isPlayer);
 		animation.add('hellron-2', [38, 39], 0, false, isPlayer);
-		animation.add('gf-in', [50], 0, false, isPlayer);
+		animation.add('gf-in', [59], 0, false, isPlayer);
 		animation.add('bambi-new', [45, 46], 0, false, isPlayer);
 		animation.play(char);
 
