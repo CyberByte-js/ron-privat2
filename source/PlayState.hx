@@ -195,6 +195,7 @@ class PlayState extends MusicBeatState
 	var satan:FlxSprite;
 	var Estatic:FlxSprite;
 	var firebg:FlxSprite;
+	var wastedbg:FlxSprite;
 
 	var fc:Bool = true;
 	var fx:FlxSprite;
@@ -752,6 +753,15 @@ class PlayState extends MusicBeatState
 				ground.active = false;
 				ground.antialiasing = true;
 				add(ground);
+				
+				wastedbg = new FlxSprite();
+				wastedbg.frames = Paths.getSparrowAtlas('updateron/bg/wastedbg');
+				wastedbg.scale.set(4,4);
+				wastedbg.animation.addByPrefix('idle', 'bg instance 1', 24, true);
+				wastedbg.animation.play('idle');
+				wastedbg.screenCenter();
+				wastedbg.alpha = 0;
+				add(wastedbg);
 			}
 			case 'hell':
 			{
@@ -4323,7 +4333,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		
-		if (curSong == 'wasted')
+		if ((curSong == 'wasted') || (curSong == 'wasted-b'))
 		{
 			if (curStep == 828)
 			{
@@ -4334,8 +4344,19 @@ class PlayState extends MusicBeatState
 				var xx = dad.x;
 				var yy = dad.y;
 				remove(dad);
-				dad = new Character(xx, yy, 'ron-mad');
+				if (curSong == 'wasted')
+					dad = new Character(xx, yy, 'ron-mad');
+				else
+				{	
+					wastedbg.alpha = 1;
+					dad = new Character(xx, yy, 'ronmad-b');
+				}
 				add(dad);
+			}
+			if ((curStep >= 828) && (curSong == 'wasted-b'))
+			{
+				FlxG.camera.shake(0.025, 0.1);
+				camHUD.shake(0.0055, 0.15);
 			}
 		}
 	

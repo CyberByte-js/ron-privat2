@@ -16,6 +16,7 @@ import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.ui.FlxBar;
 import flixel.text.FlxText;
 
 using StringTools;
@@ -27,6 +28,7 @@ class Caching extends MusicBeatState
 
     var text:FlxText;
     var kadeLogo:FlxSprite;
+	var loadingBar:FlxBar;
 
 	override function create()
 	{
@@ -39,25 +41,36 @@ class Caching extends MusicBeatState
         text.size = 34;
         text.alignment = FlxTextAlign.CENTER;
 		text.screenCenter(XY);
+		
+        sys.thread.Thread.create(() -> {
+            cache();
+        });
+		
+		loadingBar = new FlxBar(text.x, text.y - 250, LEFT_TO_RIGHT, 400, 30, this, 'done', 0, 41, true);
+		loadingBar.screenCenter(X);
+		loadingBar.scrollFactor.set();
+		loadingBar.createFilledBar(FlxColor.BLACK, 0xFFFFFFFF);
+		
+		var bgBar:FlxSprite = new FlxSprite().makeGraphic(408, 38, FlxColor.BLACK);
+		bgBar.x = loadingBar.x - 4;
+		bgBar.y = loadingBar.y - 4;
+		bgBar.updateHitbox();
+		bgBar.antialiasing = true;
 
         kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('loading'));
 		kadeLogo.screenCenter();
+        kadeLogo.setGraphicSize(Std.int(kadeLogo.width * 0.5));
         text.y -= kadeLogo.height / 2 - 125;
         text.x -= 170;
-        kadeLogo.setGraphicSize(Std.int(kadeLogo.width * 0.5));
-
         kadeLogo.alpha = 0;
 
         add(kadeLogo);
+		add(bgBar);
+		add(loadingBar);
         add(text);
 
         trace('starting caching..');
         
-        sys.thread.Thread.create(() -> {
-            cache();
-        });
-
-
         super.create();
     }
 
@@ -70,8 +83,7 @@ class Caching extends MusicBeatState
         {
             var alpha = HelperFunctions.truncateFloat(done / toBeDone * 100,2) / 100;
             kadeLogo.alpha = alpha;
-            text.alpha = alpha;
-            text.text = "loading... (" + done + "/" + toBeDone + ")";
+            text.text = done + "/" + toBeDone;
 			text.screenCenter(XY);
 			text.y = FlxG.height / 8;
         }
@@ -123,8 +135,14 @@ class Caching extends MusicBeatState
         }
 
         trace("Finished caching...");
-
-        FlxG.switchState(new TitleState());
+		FlxG.sound.play(Paths.sound('cool'));
+		FlxTween.tween(kadeLogo, {alpha: 0}, 1.5, {ease: FlxEase.quadInOut});
+		FlxTween.tween(FlxG.camera, {zoom: 3, angle: 20}, 2.5, {
+			ease: FlxEase.quadInOut,
+			onComplete: function(twn:FlxTween)
+			{
+				FlxG.switchState(new TitleState());
+			}
+		});
     }
-
 }

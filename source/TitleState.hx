@@ -166,6 +166,12 @@ class TitleState extends MusicBeatState
 			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
+		
+			FlxG.camera.zoom = 2;
+			
+			FlxTween.tween(FlxG.camera, {zoom: 1, angle: 0}, 1, {
+				ease: FlxEase.quadInOut
+			});
 		}
 
 		Conductor.changeBPM(102);
@@ -421,7 +427,9 @@ class TitleState extends MusicBeatState
 		{
 			super.beatHit();
 			//bumpin camera :)
-			FlxTween.tween(FlxG.camera, {zoom:1.025}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+			//ITS COOL
+			if (FlxG.camera.zoom == 1)
+				FlxTween.tween(FlxG.camera, {zoom:1.025}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
 			logoBl.animation.play('bump',true);
 			FlxG.log.add(curBeat);
 
