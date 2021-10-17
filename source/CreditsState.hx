@@ -218,6 +218,12 @@ class CreditsState extends MusicBeatState
 					FlxG.openURL("https://gamebanana.com/members/1981735");
 				case 21:
 					FlxG.openURL("https://www.youtube.com/c/coquers_/videos");
+				case 22:
+					FlxG.openURL("https://www.youtube.com/channel/UCnTN-0q7Wv1zqvBXQ_g4gZA");
+				case 23:
+					FlxG.openURL("https://www.youtube.com/channel/UCxRBys-eyaerUlWlTWbCokw");
+				case 24:
+					FlxG.openURL("https://www.youtube.com/channel/UCreog81MEijphdM7lmHHTZg");
             }
 		}
 	}

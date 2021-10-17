@@ -45,11 +45,11 @@ class HealthIcon extends FlxSprite
 		// ok
 		// ty :)
 		animation.add('ron', [24, 25], 0, false, isPlayer);
-		animation.add('ron-angry', [26, 27], 0, false, isPlayer);		
+		animation.add('ron-angry', [47, 48], 0, false, isPlayer);		
 		animation.add('ron-mad', [26, 27], 0, false, isPlayer);		
 		animation.add('hellron', [28, 29], 0, false, isPlayer);	
 		animation.add('hellron-crazy', [45, 45], 0, false, isPlayer);			
-		animation.add('ateloron', [28, 29], 0, false, isPlayer);
+		animation.add('ateloron', [44, 28], 0, false, isPlayer);
 		animation.add('ron-usb', [30, 31], 0, false, isPlayer);		
 		animation.add('factorytankman', [32, 33], 0, false, isPlayer);
 		animation.add('ronb', [34, 35], 0, false, isPlayer);
@@ -61,9 +61,9 @@ class HealthIcon extends FlxSprite
 		animation.add('factorytankman-b', [42, 43], 0, false, isPlayer);
 		animation.add('tankmantrojan-2', [40, 41], 0, false, isPlayer);
 		animation.add('factorytankman-2', [42, 43], 0, false, isPlayer);
+		animation.add('demonron', [45, 46], 0, false, isPlayer);
 		animation.add('hellron-2', [38, 39], 0, false, isPlayer);
 		animation.add('gf-in', [59], 0, false, isPlayer);
-		animation.add('bambi-new', [45, 46], 0, false, isPlayer);
 		animation.play(char);
 
 		switch(char)

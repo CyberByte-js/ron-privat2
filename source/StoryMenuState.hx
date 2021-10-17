@@ -64,6 +64,8 @@ class StoryMenuState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+	var bg:FlxSprite;
+	var bg2:FlxSprite;
 
 	override function create()
 	{
@@ -105,7 +107,16 @@ class StoryMenuState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
-		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFFF9CF51);
+		var yellowBG:FlxSprite = new FlxSprite(0, 72).makeGraphic(FlxG.width, 400, 0xFF000000);
+		bg = new FlxSprite(0, 56).loadGraphic(Paths.image('storyWeek1'));
+		bg2 = new FlxSprite(-4, 64);
+		bg2.scale.set(2, 2);
+		bg2.frames = Paths.getSparrowAtlas('storyWeek2');
+		bg2.antialiasing = true;
+		bg2.animation.addByPrefix('storymode instance 1', 'storymode instance 1', 24, true);
+		bg2.animation.play('storymode instance 1');
+		bg2.updateHitbox();
+		bg2.alpha = 0;
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
@@ -184,6 +195,8 @@ class StoryMenuState extends MusicBeatState
 		trace("Line 150");
 
 		add(yellowBG);
+		add(bg);
+		add(bg2);
 		add(grpWeekCharacters);
 
 		txtTracklist = new FlxText(FlxG.width * 0.05, yellowBG.x + yellowBG.height + 100, 0, "Tracks", 32);
@@ -402,6 +415,12 @@ class StoryMenuState extends MusicBeatState
 			curWeek = 0;
 		if (curWeek < 0)
 			curWeek = weekData.length - 1;
+			
+		// nvm
+		if (curWeek == 2)
+			bg2.alpha = 0;
+		else
+			bg2.alpha = 0;
 
 		var bullShit:Int = 0;
 

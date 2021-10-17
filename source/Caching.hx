@@ -95,45 +95,68 @@ class Caching extends MusicBeatState
     function cache()
     {
 
-        var images = [];
-        var music = [];
+        var characters = [];
+		var bgs = [];
 
-        trace("caching images...");
+        trace("caching characters...");
 
         for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
         {
             if (!i.endsWith(".png"))
                 continue;
-            images.push(i);
+            characters.push(i);
         }
-
-        trace("caching music...");
-
-        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/songs")))
+		
+        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/ron/characters")))
         {
-            music.push(i);
+            if (!i.endsWith(".png"))
+                continue;
+            characters.push(i);
         }
+		
+        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/characters")))
+        {
+            if (!i.endsWith(".png"))
+                continue;
+            characters.push(i);
+        }
+		
+		trace("caching bgs...");
+		
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/bg")))
+		{
+            if (!i.endsWith(".png"))
+                continue;
+            bgs.push(i);
+		}
+		
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/ron/bg")))
+		{
+            if (!i.endsWith(".png"))
+                continue;
+            bgs.push(i);
+		}
 
-        toBeDone = Lambda.count(images) + Lambda.count(music);
+        toBeDone = Lambda.count(characters) + Lambda.count(bgs);
 
         trace("LOADING: " + toBeDone + " OBJECTS.");
 
-        for (i in images)
+        for (i in characters)
         {
             var replaced = i.replace(".png","");
             FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
             trace("cached " + replaced);
             done++;
         }
-
-        for (i in music)
+		
+        for (i in bgs)
         {
-            FlxG.sound.cache(Paths.inst(i));
-            FlxG.sound.cache(Paths.voices(i));
-            trace("cached " + i);
+            var replaced = i.replace(".png","");
+            FlxG.bitmap.add(Paths.image("updateron/bg/" + replaced,"shared"));
+            trace("cached " + replaced);
             done++;
         }
-
+	
         trace("Finished caching...");
 		FlxG.sound.play(Paths.sound('cool'));
 		FlxTween.tween(kadeLogo, {alpha: 0}, 1.5, {ease: FlxEase.quadInOut});

@@ -735,6 +735,17 @@ class PlayState extends MusicBeatState
 				bg.scrollFactor.set(0.1, 0.1);
 				add(bg);
 				
+				var witheredR:FlxSprite = new FlxSprite(-512, -260);
+				witheredR.frames = Paths.getSparrowAtlas('updateron/bg/annoyed_rain');
+				witheredR.setGraphicSize(Std.int(witheredR.width * 4));
+				witheredR.animation.addByPrefix('rain', 'rain', 24, true);
+				witheredR.updateHitbox();
+				witheredR.antialiasing = true;
+				witheredR.scrollFactor.set(0.5,0.1);
+				witheredR.screenCenter(XY);
+				if ((SONG.song == 'Ayo') || (SONG.song == 'Ayo-b'))
+					add(witheredR);
+				
 				var clouds:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/pissedRon_clouds'));
 				clouds.updateHitbox();
 				clouds.scale.x = 0.7;
@@ -808,7 +819,7 @@ class PlayState extends MusicBeatState
 				blackeffect.screenCenter(XY);
 				blackeffect.scrollFactor.set();
 				blackeffect.alpha = 1;
-				if (SONG.song == 'Bloodshed')
+				if (SONG.song != 'Bloodshed-b')
 					blackeffect.alpha = 0;
 				add(blackeffect);
 				Estatic = new FlxSprite().loadGraphic(Paths.image('updateron/bg/deadly'));
@@ -1265,6 +1276,11 @@ class PlayState extends MusicBeatState
 				dad.y += 310;
 				camPos.set(dad.getGraphicMidpoint().x + 150, dad.getGraphicMidpoint().y + 300);
 				healthBar.createFilledBar(0xFF000000, bfcolor);
+			case 'demonron':
+				dad.x += 70;
+				dad.y += 250;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+				healthBar.createFilledBar(0xFFFF0000, bfcolor);
 			case 'susron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1930,6 +1946,8 @@ class PlayState extends MusicBeatState
 							skin = 'ronhell';
 						case 'ron-usb':
 							skin = 'ronhell';
+						case 'demonron':
+							skin = 'demonsip';
 						case 'ronb':
 							skin = 'evik';
 						case 'ronmad-b':
@@ -2064,6 +2082,8 @@ class PlayState extends MusicBeatState
 								skin = 'ronhell';
 							case 'ron-usb':
 								skin = 'ronhell';
+							case 'demonron':
+								skin = 'demonsip';
 							case 'ronb':
 								skin = 'evik';
 							case 'ronmad-b':

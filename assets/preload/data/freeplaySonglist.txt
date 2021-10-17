@@ -1,13 +1,18 @@
 Tutorial:gf:0
 Ron:ron:1
 Ron-b:ronb:1
+<<<<<<< Updated upstream
 Wasted:ron-mad:1
 Wasted-b:ronangry-b:1
+=======
+Wasted:ron-angry:1
+Wasted-b:ronmad-b:1
+>>>>>>> Stashed changes
 Ayo:ron-mad:1
 Ayo-b:ronmad-b:1
 Bloodshed:hellron:1
 Bloodshed-b:hellron-b:1
-Bloodshed-old:hellron:1
+Bloodshed-old:demonron:1
 Trojan-Virus:ron-usb:2
 Trojan-Virus-b:ron-usb-b:2
 File-Manipulation:ron-usb:2
