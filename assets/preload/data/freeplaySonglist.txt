@@ -2,7 +2,7 @@ Tutorial:gf:0
 Ron:ron:1
 Ron-b:ronb:1
 Wasted:ron-mad:1
-Wasted-b:ronmad-b:1
+Wasted-b:ronangry-b:1
 Ayo:ron-mad:1
 Ayo-b:ronmad-b:1
 Bloodshed:hellron:1
