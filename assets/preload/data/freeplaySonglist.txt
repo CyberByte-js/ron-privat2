@@ -1,13 +1,8 @@
 Tutorial:gf:0
 Ron:ron:1
 Ron-b:ronb:1
-<<<<<<< Updated upstream
 Wasted:ron-mad:1
 Wasted-b:ronangry-b:1
-=======
-Wasted:ron-angry:1
-Wasted-b:ronmad-b:1
->>>>>>> Stashed changes
 Ayo:ron-mad:1
 Ayo-b:ronmad-b:1
 Bloodshed:hellron:1
