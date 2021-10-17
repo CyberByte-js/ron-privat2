@@ -814,6 +814,7 @@ class PlayState extends MusicBeatState
 				Estatic = new FlxSprite().loadGraphic(Paths.image('updateron/bg/deadly'));
 				Estatic.scrollFactor.set();
 				Estatic.screenCenter();
+				Estatic.alpha = 0;
 			}
 			case 'glitch':
 				defaultCamZoom = 0.7;
@@ -4037,7 +4038,10 @@ class PlayState extends MusicBeatState
 						combo += 1;
 					}
 					else
+					{
+						health += 0.01;
 						totalNotesHit += 1;
+					}
 	
 
 					switch (note.noteData)
@@ -4266,7 +4270,7 @@ class PlayState extends MusicBeatState
 				if (fx.alpha > 0.3)
 					fx.alpha -= 0.05;
 			}
-			Estatic.alpha = (2-(health)-1)*2;
+			Estatic.alpha = (2-health)/2;
 		}
 		
 		if (curSong == 'Bloodshed-b') {
@@ -4319,10 +4323,10 @@ class PlayState extends MusicBeatState
 			{
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
-				if (health > 0.3)
-					health -= 0.14;
+				if (health > 0.36)
+					health -= 0.12;
 				else
-					health = 0.2;
+					health = 0.36;
 			}
 			if ((curStep >= 1280) && (curStep <= 1536))
 			{
