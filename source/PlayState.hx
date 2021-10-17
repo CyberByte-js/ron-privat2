@@ -194,6 +194,8 @@ class PlayState extends MusicBeatState
 	var santa:FlxSprite;
 	var satan:FlxSprite;
 	var Estatic:FlxSprite;
+	var firebg:FlxSprite;
+	var wastedbg:FlxSprite;
 
 	var fc:Bool = true;
 	var fx:FlxSprite;
@@ -321,10 +323,6 @@ class PlayState extends MusicBeatState
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
 
-		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(detailsText + " " + SONG.song + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "\nAcc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC);
-		#end
-
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -340,6 +338,21 @@ class PlayState extends MusicBeatState
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial', 'tutorial');
+			
+		// Updating Discord Rich Presence.
+		var iconsong:String = 'normal';
+		if (SONG.song.toLowerCase() == 'bloodshed')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'trojan-virus')
+			iconsong = 'trojan';
+		if (SONG.song.toLowerCase() == 'file-manipulation')
+			iconsong = 'trojan';
+		if (SONG.song.toLowerCase() == 'atelophobia')
+			iconsong = 'atelo';
+		if (SONG.song.toLowerCase() == 'factory-reset')
+			iconsong = 'reset';
+		DiscordClient.changePresenceIcon(iconsong, detailsText + " " + SONG.song + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "\nAcc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC);
+		#end
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
@@ -740,6 +753,15 @@ class PlayState extends MusicBeatState
 				ground.active = false;
 				ground.antialiasing = true;
 				add(ground);
+				
+				wastedbg = new FlxSprite();
+				wastedbg.frames = Paths.getSparrowAtlas('updateron/bg/wastedbg');
+				wastedbg.scale.set(4,4);
+				wastedbg.animation.addByPrefix('idle', 'bg instance 1', 24, true);
+				wastedbg.animation.play('idle');
+				wastedbg.screenCenter();
+				wastedbg.alpha = 0;
+				add(wastedbg);
 			}
 			case 'hell':
 			{
@@ -751,6 +773,15 @@ class PlayState extends MusicBeatState
 				bg.scrollFactor.set(0.05, 0.05);
 				bg.active = false;
 				add(bg);
+				firebg = new FlxSprite();
+				firebg.frames = Paths.getSparrowAtlas('updateron/bg/escape_fire');
+				firebg.scale.set(6,6);
+				firebg.animation.addByPrefix('idle', 'fire instance 1', 24, true);
+				firebg.animation.play('idle');
+				firebg.scrollFactor.set();
+				firebg.screenCenter();
+				firebg.alpha = 0;
+				add(firebg);
 				satan = new FlxSprite(300, 200).loadGraphic(Paths.image('updateron/bg/hellRon_satan'));
 				satan.antialiasing = true;
 				satan.screenCenter(XY);
@@ -780,6 +811,9 @@ class PlayState extends MusicBeatState
 				if (SONG.song == 'Bloodshed')
 					blackeffect.alpha = 0;
 				add(blackeffect);
+				Estatic = new FlxSprite().loadGraphic(Paths.image('updateron/bg/deadly'));
+				Estatic.scrollFactor.set();
+				Estatic.screenCenter();
 			}
 			case 'glitch':
 				defaultCamZoom = 0.7;
@@ -965,9 +999,6 @@ class PlayState extends MusicBeatState
 			if (curSong == 'Bloodshed')
 				gfCheck = 'gf-run';
 		} else {gfCheck = SONG.gfVersion;}
-		
-		if (StringTools.contains(SONG.song.toLowerCase(), '-b'))
-			gfCheck = 'gf-b';
 
 		var curGf:String = '';
 		switch (gfCheck)
@@ -993,13 +1024,10 @@ class PlayState extends MusicBeatState
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
-
-		
-		
-		if (StringTools.contains(SONG.song.toLowerCase(), '-b'))
-			boyfriend = new Boyfriend(770, 450, 'bf-b');
-		else
-			boyfriend = new Boyfriend(770, 450, SONG.player1);
+		boyfriend = new Boyfriend(770, 450, SONG.player1);
+		var bfcolor = 0xFF31B0D1;
+		if (SONG.player1 == 'bf-b')
+			bfcolor = 0xFFFF45FF;
 
 		// REPOSITIONING PER STAGE
 		switch (curStage)
@@ -1202,6 +1230,8 @@ class PlayState extends MusicBeatState
 					camPos.x += 600;
 					tweenCamIn();
 				}
+				
+			healthBar.createFilledBar(0xFFFFD800, bfcolor);
 
 			case 'ron':
 				dad.x += 70;
@@ -1215,7 +1245,7 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFF00DC, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFF00DC, bfcolor);
 			case 'ron-mad':
 				dad.x += 70;
 				dad.y += 250;
@@ -1224,7 +1254,7 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFF00DC, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFF00DC, bfcolor);
 			case 'hellron-crazy':
 				dad.x += 70;
 				dad.y += 290;
@@ -1233,6 +1263,7 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 310;
 				camPos.set(dad.getGraphicMidpoint().x + 150, dad.getGraphicMidpoint().y + 300);
+				healthBar.createFilledBar(0xFF000000, bfcolor);
 			case 'susron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1241,42 +1272,42 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFF000000, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFF000000, bfcolor);
 			case 'ronb':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFF00DC, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFF00DC, bfcolor);
 			case 'ron-usb':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFF000000, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFF000000, bfcolor);
 			case 'factorytankman':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFF877000, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFF877000, bfcolor);
 			case 'factorytankman-b':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFF8E007B, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFF8E007B, bfcolor);
 			case 'ron-usb-b':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFFFFFF, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'hellron-2':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFFFFFF, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'ateloron-b':
 				dad.x += 70;
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFFFFFF, 0xFF31B0D1);
+				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 		}
 
 		strumLineNotes.cameras = [camHUD];
@@ -1345,12 +1376,19 @@ class PlayState extends MusicBeatState
 				case 'bloodshed':
 					schoolIntro(doof);
 					add(fx);
+					add(Estatic);
 				case 'trojan-virus':
 					schoolIntro(doof);
 					add(Estatic);
 				case 'file-manipulation':
 					schoolIntro(doof);
 					add(Estatic);
+				case 'trojan-virus-b':
+					add(Estatic);
+					startCountdown();
+				case 'file-manipulation-b':
+					add(Estatic);
+					startCountdown();
 				case 'atelophobia':
 					camFollow.y = dad.getMidpoint().y;
 					camFollow.x = dad.getMidpoint().x + 300;
@@ -4173,6 +4211,39 @@ class PlayState extends MusicBeatState
 				case 518:
 					defaultCamZoom = 0.85;
 					satan.angle = 0;
+				case 776:
+					defaultCamZoom = 0.9;
+					FlxTween.tween(firebg, {alpha: 1}, 1, {ease: FlxEase.quadInOut});
+				case 792:
+					defaultCamZoom = 0.95;
+				case 808:
+					defaultCamZoom = 1;
+				case 824:
+					defaultCamZoom = 1.05;
+				case 840:
+					defaultCamZoom = 1.1;
+				case 856:
+					defaultCamZoom = 1.15;
+				case 872:
+					defaultCamZoom = 1.2;
+				case 888:
+					defaultCamZoom = 1.25;
+				case 904:
+					defaultCamZoom = 0.95;
+				case 920:
+					defaultCamZoom = 1.05;
+				case 936:
+					defaultCamZoom = 1.15;
+				case 952:
+					defaultCamZoom = 1.25;
+				case 968:
+					defaultCamZoom = 0.95;
+				case 984:
+					defaultCamZoom = 1.05;
+				case 1000:
+					defaultCamZoom = 1.15;
+				case 1016:
+					defaultCamZoom = 1.25;
 			}
 			if ((curStep >= 259) && (curStep <= 518))
 			{
@@ -4182,6 +4253,20 @@ class PlayState extends MusicBeatState
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
 			}
+			else if ((curStep >= 776) && (curStep <= 1070))
+			{
+				if (fx.alpha > 0)
+					fx.alpha -= 0.05;
+				satan.angle += 10;
+				FlxG.camera.shake(0.015, 0.1);
+				camHUD.shake(0.0015, 0.15);
+			}
+			else
+			{
+				if (fx.alpha > 0.3)
+					fx.alpha -= 0.05;
+			}
+			Estatic.alpha = (2-(health)-1)*2;
 		}
 		
 		if (curSong == 'Bloodshed-b') {
@@ -4250,7 +4335,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		
-		if (curSong == 'wasted')
+		if ((curSong == 'wasted') || (curSong == 'wasted-b'))
 		{
 			if (curStep == 828)
 			{
@@ -4261,8 +4346,19 @@ class PlayState extends MusicBeatState
 				var xx = dad.x;
 				var yy = dad.y;
 				remove(dad);
-				dad = new Character(xx, yy, 'ron-mad');
+				if (curSong == 'wasted')
+					dad = new Character(xx, yy, 'ron-mad');
+				else
+				{	
+					wastedbg.alpha = 1;
+					dad = new Character(xx, yy, 'ronmad-b');
+				}
 				add(dad);
+			}
+			if ((curStep >= 828) && (curSong == 'wasted-b'))
+			{
+				FlxG.camera.shake(0.025, 0.1);
+				camHUD.shake(0.0055, 0.15);
 			}
 		}
 	

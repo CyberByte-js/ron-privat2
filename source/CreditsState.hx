@@ -58,6 +58,8 @@ class CreditsState extends MusicBeatState
 		// LOAD CHARACTERS
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
+		bg.scale.set(0.7, 0.7);
+		bg.screenCenter(XY);
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -65,8 +67,7 @@ class CreditsState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false, true);
-			songText.screenCenter(X);
+			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false, false);
 			songText.isMenuItem = true;
 			songText.targetY = i;
 			grpSongs.add(songText);

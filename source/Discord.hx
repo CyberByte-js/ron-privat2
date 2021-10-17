@@ -12,7 +12,7 @@ class DiscordClient
 	{
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: "881651629378641920", // change this to what ever the fuck you want lol
+			clientID: "898517870483488778", // change this to what ever the fuck you want lol
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -62,9 +62,9 @@ class DiscordClient
 		});
 		trace("Discord Client initialized");
 	}
-
+	
 	public static function changePresence(details:String, state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float)
-	{
+	{	
 		var startTimestamp:Float = if(hasStartTimestamp) Date.now().getTime() else 0;
 
 		if (endTimestamp > 0)
@@ -75,7 +75,7 @@ class DiscordClient
 		DiscordRpc.presence({
 			details: details,
 			state: state,
-			largeImageKey: 'ronlogo',
+			largeImageKey: 'normal',
 			largeImageText: "fridaynightfunkin",
 			smallImageKey : smallImageKey,
 			// Obtained times are in milliseconds so they are divided so Discord can use it
@@ -85,5 +85,29 @@ class DiscordClient
 
 		//trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp');
 	}
+
+	public static function changePresenceIcon(bigImageKey : String, details:String, state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float)
+	{	
+		var startTimestamp:Float = if(hasStartTimestamp) Date.now().getTime() else 0;
+
+		if (endTimestamp > 0)
+		{
+			endTimestamp = startTimestamp + endTimestamp;
+		}
+
+		DiscordRpc.presence({
+			details: details,
+			state: state,
+			largeImageKey: bigImageKey,
+			largeImageText: bigImageKey,
+			smallImageKey : smallImageKey,
+			// Obtained times are in milliseconds so they are divided so Discord can use it
+			startTimestamp : Std.int(startTimestamp / 1000),
+            endTimestamp : Std.int(endTimestamp / 1000)
+		});
+
+		//trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp');
+	}
+	
 }
 #end
