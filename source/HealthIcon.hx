@@ -17,60 +17,54 @@ class HealthIcon extends FlxSprite
 
 		antialiasing = true;
 		animation.add('bf', [0, 1], 0, false, isPlayer);
-		animation.add('bf-b', [50, 51], 0, false, isPlayer);
-		animation.add('bf-run', [0, 1], 0, false, isPlayer);
-		animation.add('bf-car', [0, 1], 0, false, isPlayer);
-		animation.add('bf-christmas', [0, 1], 0, false, isPlayer);
-		animation.add('bf-pixel', [21, 21], 0, false, isPlayer);
-		animation.add('spooky', [2, 3], 0, false, isPlayer);
-		animation.add('pico', [4, 5], 0, false, isPlayer);
-		animation.add('mom', [6, 7], 0, false, isPlayer);
-		animation.add('mom-car', [6, 7], 0, false, isPlayer);
-		animation.add('tankman', [8, 9], 0, false, isPlayer);
-		animation.add('face', [10, 11], 0, false, isPlayer);
-		animation.add('dad', [12, 13], 0, false, isPlayer);
-		animation.add('senpai', [22, 22], 0, false, isPlayer);
-		animation.add('senpai-angry', [22, 22], 0, false, isPlayer);
-		animation.add('spirit', [23, 23], 0, false, isPlayer);
-		animation.add('bf-old', [14, 15], 0, false, isPlayer);
-		animation.add('gf', [16], 0, false, isPlayer);
-		animation.add('gf-b', [52], 0, false, isPlayer);
-		animation.add('gf-christmas', [16], 0, false, isPlayer);
-		animation.add('gf-pixel', [16], 0, false, isPlayer);
-		animation.add('parents-christmas', [17, 18], 0, false, isPlayer);
-		animation.add('monster', [19, 20], 0, false, isPlayer);
-		animation.add('monster-christmas', [19, 20], 0, false, isPlayer);
+		animation.add('bf-b', [20, 21], 0, false, isPlayer);
+		animation.add('bf-run', [30, 31], 0, false, isPlayer);
+		animation.add('bf-d', [40, 41], 0, false, isPlayer);
+		animation.add('gf', [10], 0, false, isPlayer);
+		animation.add('gf-d', [10], 0, false, isPlayer);
+		animation.add('gf-b', [11], 0, false, isPlayer);
 		// organized ron health icons because cyber didnt
 		// also cyber plz add the other health icons ok ty
 		// ok
 		// ty :)
-		animation.add('ron', [24, 25], 0, false, isPlayer);
-		animation.add('ron-angry', [47, 48], 0, false, isPlayer);		
-		animation.add('ron-mad', [26, 27], 0, false, isPlayer);		
-		animation.add('hellron', [28, 29], 0, false, isPlayer);	
-		animation.add('hellron-crazy', [45, 45], 0, false, isPlayer);			
-		animation.add('ateloron', [44, 28], 0, false, isPlayer);
-		animation.add('ron-usb', [30, 31], 0, false, isPlayer);		
-		animation.add('factorytankman', [32, 33], 0, false, isPlayer);
-		animation.add('ronb', [34, 35], 0, false, isPlayer);
-		animation.add('ronangry-b', [36, 37], 0, false, isPlayer);
-		animation.add('ronmad-b', [36, 37], 0, false, isPlayer);
-		animation.add('hellron-b', [38, 39], 0, false, isPlayer);
-		animation.add('ateloron-b', [38, 39], 0, false, isPlayer);	
-		animation.add('ron-usb-b', [40, 41], 0, false, isPlayer);
-		animation.add('factorytankman-b', [42, 43], 0, false, isPlayer);
-		animation.add('tankmantrojan-2', [40, 41], 0, false, isPlayer);
-		animation.add('factorytankman-2', [42, 43], 0, false, isPlayer);
-		animation.add('demonron', [45, 46], 0, false, isPlayer);
-		animation.add('hellron-2', [38, 39], 0, false, isPlayer);
+		
+		// i organized them even better now
+		// Cry about it
+		// -sz
+		
+		// week 1
+		animation.add('ron', [2, 3], 0, false, isPlayer);
+		animation.add('ron-angry', [4, 5], 0, false, isPlayer);		
+		animation.add('ron-mad', [6, 7], 0, false, isPlayer);		
+		animation.add('hellron', [8, 9], 0, false, isPlayer);	
+		animation.add('hellron-crazy', [8, 9], 0, false, isPlayer);		
+		animation.add('demonron', [42, 43], 0, false, isPlayer);				
+		
+		// week 2
+		animation.add('ron-usb', [12, 13], 0, false, isPlayer);	
+		animation.add('ateloron', [14, 16], 0, false, isPlayer);	
+		animation.add('factorytankman', [17, 19], 0, false, isPlayer);
+		
+		// week 1 b
+		animation.add('ronb', [22, 23], 0, false, isPlayer);
+		animation.add('ronangry-b', [24, 25], 0, false, isPlayer);
+		animation.add('ronmad-b', [26, 27], 0, false, isPlayer);
+		animation.add('hellron-b', [28, 29], 0, false, isPlayer);
+		animation.add('hellron-2', [28, 29], 0, false, isPlayer);
+		
+		// week 2 b
+		animation.add('ron-usb-b', [32, 33], 0, false, isPlayer);
+		animation.add('tankmantrojan-2', [32, 33], 0, false, isPlayer);
+		animation.add('ateloron-b', [34, 36], 0, false, isPlayer);	
+		animation.add('factorytankman-b', [37, 39], 0, false, isPlayer);
+		animation.add('factorytankman-2', [37, 39], 0, false, isPlayer);
+		
+		// bonus songs for the future
+		animation.add('bijuuron', [44, 45], 0, false, isPlayer);
+		
+		// idk why this exists but ill put it in just in case
 		animation.add('gf-in', [59], 0, false, isPlayer);
 		animation.play(char);
-
-		switch(char)
-		{
-			case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit' | 'gf-pixel':
-				antialiasing = false;
-		}
 
 		scrollFactor.set();
 	}

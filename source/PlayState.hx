@@ -735,17 +735,6 @@ class PlayState extends MusicBeatState
 				bg.scrollFactor.set(0.1, 0.1);
 				add(bg);
 				
-				var witheredR:FlxSprite = new FlxSprite(-512, -260);
-				witheredR.frames = Paths.getSparrowAtlas('updateron/bg/annoyed_rain');
-				witheredR.setGraphicSize(Std.int(witheredR.width * 4));
-				witheredR.animation.addByPrefix('rain', 'rain', 24, true);
-				witheredR.updateHitbox();
-				witheredR.antialiasing = true;
-				witheredR.scrollFactor.set(0.5,0.1);
-				witheredR.screenCenter(XY);
-				if ((SONG.song == 'Ayo') || (SONG.song == 'Ayo-b'))
-					add(witheredR);
-				
 				var clouds:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/pissedRon_clouds'));
 				clouds.updateHitbox();
 				clouds.scale.x = 0.7;
@@ -773,6 +762,50 @@ class PlayState extends MusicBeatState
 				wastedbg.screenCenter();
 				wastedbg.alpha = 0;
 				add(wastedbg);
+			}
+			case 'verymad':
+			{
+				defaultCamZoom = 0.9;
+				curStage = 'verymad';
+				var bg:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/veryAngreRon_sky'));
+				bg.updateHitbox();
+				bg.scale.x = 1;
+				bg.scale.y = 1;
+				bg.active = false;
+				bg.antialiasing = true;
+				bg.screenCenter();
+				bg.scrollFactor.set(0.1, 0.1);
+				add(bg);
+				
+				var witheredR:FlxSprite = new FlxSprite(-512, -260);
+				witheredR.frames = Paths.getSparrowAtlas('updateron/bg/annoyed_rain');
+				witheredR.setGraphicSize(Std.int(witheredR.width * 4));
+				witheredR.animation.addByPrefix('rain', 'rain', 24, true);
+				witheredR.updateHitbox();
+				witheredR.antialiasing = true;
+				witheredR.scrollFactor.set(0.5,0.1);
+				witheredR.screenCenter(XY);
+				add(witheredR);
+				witheredR.animation.play('rain');
+				
+				var clouds:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/veryAngreRon_clouds'));
+				clouds.updateHitbox();
+				clouds.scale.x = 0.7;
+				clouds.scale.y = 0.7;
+				clouds.screenCenter();
+				clouds.active = false;
+				clouds.antialiasing = true;
+				clouds.scrollFactor.set(0.2, 0.2);
+				add(clouds);
+				/*var glitchEffect = new FlxGlitchEffect(8,10,0.4,FlxGlitchDirection.HORIZONTAL);
+				var glitchSprite = new FlxEffectSprite(bg, [glitchEffect]);
+				add(glitchSprite);*/
+				
+				var ground:FlxSprite = new FlxSprite(-537, -250).loadGraphic(Paths.image('updateron/bg/veryAngreRon_ground'));
+				ground.updateHitbox();
+				ground.active = false;
+				ground.antialiasing = true;
+				add(ground);
 			}
 			case 'hell':
 			{
@@ -1010,6 +1043,8 @@ class PlayState extends MusicBeatState
 			}
 			if (curSong == 'Bloodshed')
 				gfCheck = 'gf-run';
+			if (curSong == 'Ayo')
+				gfCheck = 'gf-d';
 		} else {gfCheck = SONG.gfVersion;}
 
 		var curGf:String = '';
@@ -1025,6 +1060,8 @@ class PlayState extends MusicBeatState
 				curGf = 'gf-run';
 			case 'gf-b':
 				curGf = 'gf-b';
+			case 'gf-d':
+				curGf = 'gf-d';
 			default:
 				curGf = 'gf';
 		}
@@ -1281,6 +1318,11 @@ class PlayState extends MusicBeatState
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFF0000, bfcolor);
+			case 'bijuuron':
+				dad.x -= 80;
+				dad.y += 120;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+				healthBar.createFilledBar(0xFFEBDD44, bfcolor);
 			case 'susron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1474,25 +1516,11 @@ class PlayState extends MusicBeatState
 		senpaiEvil.updateHitbox();
 		senpaiEvil.screenCenter();
 
-		if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'roses' || StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'thorns')
-		{
-			remove(black);
-
-			if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'thorns')
-			{
-				add(red);
-			}
-		}
+		remove(black);
 
 		new FlxTimer().start(0.3, function(tmr:FlxTimer)
 		{
-			black.alpha -= 0.15;
-
-			if (black.alpha > 0)
-			{
-				tmr.reset(0.3);
-			}
-			else
+			// i HATE the slow black screen intro smh
 			{
 				if (dialogueBox != null)
 				{
@@ -4219,8 +4247,8 @@ class PlayState extends MusicBeatState
 			healthBar.alpha = 0;
 			iconP1.visible = true;
 			iconP2.visible = true;
-			iconP2.alpha = (2-(health)-0.25)/2;
-			iconP1.alpha = (health-0.25)/2;
+			iconP2.alpha = (2-(health)-0.25)/2+0.2;
+			iconP1.alpha = (health-0.25)/2+0.2;
 			switch (curStep) {
 				case 259:
 					defaultCamZoom = 0.95;
@@ -4298,8 +4326,8 @@ class PlayState extends MusicBeatState
 			healthBar.alpha = 0;
 			iconP1.visible = true;
 			iconP2.visible = true;
-			iconP2.alpha = (2-(health)-0.25)/2;
-			iconP1.alpha = (health-0.25)/2;
+			iconP2.alpha = (2-(health)-0.25)/2+0.2;
+			iconP1.alpha = (health-0.25)/2+0.2;
 			switch (curStep) {
 				case 0:
 					blackeffect.alpha = 0;
@@ -4314,16 +4342,21 @@ class PlayState extends MusicBeatState
 				case 320:
 					FlxTween.tween(blackeffect, {alpha: 0}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(fx, {alpha: 0.6}, 2, {ease: FlxEase.quadInOut});
+				case 512:
+					FlxTween.tween(firebg, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
 				case 768:
 					FlxTween.tween(blackeffect, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(fx, {alpha: 0.8}, 2, {ease: FlxEase.quadInOut});
 					dad.alpha = 0;
+				case 900:
+					FlxTween.tween(firebg, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
 				case 1024:
 					FlxTween.tween(blackeffect, {alpha: 0}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(fx, {alpha: 0.6}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(dad, {alpha: 1}, 2, {ease: FlxEase.quadInOut});					
 				case 1152:
 					FlxTween.tween(fx, {alpha: 0.4}, 2, {ease: FlxEase.quadInOut});
+					FlxTween.tween(firebg, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
 				case 1280:
 					FlxTween.tween(blackeffect, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(fx, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
@@ -4339,27 +4372,27 @@ class PlayState extends MusicBeatState
 				if (curStep % 64 == 0)
 					defaultCamZoom = 0.85;
 			}
-			if (((curStep >= 768) && (curStep <= 1024)))
+			if (((curStep >= 512) && (curStep <= 1024)))
 			{
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
-				if (health > 0.36)
-					health -= 0.12;
+				if (health > 0.2)
+					health -= 0.1;
 				else
-					health = 0.36;
+					health = 0.2;
 			}
-			if ((curStep >= 1280) && (curStep <= 1536))
+			if ((curStep >= 1152) && (curStep <= 1536))
 			{
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
-				if (health > 0.03)
-					health -= 0.014;
+				if (health > 0.2)
+					health = 0.1;
 				else
-					health = 0.02;			
+					health -= 0.2;
 			}
 		}
 		
-		if ((curSong == 'wasted') || (curSong == 'wasted-b'))
+		if ((curSong == 'wasted') || (curSong == 'Wasted-B'))
 		{
 			if (curStep == 828)
 			{

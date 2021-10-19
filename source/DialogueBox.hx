@@ -9,6 +9,8 @@ import flixel.input.FlxKeyManager;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 #if windows
 import Sys;
@@ -22,7 +24,6 @@ class DialogueBox extends FlxSpriteGroup
 
 	
 	var curCharacter:String = '';
-
 
 	var dialogue:Alphabet;
 	var dialogueList:Array<String> = [];
@@ -105,7 +106,7 @@ class DialogueBox extends FlxSpriteGroup
 		portraitLeft.y += 100;
 		portraitLeft.scale.set(0.8, 0.8);
 		add(portraitLeft);
-		portraitLeft.visible = false;
+		portraitLeft.visible = true;
 
 		portraitRight = new FlxSprite();
 		portraitRight.frames = Paths.getSparrowAtlas('updateron/portraits/bf', 'shared');
@@ -121,7 +122,8 @@ class DialogueBox extends FlxSpriteGroup
 		portraitRight.updateHitbox();
 		portraitRight.scrollFactor.set();
 		add(portraitRight);
-		portraitRight.visible = false;
+		portraitRight.alpha = 0.5;
+		portraitRight.visible = true;
 
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
@@ -130,9 +132,9 @@ class DialogueBox extends FlxSpriteGroup
 
 		box.screenCenter(X);
 
-		handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
+		handSelect = new FlxSprite(FlxG.width * 0.7, FlxG.height * 0.85).loadGraphic(Paths.image('hand'));
 		add(handSelect);
-
+		FlxTween.tween(handSelect, {x: FlxG.width * 0.72}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		if (!talkingRight)
 		{
@@ -141,13 +143,13 @@ class DialogueBox extends FlxSpriteGroup
 
 		dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Pixel Arial 11 Bold';
-		dropText.color = 0xFFD89494;
+		dropText.color = 0xFF3F2021;
 		add(dropText);
 
 		swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 		swagDialogue.font = 'Pixel Arial 11 Bold';
-		swagDialogue.color = 0xFF3F2021;
-		swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
+		swagDialogue.color = 0xFFD89494;
+		swagDialogue.sounds = [FlxG.sound.load(Paths.sound('ronText'), 0.6)];
 		add(swagDialogue);
 
 		dialogue = new Alphabet(0, 80, "", false, true);
@@ -246,10 +248,8 @@ class DialogueBox extends FlxSpriteGroup
 		// swagDialogue.text = ;
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
-		if (curCharacter != 'bf')
+		if (StringTools.contains(curCharacter, 'ron'))
 		{
-			remove(portraitLeft);
-			portraitLeft = new FlxSprite();
 			portraitLeft.frames = Paths.getSparrowAtlas('updateron/portraits/'+curCharacter, 'shared');
 			portraitLeft.animation.addByPrefix('ron Portrait Enter', 'ron Portrait Enter', 24, false);
 			portraitLeft.setGraphicSize(Std.int(portraitLeft.width + PlayState.daPixelZoom * 0.175));
@@ -259,25 +259,30 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.x -= 80;
 			portraitLeft.y += 100;
 			portraitLeft.scale.set(0.8, 0.8);
-			portraitLeft.visible = false;
-			add(portraitLeft);
-			portraitRight.visible = false;
-			if (!portraitLeft.visible)
-			{
-				portraitLeft.visible = true;
-				portraitLeft.animation.play('ron Portrait Enter');
-			}
+			portraitRight.alpha = 0.5;
+			portraitLeft.alpha = 1;
+			portraitLeft.animation.play('ron Portrait Enter');
+			swagDialogue.sounds =  [FlxG.sound.load(Paths.sound('ronText'), 0.6)];
+			dropText.font = Paths.font("w95.otf");
+			dropText.color = 0xFFFFF4BB;
+			swagDialogue.font = Paths.font("w95.otf");
+			swagDialogue.color = 0xFFFFBF00;
+			dropText.size = 48;
+			swagDialogue.size = 48;
 		}
 		else
 		{
-			portraitLeft.visible = false;
-			if (!portraitRight.visible)
-			{
-				portraitRight.visible = true;
-				trace('bf pog!!!');
-				portraitRight.animation.play(curCharacter);
-				swagDialogue.sounds =  [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
-			}
+			portraitLeft.alpha = 0.5;
+			portraitRight.alpha = 1;
+			trace('bf pog!!!');
+			portraitRight.animation.play(curCharacter);
+			swagDialogue.sounds =  [FlxG.sound.load(Paths.sound('bfText'), 0.6)];
+			dropText.font = 'Pixel Arial 11 Bold';
+			dropText.color = 0xFFB9E5FF;
+			swagDialogue.font = 'Pixel Arial 11 Bold';
+			swagDialogue.color = 0xFF00BADA;
+			dropText.size = 32;
+			swagDialogue.size = 32;
 		}
 	}
 	function cleanDialog():Void

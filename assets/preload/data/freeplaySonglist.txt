@@ -1,7 +1,7 @@
 Tutorial:gf:0
 Ron:ron:1
 Ron-b:ronb:1
-Wasted:ron-mad:1
+Wasted:ron-angry:1
 Wasted-b:ronangry-b:1
 Ayo:ron-mad:1
 Ayo-b:ronmad-b:1
@@ -13,8 +13,8 @@ Trojan-Virus-b:ron-usb-b:2
 File-Manipulation:ron-usb:2
 File-Manipulation-b:ron-usb-b:2
 Atelophobia:ateloron:2
-Atelophobia-b:ateloron:2
+Atelophobia-b:ateloron-b:2
 Factory-Reset:factorytankman:2
 Factory-Reset-b:factorytankman-b:2
-Trouble:ron:0
-Bijuu:ron:0
+Trouble:factorytankman:0
+Bijuu:bijuuron:0
