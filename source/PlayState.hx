@@ -1822,7 +1822,7 @@ class PlayState extends MusicBeatState
 
 		if (!paused)
 		{
-			if ((sys.FileSystem.exists(Paths.censoredinst(PlayState.SONG.song))) && (FlxG.save.data.coolronweekcopyright))
+			if ((FileSystem.exists(Paths.censoredinst(PlayState.SONG.song))) && (FlxG.save.data.coolronweekcopyright))
 				FlxG.sound.playMusic(Paths.censoredinst(PlayState.SONG.song), 1, false);
 			else
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
@@ -2715,7 +2715,7 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				camFollow.setPosition(dad.getMidpoint().x + 150 + offsetX, dad.getMidpoint().y - 100 + offsetY);
+				camFollow.setPosition(dad.getMidpoint().x + offsetX + dad.frameWidth/2, dad.getMidpoint().y + 120 - dad.frameHeight/2 + offsetY);
 				#if windows
 				if (luaModchart != null)
 					luaModchart.executeState('playerTwoTurn', []);
@@ -2749,7 +2749,7 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				camFollow.setPosition(boyfriend.getMidpoint().x - 100 + offsetX, boyfriend.getMidpoint().y - 100 + offsetY);
+				camFollow.setPosition(boyfriend.x + boyfriend.frameWidth/2 - 100 + offsetX, boyfriend.y + boyfriend.height - boyfriend.frameHeight/2 - 100 + offsetY);
 
 				#if windows
 				if (luaModchart != null)
@@ -4533,9 +4533,11 @@ class PlayState extends MusicBeatState
 	
 		}
 
-		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
-		iconP2.setGraphicSize(Std.int(iconP2.width + 30));
-			
+		iconP1.scale.set(1.5, 0.5);
+		iconP2.scale.set(1.5, 0.5);
+		FlxTween.tween(iconP1, {"scale.x": 1, "scale.y": 1}, 1, {ease: FlxEase.quadInOut});
+		FlxTween.tween(iconP2, {"scale.x": 1, "scale.y": 1}, 1, {ease: FlxEase.quadInOut});
+		
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
 
@@ -4548,7 +4550,6 @@ class PlayState extends MusicBeatState
 		{
 			boyfriend.playAnim('idle');
 		}
-		
 
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{

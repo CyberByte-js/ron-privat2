@@ -250,6 +250,9 @@ class DialogueBox extends FlxSpriteGroup
 		swagDialogue.start(0.04, true);
 		if ((StringTools.contains(curCharacter, 'ron')) || (StringTools.contains(curCharacter, 'Ron')))
 		{
+			var shouldAnimate:Bool = true;
+			if ((portraitLeft.frames == Paths.getSparrowAtlas('updateron/portraits/'+curCharacter, 'shared')) && (portraitRight.alpha == 0.5))
+				shouldAnimate = false;
 			portraitLeft.frames = Paths.getSparrowAtlas('updateron/portraits/'+curCharacter, 'shared');
 			portraitLeft.animation.addByPrefix('ron Portrait Enter', 'ron Portrait Enter', 24, false);
 			portraitLeft.setGraphicSize(Std.int(portraitLeft.width + PlayState.daPixelZoom * 0.175));
@@ -261,7 +264,8 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.scale.set(0.8, 0.8);
 			portraitRight.alpha = 0.5;
 			portraitLeft.alpha = 1;
-			portraitLeft.animation.play('ron Portrait Enter');
+			if (shouldAnimate == true)
+				portraitLeft.animation.play('ron Portrait Enter');
 			swagDialogue.sounds =  [FlxG.sound.load(Paths.sound('ronText'), 0.6)];
 			dropText.font = Paths.font("w95.otf");
 			dropText.color = 0xFFFFF4BB;

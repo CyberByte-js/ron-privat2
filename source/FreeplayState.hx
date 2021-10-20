@@ -9,6 +9,8 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 
 
@@ -115,6 +117,7 @@ class FreeplayState extends MusicBeatState
 		fdiffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "UNFAIR", 24);
 		fdiffText.font = scoreText.font;
 		fdiffText.visible = false;
+		fdiffText.color = 0xFFFF0000;
 		add(fdiffText);
 
 		comboText = new FlxText(diffText.x + 100, diffText.y, 0, "", 24);
@@ -186,6 +189,8 @@ class FreeplayState extends MusicBeatState
 		}
 
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.4));
+		FlxG.watch.addQuick("beatShit", curStep);
+		Conductor.songPosition = FlxG.sound.music.time;
 
 		if (Math.abs(lerpScore - intendedScore) <= 10)
 			lerpScore = intendedScore;
@@ -299,6 +304,28 @@ class FreeplayState extends MusicBeatState
 
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 	}
+	
+	override function beatHit()
+	{
+		switch (curSelected)
+		{
+			case 1 | 2:
+				FlxG.camera.shake(0.0025, 0.05);
+			case 3 | 4:
+				FlxG.camera.y += 10;
+				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
+			case 5 | 6:
+				if (curBeat % 2 == 1)
+					FlxG.camera.angle = 2;
+				else
+					FlxG.camera.angle = -2;
+					
+				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
+			case 7 | 8 | 9:
+				FlxG.camera.zoom = 1.05;
+				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
+		}
+	}
 
 	function changeSelection(change:Int = 0)
 	{
@@ -335,6 +362,8 @@ class FreeplayState extends MusicBeatState
 		#if PRELOAD_ALL
 		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
 		#end
+		
+		Conductor.changeBPM(Song.loadFromJson(songs[curSelected].songName.toLowerCase(), songs[curSelected].songName.toLowerCase()).bpm/2);
 
 		var bullShit:Int = 0;
 
