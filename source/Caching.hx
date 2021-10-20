@@ -53,7 +53,7 @@ class Caching extends MusicBeatState
             cache();
         });
 		
-		loadingBar = new FlxBar(text.x, text.y - 250, LEFT_TO_RIGHT, 400, 30, this, 'done', 0, 70, true);
+		loadingBar = new FlxBar(text.x, text.y - 200, LEFT_TO_RIGHT, 400, 30, this, 'done', 0, 70, true);
 		loadingBar.screenCenter(X);
 		loadingBar.scrollFactor.set();
 		loadingBar.createFilledBar(FlxColor.BLACK, 0xFFFFFFFF);
@@ -67,17 +67,28 @@ class Caching extends MusicBeatState
         kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('loading'));
 		kadeLogo.screenCenter();
         kadeLogo.setGraphicSize(Std.int(kadeLogo.width * 0.5));
-        text.y -= kadeLogo.height / 2 - 125;
+        text.y -= kadeLogo.height / 2 - 65;
         text.x -= 170;
 		text2.x -= 85;
 		text2.y += 300;
         kadeLogo.alpha = 0;
+		
+		var gfDance:FlxSprite = new FlxSprite();
+		gfDance.frames = Paths.getSparrowAtlas('loadingRun');
+		gfDance.animation.addByPrefix('idle', "run", 12, true);
+		gfDance.antialiasing = true;
+		gfDance.screenCenter(XY);
+		gfDance.animation.play('idle');
+		gfDance.alpha = 1;
+		gfDance.scale.set(0.3,0.3);
+		gfDance.y -= 265;
 
         add(kadeLogo);
 		add(bgBar);
 		add(loadingBar);
         add(text);
 		add(text2);
+		add(gfDance);
 
         trace('starting caching..');
         
@@ -95,7 +106,7 @@ class Caching extends MusicBeatState
             kadeLogo.alpha = alpha;
             text.text = done + "/" + toBeDone;
 			text.screenCenter(XY);
-			text.y = FlxG.height / 8;
+			text.y = FlxG.height / 8 + 52;
         }
 
         super.update(elapsed);

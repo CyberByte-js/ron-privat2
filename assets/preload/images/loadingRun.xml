@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="KadeEngineLogoBumpin.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="run0000" x="0" y="0" width="390" height="280"/>
+	<SubTexture name="run0001" x="0" y="280" width="390" height="280"/>
+	<SubTexture name="run0002" x="390" y="0" width="390" height="280"/>
+	<SubTexture name="run0003" x="390" y="280" width="390" height="280"/>
+</TextureAtlas>

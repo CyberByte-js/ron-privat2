@@ -66,6 +66,7 @@ class StoryMenuState extends MusicBeatState
 	var rightArrow:FlxSprite;
 	var bg:FlxSprite;
 	var bg2:FlxSprite;
+	public var video:MP4Handler = new MP4Handler();
 
 	override function create()
 	{
@@ -360,10 +361,19 @@ class StoryMenuState extends MusicBeatState
 			PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
 			PlayState.storyWeek = curWeek;
 			PlayState.campaignScore = 0;
-			new FlxTimer().start(1, function(tmr:FlxTimer)
+			if (curWeek == 1) {
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					video.playMP4(Paths.video('ron'), new PlayState(), false, false, false);
+				});
+			}
+			else
 			{
-				LoadingState.loadAndSwitchState(new PlayState(), true);
-			});
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					LoadingState.loadAndSwitchState(new PlayState(), true);
+				});
+			}
 		}
 	}
 

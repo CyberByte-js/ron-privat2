@@ -29,6 +29,7 @@ class FreeplayState extends MusicBeatState
 	var scoreText:FlxText;
 	var comboText:FlxText;
 	var diffText:FlxText;
+	var fdiffText:FlxText;
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 	var combo:String = '';
@@ -110,6 +111,11 @@ class FreeplayState extends MusicBeatState
 		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
 		diffText.font = scoreText.font;
 		add(diffText);
+
+		fdiffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "UNFAIR", 24);
+		fdiffText.font = scoreText.font;
+		fdiffText.visible = false;
+		add(fdiffText);
 
 		comboText = new FlxText(diffText.x + 100, diffText.y, 0, "", 24);
 		comboText.font = diffText.font;
@@ -231,6 +237,17 @@ class FreeplayState extends MusicBeatState
 		{
 			FlxG.switchState(new MainMenuState());
 		}
+		
+		if (songs[curSelected].songName == 'Bloodshed-old')
+		{
+			fdiffText.visible = true;
+			diffText.visible = false;
+		}
+		else
+		{
+			fdiffText.visible = false;
+			diffText.visible = true;
+		}
 
 		if (accepted)
 		{
@@ -249,7 +266,10 @@ class FreeplayState extends MusicBeatState
 			
 			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName);
 			PlayState.isStoryMode = false;
-			PlayState.storyDifficulty = curDifficulty;
+			if (songs[curSelected].songName == 'Bloodshed-old')
+				PlayState.storyDifficulty = 2;
+			else
+				PlayState.storyDifficulty = curDifficulty;
 			PlayState.storyWeek = songs[curSelected].week;
 			trace('CUR WEEK' + PlayState.storyWeek);
 			LoadingState.loadAndSwitchState(new PlayState());

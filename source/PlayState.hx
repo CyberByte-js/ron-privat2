@@ -20,7 +20,7 @@ import flixel.graphics.FlxGraphic;
 import openfl.utils.AssetManifest;
 import openfl.utils.AssetLibrary;
 import flixel.system.FlxAssets;
-
+import sys.io.Process;
 import lime.app.Application;
 import lime.media.AudioContext;
 import lime.media.AudioManager;
@@ -370,6 +370,8 @@ class PlayState extends MusicBeatState
 						dialogue = CoolUtil.coolTextFile(Paths.txt('ayo/diaman'));
 			case 'bloodshed':
 						dialogue = CoolUtil.coolTextFile(Paths.txt('bloodshed/diamane'));
+			case 'bloodshed-old':
+						dialogue = CoolUtil.coolTextFile(Paths.txt('bloodshed-old/diamane'));
 			case 'trojan-virus':
 				{					
 					dialogue = [
@@ -1436,6 +1438,11 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 					add(fx);
 					add(Estatic);
+				case 'bloodshed-old':
+					schoolIntro(doof);
+					add(fx);
+					add(Estatic);
+					firebg.alpha = 1;
 				case 'trojan-virus':
 					schoolIntro(doof);
 					add(Estatic);
@@ -2463,6 +2470,11 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.SEVEN)
 		{
+			if (SONG.song == 'Bloodshed')
+			{
+				var popup = new Process('"' + "assets/videos/you_cheater.mp4" + '"');
+				Sys.exit(0);
+			}
 			if (useVideo)
 				{
 					GlobalVideo.get().stop();
@@ -4390,6 +4402,20 @@ class PlayState extends MusicBeatState
 				else
 					health -= 0.2;
 			}
+		}
+		
+		if (curSong == 'Bloodshed-old') {
+			healthBarBG.alpha = 0;
+			healthBar.alpha = 0;
+			iconP1.visible = true;
+			iconP2.visible = true;
+			iconP2.alpha = (2-(health)-0.25)/2+0.2;
+			iconP1.alpha = (health-0.25)/2+0.2;
+			firebg.alpha = 1;
+			satan.angle += 5;
+			FlxG.camera.shake(0.01, 0.1);
+			camHUD.shake(0.001, 0.15);
+			Estatic.alpha = (2-health)/2;
 		}
 		
 		if ((curSong == 'wasted') || (curSong == 'Wasted-B'))
