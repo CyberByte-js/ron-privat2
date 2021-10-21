@@ -98,7 +98,7 @@ class BSIDEState extends MusicBeatState
 
 		var ui_tex = Paths.getSparrowAtlas('bside_menu_UI_assets');
 		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFF507AF9);
-		bg = new FlxSprite(0, 56).loadGraphic(Paths.image('storyWeek1B'));
+		yellowBG = new FlxSprite(0, 56).loadGraphic(Paths.image('storyWeek1B'));
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
