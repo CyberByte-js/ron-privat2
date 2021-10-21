@@ -61,6 +61,7 @@ class BSIDEState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+	var copyright:FlxText;
 
 	override function create()
 	{
@@ -81,6 +82,9 @@ class BSIDEState extends MusicBeatState
 
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("VCR OSD Mono", 32);
+		
+		copyright = new FlxText(FlxG.width * 0.72, 600, 0, "", 32);
+		copyright.setFormat(Paths.font("w95.otf"), 24, FlxColor.WHITE, LEFT);
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
 		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
@@ -93,7 +97,8 @@ class BSIDEState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		var ui_tex = Paths.getSparrowAtlas('bside_menu_UI_assets');
-		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, FlxColor.BLUE);
+		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFF507AF9);
+		bg = new FlxSprite(0, 56).loadGraphic(Paths.image('storyWeek1B'));
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
@@ -203,6 +208,13 @@ class BSIDEState extends MusicBeatState
 		// FlxG.watch.addQuick('font', scoreText.font);
 
 		difficultySelectors.visible = weekUnlocked[curWeek];
+		
+		if (!FlxG.save.data.coolronweekcopyright)
+			copyright.text = "May include copyrighted material\nC: toggle";
+		else
+			copyright.text = "Copyright protection enabled\nC: toggle";
+		if (FlxG.keys.justPressed.C)
+				FlxG.save.data.coolronweekcopyright = !FlxG.save.data.coolronweekcopyright;
 
 		grpLocks.forEach(function(lock:FlxSprite)
 		{
