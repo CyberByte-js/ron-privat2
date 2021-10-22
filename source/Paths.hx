@@ -121,11 +121,6 @@ class Paths
 	inline static public function inst(song:String)
 	{
 		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
-			switch (PlayState.storyDifficulty)
-			{
-				case 3:
-					songLowercase = songLowercase + "-b";
-			}
 			switch (songLowercase) {
 				case 'dad-battle': songLowercase = 'dadbattle';
 				case 'philly-nice': songLowercase = 'philly';
