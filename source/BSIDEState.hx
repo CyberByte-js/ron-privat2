@@ -112,8 +112,6 @@ class BSIDEState extends MusicBeatState
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
 
-		
-
 		trace("Line 70");
 			for (i in 0...weekData.length)
 			{

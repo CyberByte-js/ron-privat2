@@ -55,6 +55,8 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	public static var finishedFunnyMove:Bool = false;
 
+	public static var b:Bool = false;
+
 	override function create()
 	{
 		#if windows
@@ -275,6 +277,7 @@ class MainMenuState extends MusicBeatState
 			case 'story mode':
 				FlxG.switchState(new StoryMenuState());
 				trace("Story Menu Selected");
+				b = false;
 			case 'freeplay':
 				FlxG.switchState(new FreeplayState());
 
@@ -285,6 +288,7 @@ class MainMenuState extends MusicBeatState
 			case 'b-side':
 				FlxG.switchState(new BSIDEState());
 				trace("b");
+				b = true;
 			case 'credits':
 				FlxG.switchState(new CreditsState());
 		}
