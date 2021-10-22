@@ -50,7 +50,8 @@ class DialogueBox extends FlxSpriteGroup
 	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
 	{
 		super();
-		if (PlayState.SONG.song.toLowerCase() == 'bloodshed')
+		if (PlayState.SONG.song.toLowerCase() == 'bloodshed'
+			|| PlayState.SONG.song.toLowerCase() == 'bloodshed-old')
 		{
 			FlxG.sound.playMusic(Paths.music('bloodshed-dialogue-mus'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
