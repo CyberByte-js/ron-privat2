@@ -26,7 +26,7 @@ class Note extends FlxSprite
 	public var modifiedByLua:Bool = false;
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
-
+	public var noteType:Int = 0;
 	public var noteScore:Float = 1;
 
 	public static var swagWidth:Float = 160 * 0.7;
@@ -37,12 +37,18 @@ class Note extends FlxSprite
 
 	public var rating:String = "shit";
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?skin:String, ?inCharter:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?skin:String, ?inCharter:Bool = false, ?noteType:Int = 0)
 	{
 		super();
 		
 		if (skin == null)
 			skin = 'ronsip';
+			
+		if (noteType == 1)
+		{
+			this.noteType = noteType;
+			skin = 'hurt';
+		}
 
 		if (prevNote == null)
 			prevNote = this;
