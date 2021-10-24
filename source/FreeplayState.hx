@@ -243,7 +243,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.switchState(new MainMenuState());
 		}
 		
-		if (songs[curSelected].songName == 'Bloodshed-old')
+		if (songs[curSelected].songName == 'Bloodshed-2')
 		{
 			fdiffText.visible = true;
 			diffText.visible = false;
@@ -269,12 +269,19 @@ class FreeplayState extends MusicBeatState
 
 			trace(poop);
 			
-			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName);
-			PlayState.isStoryMode = false;
-			if (songs[curSelected].songName == 'Bloodshed-old')
+			if (songs[curSelected].songName == 'Bloodshed-2')
 				PlayState.storyDifficulty = 2;
 			else
 				PlayState.storyDifficulty = curDifficulty;
+			if ((songs[curSelected].songName == 'Bloodshed') && (curDifficulty == 3))
+			{
+				PlayState.storyDifficulty = 2;
+				PlayState.SONG = Song.loadFromJson(poop, 'Bloodshed-old');
+			}
+			else
+				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName);
+
+			PlayState.isStoryMode = false;
 			PlayState.storyWeek = songs[curSelected].week;
 			trace('CUR WEEK' + PlayState.storyWeek);
 			LoadingState.loadAndSwitchState(new PlayState());
@@ -285,10 +292,20 @@ class FreeplayState extends MusicBeatState
 	{
 		curDifficulty += change;
 
-		if (curDifficulty < 0)
-			curDifficulty = 2;
-		if (curDifficulty > 2)
-			curDifficulty = 0;
+		if (songs[curSelected].songName.contains("-b"))
+		{
+			if (curDifficulty < 0)
+				curDifficulty = 2;
+			if (curDifficulty > 2)
+				curDifficulty = 0;
+		}
+		else
+		{
+			if (curDifficulty < 0)
+				curDifficulty = 3;
+			if (curDifficulty > 3)
+				curDifficulty = 0;
+		}
 
 		// adjusting the highscore song name to be compatible (changeDiff)
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
@@ -303,25 +320,27 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
+		if (songs[curSelected].songName.contains("-b"))
+			diffText.text = CoolUtil.difficultyBFromInt(curDifficulty).toUpperCase();
 	}
 	
 	override function beatHit()
 	{
 		switch (curSelected)
 		{
-			case 1 | 2:
+			case 2 | 3:
 				FlxG.camera.shake(0.0025, 0.05);
-			case 3 | 4:
+			case 4 | 5:
 				FlxG.camera.y += 10;
 				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
-			case 5 | 6:
+			case 6 | 7:
 				if (curBeat % 2 == 1)
 					FlxG.camera.angle = 2;
 				else
 					FlxG.camera.angle = -2;
 					
 				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
-			case 7 | 8 | 9:
+			case 8 | 9:
 				FlxG.camera.zoom = 1.05;
 				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
 		}
@@ -335,13 +354,28 @@ class FreeplayState extends MusicBeatState
 
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-
+		
 		curSelected += change;
-
+		
 		if (curSelected < 0)
 			curSelected = songs.length - 1;
 		if (curSelected >= songs.length)
 			curSelected = 0;
+		
+		if (songs[curSelected].songName.contains("-b"))
+		{
+			if (curDifficulty < 0)
+				curDifficulty = 2;
+			if (curDifficulty > 2)
+				curDifficulty = 0;
+		}
+		else
+		{
+			if (curDifficulty < 0)
+				curDifficulty = 3;
+			if (curDifficulty > 3)
+				curDifficulty = 0;
+		}
 
 		// selector.y = (70 * curSelected) + 30;
 		
@@ -388,6 +422,10 @@ class FreeplayState extends MusicBeatState
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
+		
+		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
+		if (songs[curSelected].songName.contains("-b"))
+			diffText.text = CoolUtil.difficultyBFromInt(curDifficulty).toUpperCase();
 	}
 }
 

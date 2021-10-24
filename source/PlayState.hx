@@ -363,6 +363,8 @@ class PlayState extends MusicBeatState
 		//dialogue shit
 		switch (songLowercase)
 		{
+			case 'pretty-wacky':
+						dialogue = CoolUtil.coolTextFile(Paths.txt('pretty-wacky/diamane'));
 			case 'ron':
 						dialogue = CoolUtil.coolTextFile(Paths.txt('ron/ronIsBack'));
 			case 'wasted':
@@ -1285,6 +1287,11 @@ class PlayState extends MusicBeatState
 				
 			healthBar.createFilledBar(0xFFFFD800, bfcolor);
 
+			case 'douyhe':
+				dad.x += 70;
+				dad.y += 250;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'ron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1439,6 +1446,8 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 					add(fx);
 					add(Estatic);
+				case 'pretty-wacky':
+					schoolIntro(doof);
 				case 'bloodshed-old':
 					schoolIntro(doof);
 					add(fx);
@@ -1978,6 +1987,8 @@ class PlayState extends MusicBeatState
 					skin = 'ronsip';
 					switch (dad.curCharacter)
 					{
+						case 'douyhe':
+							skin = 'NOTE_assets';
 						case 'hellron':
 							skin = 'ronhell';
 						case 'ateloron':
@@ -3075,7 +3086,7 @@ class PlayState extends MusicBeatState
 									{
 										health -= 0.075;
 										vocals.volume = 0;
-										if (theFunne)
+										if ((theFunne) && (daNote.noteType == 0))
 											noteMiss(daNote.noteData, daNote);
 									}
 								}
@@ -3083,7 +3094,7 @@ class PlayState extends MusicBeatState
 								{
 									health -= 0.075;
 									vocals.volume = 0;
-									if (theFunne)
+									if ((theFunne) && (daNote.noteType == 0))
 										noteMiss(daNote.noteData, daNote);
 								}
 							}
@@ -3379,12 +3390,14 @@ class PlayState extends MusicBeatState
 				score = -300;
 				combo = 0;
 				misses++;
-				health -= 0.2;
+				health -= 0.25;
 				ss = false;
 				uhoh = true;
 				shits++;
 				if (FlxG.save.data.accuracyMod == 0)
 					totalNotesHit -= 1;
+					
+				boyfriend.playAnim('singDOWNmiss', true);
 			}
 
 			// trace('Wife accuracy loss: ' + wife + ' | Rating: ' + daRating + ' | Score: ' + score + ' | Weight: ' + (1 - wife));
@@ -3734,7 +3747,7 @@ class PlayState extends MusicBeatState
 							{
 								for (shit in 0...pressArray.length)
 									{ // if a direction is hit that shouldn't be
-										if (pressArray[shit] && !directionList.contains(shit))
+										if (pressArray[shit] && !(directionList.contains(shit)))
 											noteMiss(shit, null);
 									}
 							}
@@ -4286,6 +4299,18 @@ class PlayState extends MusicBeatState
 		boyfriend.playAnim('scared', true);
 		gf.playAnim('scared', true);
 	}
+	
+	function RonIngameTransform()
+	{
+		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		black.scrollFactor.set();
+		new FlxTimer().start(1.7, function(tmr:FlxTimer)
+		{
+			add(black);
+			FlxG.camera.fade(FlxColor.WHITE, 0.1, true);
+		});
+
+	}
 
 	var danced:Bool = false;
 
@@ -4535,6 +4560,11 @@ class PlayState extends MusicBeatState
 			if (curBeat % 2 == 0 && dad.animOffsets.exists('danceRight'))
 				dad.playAnim('danceRight');
 		}
+		
+		if (curSong.toLowerCase() == 'trouble' && curBeat == 504 )
+		{
+			RonIngameTransform();
+		}
 
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
@@ -4572,8 +4602,10 @@ class PlayState extends MusicBeatState
 
 		iconP1.scale.set(1.5, 0.5);
 		iconP2.scale.set(1.5, 0.5);
-		FlxTween.tween(iconP1, {"scale.x": 1, "scale.y": 1}, 1, {ease: FlxEase.quadInOut});
-		FlxTween.tween(iconP2, {"scale.x": 1, "scale.y": 1}, 1, {ease: FlxEase.quadInOut});
+		FlxTween.tween(iconP1, {"scale.x": 1}, 1.5, {ease: FlxEase.quadInOut});
+		FlxTween.tween(iconP1, {"scale.y": 1}, 0.5, {ease: FlxEase.quadInOut});
+		FlxTween.tween(iconP2, {"scale.x": 1}, 1.5, {ease: FlxEase.quadInOut});
+		FlxTween.tween(iconP2, {"scale.y": 1}, 0.5, {ease: FlxEase.quadInOut});
 		
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();

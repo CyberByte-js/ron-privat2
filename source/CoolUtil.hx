@@ -6,11 +6,17 @@ using StringTools;
 
 class CoolUtil
 {
-	public static var difficultyArray:Array<String> = ['Easy', "Normal", "Hard", "B-Side"];
+	public static var difficultyArray:Array<String> = ['Easy', "Normal", "Hard", "Cool"];
+	public static var difficultyArrayB:Array<String> = ['Easy', "Standard", "Flip", "Flip"];
 
 	public static function difficultyFromInt(difficulty:Int):String
 	{
 		return difficultyArray[difficulty];
+	}
+	
+	public static function difficultyBFromInt(difficulty:Int):String
+	{
+		return difficultyArrayB[difficulty];
 	}
 
 	public static function coolTextFile(path:String):Array<String>

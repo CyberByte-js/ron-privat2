@@ -22,30 +22,30 @@ using StringTools;
 
 class StoryMenuState extends MusicBeatState
 {
-	public var bside:Bool = false;
-
 	var scoreText:FlxText;
-
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
 		['Ron', 'Wasted', 'Ayo', 'Bloodshed'],
-		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset']
+		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset'],
+		['Pretty-Wacky','He-Hates-Me']
 	];
+
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, false];
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
 		['ron', 'bf', 'gf'],
 		['ron2', 'bf', 'gf'],
-		['', 'bf', 'gf']
+		['douyhe', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = [
 		"Tutorial but less cooler B(",
 		"VS COOL GUY B)",
-		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron"
+		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron",
+		"thy tongue deviseth mischiefs"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -66,6 +66,8 @@ class StoryMenuState extends MusicBeatState
 	var rightArrow:FlxSprite;
 	var bg:FlxSprite;
 	var bg2:FlxSprite;
+	var secret:String = "";
+	var secretPng:FlxSprite;
 	public var video:MP4Handler = new MP4Handler();
 
 	override function create()
@@ -74,6 +76,11 @@ class StoryMenuState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Story Mode Menu", null);
 		#end
+		
+		if (FlxG.save.data.douyhelikescheese)
+			weekUnlocked = [true, true, true, true];
+		else
+			weekUnlocked = [true, true, true, false];
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
@@ -124,34 +131,22 @@ class StoryMenuState extends MusicBeatState
 
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
-
-		
+		secret = "";
 
 		trace("Line 70");
-			for (i in 0...weekData.length)
-			{
+		for (i in 0...weekData.length)
+		{
 			var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, i);
 			weekThing.y += ((weekThing.height + 20) * i);
 			weekThing.targetY = i;
 			grpWeekText.add(weekThing);
-
 			weekThing.screenCenter(X);
 			weekThing.antialiasing = true;
 			// weekThing.updateHitbox();
-
 			// Needs an offset thingie
 			if (!weekUnlocked[i])
-			{
-				var lock:FlxSprite = new FlxSprite(weekThing.width + 10 + weekThing.x);
-				lock.frames = ui_tex;
-				lock.animation.addByPrefix('lock', 'lock');
-				lock.animation.play('lock');
-				lock.ID = i;
-				lock.antialiasing = true;
-				grpLocks.add(lock);
-			}
-			}	
-		
+				weekThing.alpha = 0;
+		}
 
 		trace("Line 96");
 
@@ -205,6 +200,12 @@ class StoryMenuState extends MusicBeatState
 		add(scoreText);
 		add(txtWeekTitle);
 		add(copyright);
+		
+		secretPng = new FlxSprite().loadGraphic(Paths.image('holdup'));
+		secretPng.scale.set(0.66,0.66);
+		secretPng.screenCenter();
+		secretPng.alpha = 0;
+		add(secretPng);
 
 		updateText();
 
@@ -234,10 +235,99 @@ class StoryMenuState extends MusicBeatState
 		if (FlxG.keys.justPressed.C)
 				FlxG.save.data.coolronweekcopyright = !FlxG.save.data.coolronweekcopyright;
 
-		grpLocks.forEach(function(lock:FlxSprite)
+		if (FlxG.keys.justPressed.ANY)
 		{
-			lock.y = grpWeekText.members[lock.ID].y;
-		});
+			if (FlxG.keys.justPressed.A)
+			{
+				secret += 'a';
+			}
+			else if (FlxG.keys.justPressed.B)
+			{
+				secret += 'b';
+			}
+			else if (FlxG.keys.justPressed.D)
+			{
+				secret += 'd';
+			}
+			else if (FlxG.keys.justPressed.E)
+			{
+				secret += 'e';
+			}
+			else if (FlxG.keys.justPressed.F)
+			{
+				secret += 'f';
+			}
+			else if (FlxG.keys.justPressed.G)
+			{
+				secret += 'g';
+			}
+			else if (FlxG.keys.justPressed.H)
+			{
+				secret += 'h';
+			}
+			else if (FlxG.keys.justPressed.I)
+			{
+				secret += 'i';
+			}
+			else if (FlxG.keys.justPressed.K)
+			{
+				secret += 'k';
+			}
+			else if (FlxG.keys.justPressed.L)
+			{
+				secret += 'l';
+			}
+			else if (FlxG.keys.justPressed.N)
+			{
+				secret += 'n';
+			}
+			else if (FlxG.keys.justPressed.O)
+			{
+				secret += 'o';
+			}
+			else if (FlxG.keys.justPressed.R)
+			{
+				secret += 'r';
+			}
+			else if (FlxG.keys.justPressed.S)
+			{
+				secret += 's';
+			}
+			else if (FlxG.keys.justPressed.T)
+			{
+				secret += 't';
+			}
+			else if (FlxG.keys.justPressed.U)
+			{
+				secret += 'u';
+			}
+			else if (FlxG.keys.justPressed.V)
+			{
+				secret += 'v';
+			}
+			
+			if (secret.length >= 46)
+			{
+				if (secret == 'helikestotalkaboutitanditshisfavoritethingever')
+				{
+					FlxG.save.data.douyhelikescheese = !FlxG.save.data.douyhelikescheese;
+					FlxG.save.flush();
+					if (FlxG.save.data.douyhelikescheese)
+						weekUnlocked = [true, true, true, true];
+					else
+						weekUnlocked = [true, true, true, false];
+					
+					secretPng.alpha = 1;
+					FlxTween.tween(secretPng, {alpha: 0}, 1);
+					FlxG.sound.play(Paths.sound('hi'));
+				}
+				else
+				{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}
+				secret = '';
+			}
+		}
 
 		if (!movedBack)
 		{
@@ -425,6 +515,14 @@ class StoryMenuState extends MusicBeatState
 		if (curWeek < 0)
 			curWeek = weekData.length - 1;
 			
+		if (!weekUnlocked[curWeek])
+		{
+			if (change > 0)
+				curWeek = 0;
+			else
+				curWeek = 2;
+		}
+			
 		// nvm
 		if (curWeek == 2)
 			bg2.alpha = 0;
@@ -436,15 +534,18 @@ class StoryMenuState extends MusicBeatState
 		for (item in grpWeekText.members)
 		{
 			item.targetY = bullShit - curWeek;
-			if (item.targetY == Std.int(0) && weekUnlocked[curWeek])
+			if (item.targetY == Std.int(0))
 				item.alpha = 1;
 			else
+			{
 				item.alpha = 0.6;
+				if (!weekUnlocked[curWeek])
+					item.alpha = 0;
+			}
 			bullShit++;
 		}
 
 		FlxG.sound.play(Paths.sound('scrollMenu'));
-
 		updateText();
 	}
 

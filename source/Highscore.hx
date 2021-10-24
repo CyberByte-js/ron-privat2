@@ -101,7 +101,7 @@ class Highscore
 		else if (diff == 2)
 			daSong += '-hard';
 		else if (diff == 3)
-			daSong += '-b-side';
+			daSong += '-cool';
 
 		return daSong;
 	}
