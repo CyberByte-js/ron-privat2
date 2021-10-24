@@ -250,6 +250,7 @@ class PlayState extends MusicBeatState
 	public function addObject(object:FlxBasic) { add(object); }
 	public function removeObject(object:FlxBasic) { remove(object); }
 
+	var uhoh:Bool = false;
 
 	override public function create()
 	{
@@ -1960,6 +1961,8 @@ class PlayState extends MusicBeatState
 
 				var gottaHitNote:Bool = section.mustHitSection;
 
+				var daNoteType:Int = songNotes[3];
+
 				if (songNotes[1] > 3)
 				{
 					gottaHitNote = !section.mustHitSection;
@@ -1998,7 +2001,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, skin);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, skin, false, daNoteType);
 
 				if (!gottaHitNote && PlayStateChangeables.Optimize)
 					continue;
@@ -2015,7 +2018,7 @@ class PlayState extends MusicBeatState
 				{
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true, skin);
+					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true, skin, false, daNoteType);
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
 
@@ -3339,6 +3342,7 @@ class PlayState extends MusicBeatState
 						health -= 0.2;
 						ss = false;
 						shits++;
+						uhoh = false;
 						if (FlxG.save.data.accuracyMod == 0)
 							totalNotesHit -= 1;
 					case 'bad':
@@ -3347,6 +3351,7 @@ class PlayState extends MusicBeatState
 						health -= 0.06;
 						ss = false;
 						bads++;
+						uhoh = false;
 						if (FlxG.save.data.accuracyMod == 0)
 							totalNotesHit += 0.50;
 					case 'good':
@@ -3356,11 +3361,13 @@ class PlayState extends MusicBeatState
 						goods++;
 						if (health < 2)
 							health += 0.04;
+						uhoh = false;
 						if (FlxG.save.data.accuracyMod == 0)
 							totalNotesHit += 0.75;
 					case 'sick':
 						if (health < 2)
 							health += 0.1;
+						uhoh = false;
 						if (FlxG.save.data.accuracyMod == 0)
 							totalNotesHit += 1;
 						sicks++;
@@ -3374,6 +3381,7 @@ class PlayState extends MusicBeatState
 				misses++;
 				health -= 0.2;
 				ss = false;
+				uhoh = true;
 				shits++;
 				if (FlxG.save.data.accuracyMod == 0)
 					totalNotesHit -= 1;
@@ -3920,61 +3928,72 @@ class PlayState extends MusicBeatState
 	function noteMiss(direction:Int = 1, daNote:Note):Void
 	{
 		if (!boyfriend.stunned)
-		{
-			health -= 0.04;
-			if (combo > 5 && gf.animOffsets.exists('sad'))
+		{	
+			if (daNote.noteType == 0)
 			{
-				gf.playAnim('sad');
-			}
-			combo = 0;
-			misses++;
-
-			if (daNote != null)
-			{
-				if (!loadRep)
+				health -= 0.04;
+				if (combo > 5 && gf.animOffsets.exists('sad'))
 				{
-					saveNotes.push([daNote.strumTime,0,direction,166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166]);
+					gf.playAnim('sad');
+				}
+				combo = 0;
+				misses++;
+
+				if (daNote != null)
+				{
+					if (!loadRep)
+					{
+						saveNotes.push([
+							daNote.strumTime,
+							0,
+							direction,
+							166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
+						]);
+						saveJudge.push("miss");
+					}
+				}
+				else if (!loadRep)
+				{
+					saveNotes.push([
+						Conductor.songPosition,
+						0,
+						direction,
+						166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
+					]);
 					saveJudge.push("miss");
 				}
-			}
-			else
-				if (!loadRep)
+
+				// var noteDiff:Float = Math.abs(daNote.strumTime - Conductor.songPosition);
+				// var wife:Float = EtternaFunctions.wife3(noteDiff, FlxG.save.data.etternaMode ? 1 : 1.7);
+
+				if (FlxG.save.data.accuracyMod == 1)
+					totalNotesHit -= 1;
+
+				songScore -= 10;
+
+				FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+				// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
+				// FlxG.log.add('played imss note');
+
+				switch (direction)
 				{
-					saveNotes.push([Conductor.songPosition,0,direction,166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166]);
-					saveJudge.push("miss");
+					case 0:
+						boyfriend.playAnim('singLEFTmiss', true);
+					case 1:
+						boyfriend.playAnim('singDOWNmiss', true);
+					case 2:
+						boyfriend.playAnim('singUPmiss', true);
+					case 3:
+						boyfriend.playAnim('singRIGHTmiss', true);
 				}
 
-			//var noteDiff:Float = Math.abs(daNote.strumTime - Conductor.songPosition);
-			//var wife:Float = EtternaFunctions.wife3(noteDiff, FlxG.save.data.etternaMode ? 1 : 1.7);
+				#if windows
+				if (luaModchart != null)
+					luaModchart.executeState('playerOneMiss', [direction, Conductor.songPosition]);
+				#end
 
-			if (FlxG.save.data.accuracyMod == 1)
-				totalNotesHit -= 1;
-
-			songScore -= 10;
-
-			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-			// FlxG.log.add('played imss note');
-
-			switch (direction)
-			{
-				case 0:
-					boyfriend.playAnim('singLEFTmiss', true);
-				case 1:
-					boyfriend.playAnim('singDOWNmiss', true);
-				case 2:
-					boyfriend.playAnim('singUPmiss', true);
-				case 3:
-					boyfriend.playAnim('singRIGHTmiss', true);
+				updateAccuracy();
 			}
-
-			#if windows
-			if (luaModchart != null)
-				luaModchart.executeState('playerOneMiss', [direction, Conductor.songPosition]);
-			#end
-
-
-			updateAccuracy();
 		}
 	}
 
@@ -4117,19 +4136,22 @@ class PlayState extends MusicBeatState
 						health += 0.01;
 						totalNotesHit += 1;
 					}
-	
-
-					switch (note.noteData)
-					{
-						case 2:
-							boyfriend.playAnim('singUP', true);
-						case 3:
-							boyfriend.playAnim('singRIGHT', true);
-						case 1:
-							boyfriend.playAnim('singDOWN', true);
-						case 0:
-							boyfriend.playAnim('singLEFT', true);
-					}
+					
+			if (!uhoh)
+			{
+				switch (note.noteData)
+				{
+					case 2:
+						boyfriend.playAnim('singUP', true);
+					case 3:
+						boyfriend.playAnim('singRIGHT', true);
+					case 1:
+						boyfriend.playAnim('singDOWN', true);
+					case 0:
+						boyfriend.playAnim('singLEFT', true);
+				}
+			}
+					
 		
 					#if windows
 					if (luaModchart != null)
