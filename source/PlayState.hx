@@ -2125,6 +2125,8 @@ class PlayState extends MusicBeatState
 						var skin = 'ronsip';
 						switch (dad.curCharacter)
 						{
+							case 'douyhe':
+								skin = 'NOTE_assets';
 							case 'hellron':
 								skin = 'ronhell';
 							case 'ateloron':
