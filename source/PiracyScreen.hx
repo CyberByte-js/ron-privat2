@@ -26,7 +26,7 @@ class PiracyScreen extends MusicBeatState
 		super.update(elapsed);
 		
 		if (controls.ACCEPT){
-			FlxG.switchState(new RoinAgainstPiracy());
+			FlxG.switchState(new PiracyScreen());
 		}
 		
 		
