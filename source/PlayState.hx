@@ -1323,6 +1323,11 @@ class PlayState extends MusicBeatState
 				dad.y += 310;
 				camPos.set(dad.getGraphicMidpoint().x + 150, dad.getGraphicMidpoint().y + 300);
 				healthBar.createFilledBar(0xFF000000, bfcolor);
+			case 'devilron':
+				dad.x += 70;
+				dad.y += 310;
+				camPos.set(dad.getGraphicMidpoint().x + 150, dad.getGraphicMidpoint().y + 300);
+				healthBar.createFilledBar(0xFF000000, bfcolor);
 			case 'demonron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1831,9 +1836,11 @@ class PlayState extends MusicBeatState
 		lastReportedPlayheadPosition = 0;
 
 		if (!paused)
-		{
-			if ((FileSystem.exists(Paths.censoredinst(PlayState.SONG.song))) && (FlxG.save.data.coolronweekcopyright))
+		{			
+			if ((FlxG.save.data.coolronweekcopyright) && ((PlayState.SONG.song.toLowerCase() == 'atelophobia') || (PlayState.SONG.song.toLowerCase() == 'ayo') || (PlayState.SONG.song.toLowerCase() == 'factory-reset') ||	(PlayState.SONG.song.toLowerCase() == 'ayo-b') || (PlayState.SONG.song.toLowerCase() == 'factory-reset-b')))
+			{
 				FlxG.sound.playMusic(Paths.censoredinst(PlayState.SONG.song), 1, false);
+			}
 			else
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		}
@@ -2128,6 +2135,8 @@ class PlayState extends MusicBeatState
 							case 'douyhe':
 								skin = 'NOTE_assets';
 							case 'hellron':
+								skin = 'ronhell';
+							case 'devilron':
 								skin = 'ronhell';
 							case 'ateloron':
 								skin = 'ronhell';
@@ -2996,7 +3005,7 @@ class PlayState extends MusicBeatState
 						}
 						//shakes the fuck out of your screen and hud -ekical
 						//now it drains your health because fuck you -ekical
-						if (dad.curCharacter == 'hellron')
+						if ((dad.curCharacter == 'hellron') || (dad.curCharacter == 'devilron'))
 							{
 								FlxG.camera.shake(0.025, 0.1);
 								camHUD.shake(0.0055, 0.15);
