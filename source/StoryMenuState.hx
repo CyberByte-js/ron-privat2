@@ -229,9 +229,9 @@ class StoryMenuState extends MusicBeatState
 		difficultySelectors.visible = weekUnlocked[curWeek];
 		
 		if (!FlxG.save.data.coolronweekcopyright)
-			copyright.text = "May include copyrighted material\nC: toggle";
+			copyright.text = "Copyright mode: Off\rC: toggle\r(It's suggested to be off anyways!)";
 		else
-			copyright.text = "Copyright protection enabled\nC: toggle";
+			copyright.text = "Copyright mode: On\rC: toggle\r(It's suggested to be off anyways!)";
 		if (FlxG.keys.justPressed.C)
 				FlxG.save.data.coolronweekcopyright = !FlxG.save.data.coolronweekcopyright;
 

@@ -243,7 +243,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.switchState(new MainMenuState());
 		}
 		
-		if (songs[curSelected].songName == 'Bloodshed-2')
+		if (songs[curSelected].songName == 'Bloodshed-two')
 		{
 			fdiffText.visible = true;
 			diffText.visible = false;
@@ -256,6 +256,8 @@ class FreeplayState extends MusicBeatState
 
 		if (accepted)
 		{
+		
+			FlxG.camera.antialiasing = true;
 			// adjusting the song name to be compatible
 			var songFormat = StringTools.replace(songs[curSelected].songName, " ", "-");
 			switch (songFormat) {
@@ -269,7 +271,7 @@ class FreeplayState extends MusicBeatState
 
 			trace(poop);
 			
-			if (songs[curSelected].songName == 'Bloodshed-2')
+			if (songs[curSelected].songName == 'Bloodshed-two')
 				PlayState.storyDifficulty = 2;
 			else
 				PlayState.storyDifficulty = curDifficulty;
@@ -331,7 +333,7 @@ class FreeplayState extends MusicBeatState
 			case 2 | 3:
 				FlxG.camera.shake(0.0025, 0.05);
 			case 4 | 5:
-				FlxG.camera.y += 10;
+				FlxG.camera.y += 5;
 				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
 			case 6 | 7:
 				if (curBeat % 2 == 1)
@@ -341,7 +343,55 @@ class FreeplayState extends MusicBeatState
 					
 				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 8 | 9:
-				FlxG.camera.zoom = 1.05;
+				FlxG.camera.shake(0.0025, 0.05);
+				FlxG.camera.zoom = 1.01;
+				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
+			case 10 | 11:
+				if (curBeat % 4 == 1)
+					FlxG.camera.x += 5;
+				else if (curBeat % 4 == 3)
+					FlxG.camera.x -= 5;
+				else if (curBeat % 4 == 2)
+					FlxG.camera.y += 5;
+				else
+					FlxG.camera.y -= 5;
+					
+				FlxTween.tween(FlxG.camera, {x: 0}, 0.2, {ease: FlxEase.quadInOut});
+				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadInOut});
+			case 12 | 13:
+				if (curBeat % 2 == 1)
+					FlxG.camera.zoom = 1.01;
+				else
+					FlxG.camera.zoom = 0.99;
+					
+				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
+			case 14 | 15:
+				FlxG.camera.shake(0.0025, 0.05);
+				if (curBeat % 2 == 1)
+				{
+					FlxG.camera.y += 5;
+					FlxG.camera.angle = 2;
+				}
+				else
+				{
+					FlxG.camera.y -= 5;
+					FlxG.camera.angle = -2;
+				}
+					
+				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
+				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
+			case 16 | 17:
+				FlxG.camera.shake(0.0015, 0.4);
+				if (curBeat % 2 == 1)
+					FlxG.camera.antialiasing = false;
+				else
+					FlxG.camera.antialiasing = true;
+			case 20:
+				if (curBeat % 2 == 1)
+					FlxG.camera.zoom = 1.02;
+				else
+					FlxG.camera.zoom = 0.98;
+					
 				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
 		}
 	}
@@ -376,6 +426,8 @@ class FreeplayState extends MusicBeatState
 			if (curDifficulty > 3)
 				curDifficulty = 0;
 		}
+		
+		FlxG.camera.antialiasing = true;
 
 		// selector.y = (70 * curSelected) + 30;
 		

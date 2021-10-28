@@ -1914,6 +1914,12 @@ class PlayState extends MusicBeatState
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 		else
 			vocals = new FlxSound();
+			
+		if ((FlxG.save.data.coolronweekcopyright) && ((PlayState.SONG.song.toLowerCase() == 'atelophobia') || (PlayState.SONG.song.toLowerCase() == 'ayo') || (PlayState.SONG.song.toLowerCase() == 'factory-reset') ||	(PlayState.SONG.song.toLowerCase() == 'ayo-b') || (PlayState.SONG.song.toLowerCase() == 'factory-reset-b')))
+		{
+			SONG.needsVoices = false;
+			vocals = new FlxSound();
+		}
 
 		trace('loaded vocals');
 
@@ -4261,7 +4267,9 @@ class PlayState extends MusicBeatState
 			if (trainSound.time >= 4700)
 				{
 					startedMoving = true;
-					gf.playAnim('hairBlow');
+					// Stop
+					
+					//gf.playAnim('hairBlow');
 				}
 		
 				if (startedMoving)

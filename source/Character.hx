@@ -88,8 +88,6 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", 0, -20);
 				addOffset("singLEFT", 0, -19);
 				addOffset("singDOWN", 0, -20);
-				addOffset('hairBlow', 45, -8);
-				addOffset('hairFall', 0, -9);
 
 				addOffset('scared', -2, -17);
 
