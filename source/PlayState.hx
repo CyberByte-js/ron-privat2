@@ -141,6 +141,7 @@ class PlayState extends MusicBeatState
 
 	public static var strumLineNotes:FlxTypedGroup<FlxSprite> = null;
 	public static var playerStrums:FlxTypedGroup<FlxSprite> = null;
+	private var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 	public static var cpuStrums:FlxTypedGroup<FlxSprite> = null;
 
 	private var camZooming:Bool = false;
@@ -276,6 +277,8 @@ class PlayState extends MusicBeatState
 
 		repPresses = 0;
 		repReleases = 0;
+		
+		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 		PlayStateChangeables.useDownscroll = FlxG.save.data.downscroll;
 		PlayStateChangeables.safeFrames = FlxG.save.data.frames;
@@ -1153,6 +1156,11 @@ class PlayState extends MusicBeatState
 
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
 		add(strumLineNotes);
+		add(grpNoteSplashes);
+		
+		var splash:NoteSplash = new NoteSplash(100, 100, 0);
+		grpNoteSplashes.add(splash);
+		splash.alpha = 0.0;
 
 		playerStrums = new FlxTypedGroup<FlxSprite>();
 		cpuStrums = new FlxTypedGroup<FlxSprite>();
@@ -1392,6 +1400,7 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		grpNoteSplashes.cameras = [camHUD];
 		if (FlxG.save.data.songPosition)
 		{
 			songPosBG.cameras = [camHUD];
@@ -3399,6 +3408,11 @@ class PlayState extends MusicBeatState
 							totalNotesHit += 1;
 						sicks++;
 				}
+				
+				if(daRating == 'sick')
+				{
+					spawnNoteSplashOnNote(daNote);
+				}
 			}
 			else
 			{
@@ -4216,6 +4230,17 @@ class PlayState extends MusicBeatState
 				}
 			}
 		
+	function spawnNoteSplashOnNote(note:Note) {
+		if(note != null) {
+			spawnNoteSplash(note.x, note.y, note.noteData);
+		}
+	}
+	
+	public function spawnNoteSplash(x:Float, y:Float, data:Int) {
+		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
+		splash.setupNoteSplash(x, y, data);
+		grpNoteSplashes.add(splash);
+	}
 
 	var fastCarCanDrive:Bool = true;
 
