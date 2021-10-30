@@ -27,6 +27,9 @@ class FreeplayState extends MusicBeatState
 	var selector:FlxText;
 	var curSelected:Int = 0;
 	var curDifficulty:Int = 1;
+	var bg:FlxSprite;
+	var intendedColor:Int;
+	var colorTween:FlxTween;
 
 	var scoreText:FlxText;
 	var comboText:FlxText;
@@ -74,9 +77,10 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scale.set(0.7, 0.7);
 		bg.screenCenter(XY);
+		bg.color = 0xFFE51F89;
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -126,6 +130,7 @@ class FreeplayState extends MusicBeatState
 
 		add(scoreText);
 
+		intendedColor = bg.color;
 		changeSelection();
 		changeDiff();
 
@@ -330,6 +335,16 @@ class FreeplayState extends MusicBeatState
 	{
 		switch (curSelected)
 		{
+			case 0 | 1:
+				FlxG.camera.shake(0.0025, 0.05);
+				if (curBeat % 2 == 1)
+					FlxG.camera.angle = 1;
+				else
+					FlxG.camera.angle = -1;
+					
+				FlxG.camera.y += 2;
+				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
+				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 2 | 3:
 				FlxG.camera.shake(0.0025, 0.05);
 			case 4 | 5:
@@ -344,16 +359,20 @@ class FreeplayState extends MusicBeatState
 				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 8 | 9:
 				FlxG.camera.shake(0.0025, 0.05);
-				FlxG.camera.zoom = 1.01;
+				if (curBeat % 2 == 1)
+					FlxG.camera.zoom = 1.01;
+				else
+					FlxG.camera.zoom = 0.99;
+					
 				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
 			case 10 | 11:
-				if (curBeat % 4 == 1)
+				if (curBeat % 5 == 1)
 					FlxG.camera.x += 5;
-				else if (curBeat % 4 == 3)
+				else if (curBeat % 5 == 3)
 					FlxG.camera.x -= 5;
-				else if (curBeat % 4 == 2)
+				else if (curBeat % 5 == 2)
 					FlxG.camera.y += 5;
-				else
+				else if (curBeat % 5 == 4)
 					FlxG.camera.y -= 5;
 					
 				FlxTween.tween(FlxG.camera, {x: 0}, 0.2, {ease: FlxEase.quadInOut});
@@ -478,6 +497,64 @@ class FreeplayState extends MusicBeatState
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 		if (songs[curSelected].songName.contains("-b"))
 			diffText.text = CoolUtil.difficultyBFromInt(curDifficulty).toUpperCase();
+
+		var clr = 0xFFE51F89;
+		switch (curSelected)
+		{
+			case 1:
+				clr = 0xFF605FD1;
+			case 2:
+				clr = FlxColor.YELLOW;
+			case 3:
+				clr = FlxColor.MAGENTA;
+			case 4:
+				clr = FlxColor.ORANGE;
+			case 5:
+				clr = FlxColor.PURPLE;
+			case 6:
+				clr = FlxColor.BROWN;
+			case 7:
+				clr = 0xFF8200AA;
+			case 8:
+				clr = FlxColor.BLACK;
+			case 9:
+				clr = FlxColor.WHITE;
+			case 10:
+				clr = 0xFF6E7896;
+			case 11:
+				clr = 0xFF966E6E;
+			case 12:
+				clr = FlxColor.GREEN;
+			case 13:
+				clr = FlxColor.BLUE;
+			case 14:
+				clr = 0xFF202020;
+			case 15:
+				clr = 0xFFDCDCDC;
+			case 16:
+				clr = FlxColor.MAGENTA;
+			case 17:
+				clr = FlxColor.CYAN;
+			case 18:
+				clr = FlxColor.GRAY;
+			case 19:
+				clr = FlxColor.LIME;
+			case 20:
+				clr = FlxColor.BLACK;
+				
+		}
+		
+		if(clr != intendedColor) {
+			if(colorTween != null) {
+				colorTween.cancel();
+			}
+			intendedColor = clr;
+			colorTween = FlxTween.color(bg, 0.5, bg.color, intendedColor, {
+				onComplete: function(twn:FlxTween) {
+					colorTween = null;
+				}
+			});
+		}
 	}
 }
 
