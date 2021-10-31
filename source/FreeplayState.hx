@@ -347,6 +347,23 @@ class FreeplayState extends MusicBeatState
 				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 2 | 3:
 				FlxG.camera.shake(0.0025, 0.05);
+				if (curBeat == 1)
+				{
+					var bruh:FlxSprite = new FlxSprite();
+					bruh.loadGraphic(Paths.image('longbob'));
+					bruh.antialiasing = true;
+					bruh.active = false;
+					bruh.scrollFactor.set();
+					bruh.screenCenter();
+					add(bruh);
+					FlxTween.tween(bruh, {alpha: 0},1, {
+						ease: FlxEase.cubeInOut,
+						onComplete: function(twn:FlxTween) 
+						{
+							bruh.destroy();
+						}
+					});
+				}
 			case 4 | 5:
 				FlxG.camera.y += 5;
 				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});

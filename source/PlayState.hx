@@ -4347,6 +4347,7 @@ class PlayState extends MusicBeatState
 	{
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
+		FlxG.sound.play(Paths.sound('bobSpooky'));
 		new FlxTimer().start(1.7, function(tmr:FlxTimer)
 		{
 			add(black);
@@ -4495,17 +4496,13 @@ class PlayState extends MusicBeatState
 				camHUD.shake(0.001, 0.15);
 				if (health > 0.2)
 					health -= 0.1;
-				else
-					health = 0.2;
 			}
 			if ((curStep >= 1152) && (curStep <= 1536))
 			{
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
 				if (health > 0.2)
-					health = 0.1;
-				else
-					health -= 0.2;
+					health -= 0.1;
 			}
 		}
 		
@@ -4650,9 +4647,6 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(iconP2, {"scale.x": 1}, 1.5, {ease: FlxEase.quadInOut});
 		FlxTween.tween(iconP2, {"scale.y": 1}, 0.5, {ease: FlxEase.quadInOut});
 		
-		iconP1.updateHitbox();
-		iconP2.updateHitbox();
-
 		if (curBeat % gfSpeed == 0)
 		{
 			gf.dance();
