@@ -459,18 +459,19 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
 			case 'devilron':
-				tex = Paths.getSparrowAtlas('updateron/characters/hellron-2');
+				// tex = Paths.getSparrowAtlas('updateron/characters/hellron-2');
+				tex = Paths.getSparrowAtlas('updateron/characters/devilron');
 				frames = tex;
-				animation.addByPrefix('idle', "idle normal", 24);
-				animation.addByPrefix('singUP', 'up normal', 24, false);
-				animation.addByPrefix('singDOWN', 'down normal', 24, false);
-				animation.addByPrefix('singLEFT', 'right normal', 24, false);
-				animation.addByPrefix('singRIGHT', 'left normal', 24, false);
-				addOffset('idle');
-				addOffset("singUP",70,70);
-				addOffset("singLEFT",25,-20);
-				addOffset("singRIGHT",30,-7);
-				addOffset("singDOWN",-25,-30);
+				animation.addByPrefix('idle', "idle", 24);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'right', 24, false);
+				animation.addByPrefix('singRIGHT', 'left', 24, false);
+				addOffset('idle', -6, -1);
+				addOffset("singUP", 2, 50);
+				addOffset("singLEFT",-35, 7);
+				addOffset("singRIGHT", 40, -7);
+				addOffset("singDOWN", 40, -35);
 			case 'hellron':
 				tex = Paths.getSparrowAtlas('updateron/characters/hellron');
 				frames = tex;

@@ -195,6 +195,7 @@ class PlayState extends MusicBeatState
 	var santa:FlxSprite;
 	var satan:FlxSprite;
 	var Estatic:FlxSprite;
+	var Estatic2:FlxSprite;
 	var firebg:FlxSprite;
 	var wastedbg:FlxSprite;
 
@@ -867,6 +868,14 @@ class PlayState extends MusicBeatState
 				Estatic.scrollFactor.set();
 				Estatic.screenCenter();
 				Estatic.alpha = 0;
+				Estatic2 = new FlxSprite();
+				Estatic2.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
+				Estatic2.scale.set(4,4);
+				Estatic2.animation.addByPrefix('idle', 'static instance 1', 24, true);
+				Estatic2.animation.play('idle');
+				Estatic2.scrollFactor.set();
+				Estatic2.screenCenter();
+				Estatic2.alpha = 0;
 			}
 			case 'glitch':
 				defaultCamZoom = 0.7;
@@ -1106,6 +1115,8 @@ class PlayState extends MusicBeatState
 						// evilTrail.changeGraphic()
 						add(evilTrail);
 						// evilTrail.scrollFactor.set(1.1, 1.1);
+						if ((SONG.song == 'Bloodshed-two') && (curStep >= 271))
+							remove(evilTrail);
 					}
 				}
 			
@@ -1460,6 +1471,11 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 					add(fx);
 					add(Estatic);
+				case 'bloodshed-two':
+					startCountdown();
+					add(fx);
+					add(Estatic);
+					add(Estatic2);
 				case 'pretty-wacky':
 					schoolIntro(doof);
 				case 'bloodshed-old':
@@ -2158,6 +2174,8 @@ class PlayState extends MusicBeatState
 							case 'ron-usb':
 								skin = 'ronhell';
 							case 'demonron':
+								skin = 'demonsip';
+							case 'devilron':
 								skin = 'demonsip';
 							case 'ronb':
 								skin = 'evik';
@@ -4518,6 +4536,39 @@ class PlayState extends MusicBeatState
 			FlxG.camera.shake(0.01, 0.1);
 			camHUD.shake(0.001, 0.15);
 			Estatic.alpha = (2-health)/2;
+		}
+		
+		if (curSong == 'Bloodshed-two') {
+			if (curStep >= 271)
+			{
+				healthBarBG.alpha = 0;
+				healthBar.alpha = 0;
+				iconP1.visible = true;
+				iconP2.visible = true;
+				iconP2.alpha = (2-(health)-0.25)/2+0.2;
+				iconP1.alpha = (health-0.25)/2+0.2;
+				Estatic.alpha = (2-health)/2;
+				Estatic2.alpha = 0.3;
+			}
+			if (curStep == 263)
+			{
+				iconP1.visible = false;
+				iconP2.visible = false;
+				healthBar.alpha = 0;
+				healthBarBG.alpha = 0;
+				var xx = dad.x;
+				var yy = dad.y;
+				dad.alpha = 0;
+				remove(dad);
+				dad = new Character(xx, yy, 'devilron');
+				add(dad);
+				var blac:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+				blac.scrollFactor.set();
+				add(blac);
+				defaultCamZoom = 0.9;
+				FlxTween.tween(blac, {alpha: 0}, 1, {ease: FlxEase.quadIn});
+				blackeffect.alpha = 1;
+			}
 		}
 		
 		if ((curSong == 'wasted') || (curSong == 'Wasted-B'))
