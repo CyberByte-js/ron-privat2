@@ -62,6 +62,7 @@ import haxe.Json;
 import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
+import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
 
 #if windows
@@ -80,6 +81,10 @@ class PlayState extends MusicBeatState
 	var user = Sys.getEnv('USERNAME');
 	
 	public static var instance:PlayState = null;
+
+	var filters:Array<BitmapFilter> = [];
+	var filterList:Array<BitmapFilter> = [];
+	var filterMap:Map<String, {filter:BitmapFilter, ?onUpdate:Void->Void}>;
 
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
@@ -306,6 +311,16 @@ class PlayState extends MusicBeatState
 		#if windows
 		// Making difficulty text for Discord Rich Presence.
 		storyDifficultyText = CoolUtil.difficultyFromInt(storyDifficulty);
+		
+		//FUCKING SHITTY SHADER CODE
+		filterMap = Highscore.getEffectList();
+		
+		/*FlxG.game.setFilters(filters);
+		
+		FlxG.game.filtersEnabled = false;*/
+
+		//filterList2.push(chromaticAberration);
+		//filterList2.push(brightShader);
 
 		iconRPC = SONG.player2;
 
@@ -338,8 +353,17 @@ class PlayState extends MusicBeatState
 
 		FlxCamera.defaultCameras = [camGame];
 
+		//IT DOESNT END HERE FUCK
+		camGame.setFilters(filters);
+		camHUD.setFilters(filters);
+
 		persistentUpdate = true;
 		persistentDraw = true;
+		
+		/*for (i in 0...filterList2.length)
+		{
+		filters.push(filterList2[i]);
+		}*/
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial', 'tutorial');
@@ -1471,11 +1495,13 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 					add(fx);
 					add(Estatic);
+					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 				case 'bloodshed-two':
 					startCountdown();
 					add(fx);
 					add(Estatic);
 					add(Estatic2);
+					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 				case 'pretty-wacky':
 					schoolIntro(doof);
 				case 'bloodshed-old':
@@ -3040,8 +3066,13 @@ class PlayState extends MusicBeatState
 						//now it drains your health because fuck you -ekical
 						if ((dad.curCharacter == 'hellron') || (dad.curCharacter == 'devilron'))
 							{
-								FlxG.camera.shake(0.025, 0.1);
-								camHUD.shake(0.0055, 0.15);
+								var multiplier:Float = 1;
+								if (health >= 1)
+									multiplier = 1;
+								else
+									multiplier = multiplier + ((1-health));
+								FlxG.camera.shake(0.025 * multiplier, 0.1);
+								camHUD.shake(0.0055 * multiplier, 0.15);
 								if (health > 0.03)
 									health -= 0.014;
 								else
@@ -4455,6 +4486,7 @@ class PlayState extends MusicBeatState
 					fx.alpha -= 0.05;
 			}
 			Estatic.alpha = (2-health)/2;
+			setChrome((2.5-health/2)/1000);
 		}
 		
 		if (curSong == 'Bloodshed-b') {
@@ -4522,6 +4554,7 @@ class PlayState extends MusicBeatState
 				if (health > 0.2)
 					health -= 0.1;
 			}
+			setChrome((2.5-health/2)/1000);
 		}
 		
 		if (curSong == 'Bloodshed-old') {
@@ -4536,9 +4569,11 @@ class PlayState extends MusicBeatState
 			FlxG.camera.shake(0.01, 0.1);
 			camHUD.shake(0.001, 0.15);
 			Estatic.alpha = (2-health)/2;
+			setChrome((2.5-health/2)/1000);
 		}
 		
 		if (curSong == 'Bloodshed-two') {
+			setChrome((2.5-health/2)/1000);
 			if (curStep >= 271)
 			{
 				healthBarBG.alpha = 0;
@@ -4690,6 +4725,8 @@ class PlayState extends MusicBeatState
 			}
 	
 		}
+		
+		filters.push(ShadersHandler.chromaticAberration);
 
 		iconP1.scale.set(1.5, 0.5);
 		iconP2.scale.set(1.5, 0.5);
