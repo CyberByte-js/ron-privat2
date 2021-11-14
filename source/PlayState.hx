@@ -62,7 +62,6 @@ import haxe.Json;
 import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
-import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
 
 #if windows
@@ -81,10 +80,6 @@ class PlayState extends MusicBeatState
 	var user = Sys.getEnv('USERNAME');
 	
 	public static var instance:PlayState = null;
-
-	var filters:Array<BitmapFilter> = [];
-	var filterList:Array<BitmapFilter> = [];
-	var filterMap:Map<String, {filter:BitmapFilter, ?onUpdate:Void->Void}>;
 
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
@@ -311,16 +306,6 @@ class PlayState extends MusicBeatState
 		#if windows
 		// Making difficulty text for Discord Rich Presence.
 		storyDifficultyText = CoolUtil.difficultyFromInt(storyDifficulty);
-		
-		//FUCKING SHITTY SHADER CODE
-		filterMap = Highscore.getEffectList();
-		
-		/*FlxG.game.setFilters(filters);
-		
-		FlxG.game.filtersEnabled = false;*/
-
-		//filterList2.push(chromaticAberration);
-		//filterList2.push(brightShader);
 
 		iconRPC = SONG.player2;
 
@@ -352,18 +337,8 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.add(camHUD);
 
 		FlxCamera.defaultCameras = [camGame];
-
-		//IT DOESNT END HERE FUCK
-		camGame.setFilters(filters);
-		camHUD.setFilters(filters);
-
 		persistentUpdate = true;
 		persistentDraw = true;
-		
-		/*for (i in 0...filterList2.length)
-		{
-		filters.push(filterList2[i]);
-		}*/
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial', 'tutorial');
@@ -4686,8 +4661,6 @@ class PlayState extends MusicBeatState
 			}
 	
 		}
-		
-		filters.push(ShadersHandler.chromaticAberration);
 
 		iconP1.scale.set(1.5, 0.5);
 		iconP2.scale.set(1.5, 0.5);
