@@ -1457,34 +1457,6 @@ class PlayState extends MusicBeatState
 
 			switch (StringTools.replace(curSong," ", "-").toLowerCase())
 			{
-				case "winter-horrorland":
-					var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
-					add(blackScreen);
-					blackScreen.scrollFactor.set();
-					camHUD.visible = false;
-
-					new FlxTimer().start(0.1, function(tmr:FlxTimer)
-					{
-						remove(blackScreen);
-						FlxG.sound.play(Paths.sound('Lights_Turn_On'));
-						camFollow.y = -2050;
-						camFollow.x += 200;
-						FlxG.camera.focusOn(camFollow.getPosition());
-						FlxG.camera.zoom = 1.5;
-
-						new FlxTimer().start(0.8, function(tmr:FlxTimer)
-						{
-							camHUD.visible = true;
-							remove(blackScreen);
-							FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 2.5, {
-								ease: FlxEase.quadInOut,
-								onComplete: function(twn:FlxTween)
-								{
-									startCountdown();
-								}
-							});
-						});
-					});
 				case 'ron':
 					schoolIntro(doof);
 				case 'wasted':
@@ -3340,17 +3312,6 @@ class PlayState extends MusicBeatState
 					trace('LOADING NEXT SONG');
 					trace(poop);
 
-					if (StringTools.replace(PlayState.storyPlaylist[0], " ", "-").toLowerCase() == 'eggnog')
-					{
-						var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
-							-FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-						blackShit.scrollFactor.set();
-						add(blackShit);
-						camHUD.visible = false;
-
-						FlxG.sound.play(Paths.sound('Lights_Shut_off'));
-					}
-
 					FlxTransitionableState.skipNextTransIn = true;
 					FlxTransitionableState.skipNextTransOut = true;
 					prevCamFollow = camFollow;
@@ -4486,7 +4447,7 @@ class PlayState extends MusicBeatState
 					fx.alpha -= 0.05;
 			}
 			Estatic.alpha = (2-health)/2;
-			setChrome((2.5-health/2)/1000);
+			//setChrome((2.5-health/2)/1000);
 		}
 		
 		if (curSong == 'Bloodshed-b') {
@@ -4554,7 +4515,7 @@ class PlayState extends MusicBeatState
 				if (health > 0.2)
 					health -= 0.1;
 			}
-			setChrome((2.5-health/2)/1000);
+			//setChrome((2.5-health/2)/1000);
 		}
 		
 		if (curSong == 'Bloodshed-old') {
@@ -4569,11 +4530,11 @@ class PlayState extends MusicBeatState
 			FlxG.camera.shake(0.01, 0.1);
 			camHUD.shake(0.001, 0.15);
 			Estatic.alpha = (2-health)/2;
-			setChrome((2.5-health/2)/1000);
+			//setChrome((2.5-health/2)/1000);
 		}
 		
-		if (curSong == 'Bloodshed-two') {
-			setChrome((2.5-health/2)/1000);
+		if (curSong == 'BLOODSHED-TWO') {
+			//setChrome((2.5-health/2)/1000);
 			if (curStep >= 271)
 			{
 				healthBarBG.alpha = 0;
