@@ -63,6 +63,7 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+import openfl.filters.ColorMatrixFilter;
 
 #if windows
 import Discord.DiscordClient;
@@ -2844,6 +2845,7 @@ class PlayState extends MusicBeatState
 
 		if (health <= 0)
 		{
+			setChrome(0.0);
 			boyfriend.stunned = true;
 
 			persistentUpdate = false;
@@ -4422,7 +4424,6 @@ class PlayState extends MusicBeatState
 					fx.alpha -= 0.05;
 			}
 			Estatic.alpha = (2-health)/2;
-			//setChrome((2.5-health/2)/1000);
 		}
 		
 		if (curSong == 'Bloodshed-b') {
@@ -4481,16 +4482,15 @@ class PlayState extends MusicBeatState
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
 				if (health > 0.2)
-					health -= 0.1;
+					health -= 0.05;
 			}
 			if ((curStep >= 1152) && (curStep <= 1536))
 			{
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
 				if (health > 0.2)
-					health -= 0.1;
+					health -= 0.05;
 			}
-			//setChrome((2.5-health/2)/1000);
 		}
 		
 		if (curSong == 'Bloodshed-old') {
@@ -4505,11 +4505,9 @@ class PlayState extends MusicBeatState
 			FlxG.camera.shake(0.01, 0.1);
 			camHUD.shake(0.001, 0.15);
 			Estatic.alpha = (2-health)/2;
-			//setChrome((2.5-health/2)/1000);
 		}
 		
 		if (curSong == 'BLOODSHED-TWO') {
-			//setChrome((2.5-health/2)/1000);
 			if (curStep >= 271)
 			{
 				healthBarBG.alpha = 0;
@@ -4540,6 +4538,15 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(blac, {alpha: 0}, 1, {ease: FlxEase.quadIn});
 				blackeffect.alpha = 1;
 			}
+		}
+
+		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-old') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-b') || (curSong == 'File-Manipulation') || (curSong == 'File-Manipulation-b')) {
+			var chromeOffset:Float = ((2 - health/2)/2+0.75);
+			chromeOffset /= 350;
+			if (chromeOffset <= 0)
+				setChrome(0.0);
+			else
+				setChrome(chromeOffset);
 		}
 		
 		if ((curSong == 'wasted') || (curSong == 'Wasted-B'))
@@ -4602,6 +4609,9 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+		
+		FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
+		camHUD.setFilters([ShadersHandler.chromaticAberration]);
 
 		if (generatedMusic)
 		{
