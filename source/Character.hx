@@ -542,20 +542,18 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -83, -46);
 				addOffset("singDOWN", -70, 20);
 			case 'ateloron-b':
-				tex = Paths.getSparrowAtlas('ron/characters/ateloron-b');
+				tex = Paths.getSparrowAtlas('updateron/characters/bteloron');
 				frames = tex;
-				animation.addByPrefix('idle', "Idle", 24);
-				animation.addByPrefix('singUP', 'Sing Up', 24, false);
-				animation.addByPrefix('singDOWN', 'Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Sing Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Sing Right', 24, false);
-				animation.addByPrefix('cheer', 'Ugh', 24, false);
+				animation.addByPrefix('idle', "idle", 24);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
 				addOffset('idle');
-				addOffset("singUP", 42, 38);
-				addOffset("singLEFT", 98, -27);
-				addOffset("singRIGHT", -89, -51);
-				addOffset("singDOWN", 40, -120);
-				addOffset("Ugh", 71, -40);
+				addOffset("singUP", -110, 53);
+				addOffset("singLEFT");
+				addOffset("singRIGHT", -83, -46);
+				addOffset("singDOWN", -70, 20);
 			case 'factorytankman-b':
 				tex = Paths.getSparrowAtlas('ron/characters/factorytankman-b');
 				frames = tex;
