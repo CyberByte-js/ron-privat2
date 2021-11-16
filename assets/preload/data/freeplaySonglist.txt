@@ -18,4 +18,4 @@ Factory-Reset:factorytankman:2
 Factory-Reset-b:factorytankman-b:2
 Trouble:factorytankman:0
 Bijuu:bijuuron:0
-Bloodshed-two:devilron:1
+BLOODSHED-TWO:devilron:1

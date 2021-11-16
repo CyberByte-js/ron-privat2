@@ -248,7 +248,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.switchState(new MainMenuState());
 		}
 		
-		if (songs[curSelected].songName == 'Bloodshed-two')
+		if (songs[curSelected].songName == 'BLOODSHED-TWO')
 		{
 			fdiffText.visible = true;
 			diffText.visible = false;
@@ -276,7 +276,7 @@ class FreeplayState extends MusicBeatState
 
 			trace(poop);
 			
-			if (songs[curSelected].songName == 'Bloodshed-two')
+			if (songs[curSelected].songName == 'BLOODSHED-TWO')
 				PlayState.storyDifficulty = 2;
 			else
 				PlayState.storyDifficulty = curDifficulty;
@@ -320,6 +320,9 @@ class FreeplayState extends MusicBeatState
 			case 'Dad-Battle': songHighscore = 'Dadbattle';
 			case 'Philly-Nice': songHighscore = 'Philly';
 		}
+		
+		if songHighscore == 'BLOODSHED-TWO'
+			curDifficulty = 2;
 		
 		#if !switch
 		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
