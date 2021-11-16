@@ -321,7 +321,7 @@ class FreeplayState extends MusicBeatState
 			case 'Philly-Nice': songHighscore = 'Philly';
 		}
 		
-		if songHighscore == 'BLOODSHED-TWO'
+		if (songHighscore == 'BLOODSHED-TWO')
 			curDifficulty = 2;
 		
 		#if !switch
