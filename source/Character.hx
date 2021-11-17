@@ -514,20 +514,20 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
 			case 'hellron-2':
-				tex = Paths.getSparrowAtlas('ron/characters/Hellron-2');
+				tex = Paths.getSparrowAtlas('updateron/characters/godron');
 				frames = tex;
-				animation.addByPrefix('idle', "Idle", 24);
-				animation.addByPrefix('singUP', 'Sing Up', 24, false);
-				animation.addByPrefix('singDOWN', 'Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Sing Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Sing Right', 24, false);
-				animation.addByPrefix('cheer', 'Ugh', 24, false);
+				animation.addByPrefix('idle', "idle", 24);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('crazy', 'crazy', 24, false);
 				addOffset('idle');
-				addOffset("singUP", 42, 38);
-				addOffset("singLEFT", 98, -27);
-				addOffset("singRIGHT", -89, -51);
-				addOffset("singDOWN", 40, -120);
-				addOffset("Ugh", 71, -40);
+				addOffset("singUP", 10, 80);
+				addOffset("singLEFT", 92, 22);
+				addOffset("singRIGHT", 40, 9);
+				addOffset("singDOWN", 50, -38);
+				addOffset("crazy", 93, 36);
 			case 'ateloron':
 				tex = Paths.getSparrowAtlas('updateron/characters/ateloron');
 				frames = tex;
@@ -784,6 +784,16 @@ class Character extends FlxSprite
 							playAnim('danceLeft');
 					}
 				case 'gf-b':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+				case 'gf-d':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;

@@ -4452,20 +4452,17 @@ class PlayState extends MusicBeatState
 				case 768:
 					FlxTween.tween(blackeffect, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(fx, {alpha: 0.8}, 2, {ease: FlxEase.quadInOut});
-					dad.alpha = 0;
 				case 900:
 					FlxTween.tween(firebg, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
 				case 1024:
 					FlxTween.tween(blackeffect, {alpha: 0}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(fx, {alpha: 0.6}, 2, {ease: FlxEase.quadInOut});
-					FlxTween.tween(dad, {alpha: 1}, 2, {ease: FlxEase.quadInOut});					
 				case 1152:
 					FlxTween.tween(fx, {alpha: 0.4}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(firebg, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
 				case 1280:
 					FlxTween.tween(blackeffect, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
 					FlxTween.tween(fx, {alpha: 1}, 2, {ease: FlxEase.quadInOut});
-					FlxTween.tween(dad, {alpha: 0.5}, 2, {ease: FlxEase.quadInOut});
 			}
 			if (curStep % 16 == 0)
 			{
@@ -4476,6 +4473,10 @@ class PlayState extends MusicBeatState
 					
 				if (curStep % 64 == 0)
 					defaultCamZoom = 0.85;
+			}
+			if ((curStep >= 768) && (curStep < 1024))
+			{
+				dad.playAnim('crazy', false);
 			}
 			if (((curStep >= 512) && (curStep <= 1024)))
 			{
@@ -4649,7 +4650,7 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 
 			// Dad doesnt interupt his own notes
-			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
+			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf' && ((dad.curCharacter == 'hellron-2') && (!dad.animation.curAnim.name.startsWith("crazy"))))
 				dad.dance();
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
