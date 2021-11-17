@@ -2747,7 +2747,10 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				camFollow.setPosition(dad.getMidpoint().x + offsetX + dad.frameWidth/2, dad.getMidpoint().y + 120 - dad.frameHeight/2 + offsetY);
+				if (FlxG.save.data.cameraenable)
+					camFollow.setPosition(dad.getMidpoint().x + offsetX + dad.frameWidth/2, dad.getMidpoint().y + 120 - dad.frameHeight/2 + offsetY);
+				else
+					camFollow.setPosition(dad.getMidpoint().x + 120 + offsetX, dad.getMidpoint().y - 60 + offsetY);
 				#if windows
 				if (luaModchart != null)
 					luaModchart.executeState('playerTwoTurn', []);
@@ -2781,7 +2784,10 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				camFollow.setPosition(boyfriend.x + boyfriend.frameWidth/2 - 100 + offsetX, boyfriend.y + boyfriend.height - boyfriend.frameHeight/2 - 100 + offsetY);
+				if (FlxG.save.data.cameraenable)
+					camFollow.setPosition(boyfriend.x + boyfriend.frameWidth/2 - 100 + offsetX, boyfriend.y + boyfriend.height - boyfriend.frameHeight/2 - 100 + offsetY);
+				else
+					camFollow.setPosition(boyfriend.x - 200 + offsetX, boyfriend.y + 100 + offsetY);
 
 				#if windows
 				if (luaModchart != null)
@@ -4542,12 +4548,17 @@ class PlayState extends MusicBeatState
 		}
 
 		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-b') || (curSong == 'File Manipulation') || (curSong == 'File Manipulation-b')) {
-			var chromeOffset:Float = ((2 - health/2)/2+0.75);
+			var chromeOffset:Float = (((2 - health/2)/2+0.5)*FlxG.save.data.rgbintense);
 			chromeOffset /= 350;
 			if (chromeOffset <= 0)
 				setChrome(0.0);
 			else
-				setChrome(chromeOffset);
+			{
+				if (FlxG.save.data.rgbenable)
+					setChrome(chromeOffset);
+				else
+					setChrome(0.0);
+			}
 		}
 		
 		if ((curSong == 'wasted') || (curSong == 'Wasted-B'))

@@ -6,6 +6,18 @@ class KadeEngineData
 {
     public static function initSave()
     {
+        if (FlxG.save.data.rgbintense == null)
+			FlxG.save.data.rgbintense = 1;
+			
+        if (FlxG.save.data.rgbenable == null)
+			FlxG.save.data.rgbenable = true;
+			
+        if (FlxG.save.data.siteenable == null)
+			FlxG.save.data.siteenable = true;
+			
+        if (FlxG.save.data.cameraenable == null)
+			FlxG.save.data.cameraenable = true;
+
         if (FlxG.save.data.newInput == null)
 			FlxG.save.data.newInput = true;
 

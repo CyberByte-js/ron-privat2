@@ -20,6 +20,8 @@ class GameOverSubstate extends MusicBeatSubstate
 		var daBf:String = '';
 		switch (PlayState.SONG.player1)
 		{
+			case 'bf-b':
+				daBf = 'bf-b';
 			case 'bf-pixel':
 				stageSuffix = '-pixel';
 				daBf = 'bf-pixel-dead';
@@ -27,14 +29,16 @@ class GameOverSubstate extends MusicBeatSubstate
 				daBf = 'bf';
 		}
 
-		switch (daStage)
+		if (FlxG.save.data.siteenable)
 		{
-			case 'baka':
-				FlxG.openURL("https://sites.google.com/view/robgivesyourobuc/home");
-			case 'hell':
-				FlxG.openURL("https://sites.google.com/view/ronmoment/home/");
+			switch (daStage)
+			{
+				case 'baka':
+					FlxG.openURL("https://sites.google.com/view/robgivesyourobuc/home");
+				case 'hell':
+					FlxG.openURL("https://sites.google.com/view/ronmoment/home/");
+			}
 		}
-		
 
 		super();
 

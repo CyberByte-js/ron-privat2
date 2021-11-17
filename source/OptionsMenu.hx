@@ -25,6 +25,12 @@ class OptionsMenu extends MusicBeatState
 	var curSelected:Int = 0;
 
 	var options:Array<OptionCategory> = [
+		new OptionCategory("Ron", [
+			new ShaderOption("Enable or disable the RGB shifting effect."),
+			new ShaderIntensityOption("Change how intense the RGB shifting effect is."),
+			new CameraOption("Enable or disable the camera moving with the characters."),
+			new SiteOption("Enable or disable the Ron site opening when dying in certain songs.")
+		]),
 		new OptionCategory("Gameplay", [
 			new DFJKOption(controls),
 			new DownscrollOption("Change the layout of the strumline."),

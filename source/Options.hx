@@ -75,7 +75,121 @@ class Option
 	public function f4():Bool { return throw "i hate you kade"; }
 }
 
+class ShaderOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
 
+	public override function press():Bool
+	{
+		FlxG.save.data.rgbenable = !FlxG.save.data.rgbenable;
+		
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return  FlxG.save.data.rgbenable ? "Shaders On" : "Shaders Off";
+	}
+
+}
+
+class ShaderIntensityOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+		acceptValues = true;
+	}
+
+	public override function press():Bool
+	{
+		return false;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Shader Intensity";
+	}
+
+	override function right():Bool {
+		FlxG.save.data.rgbintense += 0.1;
+
+		if (FlxG.save.data.rgbintense < 0)
+			FlxG.save.data.rgbintense = 0;
+
+		if (FlxG.save.data.rgbintense > 2)
+			FlxG.save.data.rgbintense = 2;
+		return true;
+	}
+
+	override function getValue():String {
+		return "Current RGB Intensity Multiplier: " + HelperFunctions.truncateFloat(FlxG.save.data.rgbintense,1);
+	}
+
+	override function left():Bool {
+		FlxG.save.data.rgbintense -= 0.1;
+
+		if (FlxG.save.data.rgbintense < 0)
+			FlxG.save.data.rgbintense = 0;
+
+		if (FlxG.save.data.rgbintense > 2)
+			FlxG.save.data.rgbintense = 2;
+
+		return true;
+	}
+}
+
+class CameraOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.cameraenable = !FlxG.save.data.cameraenable;
+		
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return  FlxG.save.data.cameraenable ? "Camera Movement On" : "Camera Movement Off";
+	}
+
+}
+
+class SiteOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.siteenable = !FlxG.save.data.siteenable;
+		
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return  FlxG.save.data.siteenable ? "Site Popup On" : "Site Popup Off";
+	}
+
+}
 
 class DFJKOption extends Option
 {
