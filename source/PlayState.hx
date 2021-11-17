@@ -1115,7 +1115,7 @@ class PlayState extends MusicBeatState
 						// evilTrail.changeGraphic()
 						add(evilTrail);
 						// evilTrail.scrollFactor.set(1.1, 1.1);
-						if ((SONG.song == 'Bloodshed-two') && (curStep >= 271))
+						if (SONG.song == 'BLOODSHED-TWO')
 							remove(evilTrail);
 					}
 				}
