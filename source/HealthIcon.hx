@@ -63,6 +63,7 @@ class HealthIcon extends FlxSprite
 		animation.add('bijuuron', [44, 45], 0, false, isPlayer);
 		animation.add('devilron', [46, 47], 0, false, isPlayer);
 		animation.add('douyhe', [48, 49], 0, false, isPlayer);
+		animation.add('helldouyhe', [52, 53], 0, false, isPlayer);
 		
 		// idk why this exists but ill put it in just in case
 		animation.add('gf-in', [59], 0, false, isPlayer);

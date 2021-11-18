@@ -377,6 +377,8 @@ class PlayState extends MusicBeatState
 						dialogue = CoolUtil.coolTextFile(Paths.txt('ayo/diaman'));
 			case 'bloodshed':
 						dialogue = CoolUtil.coolTextFile(Paths.txt('bloodshed/diamane'));
+			case 'bloodshed-b':
+						dialogue = CoolUtil.coolTextFile(Paths.txt('bloodshed-b/diamane'));
 			case 'bloodshed-old':
 						dialogue = CoolUtil.coolTextFile(Paths.txt('bloodshed-old/diamane'));
 			case 'trojan-virus':
@@ -1475,7 +1477,7 @@ class PlayState extends MusicBeatState
 					FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
 					schoolIntro(doof);
 				case 'bloodshed-b':
-					startCountdown();
+					schoolIntro(doof);
 					add(fx);
 					gf.visible = false;
 				default:
@@ -2747,7 +2749,7 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				if (FlxG.save.data.cameraenable)
+				if ((FlxG.save.data.cameraenable) && dad.curCharacter != 'bijuuron'))
 					camFollow.setPosition(dad.getMidpoint().x + offsetX + dad.frameWidth/2, dad.getMidpoint().y + 120 - dad.frameHeight/2 + offsetY);
 				else
 					camFollow.setPosition(dad.getMidpoint().x + 120 + offsetX, dad.getMidpoint().y - 60 + offsetY);
@@ -3324,7 +3326,7 @@ class PlayState extends MusicBeatState
 				if (FlxG.save.data.scoreScreen)
 					openSubState(new ResultsScreen());
 				else
-					FlxG.switchState(new FreeplayState());
+					FlxG.switchState(new MasterPlayState());
 			}
 		}
 	}
@@ -4538,6 +4540,7 @@ class PlayState extends MusicBeatState
 				remove(dad);
 				dad = new Character(xx, yy, 'devilron');
 				add(dad);
+				iconP2.animation.play('devilron');
 				var blac:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 				blac.scrollFactor.set();
 				add(blac);
@@ -4548,18 +4551,20 @@ class PlayState extends MusicBeatState
 		}
 
 		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-b') || (curSong == 'File Manipulation') || (curSong == 'File Manipulation-b')) {
-			var chromeOffset:Float = (((2 - health/2)/2+0.5)*FlxG.save.data.rgbintense);
+			var chromeOffset:Float = (((2 - health/2)/2+0.5));
 			chromeOffset /= 350;
 			if (chromeOffset <= 0)
 				setChrome(0.0);
 			else
 			{
 				if (FlxG.save.data.rgbenable)
-					setChrome(chromeOffset);
+					setChrome(chromeOffset*FlxG.save.data.rgbintense);
 				else
 					setChrome(0.0);
 			}
 		}
+		else
+			setChrome(0.0);
 		
 		if ((curSong == 'wasted') || (curSong == 'Wasted-B'))
 		{

@@ -18,6 +18,7 @@
 	<SubTexture name="FTalk0005" x="2430" y="5" width="385" height="331" frameX="0" frameY="0" frameWidth="386" frameHeight="331"/>
 	<SubTexture name="FTalk0006" x="2825" y="5" width="385" height="328" frameX="0" frameY="-3" frameWidth="386" frameHeight="331"/>
 	<SubTexture name="FTalk0007" x="3220" y="5" width="383" height="328" frameX="-2" frameY="-3" frameWidth="386" frameHeight="331"/>
+	<SubTexture name="BSIDE0000" x="3640" y="5" width="383" height="328" frameX="-2" frameY="-3" frameWidth="386" frameHeight="331"/>
 	<SubTexture name="Fear0000" x="3613" y="5" width="408" height="328" frameX="-1" frameY="-1" frameWidth="410" frameHeight="329"/>
 	<SubTexture name="Fear0001" x="5" y="346" width="408" height="328" frameX="-2" frameY="-1" frameWidth="410" frameHeight="329"/>
 	<SubTexture name="Fear0002" x="423" y="346" width="408" height="329" frameX="-1" frameY="0" frameWidth="410" frameHeight="329"/>

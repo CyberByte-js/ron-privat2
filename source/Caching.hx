@@ -171,7 +171,7 @@ class Caching extends MusicBeatState
             FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
             trace("cached " + replaced);
             done++;
-			text2.text = "Loaded " + replaced;
+			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
         }
 		
         for (i in characters_ron)
@@ -180,7 +180,7 @@ class Caching extends MusicBeatState
             FlxG.bitmap.add(Paths.image("ron/characters/" + replaced,"shared"));
             trace("cached " + replaced);
             done++;
-			text2.text = "Loaded " + replaced;
+			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
         }
 		
         for (i in characters_update)
@@ -189,7 +189,7 @@ class Caching extends MusicBeatState
             FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"));
             trace("cached " + replaced);
             done++;
-			text2.text = "Loaded " + replaced;
+			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
         }
 		
         for (i in bgs_ron)
@@ -198,7 +198,7 @@ class Caching extends MusicBeatState
             FlxG.bitmap.add(Paths.image("ron/bg/" + replaced,"shared"));
             trace("cached " + replaced);
             done++;
-			text2.text = "Loaded " + replaced;
+			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
         }
 		
         for (i in bgs_update)
@@ -207,7 +207,7 @@ class Caching extends MusicBeatState
             FlxG.bitmap.add(Paths.image("updateron/bg/" + replaced,"shared"));
             trace("cached " + replaced);
             done++;
-			text2.text = "Loaded " + replaced;
+			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
         }
 	
         trace("Finished caching...");

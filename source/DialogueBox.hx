@@ -112,6 +112,7 @@ class DialogueBox extends FlxSpriteGroup
 		portraitRight = new FlxSprite();
 		portraitRight.frames = Paths.getSparrowAtlas('updateron/portraits/bf', 'shared');
 		portraitRight.animation.addByPrefix('bf', 'FTalk', 24, false);
+		portraitRight.animation.addByPrefix('bfb', 'BSIDE', 24, false);
 		portraitRight.animation.addByPrefix('BTalk', 'BTalk', 24, false);
 		portraitRight.animation.addByPrefix('FTalk', 'FTalk', 24, false);
 		portraitRight.animation.addByPrefix('Fear', 'Fear', 24, false);
