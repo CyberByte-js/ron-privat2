@@ -2749,7 +2749,7 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				if ((FlxG.save.data.cameraenable) && dad.curCharacter != 'bijuuron'))
+				if ((FlxG.save.data.cameraenable) && (dad.curCharacter != 'bijuuron'))
 					camFollow.setPosition(dad.getMidpoint().x + offsetX + dad.frameWidth/2, dad.getMidpoint().y + 120 - dad.frameHeight/2 + offsetY);
 				else
 					camFollow.setPosition(dad.getMidpoint().x + 120 + offsetX, dad.getMidpoint().y - 60 + offsetY);
