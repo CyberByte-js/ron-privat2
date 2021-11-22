@@ -198,6 +198,7 @@ class PlayState extends MusicBeatState
 	var Estatic:FlxSprite;
 	var Estatic2:FlxSprite;
 	var firebg:FlxSprite;
+	var hellbg:FlxSprite;
 	var wastedbg:FlxSprite;
 
 	var fc:Bool = true;
@@ -822,12 +823,16 @@ class PlayState extends MusicBeatState
 			{
 				defaultCamZoom = 0.85;
 				curStage = 'hell';
-				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('updateron/bg/hellRon_sky'));
-				bg.antialiasing = true;
-				bg.screenCenter(XY);
-				bg.scrollFactor.set(0.05, 0.05);
-				bg.active = false;
-				add(bg);
+				hellbg = new FlxSprite();
+				hellbg.frames = Paths.getSparrowAtlas('updateron/bg/hell_bg');
+				hellbg.scale.set(5,5);
+				hellbg.animation.addByPrefix('idle instance 1', 'idle instance 1', 48, true);
+				hellbg.animation.play('idle instance 1');
+				hellbg.antialiasing = true;
+				hellbg.screenCenter(XY);
+				hellbg.y += hellbg.height / 5;
+				hellbg.scrollFactor.set(0.05, 0.05);
+				add(hellbg);
 				firebg = new FlxSprite();
 				firebg.frames = Paths.getSparrowAtlas('updateron/bg/escape_fire');
 				firebg.scale.set(6,6);
@@ -851,7 +856,7 @@ class PlayState extends MusicBeatState
 				ground.active = false;
 				add(ground);
 				fx = new FlxSprite().loadGraphic(Paths.image('updateron/bg/effect'));
-				fx.setGraphicSize(Std.int(bg.width * 0.75));
+				fx.setGraphicSize(Std.int(2560 * 0.75));
 				fx.updateHitbox();
 				fx.antialiasing = true;
 				fx.screenCenter(XY);
@@ -4431,7 +4436,7 @@ class PlayState extends MusicBeatState
 				if (fx.alpha > 0.3)
 					fx.alpha -= 0.05;
 			}
-			Estatic.alpha = (2-health)/2;
+			Estatic.alpha = (((2-health)/3)+0.2);
 		}
 		
 		if (curSong == 'Bloodshed-b') {
