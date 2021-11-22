@@ -12,3 +12,4 @@ glitch
 baka
 win
 trouble
+void

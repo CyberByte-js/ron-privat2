@@ -127,6 +127,7 @@ class PlayState extends MusicBeatState
 	public var originalX:Float;
 
 	public static var dad:Character;
+	public static var dad2:Character;
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
 
@@ -1031,6 +1032,15 @@ class PlayState extends MusicBeatState
 					add(deadbob);
 					
 				}
+			case 'void':
+				{
+					defaultCamZoom = 0.5;
+					curStage = 'baka';
+					var bg:FlxSprite = new FlxSprite(300, 200).loadGraphic(Paths.image('updateron/bg/effect'));
+					bg.antialiasing = true;
+					bg.active = false;
+					add(bg);
+				}
 			default:
 			{
 				defaultCamZoom = 0.9;
@@ -1094,6 +1104,7 @@ class PlayState extends MusicBeatState
 		gf.scrollFactor.set(0.95, 0.95);
 
 		dad = new Character(100, 100, SONG.player2);
+		dad2 = new Character(800, 150, 'ronslaught-pov');
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
@@ -1138,7 +1149,9 @@ class PlayState extends MusicBeatState
 			add(dad);
 			add(boyfriend);
 		}
-
+		
+		if (SONG.song == 'Double-Trouble')
+			add(dad2);
 
 		if (loadRep)
 		{
@@ -1348,6 +1361,10 @@ class PlayState extends MusicBeatState
 				dad.x += 70;
 				dad.y += 310;
 				camPos.set(dad.getGraphicMidpoint().x + 150, dad.getGraphicMidpoint().y + 300);
+				healthBar.createFilledBar(0xFF000000, bfcolor);
+			case 'hellron-pov':
+				dad.x -= 300;
+				gf.visible = false;
 				healthBar.createFilledBar(0xFF000000, bfcolor);
 			case 'devilron':
 				dad.x += 70;
@@ -2754,10 +2771,13 @@ class PlayState extends MusicBeatState
 					offsetY = luaModchart.getVar("followYOffset", "float");
 				}
 				#end
-				if ((FlxG.save.data.cameraenable) && (dad.curCharacter != 'bijuuron'))
+				var pov = 0;
+				if (dad.curCharacter == 'hellron-pov')
+					pov = 333;
+				if ((FlxG.save.data.cameraenable) && (dad.curCharacter != 'bijuuron') && (dad.curCharacter != 'hellron-pov'))
 					camFollow.setPosition(dad.getMidpoint().x + offsetX + dad.frameWidth/2, dad.getMidpoint().y + 120 - dad.frameHeight/2 + offsetY);
 				else
-					camFollow.setPosition(dad.getMidpoint().x + 120 + offsetX, dad.getMidpoint().y - 60 + offsetY);
+					camFollow.setPosition(dad.getMidpoint().x + 120 + pov + offsetX, dad.getMidpoint().y - 60 + offsetY);
 				#if windows
 				if (luaModchart != null)
 					luaModchart.executeState('playerTwoTurn', []);
@@ -3013,16 +3033,33 @@ class PlayState extends MusicBeatState
 								altAnim = '-alt';
 						}
 	
-						switch (Math.abs(daNote.noteData))
+						if (daNote.noteType == 0)
 						{
-							case 2:
-								dad.playAnim('singUP' + altAnim, true);
-							case 3:
-								dad.playAnim('singRIGHT' + altAnim, true);
-							case 1:
-								dad.playAnim('singDOWN' + altAnim, true);
-							case 0:
-								dad.playAnim('singLEFT' + altAnim, true);
+							switch (Math.abs(daNote.noteData))
+								{
+									case 2:
+										dad.playAnim('singUP' + altAnim, true);
+									case 3:
+										dad.playAnim('singRIGHT' + altAnim, true);
+									case 1:
+										dad.playAnim('singDOWN' + altAnim, true);
+									case 0:
+										dad.playAnim('singLEFT' + altAnim, true);
+								}
+						}
+						else
+						{
+							switch (Math.abs(daNote.noteData))
+								{
+									case 2:
+										dad2.playAnim('singUP' + altAnim, true);
+									case 3:
+										dad2.playAnim('singRIGHT' + altAnim, true);
+									case 1:
+										dad2.playAnim('singDOWN' + altAnim, true);
+									case 0:
+										dad2.playAnim('singLEFT' + altAnim, true);
+								}
 						}
 						//shakes the fuck out of your screen and hud -ekical
 						//now it drains your health because fuck you -ekical

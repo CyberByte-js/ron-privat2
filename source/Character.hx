@@ -206,6 +206,48 @@ class Character extends FlxSprite
 
 				flipX = true;
 				
+			case 'bf-inv':
+				var tex = Paths.getSparrowAtlas('characters/BOYFRIEND', 'shared');
+				frames = tex;
+
+				trace(tex.frames.length);
+
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('hey', 'BF HEY', 24, false);
+
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+
+				animation.addByPrefix('scared', 'BF idle shaking', 24);
+
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+				addOffset("singUPmiss", -29, 27);
+				addOffset("singRIGHTmiss", -30, 21);
+				addOffset("singLEFTmiss", 12, 24);
+				addOffset("singDOWNmiss", -11, -19);
+				addOffset("hey", 7, 4);
+				addOffset('firstDeath', 37, 11);
+				addOffset('deathLoop', 37, 5);
+				addOffset('deathConfirm', 37, 69);
+				addOffset('scared', -4);
+
+				playAnim('idle');
+				visible = false;
+				alpha = 0;
+				flipX = true;
 			case 'bf-d':
 				var tex = Paths.getSparrowAtlas('characters/dBOYFRIEND', 'shared');
 				frames = tex;
@@ -509,6 +551,32 @@ class Character extends FlxSprite
 				addOffset("singLEFT",25,-20);
 				addOffset("singRIGHT",30,-7);
 				addOffset("singDOWN",-25,-30);
+			case 'hellron-pov':
+				tex = Paths.getSparrowAtlas('updateron/characters/hellron-pov');
+				frames = tex;
+				animation.addByPrefix('idle', "idle", 24);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'right', 24, false);
+				animation.addByPrefix('singRIGHT', 'left', 24, false);
+				addOffset('idle');
+				addOffset("singUP", 120, 72);
+				addOffset("singLEFT", -70, -77);
+				addOffset("singRIGHT", 214, -50);
+				addOffset("singDOWN", 20, -195);
+			case 'ronslaught-pov':
+				tex = Paths.getSparrowAtlas('updateron/characters/ronslaught-pov');
+				frames = tex;
+				animation.addByPrefix('idle', "idle", 24);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'right', 24, false);
+				animation.addByPrefix('singRIGHT', 'left', 24, false);
+				addOffset('idle');
+				addOffset("singUP", 0, 140);
+				addOffset("singLEFT", -190, -53);
+				addOffset("singRIGHT", 103, -52);
+				addOffset("singDOWN", -88, -137);
 			case 'hellron-crazy':
 				tex = Paths.getSparrowAtlas('updateron/characters/hellron');
 				frames = tex;

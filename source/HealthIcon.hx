@@ -1,6 +1,8 @@
 package;
 
 import flixel.FlxSprite;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 class HealthIcon extends FlxSprite
 {
@@ -17,6 +19,7 @@ class HealthIcon extends FlxSprite
 
 		antialiasing = true;
 		animation.add('bf', [0, 1], 0, false, isPlayer);
+		animation.add('bf-inv', [0, 1], 0, false, isPlayer);
 		animation.add('bf-b', [20, 21], 0, false, isPlayer);
 		animation.add('bf-run', [30, 31], 0, false, isPlayer);
 		animation.add('bf-d', [40, 41], 0, false, isPlayer);
@@ -61,6 +64,8 @@ class HealthIcon extends FlxSprite
 		
 		// bonus songs for the future
 		animation.add('bijuuron', [44, 45], 0, false, isPlayer);
+		animation.add('hellron-pov', [54, 55], 0, false, isPlayer);	
+		animation.add('ronslaught-pov', [54, 55], 0, false, isPlayer);	
 		animation.add('devilron', [46, 47], 0, false, isPlayer);
 		animation.add('douyhe', [48, 49], 0, false, isPlayer);
 		animation.add('helldouyhe', [52, 53], 0, false, isPlayer);
