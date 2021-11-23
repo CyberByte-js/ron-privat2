@@ -1075,7 +1075,7 @@ class PlayState extends MusicBeatState
 				case 5: gfCheck = 'gf-christmas';
 				case 6: gfCheck = 'gf-pixel';
 			}
-			if (curSong == 'Bloodshed')
+			if (curSong == 'Bloodshed' || curSong == 'not-bloodshed')
 				gfCheck = 'gf-run';
 			if (curSong == 'Ayo')
 				gfCheck = 'gf-d';
@@ -1465,6 +1465,10 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'bloodshed':
 					schoolIntro(doof);
+					add(fx);
+					add(Estatic);
+					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
+				case 'not-bloodshed'
 					add(fx);
 					add(Estatic);
 					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
@@ -4397,7 +4401,7 @@ class PlayState extends MusicBeatState
 
 	override function stepHit()
 	{
-		if (curSong == 'Bloodshed') {
+		if (curSong == 'Bloodshed' || 'not-bloodshed') {
 			healthBarBG.alpha = 0;
 			healthBar.alpha = 0;
 			iconP1.visible = true;
@@ -4592,7 +4596,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-b') || (curSong == 'File Manipulation') || (curSong == 'File Manipulation-b')) {
+		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-b') || (curSong == 'File Manipulation') || (curSong == 'File Manipulation-b') || (curSong == 'not-bloodshed')) {
 			var chromeOffset:Float = (((2 - health/2)/2+0.5));
 			chromeOffset /= 350;
 			if (chromeOffset <= 0)
