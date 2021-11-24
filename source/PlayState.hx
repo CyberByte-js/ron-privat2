@@ -1468,7 +1468,7 @@ class PlayState extends MusicBeatState
 					add(fx);
 					add(Estatic);
 					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
-				case 'not-bloodshed'
+				case 'not-bloodshed':
 					add(fx);
 					add(Estatic);
 					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
@@ -4401,7 +4401,7 @@ class PlayState extends MusicBeatState
 
 	override function stepHit()
 	{
-		if (curSong == 'Bloodshed' || 'not-bloodshed') {
+		if (curSong == 'Bloodshed' || curSong == 'not-bloodshed') {
 			healthBarBG.alpha = 0;
 			healthBar.alpha = 0;
 			iconP1.visible = true;
