@@ -330,8 +330,6 @@ class ExtrasPlayState extends MusicBeatState
 		#end
 
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
-		if (songs[curSelected].songName.contains("-b"))
-			diffText.text = CoolUtil.difficultyBFromInt(curDifficulty).toUpperCase();
 	}
 	
 	override function beatHit()
@@ -364,20 +362,10 @@ class ExtrasPlayState extends MusicBeatState
 		if (curSelected >= songs.length)
 			curSelected = 0;
 		
-		if (songs[curSelected].songName.contains("-b"))
-		{
-			if (curDifficulty < 0)
-				curDifficulty = 2;
-			if (curDifficulty > 2)
-				curDifficulty = 0;
-		}
-		else
-		{
-			if (curDifficulty < 0)
-				curDifficulty = 3;
-			if (curDifficulty > 3)
-				curDifficulty = 0;
-		}
+		if (curDifficulty < 0)
+			curDifficulty = 3;
+		if (curDifficulty > 3)
+			curDifficulty = 0;
 		
 		FlxG.camera.antialiasing = true;
 
@@ -428,8 +416,6 @@ class ExtrasPlayState extends MusicBeatState
 		}
 		
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
-		if (songs[curSelected].songName.contains("-b"))
-			diffText.text = CoolUtil.difficultyBFromInt(curDifficulty).toUpperCase();
 
 		var clr = 0xFFE51F89;
 		switch (curSelected)
