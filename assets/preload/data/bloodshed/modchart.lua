@@ -14,7 +14,7 @@ function start (song)
     for i =4,7 do 
         tweenPosXAngle(i, _G['defaultStrum'..i..'X'] - 275,getActorAngle(i), 0.5, 'setDefault')
     end
-	strumLine2Visible = false
+	strumLine1Visible = false
 end
 
 function update (elapsed)
