@@ -396,6 +396,7 @@ class ModchartState
 	
 				setVar("cameraAngle", FlxG.camera.angle);
 				setVar("camHudAngle", PlayState.instance.camHUD.angle);
+				setVar("camHudAlpha", PlayState.instance.camHUD.alpha);
 	
 				setVar("followXOffset",0);
 				setVar("followYOffset",0);

@@ -845,8 +845,9 @@ class PlayState extends MusicBeatState
 				add(firebg);
 				satan = new FlxSprite(300, 200).loadGraphic(Paths.image('updateron/bg/hellRon_satan'));
 				satan.antialiasing = true;
+				satan.scale.set(1.2,1.2);
 				satan.screenCenter(XY);
-				satan.scrollFactor.set(0.35, 0.35);
+				satan.scrollFactor.set(0.15, 0.15);
 				satan.y -= 100;
 				satan.active = true;
 				add(satan);	
@@ -1133,6 +1134,14 @@ class PlayState extends MusicBeatState
 						// evilTrail.changeGraphic()
 						add(evilTrail);
 						// evilTrail.scrollFactor.set(1.1, 1.1);
+						if (dad.animation.curAnim.name.endsWith('UP'))
+							FlxTween.tween(evilTrail, {y: dad.y -= 150}, 1);
+						if (dad.animation.curAnim.name.endsWith('DOWN'))
+							FlxTween.tween(evilTrail, {y: dad.y += 150}, 1);
+						if (dad.animation.curAnim.name.endsWith('LEFT'))
+							FlxTween.tween(evilTrail, {x: dad.x -= 150}, 1);
+						if (dad.animation.curAnim.name.endsWith('RIGHT'))
+							FlxTween.tween(evilTrail, {x: dad.x += 150}, 1);
 						if (SONG.song == 'BLOODSHED-TWO')
 							remove(evilTrail);
 					}
@@ -2426,6 +2435,7 @@ class PlayState extends MusicBeatState
 
 			FlxG.camera.angle = luaModchart.getVar('cameraAngle', 'float');
 			camHUD.angle = luaModchart.getVar('camHudAngle','float');
+			camHUD.alpha = luaModchart.getVar('camHudAlpha','float');
 
 			if (luaModchart.getVar("showOnlyStrums",'bool'))
 			{
@@ -2776,10 +2786,21 @@ class PlayState extends MusicBeatState
 				}
 				#end
 				var pov = 0;
+				var mxx = 0;
+				var myy = 0;
+				if (dad.animation.curAnim.name.endsWith('UP'))
+					myy = 30;
+				if (dad.animation.curAnim.name.endsWith('DOWN'))
+					myy = -30;
+				if (dad.animation.curAnim.name.endsWith('LEFT'))
+					mxx = -30;
+				if (dad.animation.curAnim.name.endsWith('RIGHT'))
+					mxx = 30;
+
 				if (dad.curCharacter == 'hellron-pov')
 					pov = 333;
 				if ((FlxG.save.data.cameraenable) && (dad.curCharacter != 'bijuuron') && (dad.curCharacter != 'hellron-pov'))
-					camFollow.setPosition(dad.getMidpoint().x + offsetX + dad.frameWidth/2, dad.getMidpoint().y + 120 - dad.frameHeight/2 + offsetY);
+					camFollow.setPosition(dad.getMidpoint().x + 160 + offsetX + mxx, dad.getMidpoint().y + 150 - myy - 250 + offsetY);
 				else
 					camFollow.setPosition(dad.getMidpoint().x + 120 + pov + offsetX, dad.getMidpoint().y - 60 + offsetY);
 				#if windows
@@ -4409,8 +4430,14 @@ class PlayState extends MusicBeatState
 			iconP2.alpha = (2-(health)-0.25)/2+0.2;
 			iconP1.alpha = (health-0.25)/2+0.2;
 			switch (curStep) {
+				case 0:
+					PlayStateChangeables.useDownscroll = true;
+					strumLine.y = 50;
+				case 72:
+					PlayStateChangeables.useDownscroll = true;
 				case 259:
 					defaultCamZoom = 0.95;
+					PlayStateChangeables.useDownscroll = false;
 				case 341:
 					defaultCamZoom = 1.05;
 				case 356:
@@ -4422,6 +4449,7 @@ class PlayState extends MusicBeatState
 				case 518:
 					defaultCamZoom = 0.85;
 					satan.angle = 0;
+					FlxTween.tween(camHUD, {angle: 20}, 1, {ease: FlxEase.quadInOut, type: BACKWARD});
 				case 776:
 					defaultCamZoom = 0.9;
 					FlxTween.tween(firebg, {alpha: 1}, 1, {ease: FlxEase.quadInOut});
@@ -4459,8 +4487,17 @@ class PlayState extends MusicBeatState
 			if ((curStep >= 259) && (curStep <= 518))
 			{
 				if (fx.alpha < 0.6)
-					fx.alpha += 0.05;
-				satan.angle += 5;
+					fx.alpha += 0.05;			
+				if (curStep == 260)
+				{
+					FlxTween.angle(satan, 0, 359.99, 1.5, { 
+						ease: FlxEase.quadIn, 
+						onComplete: function(twn:FlxTween) 
+						{
+							FlxTween.angle(satan, 0, 359.99, 0.75, { type: FlxTween.LOOPING } );
+						}} 
+					);
+				}
 				FlxG.camera.shake(0.01, 0.1);
 				camHUD.shake(0.001, 0.15);
 			}
@@ -4468,12 +4505,25 @@ class PlayState extends MusicBeatState
 			{
 				if (fx.alpha > 0)
 					fx.alpha -= 0.05;
-				satan.angle += 10;
+				if (curStep == 777)
+				{
+					FlxTween.angle(satan, 0, 359.99, 0.75, { 
+						ease: FlxEase.quadIn, 
+						onComplete: function(twn:FlxTween) 
+						{
+							FlxTween.angle(satan, 0, 359.99, 0.35, { type: FlxTween.LOOPING } );
+						}} 
+					);
+				}
 				FlxG.camera.shake(0.015, 0.1);
 				camHUD.shake(0.0015, 0.15);
 			}
 			else
 			{
+				if ((curStep == 1071) || (curStep == 519))
+					FlxTween.cancelTweensOf(satan);
+				if (satan.angle != 0)
+					FlxTween.angle(satan, satan.angle, 359.99, 0.5, {ease: FlxEase.quadIn});
 				if (fx.alpha > 0.3)
 					fx.alpha -= 0.05;
 			}
