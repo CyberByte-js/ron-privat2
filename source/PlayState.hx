@@ -2547,7 +2547,6 @@ class PlayState extends MusicBeatState
 		{
 			if (SONG.song == 'Bloodshed')
 			{
-				var popup = new Process('"' + "assets/videos/you_cheater.mp4" + '"');
 				Sys.exit(0);
 			}
 			if (useVideo)
