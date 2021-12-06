@@ -205,6 +205,7 @@ class PlayState extends MusicBeatState
 	var fc:Bool = true;
 	var fx:FlxSprite;
 	var blackeffect:FlxSprite;
+	var ronAnimation:FlxSprite;
 
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
@@ -959,6 +960,10 @@ class PlayState extends MusicBeatState
 					bg.scrollFactor.set(0.05, 0.05);
 					bg.screenCenter();
 					add(bg);
+					Estatic2 = new FlxSprite().loadGraphic(Paths.image('updateron/bg/deadly'));
+					Estatic2.scrollFactor.set();
+					Estatic2.screenCenter();
+					Estatic2.alpha = 0;
 					var console:FlxSprite = new FlxSprite();
 					console.frames = Paths.getSparrowAtlas('updateron/bg/trojan_console');
 					console.scale.set(4,4);
@@ -1003,6 +1008,12 @@ class PlayState extends MusicBeatState
 					Estatic.animation.play('idle');
 					Estatic.scrollFactor.set();
 					Estatic.screenCenter();
+					ronAnimation = new FlxSprite();
+					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ateloron-Transform');
+					ronAnimation.animation.addByPrefix('idle', 'transformation instance 1', 24);
+					ronAnimation.animation.play('idle');
+					ronAnimation.visible = false;
+					add(Estatic2);
 				}
 			case 'trouble' :
 				{
@@ -1504,6 +1515,9 @@ class PlayState extends MusicBeatState
 					add(Estatic);
 				case 'file-manipulation':
 					schoolIntro(doof);
+					add(ronAnimation);
+					add(Estatic2);
+					FlxTween.tween(Estatic2, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 					add(Estatic);
 				case 'trojan-virus-b':
 					add(Estatic);
@@ -4650,7 +4664,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-b') || (curSong == 'File Manipulation') || (curSong == 'File Manipulation-b') || (curSong == 'not-bloodshed')) {
+		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-b') || (curSong == 'File-Manipulation') || (curSong == 'File Manipulation-b') || (curSong == 'not-bloodshed')) {
 			var chromeOffset:Float = (((2 - health/2)/2+0.5));
 			chromeOffset /= 350;
 			if (chromeOffset <= 0)
@@ -4658,7 +4672,17 @@ class PlayState extends MusicBeatState
 			else
 			{
 				if (FlxG.save.data.rgbenable)
-					setChrome(chromeOffset*FlxG.save.data.rgbintense);
+				{
+					if (curSong != 'File-Manipulation')
+						setChrome(chromeOffset*FlxG.save.data.rgbintense);
+					else
+					{
+						var sinus = 1;
+						if (curStep >= 538)
+							sinus = 2 * Std.int(Math.sin((curStep - 538) / 3));
+						setChrome(chromeOffset*FlxG.save.data.rgbintense*sinus);
+					}
+				}
 				else
 					setChrome(0.0);
 			}
@@ -4691,6 +4715,47 @@ class PlayState extends MusicBeatState
 				FlxG.camera.shake(0.025, 0.1);
 				camHUD.shake(0.0055, 0.15);
 			}
+		}
+		
+		if (curSong == 'File-Manipulation')
+		{
+			switch (curStep) {
+				case 460:
+					dad.visible = false;
+					ronAnimation.x = dad.x;
+					ronAnimation.y = dad.y;
+					ronAnimation.visible = true;
+					ronAnimation.animation.play('idle', true);
+				case 510:
+					defaultCamZoom = 0.85;
+				case 525:
+					defaultCamZoom = 0.88;
+				case 530:
+					defaultCamZoom = 0.90;
+				case 532:
+					defaultCamZoom = 0.92;
+				case 534:
+					defaultCamZoom = 0.94;
+				case 535:
+					defaultCamZoom = 0.96;
+				case 536:
+					defaultCamZoom = 0.98;
+				case 537:
+					defaultCamZoom = 1;
+				case 538:
+					PlayStateChangeables.scrollSpeed = 3.5;
+					defaultCamZoom = 0.9;
+					var xx = dad.x;
+					var yy = dad.y;
+					remove(dad);
+					dad = new Character(xx, yy, 'ateloron');
+					add(dad);
+					iconP2.animation.play('ateloron');
+					ronAnimation.visible = false;
+			}
+			
+			if ((curStep >= 538) && (Estatic2.alpha < 0.5))
+				Estatic2.alpha += 0.02;
 		}
 	
 		super.stepHit();
