@@ -3248,8 +3248,6 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-
-
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN,handleInput);
 		if (useVideo)
 			{
@@ -3413,6 +3411,11 @@ class PlayState extends MusicBeatState
 				else
 					FlxG.switchState(new MasterPlayState());
 			}
+		}
+
+		if (SONG.song.toLowerCase() == 'factory-reset-b' && misses == 0 && !PlayStateChangeables.botPlay)
+		{
+			Achievements.whatTheActualFuck = true;
 		}
 	}
 
