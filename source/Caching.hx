@@ -64,6 +64,12 @@ class Caching extends MusicBeatState
 		bgBar.updateHitbox();
 		bgBar.antialiasing = true;
 
+		var bgLoading = Paths.image('loading');
+		if (FlxG.random.bool(10))
+			bgLoading = Paths.image('loadingold');
+		// THIS LOOKS TERRIBLE
+		if (FlxG.random.bool(1000))
+			bgLoading = Paths.image('loadingolder');
         kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('loading'));
 		kadeLogo.screenCenter();
         kadeLogo.setGraphicSize(Std.int(kadeLogo.width * 0.5));
@@ -168,7 +174,7 @@ class Caching extends MusicBeatState
         for (i in characters_global)
         {
             var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
+            FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
 			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
@@ -177,7 +183,7 @@ class Caching extends MusicBeatState
         for (i in characters_ron)
         {
             var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("ron/characters/" + replaced,"shared"));
+            FlxG.bitmap.add(Paths.image("ron/characters/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
 			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
@@ -186,7 +192,7 @@ class Caching extends MusicBeatState
         for (i in characters_update)
         {
             var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"));
+            FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
 			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
@@ -195,7 +201,7 @@ class Caching extends MusicBeatState
         for (i in bgs_ron)
         {
             var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("ron/bg/" + replaced,"shared"));
+            FlxG.bitmap.add(Paths.image("ron/bg/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
 			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
@@ -204,12 +210,13 @@ class Caching extends MusicBeatState
         for (i in bgs_update)
         {
             var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("updateron/bg/" + replaced,"shared"));
+            FlxG.bitmap.add(Paths.image("updateron/bg/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
 			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
         }
-	
+		
+		FlxGraphic.defaultPersist = true;
         trace("Finished caching...");
 		text.text = toBeDone + "/" + toBeDone;
 		text2.text = "DONE! (in a cool way)";

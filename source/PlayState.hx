@@ -4759,6 +4759,14 @@ class PlayState extends MusicBeatState
 			
 			if ((curStep >= 538) && (Estatic2.alpha < 0.5))
 				Estatic2.alpha += 0.02;
+				
+			if ((((curStep >= 816) && (curStep <= 848)) || ((curStep >= 880) && (curStep <= 912))) && (curStep % 2 == 0))
+			{
+				defaultCamZoom += 0.05;
+			}
+			if ((((curStep > 848) && (curStep < 880)) || ((curStep > 912) && (curStep < 1080))) && (defaultCamZoom > 0.9))
+				defaultCamZoom -= 0.0125;
+			
 		}
 	
 		super.stepHit();
