@@ -1053,6 +1053,73 @@ class PlayState extends MusicBeatState
 					bg.active = false;
 					add(bg);
 				}
+				case 'glitch-factory':
+					defaultCamZoom = 0.7;
+					curStage = 'glitch-factory';
+					var bg:FlxSprite = new FlxSprite();
+					bg.frames = Paths.getSparrowAtlas('updateron/bg/atelo_bg');
+					bg.scale.set(2, 2);
+					bg.animation.addByPrefix('idle', 'bg instance 1', 24, true);
+					bg.animation.play('idle');
+					bg.scrollFactor.set(0.05, 0.05);
+					bg.screenCenter();
+					add(bg);
+					var popup:FlxSprite = new FlxSprite();
+					popup.frames = Paths.getSparrowAtlas('updateron/bg/atelo_popup_animated');
+					popup.scale.set(4, 4);
+					popup.animation.addByPrefix('idle', 'popups instance 1', 24, true);
+					popup.animation.play('idle');
+					popup.scrollFactor.set(0.05, 0.05);
+					popup.screenCenter();
+					add(popup);
+					var lamp:FlxSprite = new FlxSprite(900, 100);
+					lamp.frames = Paths.getSparrowAtlas('updateron/bg/atelo_lamp');
+					lamp.scale.set(2, 2);
+					lamp.animation.addByPrefix('idle', 'lamppost instance 1', 24, true);
+					lamp.animation.play('idle');
+					lamp.scrollFactor.set(0.9, 0.9);
+					add(lamp);
+					var ground:FlxSprite = new FlxSprite().loadGraphic(Paths.image('updateron/bg/atelo_ground'));
+					ground.scale.set(2, 2);
+					ground.screenCenter(X);
+					ground.antialiasing = true;
+					ground.scrollFactor.set(0.9, 0.9);
+					ground.active = false;
+					add(ground);
+					var error:FlxSprite = new FlxSprite(900, 550);
+					error.frames = Paths.getSparrowAtlas('updateron/bg/error');
+					error.scale.set(2, 2);
+					error.animation.addByPrefix('idle', 'error instance 1', 24, true);
+					error.animation.play('idle');
+					error.updateHitbox();
+					error.antialiasing = true;
+					add(error);
+					var error2:FlxSprite = new FlxSprite(-650, 550);
+					error2.frames = Paths.getSparrowAtlas('updateron/bg/error');
+					error2.scale.set(2, 2);
+					error2.animation.addByPrefix('idle', 'error instance 1', 24, true);
+					error2.animation.play('idle');
+					error2.updateHitbox();
+					error2.antialiasing = true;
+					add(error2);
+
+					// Morshu
+					var morshu:FlxSprite = new FlxSprite(-650, 0);
+					morshu.frames = Paths.getSparrowAtlas('updateron/bg/mmm');
+					morshu.animation.addByPrefix('idle', 'bop', 24, true);
+					morshu.animation.play('idle');
+					morshu.updateHitbox();
+					morshu.antialiasing = true;
+					add(morshu);
+
+					// Caleb
+					var caleb:FlxSprite = new FlxSprite(900, 0);
+					caleb.frames = Paths.getSparrowAtlas('updateron/bg/ears');
+					caleb.animation.addByPrefix('idle', 'bop', 24, true);
+					caleb.animation.play('idle');
+					caleb.updateHitbox();
+					caleb.antialiasing = true;
+					add(caleb);
 			default:
 			{
 				defaultCamZoom = 0.9;
