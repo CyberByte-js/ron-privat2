@@ -2972,11 +2972,12 @@ class PlayState extends MusicBeatState
 				case 48:
 					gfSpeed = 1;
 				case 80:
+					// F
 					gfSpeed = 2;
 				case 112:
 					gfSpeed = 1;
 				case 163:
-					// FlxG.sound.music.stop();
+					FlxG.sound.music.stop();
 					// FlxG.switchState(new TitleState());
 			}
 		}
@@ -4913,12 +4914,12 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
-		if (curBeat % (gfSpeed * 2) == 0) {
-			iconP1.scale.set(1.3,0.7);
-			iconP2.scale.set(1.3,0.7);
+		if (curBeat % 4 == 0) {
+			iconP1.scale.set(1.5,0.5);
+			iconP2.scale.set(1.5,0.5);
 	
-			FlxTween.tween(iconP1,{'scale.x':1,'scale.y':1},Conductor.crochet / 1000 * (gfSpeed * 2),{ease: FlxEase.backOut});
-			FlxTween.tween(iconP2,{'scale.x':1,'scale.y':1},Conductor.crochet / 1000 * (gfSpeed * 2),{ease: FlxEase.backOut});
+			FlxTween.tween(iconP1,{'scale.x':1,'scale.y':1},Conductor.crochet / 1000 * 4,{ease: FlxEase.backOut});
+			FlxTween.tween(iconP2,{'scale.x':1,'scale.y':1},Conductor.crochet / 1000 * 4,{ease: FlxEase.backOut});
 
 			iconP1.updateHitbox();
 			iconP2.updateHitbox();
