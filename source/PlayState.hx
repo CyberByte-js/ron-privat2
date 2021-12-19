@@ -2994,6 +2994,8 @@ class PlayState extends MusicBeatState
 
 		if (health <= 0)
 		{
+			defaultCamZoom = 1.1;
+			FlxG.camera.zoom = 1.1;
 			setChrome(0.0);
 			boyfriend.stunned = true;
 
@@ -3004,7 +3006,6 @@ class PlayState extends MusicBeatState
 			vocals.stop();
 			FlxG.sound.music.stop();
 			
-			defaultCamZoom = 1;
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
 			#if windows
