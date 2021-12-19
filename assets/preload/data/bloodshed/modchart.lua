@@ -8,13 +8,7 @@ function setDefault(id)
 end
 
 function start (song)
-    for i=0,3 do
-        tweenPosXAngle(i, _G['defaultStrum'..i..'X'] + 1250,getActorAngle(i), 0.5, 'setDefault')
-    end
-    for i =4,7 do 
-        tweenPosXAngle(i, _G['defaultStrum'..i..'X'] - 275,getActorAngle(i), 0.5, 'setDefault')
-    end
-	strumLine1Visible = false
+
 end
 
 function update (elapsed)
@@ -29,30 +23,30 @@ function update (elapsed)
         setWindowPos(0 * math.sin(currentBeat * math.pi) + 327, 0 * math.sin(currentBeat * 3) + 160)
     end
     if daNoteMove then
-        for i=0,7 do
+        for i=4,7 do
             setActorX(_G['defaultStrum'..i..'X'] + 8 * math.sin((currentBeat + i*0.25) * math.pi), i)
             setActorY(defaultStrum0Y + 18 * math.cos((currentBeat + i*2.5) * math.pi), i)
         end
     end
 	if daNoteMoveH then
-        for i=0,7 do
+        for i=4,7 do
             setActorX(_G['defaultStrum'..i..'X'] + 32 * math.sin((currentBeat + i*0.25) * math.pi), i)
         end
 	end
 	if daNoteMoveH2 then
-        for i=0,7 do
-            setActorX(_G['defaultStrum'..i..'X'] + 64 * math.sin((currentBeat) * math.pi), i)
-			setActorY(strumy + 18 * math.cos((currentBeat) * math.pi), i)
-        end
+        -- for i=4,7 do
+        --    setActorX(_G['defaultStrum'..i..'X'] + 64 * math.sin((currentBeat) * math.pi), i)
+		--	  setActorY(strumy + 18 * math.cos((currentBeat) * math.pi), i)
+        -- end
 	end
 	if daNoteMoveH3 then
-        for i=0,7 do
+        for i=4,7 do
 			setActorY(defaultStrum0Y + 128 * math.cos((currentBeat/4) * math.pi) + 128, i)
             setActorX(_G['defaultStrum'..i..'X'] + 128 * math.sin((currentBeat) * math.pi), i)
         end
 	end
 	if daNoteMoveH4 then
-        for i=0,7 do
+        for i=4,7 do
             setActorX(_G['defaultStrum'..i..'X'] + 128 * math.sin((currentBeat) * math.pi), i)
 			setActorY(strumy + 24 * math.cos((currentBeat) * math.pi), i)
 		end
@@ -60,7 +54,7 @@ function update (elapsed)
 		cameraAngle = 2 * math.sin((currentBeat/6) * math.pi)
 	end
 	if daNoteMoveH5 then
-        for i=0,7 do
+        for i=4,7 do
             setActorX(_G['defaultStrum'..i..'X'] + 128 * math.sin((currentBeat) * math.pi), i)
 			setActorY(defaultStrum0Y + 96 * math.cos((currentBeat/4) * math.pi) + 96, i)
 		end
@@ -70,23 +64,16 @@ function update (elapsed)
 end
 -- fixed the step they start at BECAUSE CYBER'S A IDIOT AND OFFSET ALL OF THEM
 function stepHit(step)
-	if (curStep >= 64) and (curStep <= 96) then
-		if strumy < 532 then
-			strumy = strumy + 20
-		end
-        for i=0,7 do
-			setActorY(strumy, i)
-        end
-	end
     if curStep == 129 then
-		daNoteMoveH = true
         funnywindowsmall = true
-    end
-    if (curStep >= 258) and (curStep <= 290) then
-		if strumy > 50 then
-			strumy = strumy - 20
+		for i=0,3 do
+			tweenPosXAngle(i, _G['defaultStrum'..i..'X'] + 1250,getActorAngle(i)+359, 1, 'setDefault')
 		end
-		daNoteMoveH = false
+		for i =4,7 do 
+			tweenPosXAngle(i, _G['defaultStrum'..i..'X'] - 275,getActorAngle(i), 1, 'setDefault')
+		end
+    end
+    if (curStep == 258) then
 		daNoteMoveH2 = true
         funnywindowsmall = false
         funnywindow = true

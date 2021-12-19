@@ -20,6 +20,8 @@ class GameOverSubstate extends MusicBeatSubstate
 		var daBf:String = '';
 		switch (PlayState.SONG.player1)
 		{
+			case 'bf-run':
+				daBf = 'bfbloodshed-death';
 			case 'bf-b':
 				daBf = 'bf-b';
 			case 'bf-pixel':

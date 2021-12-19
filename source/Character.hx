@@ -371,6 +371,37 @@ class Character extends FlxSprite
 
 				flipX = true;
 				flipX = true;
+			case 'bfbloodshed-death':
+				var tex = Paths.getSparrowAtlas('updateron/characters/bfbloodshed-death', 'shared');
+				frames = tex;
+
+				trace(tex.frames.length);
+
+				animation.addByPrefix('idle', "BF idle dance", 24, false);
+				animation.addByPrefix('singUP', "BF dies", 24, false);
+				animation.addByPrefix('singLEFT', "BF dies", 24, false);
+				animation.addByPrefix('singRIGHT', "BF dies", 24, false);
+				animation.addByPrefix('singDOWN', "BF dies", 24, false);
+				animation.addByPrefix('singUPmiss', "BF dies", 24, false);
+				animation.addByPrefix('singLEFTmiss', "BF dies", 24, false);
+				animation.addByPrefix('singRIGHTmiss', "BF dies", 24, false);
+				animation.addByPrefix('singDOWNmiss', "BF dies", 24, false);
+				animation.addByPrefix('hey', "BF dies", 24, false);
+
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+
+				animation.addByPrefix('scared', 'BF idle shaking', 24);
+
+				addOffset('idle', -5);
+				addOffset('firstDeath', 317, 76);
+				addOffset('deathLoop', 235, 71);
+				addOffset('deathConfirm', 232, 69);
+				playAnim('idle');
+
+				flipX = true;
+				flipX = true;
 			case 'douyhe':
 				tex = Paths.getSparrowAtlas('memes/dayne');
 				frames = tex;
@@ -547,10 +578,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'right normal', 24, false);
 				animation.addByPrefix('singRIGHT', 'left normal', 24, false);
 				addOffset('idle');
-				addOffset("singUP",70,70);
-				addOffset("singLEFT",25,-20);
+				addOffset("singUP",130,75);
+				addOffset("singLEFT",180,0);
 				addOffset("singRIGHT",30,-7);
-				addOffset("singDOWN",-25,-30);
+				addOffset("singDOWN",60,-61);
 			case 'hellron-pov':
 				tex = Paths.getSparrowAtlas('updateron/characters/hellron-pov');
 				frames = tex;

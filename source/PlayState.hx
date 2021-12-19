@@ -367,6 +367,9 @@ class PlayState extends MusicBeatState
 
 		trace('INFORMATION ABOUT WHAT U PLAYIN WIT:\nFRAMES: ' + PlayStateChangeables.safeFrames + '\nZONE: ' + Conductor.safeZoneOffset + '\nTS: ' + Conductor.timeScale + '\nBotPlay : ' + PlayStateChangeables.botPlay);
 
+		FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
+		camHUD.setFilters([ShadersHandler.chromaticAberration]);
+
 		//dialogue shit
 		switch (songLowercase)
 		{
@@ -1677,14 +1680,17 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		var strtspd = Conductor.crochet / 1000;
+		if (songLowercase == 'bloodshed-two')
+			strtspd /= 5;
+
 		talking = false;
 		startedCountdown = true;
 		Conductor.songPosition = 0;
-		Conductor.songPosition -= Conductor.crochet * 5;
+		Conductor.songPosition -= strtspd * 1000 * 5;
 
 		var swagCounter:Int = 0;
-
-		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
+		startTimer = new FlxTimer().start(strtspd, function(tmr:FlxTimer)
 		{
 			dad.dance();
 			gf.dance();
@@ -1730,7 +1736,7 @@ class PlayState extends MusicBeatState
 
 					ready.screenCenter();
 					add(ready);
-					FlxTween.tween(ready, {y: ready.y += 100, alpha: 0}, Conductor.crochet / 1000, {
+					FlxTween.tween(ready, {y: ready.y += 100, alpha: 0}, strtspd, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -1747,7 +1753,7 @@ class PlayState extends MusicBeatState
 
 					set.screenCenter();
 					add(set);
-					FlxTween.tween(set, {y: set.y += 100, alpha: 0}, Conductor.crochet / 1000, {
+					FlxTween.tween(set, {y: set.y += 100, alpha: 0}, strtspd, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -1766,7 +1772,7 @@ class PlayState extends MusicBeatState
 
 					go.screenCenter();
 					add(go);
-					FlxTween.tween(go, {y: go.y += 100, alpha: 0}, Conductor.crochet / 1000, {
+					FlxTween.tween(go, {y: go.y += 100, alpha: 0}, strtspd, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -2930,7 +2936,8 @@ class PlayState extends MusicBeatState
 
 			vocals.stop();
 			FlxG.sound.music.stop();
-
+			
+			defaultCamZoom = 1;
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
 			#if windows
@@ -4452,13 +4459,10 @@ class PlayState extends MusicBeatState
 			iconP1.alpha = (health-0.25)/2+0.2;
 			switch (curStep) {
 				case 0:
-					PlayStateChangeables.useDownscroll = true;
+					PlayStateChangeables.useDownscroll = false;
 					strumLine.y = 50;
-				case 72:
-					PlayStateChangeables.useDownscroll = true;
 				case 259:
 					defaultCamZoom = 0.95;
-					PlayStateChangeables.useDownscroll = false;
 				case 341:
 					defaultCamZoom = 1.05;
 				case 356:
@@ -4665,6 +4669,44 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(blac, {alpha: 0}, 1, {ease: FlxEase.quadIn});
 				blackeffect.alpha = 1;
 			}
+			if ((curStep == 784) || (curStep == 2367))
+			{
+				firebg.alpha = 1;
+				FlxG.camera.setFilters([ShadersHandler.GrayScale]);
+				camHUD.setFilters([ShadersHandler.GrayScale]);
+				Estatic2.alpha = 0;
+				var xx = dad.x;
+				var yy = dad.y;
+				dad.alpha = 0;
+				remove(dad);
+				dad = new Character(xx, yy, 'hellron');
+				add(dad);				
+				blackeffect.alpha = 0;
+				var blac:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+				blac.scrollFactor.set();
+				add(blac);
+				defaultCamZoom = 1.05;
+				FlxTween.tween(blac, {alpha: 0}, 1, {ease: FlxEase.quadIn});
+			}
+			if ((curStep == 911) || (curStep == 2623))
+			{
+				firebg.alpha = 0;
+				FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
+				camHUD.setFilters([ShadersHandler.chromaticAberration]);
+				Estatic2.alpha = 0.3;
+				var xx = dad.x;
+				var yy = dad.y;
+				dad.alpha = 0;
+				remove(dad);
+				dad = new Character(xx, yy, 'devilron');
+				add(dad);				
+				blackeffect.alpha = 1;
+				var blac:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+				blac.scrollFactor.set();
+				add(blac);
+				defaultCamZoom = 0.9;
+				FlxTween.tween(blac, {alpha: 0}, 1, {ease: FlxEase.quadIn});
+			}
 		}
 
 		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-b') || (curSong == 'File-Manipulation') || (curSong == 'File Manipulation-b') || (curSong == 'not-bloodshed')) {
@@ -4762,10 +4804,10 @@ class PlayState extends MusicBeatState
 				
 			if ((((curStep >= 816) && (curStep <= 848)) || ((curStep >= 880) && (curStep <= 912))) && (curStep % 2 == 0))
 			{
-				defaultCamZoom += 0.05;
+				defaultCamZoom += 0.2;
 			}
 			if ((((curStep > 848) && (curStep < 880)) || ((curStep > 912) && (curStep < 1080))) && (defaultCamZoom > 0.9))
-				defaultCamZoom -= 0.0125;
+				defaultCamZoom -= 0.025;
 			
 		}
 	
@@ -4802,10 +4844,18 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		
-		FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
-		camHUD.setFilters([ShadersHandler.chromaticAberration]);
 
+		if (curBeat % (gfSpeed * 2) == 0) {
+			iconP1.scale.set(1.3,0.7);
+			iconP2.scale.set(1.3,0.7);
+	
+			FlxTween.tween(iconP1,{'scale.x':1,'scale.y':1},Conductor.crochet / 1000 * (gfSpeed * 2),{ease: FlxEase.backOut});
+			FlxTween.tween(iconP2,{'scale.x':1,'scale.y':1},Conductor.crochet / 1000 * (gfSpeed * 2),{ease: FlxEase.backOut});
+
+			iconP1.updateHitbox();
+			iconP2.updateHitbox();
+		}
+		
 		if (generatedMusic)
 		{
 			notes.sort(FlxSort.byY, (PlayStateChangeables.useDownscroll ? FlxSort.ASCENDING : FlxSort.DESCENDING));
@@ -4864,13 +4914,14 @@ class PlayState extends MusicBeatState
 			}
 	
 		}
-
-		iconP1.scale.set(1.5, 0.5);
-		iconP2.scale.set(1.5, 0.5);
-		FlxTween.tween(iconP1, {"scale.x": 1}, 1.5, {ease: FlxEase.quadInOut});
-		FlxTween.tween(iconP1, {"scale.y": 1}, 0.5, {ease: FlxEase.quadInOut});
-		FlxTween.tween(iconP2, {"scale.x": 1}, 1.5, {ease: FlxEase.quadInOut});
-		FlxTween.tween(iconP2, {"scale.y": 1}, 0.5, {ease: FlxEase.quadInOut});
+	
+		// this code is terrible
+		// iconP1.scale.set(1.5, 0.5);
+		// iconP2.scale.set(1.5, 0.5);
+		// FlxTween.tween(iconP1, {"scale.x": 1}, 1.5, {ease: FlxEase.quadInOut});
+		// FlxTween.tween(iconP1, {"scale.y": 1}, 0.5, {ease: FlxEase.quadInOut});
+		// FlxTween.tween(iconP2, {"scale.x": 1}, 1.5, {ease: FlxEase.quadInOut});
+		// FlxTween.tween(iconP2, {"scale.y": 1}, 0.5, {ease: FlxEase.quadInOut});
 		
 		if (curBeat % gfSpeed == 0)
 		{

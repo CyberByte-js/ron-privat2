@@ -22,6 +22,7 @@ class HealthIcon extends FlxSprite
 		animation.add('bf-inv', [0, 1], 0, false, isPlayer);
 		animation.add('bf-b', [20, 21], 0, false, isPlayer);
 		animation.add('bf-run', [30, 31], 0, false, isPlayer);
+		animation.add('bfbloodshed-death', [30, 31], 0, false, isPlayer);
 		animation.add('bf-d', [40, 41], 0, false, isPlayer);
 		animation.add('gf', [10], 0, false, isPlayer);
 		animation.add('gf-d', [10], 0, false, isPlayer);
