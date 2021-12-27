@@ -465,6 +465,21 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -89, -51);
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
+			case 'ronPower':
+				tex = Paths.getSparrowAtlas('updateron/characters/ronPower');
+				frames = tex;
+				animation.addByPrefix('idle', "Idle", 24);
+				animation.addByPrefix('singUP', 'Sing Up', 24, false);
+				animation.addByPrefix('singDOWN', 'Sing Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Sing Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Sing Right', 24, false);
+				animation.addByPrefix('cheer', 'Ugh', 24, false);
+				addOffset('idle');
+				addOffset("singUP", 42, 38);
+				addOffset("singLEFT", 98, -27);
+				addOffset("singRIGHT", -89, -51);
+				addOffset("singDOWN", 40, -120);
+				addOffset("Ugh", 71, -40);
 			case 'demonron':
 				tex = Paths.getSparrowAtlas('updateron/characters/demonron');
 				frames = tex;
@@ -693,20 +708,18 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
 			case 'ron-usb':
-				tex = Paths.getSparrowAtlas('ron/characters/ron-usb');
+				tex = Paths.getSparrowAtlas('updateron/characters/ron-usb');
 				frames = tex;
-				animation.addByPrefix('idle', "Idle", 24);
-				animation.addByPrefix('singUP', 'Sing Up', 24, false);
-				animation.addByPrefix('singDOWN', 'Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Sing Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Sing Right', 24, false);
-				animation.addByPrefix('cheer', 'Ugh', 24, false);
+				animation.addByPrefix('idle', "idle", 24);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
 				addOffset('idle');
-				addOffset("singUP", 42, 38);
-				addOffset("singLEFT", 98, -27);
-				addOffset("singRIGHT", -89, -51);
-				addOffset("singDOWN", 40, -120);
-				addOffset("Ugh", 71, -40);
+				addOffset("singUP", 130, 188);
+				addOffset("singLEFT", 160, -85);
+				addOffset("singRIGHT", 0, -126);
+				addOffset("singDOWN", 55, -143);
 			case 'ron-usb-b':
 				tex = Paths.getSparrowAtlas('ron/characters/Tankmantrojan');
 				frames = tex;

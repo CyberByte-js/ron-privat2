@@ -128,6 +128,7 @@ class Caching extends MusicBeatState
 		var bgs_ron = [];
 		var bgs_update = [];
 
+		FlxGraphic.defaultPersist = true;
         trace("caching characters...");
 
         for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
@@ -174,6 +175,11 @@ class Caching extends MusicBeatState
         for (i in characters_global)
         {
             var replaced = i.replace(".png","");
+			var loader:FlxSprite = new FlxSprite().loadGraphic(i);
+			loader.updateHitbox();
+			loader.scale.set(0.001,0.001);
+			loader.screenCenter();
+			add(loader);
             FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
@@ -183,6 +189,11 @@ class Caching extends MusicBeatState
         for (i in characters_ron)
         {
             var replaced = i.replace(".png","");
+			var loader:FlxSprite = new FlxSprite().loadGraphic(i);
+			loader.updateHitbox();
+			loader.scale.set(0.001,0.001);
+			loader.screenCenter();
+			add(loader);
             FlxG.bitmap.add(Paths.image("ron/characters/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
@@ -192,6 +203,11 @@ class Caching extends MusicBeatState
         for (i in characters_update)
         {
             var replaced = i.replace(".png","");
+			var loader:FlxSprite = new FlxSprite().loadGraphic(i);
+			loader.updateHitbox();
+			loader.scale.set(0.001,0.001);
+			loader.screenCenter();
+			add(loader);
             FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
@@ -201,6 +217,11 @@ class Caching extends MusicBeatState
         for (i in bgs_ron)
         {
             var replaced = i.replace(".png","");
+			var loader:FlxSprite = new FlxSprite().loadGraphic(i);
+			loader.updateHitbox();
+			loader.scale.set(0.001,0.001);
+			loader.screenCenter();
+			add(loader);
             FlxG.bitmap.add(Paths.image("ron/bg/" + replaced,"shared"), true, Std.string(i));
             trace("cached " + replaced);
             done++;
@@ -216,7 +237,6 @@ class Caching extends MusicBeatState
 			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
         }
 		
-		FlxGraphic.defaultPersist = true;
         trace("Finished caching...");
 		text.text = toBeDone + "/" + toBeDone;
 		text2.text = "DONE! (in a cool way)";

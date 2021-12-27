@@ -42,12 +42,13 @@ class HealthIcon extends FlxSprite
 		animation.add('ron-mad', [6, 7], 0, false, isPlayer);		
 		animation.add('hellron', [8, 9], 0, false, isPlayer);	
 		animation.add('hellron-crazy', [8, 9], 0, false, isPlayer);		
-		animation.add('demonron', [42, 43], 0, false, isPlayer);				
+		animation.add('demonron', [44, 45], 0, false, isPlayer);				
 		
 		// week 2
-		animation.add('ron-usb', [12, 13], 0, false, isPlayer);	
-		animation.add('ateloron', [14, 16], 0, false, isPlayer);	
-		animation.add('factorytankman', [17, 19], 0, false, isPlayer);
+		animation.add('ronPower', [12, 13], 0, false, isPlayer);
+		animation.add('ron-usb', [16, 17], 0, false, isPlayer);	
+		animation.add('ateloron', [18, 19], 0, false, isPlayer);	
+		animation.add('factorytankman', [46, 47], 0, false, isPlayer);
 		
 		// week 1 b
 		animation.add('ronb', [22, 23], 0, false, isPlayer);
@@ -57,17 +58,19 @@ class HealthIcon extends FlxSprite
 		animation.add('hellron-2', [28, 29], 0, false, isPlayer);
 		
 		// week 2 b
-		animation.add('ron-usb-b', [32, 33], 0, false, isPlayer);
-		animation.add('tankmantrojan-2', [32, 33], 0, false, isPlayer);
-		animation.add('ateloron-b', [34, 36], 0, false, isPlayer);	
-		animation.add('factorytankman-b', [37, 39], 0, false, isPlayer);
-		animation.add('factorytankman-2', [37, 39], 0, false, isPlayer);
+		animation.add('ronPower-b', [32, 33], 0, false, isPlayer);
+		animation.add('ron-usb-b', [36, 37], 0, false, isPlayer);
+		animation.add('tankmantrojan-2', [36, 37], 0, false, isPlayer);
+		animation.add('ateloron-b', [38, 39], 0, false, isPlayer);	
+		animation.add('factorytankman-b', [46, 47], 0, false, isPlayer);
+		animation.add('factorytankman-2', [46, 47], 0, false, isPlayer);
+		// eh factory reset bsides doesnt even exist anymore so
 		
 		// bonus songs for the future
-		animation.add('bijuuron', [44, 45], 0, false, isPlayer);
+		animation.add('bijuuron', [42, 43], 0, false, isPlayer);
 		animation.add('hellron-pov', [54, 55], 0, false, isPlayer);	
 		animation.add('ronslaught-pov', [54, 55], 0, false, isPlayer);	
-		animation.add('devilron', [46, 47], 0, false, isPlayer);
+		animation.add('devilron', [44, 45], 0, false, isPlayer);
 		animation.add('douyhe', [48, 49], 0, false, isPlayer);
 		animation.add('helldouyhe', [52, 53], 0, false, isPlayer);
 		animation.add('tankman', [56, 57], 0, false, isPlayer);

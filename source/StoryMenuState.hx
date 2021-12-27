@@ -453,6 +453,12 @@ class StoryMenuState extends MusicBeatState
 					video.playMP4(Paths.video('ron'), new PlayState(), false, false, false);
 				});
 			}
+			if (curWeek == 2) {
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					video.playMP4(Paths.video('trojanvirus'), new PlayState(), false, false, false);
+				});
+			}
 			else
 			{
 				new FlxTimer().start(1, function(tmr:FlxTimer)
