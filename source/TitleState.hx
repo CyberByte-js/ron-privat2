@@ -1,9 +1,9 @@
 package;
 
-#if sys
+/* #if sys
 //import smTools.SMFile;
 #end
-import sys.io.Process;
+import sys.io.Process; */
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
