@@ -20,7 +20,9 @@ import flixel.graphics.FlxGraphic;
 import openfl.utils.AssetManifest;
 import openfl.utils.AssetLibrary;
 import flixel.system.FlxAssets;
+#if desktop
 import sys.io.Process;
+#end
 import lime.app.Application;
 import lime.media.AudioContext;
 import lime.media.AudioManager;
@@ -78,7 +80,9 @@ using StringTools;
 class PlayState extends MusicBeatState
 {
 
+	#if desktop
 	var user = Sys.getEnv('USERNAME');
+	#end
 	
 	public static var instance:PlayState = null;
 
@@ -391,7 +395,8 @@ class PlayState extends MusicBeatState
 			case 'bloodshed-old':
 						dialogue = CoolUtil.coolTextFile(Paths.txt('bloodshed-old/diamane'));
 			case 'trojan-virus':
-				{					
+				{
+					#if desktop		
 					dialogue = [
 						":ronPortraitPower:Yooooooo Whats up Bitch",
 						":bf:what why tf are you here again",
@@ -408,6 +413,24 @@ class PlayState extends MusicBeatState
 						":ronPortraitPower:anyway I pull up Motherfucker!!! Get ready for your world to be Rocked",
 						":bf:alr lmao"
 						];
+					#else
+					dialogue = [
+						":ronPortraitPower:Yooooooo Whats up Bitch",
+						":bf:what why tf are you here again",
+						":ronPortraitPower:cuz you posted tha video on the internet",
+						":ronPortraitPower:i hate u for that and i want you to Spontaneously Combust",
+						":bf:oh ok",
+						":bf:btw why tf are you glowing",
+						":ronPortraitPower:so basicaly i went to buy free power and I got it!!!",
+						":bf:guh?? wt",
+						":ronPortraitPower:yea someone called Admin gave it to me",
+						":bf:huh",
+						":bf:who",
+						":ronPortraitPower:idk but theyre pretty based",
+						":ronPortraitPower:anyway I pull up Motherfucker!!! Get ready for your world to be Rocked",
+						":bf:alr lmao"
+						];
+					#end
 				}
 			case 'file-manipulation':
 				{
@@ -1786,9 +1809,9 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(1, true);
 
 
-		#if windows
 		// pre lowercasing the song name (startCountdown)
 		var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
+		#if windows
 		switch (songLowercase) {
 			case 'dad-battle': songLowercase = 'dadbattle';
 			case 'philly-nice': songLowercase = 'philly';
@@ -2687,7 +2710,9 @@ class PlayState extends MusicBeatState
 		{
 			if (SONG.song == 'Bloodshed')
 			{
+				#if desktop
 				Sys.exit(0);
+				#end
 			}
 			if (useVideo)
 				{
