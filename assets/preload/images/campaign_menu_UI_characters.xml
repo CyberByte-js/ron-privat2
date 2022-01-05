@@ -182,6 +182,9 @@
 	<SubTexture name="ronweek2 idle0005" x="3900" y="3026" width="349" height="436" frameX="-9" frameY="0" frameWidth="371" frameHeight="436"/>
 	<SubTexture name="ronweek2 idle0006" x="3900" y="3026" width="349" height="436" frameX="-9" frameY="0" frameWidth="371" frameHeight="436"/>
 	<SubTexture name="douyhe0000" x="6775" y="3049" width="300" height="377"/>
+	<SubTexture name="bambi0000" x="7204" y="3091" width="344" height="336"/>
+	<SubTexture name="bambi0001" x="7204" y="3597" width="344" height="336"/>
+	<SubTexture name="cook ron0000" x="7626" y="2974" width="391" height="475"/>
 	<SubTexture name="spooky dance idle BLACK LINES0000" x="4249" y="3026" width="381" height="549" frameX="-50" frameY="0" frameWidth="492" frameHeight="549"/>
 	<SubTexture name="spooky dance idle BLACK LINES0001" x="4249" y="3026" width="381" height="549" frameX="-50" frameY="0" frameWidth="492" frameHeight="549"/>
 	<SubTexture name="spooky dance idle BLACK LINES0002" x="4630" y="3026" width="379" height="541" frameX="-55" frameY="-8" frameWidth="492" frameHeight="549"/>

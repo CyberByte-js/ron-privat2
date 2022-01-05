@@ -27,17 +27,21 @@ class StoryMenuState extends MusicBeatState
 		['Tutorial'],
 		['Ron', 'Wasted', 'Ayo', 'Bloodshed'],
 		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset'],
-		['Pretty-Wacky','He-Hates-Me']
+		['Raw-Meaty-Meats', 'Assassination', 'Steak'],
+		['Slammed', 'Meme-Machine', 'Frosting-Over'],
+		['Pretty-Wacky','He-Hates-Me', 'Atypical']
 	];
 
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, false];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, false];
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
 		['ron', 'bf', 'gf'],
 		['ron2', 'bf', 'gf'],
+		['cookron', 'bf', 'gf'],
+		['bambi', 'ronMain', ''],
 		['douyhe', 'bf', 'gf']
 	];
 
@@ -45,6 +49,8 @@ class StoryMenuState extends MusicBeatState
 		"Tutorial but less cooler B(",
 		"VS COOL GUY B)",
 		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron",
+		"THE MEAT IS RAW BOYFRIEND, THE MEAT IS RAW *SLAP*",
+		"bm mabmabi hory sheet bambir IRL!!!!!!!!!!!!!!!!!!!!!!!!!!!! *vine tuhd*",
 		"thy tongue deviseth mischiefs"
 	];
 
@@ -78,9 +84,9 @@ class StoryMenuState extends MusicBeatState
 		#end
 		
 		if (FlxG.save.data.douyhelikescheese)
-			weekUnlocked = [true, true, true, true];
+			weekUnlocked = [true, true, true, true, true, true];
 		else
-			weekUnlocked = [true, true, true, false];
+			weekUnlocked = [true, true, true, true, true, false];
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
@@ -215,7 +221,7 @@ class StoryMenuState extends MusicBeatState
 	}
 
 	override function update(elapsed:Float)
-	{
+	{	
 		// scoreText.setFormat('VCR OSD Mono', 32);
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.5));
 
@@ -313,9 +319,9 @@ class StoryMenuState extends MusicBeatState
 					FlxG.save.data.douyhelikescheese = !FlxG.save.data.douyhelikescheese;
 					FlxG.save.flush();
 					if (FlxG.save.data.douyhelikescheese)
-						weekUnlocked = [true, true, true, true];
+						weekUnlocked = [true, true, true, true, true, true];
 					else
-						weekUnlocked = [true, true, true, false];
+						weekUnlocked = [true, true, true, true, true, false];
 					
 					secretPng.alpha = 1;
 					FlxTween.tween(secretPng, {alpha: 0}, 1);

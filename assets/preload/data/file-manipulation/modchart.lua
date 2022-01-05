@@ -22,4 +22,13 @@ function stepHit(step)
     if curStep >= 538 then
         funny = true
     end
+	if curStep >= 816 and curStep <= 848 and curStep % 2 == 0 then
+		cameraZoom = cameraZoom + 0.025
+	end
+	if curStep >= 880 and curStep <= 912 and curStep % 2 == 0 then
+		cameraZoom = cameraZoom + 0.025	
+	end
+	if curStep == 913 then
+		cameraZoom = 0.9
+	end
 end

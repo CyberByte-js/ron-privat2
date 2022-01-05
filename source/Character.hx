@@ -675,10 +675,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'left', 24, false);
 				animation.addByPrefix('singRIGHT', 'right', 24, false);
 				addOffset('idle');
-				addOffset("singUP", -110, 53);
+				addOffset("singUP", -110, 91);
 				addOffset("singLEFT");
 				addOffset("singRIGHT", -83, -46);
-				addOffset("singDOWN", -70, 20);
+				addOffset("singDOWN", -70, 30);
 			case 'ateloron-b':
 				tex = Paths.getSparrowAtlas('updateron/characters/bteloron');
 				frames = tex;

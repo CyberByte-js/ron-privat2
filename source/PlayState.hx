@@ -804,7 +804,7 @@ class PlayState extends MusicBeatState
 				add(bg2);
 				Estatic2 = new FlxSprite();
 				Estatic2.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
-				Estatic2.scale.set(4,4);
+				Estatic2.scale.set(2,2);
 				Estatic2.animation.addByPrefix('idle', 'static instance 1', 24, true);
 				Estatic2.animation.play('idle');
 				Estatic2.scrollFactor.set();
@@ -930,7 +930,7 @@ class PlayState extends MusicBeatState
 				Estatic.alpha = 0;
 				Estatic2 = new FlxSprite();
 				Estatic2.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
-				Estatic2.scale.set(4,4);
+				Estatic2.scale.set(2,2);
 				Estatic2.animation.addByPrefix('idle', 'static instance 1', 24, true);
 				Estatic2.animation.play('idle');
 				Estatic2.scrollFactor.set();
@@ -1053,7 +1053,7 @@ class PlayState extends MusicBeatState
 					add(error);
 					Estatic = new FlxSprite();
 					Estatic.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
-					Estatic.scale.set(4,4);
+					Estatic.scale.set(2,2);
 					Estatic.animation.addByPrefix('idle', 'static instance 1', 24, true);
 					Estatic.animation.play('idle');
 					Estatic.scrollFactor.set();
@@ -4951,14 +4951,6 @@ class PlayState extends MusicBeatState
 			
 			if ((curStep >= 538) && (Estatic2.alpha < 0.5))
 				Estatic2.alpha += 0.02;
-				
-			if ((((curStep >= 816) && (curStep <= 848)) || ((curStep >= 880) && (curStep <= 912))) && (curStep % 2 == 0))
-			{
-				defaultCamZoom += 0.025;
-			}
-			if ((((curStep > 848) && (curStep < 880)) || ((curStep > 912) && (curStep < 1080))) && (defaultCamZoom > 0.9))
-				defaultCamZoom -= 0.075;
-			
 		}
 	
 		super.stepHit();
