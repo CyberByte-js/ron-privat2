@@ -28,7 +28,7 @@ class StoryMenuState extends MusicBeatState
 		['Ron', 'Wasted', 'Ayo', 'Bloodshed'],
 		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset'],
 		['Raw-Meaty-Meats', 'Assassination', 'Steak'],
-		['Slammed', 'Meme-Machine', 'Frosting-Over'],
+		['Holy-Shit-Dave-Fnf', 'Slammed', 'Meme-Machine', 'Frosting-Over'],
 		['Pretty-Wacky','He-Hates-Me', 'Atypical']
 	];
 
