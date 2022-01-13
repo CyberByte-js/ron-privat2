@@ -43,6 +43,8 @@ class MainMenuState extends MusicBeatState
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
+	var code:String = "";
+	var therock:FlxSprite;
 	public static var firstStart:Bool = true;
 
 	public static var nightly:String = " (ron eidtion)";
@@ -104,6 +106,11 @@ class MainMenuState extends MusicBeatState
 		add(car);
 		car.scrollFactor.set();
 		car.animation.play('car instance 1');
+
+		therock = new FlxSprite().loadGraphic(Paths.image('therock'));
+		therock.screenCenter();
+		therock.alpha = 0;
+		add(therock);
 		
 		if(FlxG.save.data.antialiasing)
 			{
@@ -178,6 +185,37 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		if (FlxG.keys.justPressed.ANY)
+		{
+			if (FlxG.keys.justPressed.B)
+			{
+				code += 'b';
+			}
+			else if (FlxG.keys.justPressed.R)
+			{
+				code += 'r';
+			}
+			else if (FlxG.keys.justPressed.O)
+			{
+				code += 'o';
+			}
+			
+			if (code.length >= 3)
+			{
+				if (code == 'bro')
+				{
+					therock.alpha = 1;
+					FlxTween.tween(therock, {alpha: 0}, 1);
+					FlxG.sound.play(Paths.sound('hi'));
+				}
+				else
+				{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}
+				code = '';
+			}
+		}
+				
 		cloud.x += 1;
 		city.x += 2;
 		if (FlxG.sound.music.volume < 0.8)
