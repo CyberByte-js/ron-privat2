@@ -1025,6 +1025,34 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.8;
 					curStage = 'win';
+					
+					var images = [];
+					var xml = [];
+					trace("caching images...");
+		
+					for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/characters")))
+					{
+						if (!i.endsWith(".png"))
+							continue;
+						images.push(i);
+		
+						if (!i.endsWith(".xml"))
+							continue;
+						xml.push(i);
+					}
+					for (i in images)
+					{
+						var replaced = i.replace(".png","");
+						FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"));
+						trace("cached " + replaced);
+					}
+				
+				for (i in xml)
+					{
+						var replaced = i.replace(".xml","");
+						FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"));
+						trace("cached " + replaced);
+					}
 					var bg:FlxSprite = new FlxSprite();
 					bg.frames = Paths.getSparrowAtlas('updateron/bg/trojan_bg');
 					bg.scale.set(4,4);
