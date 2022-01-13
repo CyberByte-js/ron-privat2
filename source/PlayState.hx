@@ -1030,7 +1030,7 @@ class PlayState extends MusicBeatState
 					var xml = [];
 					trace("caching images...");
 		
-					for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/characters")))
+					for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/characters/")))
 					{
 						if (!i.endsWith(".png"))
 							continue;
@@ -4974,25 +4974,22 @@ class PlayState extends MusicBeatState
 					ronAnimation.y = dad.y+60;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
-				case 510:
-					defaultCamZoom = 0.85;
-				case 525:
-					defaultCamZoom = 0.88;
-				case 530:
-					defaultCamZoom = 0.90;
+				case 513:
+					FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
+					trace("workk");
 				case 532:
-					defaultCamZoom = 0.92;
-				case 534:
-					defaultCamZoom = 0.94;
+					FlxTween.cancelTweensOf(FlxG.camera);
 				case 535:
-					defaultCamZoom = 0.96;
-				case 536:
-					defaultCamZoom = 0.98;
-				case 537:
+					FlxTween.tween(FlxG.camera, {zoom: 0.8}, 2);
+					trace("also work");
+				case 545:
+					FlxTween.cancelTweensOf(FlxG.camera);
+				case 560:
 					defaultCamZoom = 1;
+				case 564:
+					defaultCamZoom = 0.88;
 				case 538:
 					PlayStateChangeables.scrollSpeed = 3.5;
-					defaultCamZoom = 0.9;
 					var xx = dad.x-20;
 					var yy = dad.y+60;
 					remove(dad);
