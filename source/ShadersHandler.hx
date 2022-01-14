@@ -6,6 +6,7 @@ class ShadersHandler
 {
 	public static var chromaticAberration:ShaderFilter = new ShaderFilter(new ChromaticAberration());
 	public static var GrayScale:ShaderFilter = new ShaderFilter(new GrayScale());
+	public static var MosaicShader:ShaderFilter = new ShaderFilter(new MosaicShader());
 
 	public static function setChrome(chromeOffset:Float):Void
 	{

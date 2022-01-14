@@ -3271,6 +3271,12 @@ class PlayState extends MusicBeatState
 									case 0:
 										dad.playAnim('singLEFT' + altAnim, true);
 								}
+								
+							if ((SONG.song.toLowerCase() == 'file-manipulation') && (((curStep >= 816) && (curStep <= 848)) || ((curStep >= 880) && (curStep <= 912))))
+							{
+								FlxG.camera.zoom += 0.0375;
+								defaultCamZoom += 0.0375;
+							}				
 						}
 						else
 						{
@@ -4461,6 +4467,12 @@ class PlayState extends MusicBeatState
 					case 0:
 						boyfriend.playAnim('singLEFT', true);
 				}
+				
+				if ((SONG.song.toLowerCase() == 'file-manipulation') && (((curStep >= 816) && (curStep <= 848)) || ((curStep >= 880) && (curStep <= 912))))
+				{
+					FlxG.camera.zoom += 0.0375;
+					defaultCamZoom += 0.0375;
+				}	
 			}
 					
 		
@@ -4997,8 +5009,22 @@ class PlayState extends MusicBeatState
 					add(dad);
 					iconP2.animation.play('ateloron');
 					ronAnimation.visible = false;
+				case 556:
+					defaultCamZoom = 0.2;
+					FlxTween.tween(FlxG.camera, {angle: 180}, 0.1, {ease: FlxEase.expoOut,});
+				case 562:
+					defaultCamZoom = 0.9;
+					FlxG.camera.angle = 0;
+				case 912:
+					defaultCamZoom = 0.9;
+				case 1046:
+					FlxTween.tween(camGame, {alpha: 0}, 0.25, {ease: FlxEase.expoOut,});
+				case 1056:
+					camGame.alpha = 1;
+					FlxG.camera.setFilters([ShadersHandler.MosaicShader]);
+					camHUD.setFilters([ShadersHandler.MosaicShader]);
 			}
-			
+	
 			if ((curStep >= 538) && (Estatic2.alpha < 0.5))
 				Estatic2.alpha += 0.02;
 		}
