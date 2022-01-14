@@ -3308,6 +3308,13 @@ class PlayState extends MusicBeatState
 								else
 									health = 0.02;
 							}
+						if (dad.curCharacter == 'ron-usb')
+							{
+								if (health > 0.03)
+									health -= 0.014;
+								else
+									health = 0.02;
+							}
 						
 						if (FlxG.save.data.cpuStrums)
 						{
@@ -4986,6 +4993,8 @@ class PlayState extends MusicBeatState
 					ronAnimation.y = dad.y+55;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
+				case 511:
+					camHUD.visible = false;
 				case 513:
 					FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
 					trace("workk");
@@ -5009,6 +5018,8 @@ class PlayState extends MusicBeatState
 					add(dad);
 					iconP2.animation.play('ateloron');
 					ronAnimation.visible = false;
+				case 544:
+					camHUD.visible = true;
 				case 556:
 					defaultCamZoom = 0.2;
 					FlxTween.tween(FlxG.camera, {angle: 180}, 0.1, {ease: FlxEase.expoOut,});
