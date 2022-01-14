@@ -3589,6 +3589,10 @@ class PlayState extends MusicBeatState
 					} else {
 						LoadingState.loadAndSwitchState(new PlayState());
 					}
+					if (curSong == 'trojan-virus')
+						if (!FlxG.save.data.songArray.contains('file-manipulation') && !FlxG.save.data.botplay)
+							FlxG.save.data.songArray.push('file-manipulation');
+					
 				}
 			}
 			else
@@ -3616,7 +3620,6 @@ class PlayState extends MusicBeatState
 			Achievements.whatTheActualFuck = true;
 		}
 	}
-
 
 	var endingSong:Bool = false;
 
@@ -4969,6 +4972,8 @@ class PlayState extends MusicBeatState
 					defaultCamZoom += 0.2;
 				case 640:
 					defaultCamZoom -= 0.2;
+				case 770:
+					camHUD.visible = false;
 				case 768:
 					dad.visible = false;
 					ronAnimation.x = dad.x-360;
@@ -4977,6 +4982,8 @@ class PlayState extends MusicBeatState
 					ronAnimation.animation.play('idle', true);
 					defaultCamZoom = 1;
 					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.4, {ease: FlxEase.expoOut,});
+				case 870:
+					camHUD.visible = true;
 			}
 			if ((curStep >= 384) && (curStep <= 640))
 				FlxG.camera.shake(0.00625, 0.1);
@@ -5043,6 +5050,14 @@ class PlayState extends MusicBeatState
 			if ((curStep >= 538) && (Estatic2.alpha < 0.5))
 				Estatic2.alpha += 0.02;
 		}
+		if (curSong.toLowerCase() == 'trojan-virus-b')
+			{
+				switch(curStep)
+				{
+					case 288:
+						FlxG.camera.shake(0.11, 0.11);
+				}
+			}
 	
 		super.stepHit();
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
