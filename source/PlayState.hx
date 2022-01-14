@@ -4982,8 +4982,8 @@ class PlayState extends MusicBeatState
 			switch (curStep) {
 				case 460:
 					dad.visible = false;
-					ronAnimation.x = dad.x-20;
-					ronAnimation.y = dad.y+60;
+					ronAnimation.x = dad.x-140;
+					ronAnimation.y = dad.y+55;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
 				case 513:
@@ -4998,7 +4998,7 @@ class PlayState extends MusicBeatState
 					FlxTween.cancelTweensOf(FlxG.camera);
 				case 560:
 					defaultCamZoom = 1;
-				case 564:
+				case 563:
 					defaultCamZoom = 0.88;
 				case 538:
 					PlayStateChangeables.scrollSpeed = 3.5;
