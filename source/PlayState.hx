@@ -3308,6 +3308,13 @@ class PlayState extends MusicBeatState
 								else
 									health = 0.02;
 							}
+						if (dad.curCharacter == 'ron-usb' || dad.curCharacter == 'ateloron')
+							{
+								if (health > 0.03)
+									health -= 0.014;
+								else
+									health = 0.02;
+							}
 						
 						if (FlxG.save.data.cpuStrums)
 						{
@@ -3582,6 +3589,7 @@ class PlayState extends MusicBeatState
 					} else {
 						LoadingState.loadAndSwitchState(new PlayState());
 					}
+					
 				}
 			}
 			else
@@ -3609,7 +3617,6 @@ class PlayState extends MusicBeatState
 			Achievements.whatTheActualFuck = true;
 		}
 	}
-
 
 	var endingSong:Bool = false;
 
@@ -4962,6 +4969,8 @@ class PlayState extends MusicBeatState
 					defaultCamZoom += 0.2;
 				case 640:
 					defaultCamZoom -= 0.2;
+				case 770:
+					camHUD.visible = false;
 				case 768:
 					dad.visible = false;
 					ronAnimation.x = dad.x-360;
@@ -4970,22 +4979,35 @@ class PlayState extends MusicBeatState
 					ronAnimation.animation.play('idle', true);
 					defaultCamZoom = 1;
 					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.4, {ease: FlxEase.expoOut,});
+				case 870:
+					camHUD.visible = true;
 			}
 			if ((curStep >= 384) && (curStep <= 640))
 				FlxG.camera.shake(0.00625, 0.1);
 			
 			camHUD.shake(0.00125, 0.15);
 		}
-		
+		if (curSong == 'bijuu')
+			{
+				switch (curStep)
+				{
+					case 105:
+						defaultCamZoom = 0.8;
+						
+				}
+			}
 		if (curSong == 'File-Manipulation')
 		{
 			switch (curStep) {
 				case 460:
 					dad.visible = false;
-					ronAnimation.x = dad.x-20;
-					ronAnimation.y = dad.y+60;
+					ronAnimation.x = dad.x-140;
+					ronAnimation.y = dad.y+55;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
+				case 507:
+					camHUD.visible = false;
+					trace('work');
 				case 513:
 					FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
 					trace("workk");
@@ -4996,9 +5018,12 @@ class PlayState extends MusicBeatState
 					trace("also work");
 				case 545:
 					FlxTween.cancelTweensOf(FlxG.camera);
+				case 544:
+					camHUD.visible = true;
+					trace('work');
 				case 560:
 					defaultCamZoom = 1;
-				case 564:
+				case 563:
 					defaultCamZoom = 0.88;
 				case 538:
 					PlayStateChangeables.scrollSpeed = 3.5;
@@ -5009,6 +5034,8 @@ class PlayState extends MusicBeatState
 					add(dad);
 					iconP2.animation.play('ateloron');
 					ronAnimation.visible = false;
+				case 544:
+					camHUD.visible = true;
 				case 556:
 					defaultCamZoom = 0.2;
 					FlxTween.tween(FlxG.camera, {angle: 180}, 0.1, {ease: FlxEase.expoOut,});
@@ -5028,6 +5055,14 @@ class PlayState extends MusicBeatState
 			if ((curStep >= 538) && (Estatic2.alpha < 0.5))
 				Estatic2.alpha += 0.02;
 		}
+		if (curSong.toLowerCase() == 'trojan-virus-b')
+			{
+				switch(curStep)
+				{
+					case 288:
+						FlxG.camera.shake(0.11, 0.11);
+				}
+			}
 	
 		super.stepHit();
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
