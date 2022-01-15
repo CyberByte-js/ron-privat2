@@ -441,7 +441,9 @@ class PlayState extends MusicBeatState
 					dialogue = CoolUtil.coolTextFile(Paths.txt('atelophobia/dialoge'));
 				}
 			case 'factory-reset':
-						dialogue = CoolUtil.coolTextFile(Paths.txt('factory-reset/dialogueIForgor'));
+				dialogue = CoolUtil.coolTextFile(Paths.txt('factory-reset/dialogueIForgor'));
+			case 'holy-shit-dave-fnf':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('holy-shit-dave-fnf/dialoge'));
 		}
 		
 
@@ -1221,6 +1223,91 @@ class PlayState extends MusicBeatState
 					caleb.updateHitbox();
 					caleb.antialiasing = true;
 					add(caleb);
+			case 'daveHouse':
+			{
+				defaultCamZoom = 0.9;
+
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('updateron/bg/sky'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.75, 0.75);
+				bg.active = false;
+
+				add(bg);
+	
+				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('updateron/bg/hills'));
+				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
+				stageHills.updateHitbox();
+				stageHills.antialiasing = true;
+				stageHills.scrollFactor.set(0.8, 0.8);
+				stageHills.active = false;
+				
+				add(stageHills);
+	
+				var gate:FlxSprite = new FlxSprite(-200, -125).loadGraphic(Paths.image('updateron/bg/gate'));
+				gate.setGraphicSize(Std.int(gate.width * 1.2));
+				gate.updateHitbox();
+				gate.antialiasing = true;
+				gate.scrollFactor.set(0.9, 0.9);
+				gate.active = false;
+
+				add(gate);
+	
+				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('updateron/bg/grass'));
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
+				stageFront.updateHitbox();
+				stageFront.antialiasing = true;
+				stageFront.active = false;
+				
+				add(stageFront);
+			}
+			case 'bambiFarm':
+			{
+				defaultCamZoom = 0.9;
+	
+				var bg:FlxSprite = new FlxSprite(-700, 0).loadGraphic(Paths.image('updateron/bg/sky'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+	
+				var hills:FlxSprite = new FlxSprite(-250, 200).loadGraphic(Paths.image('updateron/bg/orangey hills'));
+				hills.antialiasing = true;
+				hills.scrollFactor.set(0.9, 0.7);
+				hills.active = false;
+	
+				var farm:FlxSprite = new FlxSprite(150, 250).loadGraphic(Paths.image('updateron/bg/funfarmhouse'));
+				farm.antialiasing = true;
+				farm.scrollFactor.set(1.1, 0.9);
+				farm.active = false;
+				
+				var foreground:FlxSprite = new FlxSprite(-400, 600).loadGraphic(Paths.image('updateron/bg/grass lands'));
+				foreground.antialiasing = true;
+				foreground.active = false;
+
+				var cornSet:FlxSprite = new FlxSprite(-350, 325).loadGraphic(Paths.image('updateron/bg/Cornys'));
+				cornSet.antialiasing = true;
+				cornSet.active = false;
+				
+				var cornSet2:FlxSprite = new FlxSprite(1050, 325).loadGraphic(Paths.image('updateron/bg/Cornys'));
+				cornSet2.antialiasing = true;
+				cornSet2.active = false;
+				
+				var fence:FlxSprite = new FlxSprite(-350, 450).loadGraphic(Paths.image('updateron/bg/crazy fences'));
+				fence.antialiasing = true;
+				fence.active = false;
+	
+				var sign:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('updateron/bg/Sign'));
+				sign.antialiasing = true;
+				sign.active = false;
+
+				add(bg);
+				add(hills);
+				add(farm);
+				add(foreground);
+				add(cornSet);
+				add(cornSet2);
+				add(fence);
+				add(sign);
+			}
 			default:
 			{
 				defaultCamZoom = 0.9;
@@ -1358,14 +1445,15 @@ class PlayState extends MusicBeatState
 		trace("SF CALC: " + Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
-		// doof.x += 70;
-		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
+		var doof2:DialogueBoxDave = new DialogueBoxDave(false, dialogue);
+		doof2.scrollFactor.set();
 		if (SONG.song.toLowerCase() == 'atelophobia')
 			doof.finishThing = gfdies;
 		else
 			doof.finishThing = startCountdown;
-
+			
+		doof2.finishThing = startCountdown;
 		Conductor.songPosition = -5000;
 		
 		strumLine = new FlxSprite(0, 50).makeGraphic(FlxG.width, 10);
@@ -1458,8 +1546,14 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		// Add Kade Engine watermark
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | " + MainMenuState.kadeEngineVer : ""), 16);
-		kadeEngineWatermark.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+			kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | " + "Tristan Engine (KE 1.2)" : ""), 16);
+		else
+			kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | " + MainMenuState.kadeEngineVer : ""), 16);
+		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+			kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		else
+			kadeEngineWatermark.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
 
@@ -1473,12 +1567,18 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.scrollFactor.set();
 		
-		scoreTxt.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+			scoreTxt.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		else
+			scoreTxt.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		add(scoreTxt);
 		scoreTxt.screenCenter(X);
 
 		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY", 20);
-		replayTxt.setFormat(Paths.font("w95.otf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+			replayTxt.setFormat(Paths.font("comic.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		else
+			replayTxt.setFormat(Paths.font("w95.otf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		replayTxt.borderSize = 4;
 		replayTxt.borderQuality = 2;
 		replayTxt.scrollFactor.set();
@@ -1488,7 +1588,10 @@ class PlayState extends MusicBeatState
 		}
 		// Literally copy-paste of the above, fu
 		botPlayState = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "BOTPLAY", 20);
-		botPlayState.setFormat(Paths.font("w95.otf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+			botPlayState.setFormat(Paths.font("comic.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		else
+			botPlayState.setFormat(Paths.font("w95.otf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		botPlayState.scrollFactor.set();
 		botPlayState.borderSize = 4;
 		botPlayState.borderQuality = 2;
@@ -1520,6 +1623,15 @@ class PlayState extends MusicBeatState
 				dad.y += 200;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
+			case 'dave':
+				dad.y += 160;
+				dad.x += 250;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+			case 'bambi':
+				dad.y += 400;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 			case 'ron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1632,6 +1744,7 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		doof2.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		if (FlxG.save.data.songPosition)
 		{
@@ -1708,6 +1821,8 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 					add(fx);
 					gf.visible = false;
+				case 'holy-shit-dave-fnf':
+					schoolIntro2(doof2, false);
 				default:
 					startCountdown();
 			}
@@ -1816,6 +1931,36 @@ class PlayState extends MusicBeatState
 					startCountdown();
 
 				remove(black);
+			}
+		});
+	}
+	
+	function schoolIntro2(?dialogueBox2:DialogueBoxDave, ?isStart:Bool = true):Void
+	{
+		camFollow.setPosition(boyfriend.getGraphicMidpoint().x - 200, dad.getGraphicMidpoint().y - 10);
+		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		black.scrollFactor.set();
+		add(black);
+
+		var stupidBasics:Float = 1;
+		if (isStart)
+		{
+			FlxTween.tween(black, {alpha: 0}, stupidBasics);
+		}
+		else
+		{
+			black.alpha = 0;
+			stupidBasics = 0;
+		}
+		new FlxTimer().start(stupidBasics, function(fuckingSussy:FlxTimer)
+		{
+			if (dialogueBox2 != null)
+			{
+				add(dialogueBox2);
+			}
+			else
+			{
+				startCountdown();
 			}
 		});
 	}
@@ -2106,7 +2251,10 @@ class PlayState extends MusicBeatState
 			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.song.length * 5),songPosBG.y,0,SONG.song, 16);
 			if (PlayStateChangeables.useDownscroll)
 				songName.y -= 3;
-			songName.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+			if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+				songName.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+			else
+				songName.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 			songName.scrollFactor.set();
 			add(songName);
 

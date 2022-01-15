@@ -439,6 +439,32 @@ class Character extends FlxSprite
 				addOffset("singDOWNmiss", -11, -19);
 				
 				flipX = true;
+			case 'dave':
+				frames = Paths.getSparrowAtlas('updateron/characters/dave_sheet', 'shared');
+				animation.addByPrefix('idle', 'idleDance', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+	
+				addOffset('idle');
+				addOffset("singUP", 18, 12);
+				addOffset("singRIGHT", 5, -2);
+				addOffset("singLEFT", 29, 2);
+				addOffset("singDOWN", -5, 2);
+			case 'bambi':
+				frames = Paths.getSparrowAtlas('updateron/characters/bambiRemake', 'shared');
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 54, 3);
+				addOffset("singRIGHT", -50, 0);
+				addOffset("singLEFT", 20, -7);
+				addOffset("singDOWN", -5, -43);
 			case 'ron':
 				tex = Paths.getSparrowAtlas('ron/characters/Tankman');
 				frames = tex;
