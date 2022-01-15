@@ -210,7 +210,8 @@ class MainMenuState extends MusicBeatState
 			{
                 therock.alpha = 1;
 				FlxTween.tween(therock, {alpha: 0}, 1);
-				FlxG.sound.play(Paths.sound('hi'));
+				FlxG.sound.play(Paths.sound('hi')); // hi ekic cal i think i fix it but im not sure:( -chromasen
+				 									// no i did not fix but it still appears - chromasen
 			}
 			if (codeInt == 10)
 				{
