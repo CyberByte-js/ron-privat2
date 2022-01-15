@@ -4987,7 +4987,15 @@ class PlayState extends MusicBeatState
 			
 			camHUD.shake(0.00125, 0.15);
 		}
-		
+		if (curSong == 'bijuu')
+			{
+				switch (curStep)
+				{
+					case 105:
+						defaultCamZoom = 0.8;
+						
+				}
+			}
 		if (curSong == 'File-Manipulation')
 		{
 			switch (curStep) {
