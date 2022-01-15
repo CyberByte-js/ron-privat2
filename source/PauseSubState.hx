@@ -23,7 +23,7 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Exit to options', 'Exit to freeplay', 'Exit to story mode', 'Exit to story mode B-side', 'Restart system', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Exit to options', 'Exit to freeplay', 'Exit to story mode', 'Exit to story mode B-side', 'Restart system (it actually does)', 'Exit to menu'];
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
@@ -344,7 +344,7 @@ class PauseSubState extends MusicBeatSubstate
 						(cast (Lib.current.getChildAt(0), Main)).setFPSCap(290);
 					
 					FlxG.switchState(new MainMenuState());
-					case "Restart system":
+					case "Restart system (it actually does)":
 						if (PlayState.instance.useVideo)
 						{
 							GlobalVideo.get().stop();
