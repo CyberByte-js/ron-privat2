@@ -403,29 +403,18 @@ class Character extends FlxSprite
 				flipX = true;
 				flipX = true;
 			case 'douyhe':
-				tex = Paths.getSparrowAtlas('memes/dayne');
+				tex = Paths.getSparrowAtlas('memes/doyne');
 				frames = tex;
-				animation.addByPrefix('idle', 'BF idle dance', 24, false);
-				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
-				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
-				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
-				animation.addByPrefix('Ugh', 'BF HEY', 24, false);
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", 0, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", 40, -30);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
-				
-				flipX = true;
+				animation.addByPrefix('idle', "idle", 24);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				addOffset('idle');
+				addOffset("singUP", 0, 60);
+				addOffset("singLEFT", 75, 30);
+				addOffset("singRIGHT");
+				addOffset("singDOWN", 25, -60);
 			case 'helldouyhe':
 				tex = Paths.getSparrowAtlas('memes/helldouye');
 				frames = tex;

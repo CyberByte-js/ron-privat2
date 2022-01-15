@@ -1517,7 +1517,7 @@ class PlayState extends MusicBeatState
 
 			case 'douyhe':
 				dad.x += 70;
-				dad.y += 250;
+				dad.y += 200;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'ron':
