@@ -189,6 +189,10 @@ class AnimationDebug extends FlxState
 			genBoyOffsets(false);
 			char.playAnim(animList[curAnim]);
 		}
+		if (FlxG.keys.pressed.ESCAPE)
+		{
+			FlxG.switchState(new MainMenuState());
+		}
 
 		super.update(elapsed);
 	}

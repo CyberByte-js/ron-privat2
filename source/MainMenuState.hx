@@ -44,6 +44,9 @@ class MainMenuState extends MusicBeatState
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
 	var code:String = "";
+	var codeInt = 0;
+	var codeInt2 = 0;
+	var neededCode:Array<String> = ['B', 'R', 'O'];
 	var therock:FlxSprite;
 	public static var firstStart:Bool = true;
 
@@ -107,8 +110,9 @@ class MainMenuState extends MusicBeatState
 		car.scrollFactor.set();
 		car.animation.play('car instance 1');
 
-		therock = new FlxSprite().loadGraphic(Paths.image('therock'));
-		therock.screenCenter();
+		therock = new FlxSprite().loadGraphic(Paths.image('therock', 'shared'));
+		therock.x += 0;
+		therock.y += 0;
 		therock.alpha = 0;
 		add(therock);
 		
@@ -185,37 +189,36 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.ANY)
-		{
-			if (FlxG.keys.justPressed.B)
+        if (FlxG.keys.justPressed.ANY)
 			{
-				code += 'b';
-			}
-			else if (FlxG.keys.justPressed.R)
-			{
-				code += 'r';
-			}
-			else if (FlxG.keys.justPressed.O)
-			{
-				code += 'o';
-			}
-			
-			if (code.length >= 3)
-			{
-				if (code == 'bro')
+				var curKey = FlxG.keys.getIsDown()[0].ID.toString();
+	
+				if (neededCode.contains(curKey) && neededCode[codeInt] == curKey)
 				{
-					therock.alpha = 1;
-					FlxTween.tween(therock, {alpha: 0}, 1);
-					FlxG.sound.play(Paths.sound('hi'));
+					code += curKey;
+					codeInt++;
+					codeInt2++;
 				}
 				else
 				{
-					FlxG.sound.play(Paths.sound('cancelMenu'));
+					code = '';
+					codeInt = 0;
 				}
-				code = '';
 			}
-		}
-				
+			
+			if (code == 'BRO')
+			{
+                therock.alpha = 1;
+				FlxTween.tween(therock, {alpha: 0}, 1);
+				FlxG.sound.play(Paths.sound('hi')); // hi ekic cal i think i fix it but im not sure:( -chromasen
+				 									// no i did not fix but it still appears - chromasen
+			}
+			if (codeInt == 10)
+				{
+					code = 'BRO';
+					codeInt = 0;
+				} 
+	
 		cloud.x += 1;
 		city.x += 2;
 		if (FlxG.sound.music.volume < 0.8)
