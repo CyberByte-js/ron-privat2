@@ -23,11 +23,13 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Exit to options', 'Exit to freeplay', 'Exit to story mode', 'Exit to story mode B-side', 'Restart system (it actually does)', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Exit to options', 'Exit to freeplay', 'Exit to story mode', 'Exit to story mode B-side', 'Restart PC \nfor real', 'Exit to menu'];
 	var curSelected:Int = 0;
 
 	var pauseMusic:FlxSound;
 	var perSongOffset:FlxText;
+	var defaultCamZoom:Float = 1.05;
+
 	
 	var offsetChanged:Bool = false;
 
@@ -299,25 +301,6 @@ class PauseSubState extends MusicBeatSubstate
 										(cast (Lib.current.getChildAt(0), Main)).setFPSCap(290);
 										
 									FlxG.switchState(new BSIDEState());
-					case 'Exit to story mode':
-						if(PlayState.loadRep)
-							{
-								FlxG.save.data.botplay = false;
-								FlxG.save.data.scrollSpeed = 1;
-								FlxG.save.data.downscroll = false;
-							}
-							PlayState.loadRep = false;
-							#if windows
-							if (PlayState.luaModchart != null)
-							{
-								PlayState.luaModchart.die();
-								PlayState.luaModchart = null;
-							}
-							#end
-							if (FlxG.save.data.fpsCap > 290)
-								(cast (Lib.current.getChildAt(0), Main)).setFPSCap(290);
-								
-							FlxG.switchState(new StoryMenuState());
 
 				case "Exit to menu":
 					if (PlayState.instance.useVideo)
@@ -344,7 +327,7 @@ class PauseSubState extends MusicBeatSubstate
 						(cast (Lib.current.getChildAt(0), Main)).setFPSCap(290);
 					
 					FlxG.switchState(new MainMenuState());
-					case "Restart system (it actually does)":
+					case "Restart PC \nfor real":
 						if (PlayState.instance.useVideo)
 						{
 							GlobalVideo.get().stop();
