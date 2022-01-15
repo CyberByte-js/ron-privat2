@@ -3589,9 +3589,6 @@ class PlayState extends MusicBeatState
 					} else {
 						LoadingState.loadAndSwitchState(new PlayState());
 					}
-					if (curSong == 'trojan-virus')
-						if (!FlxG.save.data.songArray.contains('file-manipulation') && !FlxG.save.data.botplay)
-							FlxG.save.data.songArray.push('file-manipulation');
 					
 				}
 			}

