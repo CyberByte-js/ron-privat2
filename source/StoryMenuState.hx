@@ -453,24 +453,28 @@ class StoryMenuState extends MusicBeatState
 			PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
 			PlayState.storyWeek = curWeek;
 			PlayState.campaignScore = 0;
-			if (curWeek == 1) {
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					video.playMP4(Paths.video('ron'), new PlayState(), false, false, false);
-				});
-			}
-			if (curWeek == 2) {
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					video.playMP4(Paths.video('trojanvirus'), new PlayState(), false, false, false);
-				});
-			}
-			else
+			switch (curWeek)
 			{
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					LoadingState.loadAndSwitchState(new PlayState(), true);
-				});
+				case 1:
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						video.playMP4(Paths.video('ron'), new PlayState(), false, false, false);
+					});					
+				case 2:
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						video.playMP4(Paths.video('trojanvirus'), new PlayState(), false, false, false);
+					});
+				case 3:
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						video.playMP4(Paths.video('cookron'), new PlayState(), false, false, false);
+					});				
+				default:
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						LoadingState.loadAndSwitchState(new PlayState(), true);
+					});
 			}
 		}
 	}
