@@ -1032,7 +1032,7 @@ class PlayState extends MusicBeatState
 					var xml = [];
 					trace("caching images...");
 		
-					for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/characters/")))
+					for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/")))
 					{
 						if (!i.endsWith(".png"))
 							continue;
@@ -1045,14 +1045,14 @@ class PlayState extends MusicBeatState
 					for (i in images)
 					{
 						var replaced = i.replace(".png","");
-						FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"));
+						FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
 						trace("cached " + replaced);
 					}
 				
 				for (i in xml)
 					{
 						var replaced = i.replace(".xml","");
-						FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"));
+						FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
 						trace("cached " + replaced);
 					}
 					var bg:FlxSprite = new FlxSprite();
