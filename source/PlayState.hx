@@ -1630,16 +1630,14 @@ class PlayState extends MusicBeatState
 				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'dave':
 				dad.y += 160;
-				dad.x += 250;
+				dad.x += 90;
 				gf.visible = false;
-				boyfriend.x += 160;
 				boyfriend.y -= 120;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 			case 'bambi':
 				dad.y += 400;
 				gf.visible = false;
-				boyfriend.x += 160;
 				boyfriend.y -= 120;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
@@ -5136,6 +5134,27 @@ class PlayState extends MusicBeatState
 				FlxG.camera.shake(0.025, 0.1);
 				camHUD.shake(0.0055, 0.15);
 			}
+		}
+		
+		if (curSong == 'Holy-Shit-Dave-Fnf')
+		{
+			switch (curStep) {
+				case 352:
+					defaultCamZoom = 1;
+				case 368:
+					defaultCamZoom = 1.2;
+				case 384:
+					FlxG.camera.flash(FlxColor.WHITE, 0.2);
+					dad.playAnim('um', false);
+				case 400:
+					defaultCamZoom = 1.5;
+				case 448:
+					defaultCamZoom = 0.9;
+					dad.playAnim('idle', false);
+			}
+			
+			if (curStep == 400)
+				dad.playAnim('err', false);
 		}
 		
 		if (curSong == 'Trojan-Virus')

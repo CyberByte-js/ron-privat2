@@ -25,4 +25,6 @@
 	<SubTexture name="idleDance0004" x="3150" y="590" width="351" height="582"/>
 	<SubTexture name="idleDance0005" x="3505" y="590" width="351" height="582"/>
 	<SubTexture name="idleDance0006" x="3505" y="590" width="351" height="582"/>
+	<SubTexture name="err0000" x="521" y="1220" width="351" height="582"/>
+	<SubTexture name="um0000" x="55" y="1220" width="351" height="582"/>
 </TextureAtlas>

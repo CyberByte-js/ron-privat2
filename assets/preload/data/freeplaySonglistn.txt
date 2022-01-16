@@ -7,4 +7,7 @@ Trojan-Virus:ron-usb:2
 File-Manipulation:ron-usb:2
 Atelophobia:ateloron:2
 Factory-Reset:factorytankman:2
-Holy-Shit-Dave-Fnf:dave:4
+Holy-Shit-Dave-Fnf:dave:2
+Slammed:bambi:2
+Meme-Machine:bambi:2
+Frosting-Over:bambi:2

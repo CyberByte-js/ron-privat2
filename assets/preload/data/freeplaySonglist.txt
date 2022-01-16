@@ -19,3 +19,7 @@ Factory-Reset-b:factorytankman-b:2
 Trouble:factorytankman:0
 Bijuu:bijuuron:0
 BLOODSHED-TWO:devilron:1
+Holy-Shit-Dave-Fnf:dave:2
+Slammed:bambi:2
+Meme-Machine:bambi:2
+Frosting-Over:bambi:2
