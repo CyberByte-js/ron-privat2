@@ -5114,6 +5114,7 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(cloudsa, {alpha: 0}, 1, {ease: FlxEase.quadIn});
 					FlxTween.tween(witheredRa, {alpha: 0}, 1, {ease: FlxEase.quadIn});
 					FlxTween.tween(bgLol, {alpha: 0}, 1, {ease: FlxEase.quadIn});
+					camHUD.shake(0.002);
 					defaultCamZoom += 0.2;
 				case 640:
 					defaultCamZoom -= 0.2;
@@ -5198,6 +5199,9 @@ class PlayState extends MusicBeatState
 					camGame.alpha = 1;
 					FlxG.camera.setFilters([ShadersHandler.MosaicShader]);
 					camHUD.setFilters([ShadersHandler.MosaicShader]);
+				case 1131:
+					FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
+					camHUD.setFilters([ShadersHandler.chromaticAberration]);
 			}
 	
 			if ((curStep >= 538) && (Estatic2.alpha < 0.5))

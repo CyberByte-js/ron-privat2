@@ -34,10 +34,43 @@ class WarningSubState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		super.update(elapsed);
-		if (controls.BACK)
+		if (controls.ACCEPT)
 		{
-			FlxG.switchState(new MainMenuState());
+			switch (secstate)
+			{
+				case 0:
+					popup.animation.play('popup1 instance 1');
+					secstate = 1;
+				case 1:
+					popup.frames = Paths.getSparrowAtlas("warning/warning");
+					popup.animation.addByPrefix('popup2 instance 1', 'popup2 instance 1', 24, false);
+					popup.scrollFactor.set();
+					popup.updateHitbox();
+					popup.screenCenter();
+					popup.animation.play('popup2 instance 1');
+					secstate = 2;
+				case 2:
+					popup.frames = Paths.getSparrowAtlas("warning/other");
+					popup.animation.addByPrefix('popup3 instance 1', 'popup3 instance 1', 24, false);
+					popup.scrollFactor.set();
+					popup.updateHitbox();
+					popup.screenCenter();
+					popup.animation.play('popup3 instance 1');
+					secstate = 3;
+					var black:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFF000000);
+					black.screenCenter();
+					black.scrollFactor.set();
+					black.alpha = 0;
+					add(black);
+					FlxTween.tween(black, {alpha: 1}, 1, {
+						ease: FlxEase.quadInOut,
+						onComplete: function(twn:FlxTween) 
+						{
+							FlxG.switchState(new MainMenuState());
+						}
+					});
+			}
 		}
+		super.update(elapsed);
 	}
 }
