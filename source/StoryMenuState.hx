@@ -26,7 +26,7 @@ class StoryMenuState extends MusicBeatState
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
 		['Ron', 'Wasted', 'Ayo', 'Bloodshed'],
-		['Trojan Virus', 'File-Manipulation', 'Atelophobia', 'Factory-Reset'],
+		['Trojan Virus', 'Recycle-Bin', 'File-Manipulation', 'Factory-Reset'],
 		['Raw-Meaty-Meats', 'Assassination', 'Steak'],
 		['Holy-Shit-Dave-Fnf', 'Slammed', 'Meme-Machine', 'Frosting-Over'],
 		['Pretty-Wacky','He-Hates-Me', 'Atypical']

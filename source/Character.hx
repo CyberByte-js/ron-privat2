@@ -885,6 +885,75 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -89, -51);
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
+			case 'cheeky':
+                tex = Paths.getSparrowAtlas('updateron/characters/Cheeky');
+                frames = tex;
+                animation.addByPrefix('idle', 'Cheeky Idle Dance', 24);
+                animation.addByPrefix('singUP', 'Cheeky NOTE UP', 24, false);
+                animation.addByPrefix('singRIGHT', 'Cheeky NOTE RIGHT', 32, false);
+                animation.addByPrefix('singDOWN', 'Cheeky NOTE DOWN', 32, false);
+                animation.addByPrefix('singLEFT', 'Cheeky NOTE LEFT', 24, false);
+
+                addOffset('idle');
+                addOffset("singUP", 0, 23);
+                addOffset("singRIGHT", -37, 0);
+                addOffset("singLEFT", 54, 0);
+                addOffset("singDOWN", 0, -21);
+
+                setGraphicSize(Std.int(width * 2.25));
+
+                playAnim('idle');
+                //healthBarColor = FlxColor.fromRGB(110, 179, 204);
+			case 'whitty': // whitty reg (lofight,overhead)
+				tex = Paths.getSparrowAtlas('updateron/characters/WhittySprites');
+				frames = tex;
+				animation.addByPrefix('idle', 'Idle', 24);
+				animation.addByPrefix('singUP', 'Sing Up', 24);
+				animation.addByPrefix('singRIGHT', 'Sing Right', 24);
+				animation.addByPrefix('singDOWN', 'Sing Down', 24);
+				animation.addByPrefix('singLEFT', 'Sing Left', 24);
+
+				addOffset('idle', 0,0 );
+				addOffset("singUP", -6, 50);
+				addOffset("singRIGHT", 0, 27);
+				addOffset("singLEFT", -10, 10);
+			case 'bandu':
+				frames = Paths.getSparrowAtlas('updateron/characters/bandu');
+				
+				animation.addByPrefix('idle', 'idle', 24, true);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				
+				animation.addByIndices('idle-alt', 'phones fall', [17], '', 24, false);
+				animation.addByPrefix('singUP-alt', 'sad up', 24, false);
+				animation.addByPrefix('singRIGHT-alt', 'sad right', 24, false);
+				animation.addByPrefix('singDOWN-alt', 'sad down', 24, false);
+				animation.addByPrefix('singLEFT-alt', 'sad left', 24, false);
+
+				animation.addByIndices('NOOMYPHONES', 'phones fall', [0, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 17], '', 24, false);
+				
+				addOffset('idle');
+				addOffset("singUP", 0, 80);
+				addOffset("singRIGHT", 140, -80);
+				addOffset("singLEFT", 200);
+				addOffset("singDOWN", 0, -30);
+				
+				addOffset('NOOMYPHONES');
+
+				addOffset('idle-alt');
+				addOffset("singUP-alt", 0, 100);
+				addOffset("singRIGHT-alt", 30);
+				addOffset("singLEFT-alt", -20, -38);
+				addOffset("singDOWN-alt");
+
+				setGraphicSize(Std.int(width / 1));
+				updateHitbox();
+
+				antialiasing = false;
+
+				playAnim('idle');
 		}
 
 		dance();
