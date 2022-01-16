@@ -1546,12 +1546,17 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		// Add Kade Engine watermark
-		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
-			kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | " + "Tristan Engine (KE 1.2)" : ""), 16);
+		if ((SONG.stage == 'bambiFarm') || (SONG.stage == 'daveHouse'))
+		{	
+			var songName = SONG.song;
+			if (songName == 'Holy-Shit-Dave-Fnf')
+				songName = 'Dave-Fnf';
+			kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,songName + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | " + "Tristan Engine (KE 1.2)" : ""), 16);
+		}
 		else
 			kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | " + MainMenuState.kadeEngineVer : ""), 16);
-		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
-			kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		if ((SONG.stage == 'bambiFarm') || (SONG.stage == 'daveHouse'))
+			kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		else
 			kadeEngineWatermark.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
@@ -1567,15 +1572,15 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.scrollFactor.set();
 		
-		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
-			scoreTxt.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		if ((SONG.stage == 'bambiFarm') || (SONG.stage == 'daveHouse'))
+			scoreTxt.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		else
 			scoreTxt.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		add(scoreTxt);
 		scoreTxt.screenCenter(X);
 
 		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY", 20);
-		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+		if ((SONG.stage == 'bambiFarm') || (SONG.stage == 'daveHouse'))
 			replayTxt.setFormat(Paths.font("comic.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		else
 			replayTxt.setFormat(Paths.font("w95.otf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -1588,7 +1593,7 @@ class PlayState extends MusicBeatState
 		}
 		// Literally copy-paste of the above, fu
 		botPlayState = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "BOTPLAY", 20);
-		if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+		if ((SONG.stage == 'bambiFarm') || (SONG.stage == 'daveHouse'))
 			botPlayState.setFormat(Paths.font("comic.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		else
 			botPlayState.setFormat(Paths.font("w95.otf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -1626,15 +1631,23 @@ class PlayState extends MusicBeatState
 			case 'dave':
 				dad.y += 160;
 				dad.x += 250;
+				gf.visible = false;
+				boyfriend.x += 160;
+				boyfriend.y -= 120;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 			case 'bambi':
 				dad.y += 400;
+				gf.visible = false;
+				boyfriend.x += 160;
+				boyfriend.y -= 120;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 			case 'ron':
 				dad.x += 70;
 				dad.y += 250;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'ronDave':
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'ronPower':
 				dad.x += 70;
@@ -2251,7 +2264,7 @@ class PlayState extends MusicBeatState
 			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.song.length * 5),songPosBG.y,0,SONG.song, 16);
 			if (PlayStateChangeables.useDownscroll)
 				songName.y -= 3;
-			if ((curStage == 'bambiFarm') || (curStage == 'daveHouse'))
+			if ((SONG.stage == 'bambiFarm') || (SONG.stage == 'daveHouse'))
 				songName.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 			else
 				songName.setFormat(Paths.font("w95.otf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -2402,6 +2415,12 @@ class PlayState extends MusicBeatState
 							skin = 'bhell';
 						case 'ron-usb-b':
 							skin = 'bhell';
+						case 'dave':
+							skin = 'NOTEold_assets';
+						case 'bambi':
+							skin = 'NOTEold_assets';
+						case 'ronDave':
+							skin = 'NOTEold_assets';
 					}
 				}
 
@@ -2542,10 +2561,21 @@ class PlayState extends MusicBeatState
 								skin = 'bhell';
 							case 'ron-usb-b':
 								skin = 'bhell';
+							case 'dave':
+								skin = 'NOTEold_assets';
+							case 'bambi':
+								skin = 'NOTEold_assets';
+							case 'ronDave':
+								skin = 'NOTEold_assets';
 						}
 						
 						if (force)
-							babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets');
+						{
+							var sskin = 'NOTE_assets';
+							if (SONG.player1 == 'ronDave')
+								sskin = 'NOTEold_assets';
+							babyArrow.frames = Paths.getSparrowAtlas(sskin);
+						}
 						else
 							babyArrow.frames = Paths.getSparrowAtlas(skin);
 						babyArrow.animation.addByPrefix('green', 'arrowUP');
@@ -2585,6 +2615,7 @@ class PlayState extends MusicBeatState
 							babyArrow.frames = Paths.getSparrowAtlas('ronsip');
 						else
 							babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets');
+						
 						babyArrow.animation.addByPrefix('green', 'arrowUP');
 						babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
 						babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
@@ -3144,7 +3175,7 @@ class PlayState extends MusicBeatState
 					pov = 333;
 				if (dad.curCharacter == 'ron-usb')
 					trojan = 180;
-				if ((FlxG.save.data.cameraenable) && (dad.curCharacter != 'bijuuron') && (dad.curCharacter != 'hellron-pov'))
+				if ((FlxG.save.data.cameraenable) && (dad.curCharacter != 'bijuuron') && (dad.curCharacter != 'hellron-pov') && (SONG.stage != 'bambiFarm') && (PlayState.SONG.stage != 'daveHouse'))
 					camFollow.setPosition(dad.getMidpoint().x + 160 + offsetX + mxx, dad.getMidpoint().y + 150 - myy - 250 + offsetY + trojan);
 				else
 					camFollow.setPosition(dad.getMidpoint().x + 120 + pov + offsetX, dad.getMidpoint().y - 60 + offsetY - trojan);

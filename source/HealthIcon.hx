@@ -67,6 +67,7 @@ class HealthIcon extends FlxSprite
 		// eh factory reset bsides doesnt even exist anymore so
 		
 		// bonus songs for the future
+		animation.add('ronDave', [2, 3], 0, false, isPlayer);
 		animation.add('bijuuron', [42, 43], 0, false, isPlayer);
 		animation.add('hellron-pov', [54, 55], 0, false, isPlayer);	
 		animation.add('ronslaught-pov', [54, 55], 0, false, isPlayer);	
