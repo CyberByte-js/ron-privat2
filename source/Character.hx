@@ -558,7 +558,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
 			case 'ronb':
-				tex = Paths.getSparrowAtlas('ron/characters/Tankman-b');
+				tex = Paths.getSparrowAtlas('updateron/characters/BsidesNEW');
 				frames = tex;
 				animation.addByPrefix('idle', "Idle", 24);
 				animation.addByPrefix('singUP', 'Sing Up', 24, false);
