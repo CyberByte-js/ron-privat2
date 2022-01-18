@@ -1,5 +1,6 @@
 package;
 
+import openfl.display.BlendMode;
 import flixel.input.gamepad.FlxGamepad;
 import Controls.KeyboardScheme;
 import flixel.FlxG;
@@ -29,6 +30,8 @@ using StringTools;
 // yeah yeah, who should we get to make it tho? -ekical
 // just ping @artists -cyber
 // k -ekical
+
+// hi -sz
 class MainMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
@@ -57,6 +60,7 @@ class MainMenuState extends MusicBeatState
 
 	var cloud:FlxBackdrop;
 	var city:FlxBackdrop;
+	var city2:FlxBackdrop;
 	var camFollow:FlxObject;
 	public static var finishedFunnyMove:Bool = false;
 
@@ -68,6 +72,21 @@ class MainMenuState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
+		
+		var bgTex = 'menuSunset';
+		var sunTex = 'menuSun';
+		var alphaTex = 1;
+		var cityTex = 'menuCity';
+		var cityBTex = 'menuCityBack';
+
+		if ((Date.now().getHours() < 6) || (Date.now().getHours() > 20))
+		{
+			bgTex = 'menuNight';
+			sunTex = 'menuMoon';
+			alphaTex = 2;
+			cityTex = 'menuCityNight';
+			cityBTex = 'menuCityBackNight';
+		}
 
 		trace(FlxG.save.data.lang);
 
@@ -78,17 +97,33 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuSunset'));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image(bgTex));
 		bg.scrollFactor.set();
 		bg.updateHitbox();
 		bg.screenCenter();
 		add(bg);
 		
+		var sun:FlxSprite = new FlxSprite();
+		sun.frames = Paths.getSparrowAtlas(sunTex);
+		sun.scrollFactor.set();
+		sun.animation.addByPrefix('sun', 'sun', 2, true);
+		sun.antialiasing = true;
+		sun.screenCenter();
+		sun.x -= 80;
+		sun.y -= 80;
+		add(sun);
+		sun.animation.play('sun');
+		
 		cloud = new FlxBackdrop(Paths.image('menuClouds'), 32, 0, true, true, 0, -250);
+		cloud.alpha = 0.8/alphaTex;
 		cloud.scrollFactor.set(0.1);
 		add(cloud);
 		
-		city = new FlxBackdrop(Paths.image('menuCity'), 32, 0, true, true, 0, -250);
+		city2 = new FlxBackdrop(Paths.image(cityBTex), 32, 0, true, true, 0, -250);
+		city2.scrollFactor.set(0.125);
+		add(city2);
+		
+		city = new FlxBackdrop(Paths.image(cityTex), 32, 0, true, true, 0, -250);
 		city.scrollFactor.set(0.2);
 		add(city);
 		
@@ -132,6 +167,14 @@ class MainMenuState extends MusicBeatState
 		logoBl.updateHitbox();
 		add(logoBl);
 		logoBl.animation.play('bump');
+		
+		var lines:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuLines'));
+		lines.scale.set(0.5, 0.5);
+		lines.scrollFactor.set();
+		lines.screenCenter();
+		lines.alpha = 0.5;
+		lines.blend = BlendMode.OVERLAY;
+		add(lines);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -219,8 +262,9 @@ class MainMenuState extends MusicBeatState
 					codeInt = 0;
 				} 
 	
-		cloud.x += 1;
+		cloud.x += 0.33;
 		city.x += 2;
+		city2.x += 1;
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;

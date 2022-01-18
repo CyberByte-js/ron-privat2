@@ -18,6 +18,8 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.ui.FlxBar;
 import flixel.text.FlxText;
+import openfl.display.BitmapData;
+import openfl.utils.Assets;
 
 using StringTools;
 
@@ -31,11 +33,18 @@ class Caching extends MusicBeatState
     var kadeLogo:FlxSprite;
 	var loadingBar:FlxBar;
 
+	public static var bitmapData:Map<String,FlxGraphic>;
+	var characters = [];
+	var bgs = [];
+	var portrait = [];
+	var maincharacters = [];
+
 	override function create()
 	{
         FlxG.mouse.visible = false;
 
         FlxG.worldBounds.set(0,0);
+		bitmapData = new Map<String,FlxGraphic>();
 
         text = new FlxText(FlxG.width / 2, FlxG.height / 4,0,"loading...");
 		text.setFormat(Paths.font("w95.otf"), 34, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -48,10 +57,6 @@ class Caching extends MusicBeatState
         text2.size = 34;
         text2.alignment = FlxTextAlign.CENTER;
 		text2.screenCenter(XY);
-		
-        sys.thread.Thread.create(() -> {
-            cache();
-        });
 		
 		loadingBar = new FlxBar(text.x, text.y - 200, LEFT_TO_RIGHT, 400, 30, this, 'done', 0, 70, true);
 		loadingBar.screenCenter(X);
@@ -95,6 +100,41 @@ class Caching extends MusicBeatState
         add(text);
 		add(text2);
 		add(gfDance);
+		
+		#if cpp
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/characters")))
+		{
+			if (!i.endsWith(".png"))
+				continue;
+			characters.push(i);
+			trace(i);
+		}
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/bg")))
+		{
+			if (!i.endsWith(".png"))
+				continue;
+			bgs.push(i);
+			trace(i);
+		}
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/portraits")))
+		{
+			if (!i.endsWith(".png"))
+				continue;
+			portrait.push(i);
+			trace(i);
+		}		
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
+		{
+			if (!i.endsWith(".png"))
+				continue;
+			maincharacters.push(i);
+			trace(i);
+		}	
+		#end
+
+		sys.thread.Thread.create(() -> {
+			cache();
+		});
 
         trace('starting caching..');
         
@@ -105,137 +145,41 @@ class Caching extends MusicBeatState
 
     override function update(elapsed) 
     {
+        super.update(elapsed);
+    }
 
-        if (toBeDone != 0 && done != toBeDone)
-        {
+	function actuallyCache(help:String, path:String)
+		{
+			var replaced = help.replace(".png","");
+			var data:BitmapData = BitmapData.fromFile(path + help);
+			var graph = FlxGraphic.fromBitmapData(data);
+			graph.persist = true;
+			graph.destroyOnNoUse = false;
+			bitmapData.set(replaced,graph);
+            trace("cached " + replaced);
+            done++;
+			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
             var alpha = HelperFunctions.truncateFloat(done / toBeDone * 100,2) / 100;
             kadeLogo.alpha = alpha;
             text.text = done + "/" + toBeDone;
 			text.screenCenter(XY);
 			text.y = FlxG.height / 8 + 52;
-        }
-
-        super.update(elapsed);
-    }
-
+		}
 
     function cache()
     {
-
-        var characters_global = [];
-		var characters_ron = [];
-		var characters_update = [];
-		var bgs_ron = [];
-		var bgs_update = [];
-
-		FlxGraphic.defaultPersist = true;
-        trace("caching characters...");
-
-        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
-        {
-            if (!i.endsWith(".png"))
-                continue;
-            characters_global.push(i);
-        }
-		
-        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/ron/characters")))
-        {
-            if (!i.endsWith(".png"))
-                continue;
-            characters_ron.push(i);
-        }
-		
-        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/characters")))
-        {
-            if (!i.endsWith(".png"))
-                continue;
-            characters_update.push(i);
-        }
-		
-		trace("caching bgs...");
-		
-		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/ron/bg")))
-		{
-            if (!i.endsWith(".png"))
-                continue;
-            bgs_ron.push(i);
-		}
-		
-		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/bg")))
-		{
-            if (!i.endsWith(".png"))
-                continue;
-            bgs_update.push(i);
-		}
-
-        toBeDone = Lambda.count(characters_global) + Lambda.count(characters_ron) + Lambda.count(characters_update) + Lambda.count(bgs_ron) + Lambda.count(bgs_update);
+        toBeDone = Lambda.count(characters) + Lambda.count(maincharacters) + Lambda.count(bgs) + Lambda.count(portrait);
 
         trace("LOADING: " + toBeDone + " OBJECTS.");
-
-        for (i in characters_global)
-        {
-            var replaced = i.replace(".png","");
-			var loader:FlxSprite = new FlxSprite().loadGraphic(i);
-			loader.updateHitbox();
-			loader.scale.set(0.001,0.001);
-			loader.screenCenter();
-			add(loader);
-            FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"), true, Std.string(i));
-            trace("cached " + replaced);
-            done++;
-			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
-        }
 		
-        for (i in characters_ron)
-        {
-            var replaced = i.replace(".png","");
-			var loader:FlxSprite = new FlxSprite().loadGraphic(i);
-			loader.updateHitbox();
-			loader.scale.set(0.001,0.001);
-			loader.screenCenter();
-			add(loader);
-            FlxG.bitmap.add(Paths.image("ron/characters/" + replaced,"shared"), true, Std.string(i));
-            trace("cached " + replaced);
-            done++;
-			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
-        }
-		
-        for (i in characters_update)
-        {
-            var replaced = i.replace(".png","");
-			var loader:FlxSprite = new FlxSprite().loadGraphic(i);
-			loader.updateHitbox();
-			loader.scale.set(0.001,0.001);
-			loader.screenCenter();
-			add(loader);
-            FlxG.bitmap.add(Paths.image("updateron/characters/" + replaced,"shared"), true, Std.string(i));
-            trace("cached " + replaced);
-            done++;
-			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
-        }
-		
-        for (i in bgs_ron)
-        {
-            var replaced = i.replace(".png","");
-			var loader:FlxSprite = new FlxSprite().loadGraphic(i);
-			loader.updateHitbox();
-			loader.scale.set(0.001,0.001);
-			loader.screenCenter();
-			add(loader);
-            FlxG.bitmap.add(Paths.image("ron/bg/" + replaced,"shared"), true, Std.string(i));
-            trace("cached " + replaced);
-            done++;
-			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
-        }
-		
-        for (i in bgs_update)
-        {
-            var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("updateron/bg/" + replaced,"shared"), true, Std.string(i));
-            trace("cached " + replaced);
-            done++;
-			text2.text = "Loading.. (" + done + "/" + toBeDone + ")";
-        }
+        for (i in characters)
+			actuallyCache(i,"assets/shared/images/updateron/characters/");
+        for (i in maincharacters)
+			actuallyCache(i,"assets/shared/images/characters");
+        for (i in bgs)
+			actuallyCache(i,"assets/shared/images/updateron/bg");
+        for (i in portrait)
+			actuallyCache(i,"assets/shared/images/updateron/portraits");
 		
         trace("Finished caching...");
 		text.text = toBeDone + "/" + toBeDone;

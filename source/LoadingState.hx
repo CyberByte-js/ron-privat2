@@ -30,6 +30,10 @@ class LoadingState extends MusicBeatState
 	function new(target:FlxState, stopMusic:Bool)
 	{
 		super();
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('loadingGeneral'));
+		menuBG.screenCenter();
+        menuBG.setGraphicSize(Std.int(menuBG.width * 0.5));
+		add(menuBG);
 		this.target = target;
 		this.stopMusic = stopMusic;
 	}

@@ -222,6 +222,7 @@ class PlayState extends MusicBeatState
 	var songScoreDef:Int = 0;
 	var scoreTxt:FlxText;
 	var replayTxt:FlxText;
+	var loadingScreen:FlxSprite;
 
 	public static var campaignScore:Int = 0;
 
@@ -267,9 +268,11 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-
 		var charInputs:String = "";
-
+		loadingScreen = new FlxSprite().loadGraphic(Paths.image('loadingGeneral'));
+		loadingScreen.screenCenter();
+        loadingScreen.setGraphicSize(Std.int(loadingScreen.width * 0.5));
+		add(loadingScreen);
 		instance = this;
 		
 		if (FlxG.save.data.fpsCap > 290)
@@ -355,6 +358,10 @@ class PlayState extends MusicBeatState
 			SONG = Song.loadFromJson('tutorial', 'tutorial');
 			
 		// Updating Discord Rich Presence.
+		
+		// soon
+		//var icon:String = storyWeek;
+		
 		var iconsong:String = 'normal';
 		if (SONG.song.toLowerCase() == 'bloodshed')
 			iconsong = 'bloodshed';
@@ -1774,6 +1781,7 @@ class PlayState extends MusicBeatState
 		startingSong = true;
 		
 		trace('starting');
+		remove(loadingScreen);
 				
 
 			switch (StringTools.replace(curSong," ", "-").toLowerCase())
