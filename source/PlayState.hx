@@ -2700,7 +2700,7 @@ class PlayState extends MusicBeatState
 				case 'wasted':
 					credits = 'coquers_';
 				case 'ayo':
-					credits = 'Tigression';
+					credits = 'ArmandRonan & kurtfan5048 & Sz & Tigression';
 				case 'bloodshed':
 					credits = 'BlueBoyeet';
 				case 'trojan-virus':
