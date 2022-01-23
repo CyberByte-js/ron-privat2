@@ -374,11 +374,20 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		}
 		
-		if (!pressedEnter && !pressedSkip && FlxG.keys.justPressed.S && !transitioning && skippedIntro)
+		if (!pressedEnter && !pressedSkip && !transitioning && skippedIntro)
 		{
-			// im too tired to keep waiting for the stupid Other states so im just putting a skip button
-			pressedSkip = true;
-			FlxG.switchState(new MainMenuState());
+			if (FlxG.keys.justPressed.S)
+			{
+				// im too tired to keep waiting for the stupid Other states so im just putting a skip button
+				pressedSkip = true;
+				FlxG.switchState(new MainMenuState());
+			}
+			if (FlxG.keys.justPressed.A)
+			{
+				// testing purposes
+				pressedSkip = true;
+				FlxG.switchState(new AntiPiracyState());
+			}
 		}
 
 		super.update(elapsed);

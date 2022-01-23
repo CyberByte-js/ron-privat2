@@ -836,7 +836,7 @@ class PlayState extends MusicBeatState
 				add(bg2);
 				Estatic2 = new FlxSprite();
 				Estatic2.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
-				Estatic2.scale.set(2,2);
+				Estatic2.scale.set(4,4);
 				Estatic2.animation.addByPrefix('idle', 'static instance 1', 24, true);
 				Estatic2.animation.play('idle');
 				Estatic2.scrollFactor.set();
@@ -962,7 +962,7 @@ class PlayState extends MusicBeatState
 				Estatic.alpha = 0;
 				Estatic2 = new FlxSprite();
 				Estatic2.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
-				Estatic2.scale.set(2,2);
+				Estatic2.scale.set(4,4);
 				Estatic2.animation.addByPrefix('idle', 'static instance 1', 24, true);
 				Estatic2.animation.play('idle');
 				Estatic2.scrollFactor.set();
@@ -1035,33 +1035,35 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 0.8;
 					curStage = 'win';
 					
-					var images = [];
-					var xml = [];
-					trace("caching images...");
-		
-					for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/")))
-					{
-						if (!i.endsWith(".png"))
-							continue;
-						images.push(i);
-		
-						if (!i.endsWith(".xml"))
-							continue;
-						xml.push(i);
-					}
-					for (i in images)
-					{
-						var replaced = i.replace(".png","");
-						FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
-						trace("cached " + replaced);
-					}
-				
-				for (i in xml)
-					{
-						var replaced = i.replace(".xml","");
-						FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
-						trace("cached " + replaced);
-					}
+					#if PRELOAD_ALL			
+						var images = [];
+						var xml = [];
+						trace("caching images...");
+			
+						for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/")))
+						{
+							if (!i.endsWith(".png"))
+								continue;
+							images.push(i);
+			
+							if (!i.endsWith(".xml"))
+								continue;
+							xml.push(i);
+						}
+						for (i in images)
+						{
+							var replaced = i.replace(".png","");
+							FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
+							trace("cached " + replaced);
+						}
+					
+					for (i in xml)
+						{
+							var replaced = i.replace(".xml","");
+							FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
+							trace("cached " + replaced);
+						}
+					#end
 					var bg:FlxSprite = new FlxSprite();
 					bg.frames = Paths.getSparrowAtlas('updateron/bg/trojan_bg');
 					bg.scale.set(4,4);
@@ -1113,7 +1115,7 @@ class PlayState extends MusicBeatState
 					add(error);
 					Estatic = new FlxSprite();
 					Estatic.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
-					Estatic.scale.set(2,2);
+					Estatic.scale.set(4,4);
 					Estatic.animation.addByPrefix('idle', 'static instance 1', 24, true);
 					Estatic.animation.play('idle');
 					Estatic.scrollFactor.set();
@@ -2688,6 +2690,150 @@ class PlayState extends MusicBeatState
 			});
 
 			strumLineNotes.add(babyArrow);
+					
+			var credits = 'uhrhmmmm.. um';
+			// jacks what the fuck
+			switch (curSong.toLowerCase())
+			{
+				case 'ron':
+					credits = 'wildythomas';
+				case 'wasted':
+					credits = 'coquers_';
+				case 'ayo':
+					credits = 'Tigression';
+				case 'bloodshed':
+					credits = 'BlueBoyeet';
+				case 'trojan-virus':
+					credits = 'Tigression';
+				case 'file-manipulation':
+					credits = 'Rareblin';
+				case 'atelophobia':
+					credits = 'firey';
+				case 'factory-reset':	
+					credits = 'Tigression';
+				case 'ron-b':
+					credits = 'DeepFriedBolonese';
+				case 'wasted-b':
+					credits = 'coquers_';
+				case 'ayo-b':
+					credits = 'Tigression';
+				case 'bloodshed-b':
+					credits = 'Tigression';
+				case 'trojan-virus-b':
+					credits = 'Tigression';
+				case 'file-manipulation-b':
+					credits = 'Tigression';
+				case 'atelophobia-b':
+					credits = 'Tigression';
+				case 'factory-reset-b':
+					credits = 'Tigression';
+				case 'holy-shit-dave-fnf':
+					credits = 'DeepFriedBolonese';
+				case 'slammed':
+					credits = 'Tigression';
+				case 'meme-machine':
+					credits = 'Tigression';
+				case 'frosting-over':
+					credits = 'Tigression';
+				case 'raw-meaty-meats':
+					credits = 'Zesty';
+				case 'assassination':
+					credits = 'Zesty & Tigression';
+				case 'steak':
+					credits = 'Zesty';
+				case 'pretty-wacky':
+					credits = 'Tigression';
+				case 'he-hates-me':
+					credits = 'Lexicord';
+				case 'typical-dissecration':
+					credits = 'nobody yet';
+				case 'trouble':
+					credits = 'KyleGFX & kurtfan5468';
+				case 'bijuu':
+					credits = 'Tigression';
+				case 'double-trouble':
+					credits = 'yourlocalmusician';
+				case 'bloodshed-two':
+					credits = 'BlueBoyeet';
+				case 'anti-piracy':
+					credits = 'BlueBoyeet';
+				case 'bloodbath':
+					credits = 'BlueBoyeet';
+				case 'withered':
+					credits = 'ZeroDawn & Sz';
+			}
+			var rSongname = curSong;
+			if (rSongname.toLowerCase().endsWith('-b'))
+			{
+				rSongname = rSongname.substr(0, rSongname.length-2);
+				rSongname += " B-Sides";
+			}
+			var songNameC:FlxText = new FlxText(0, 0, 0, rSongname, 32);
+			var songNameD:FlxText = new FlxText(0, 0, 0, credits, 32);
+			songNameC.setFormat(Paths.font("w95.otf"), 52, FlxColor.YELLOW, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK); 
+			songNameC.scrollFactor.set();
+			songNameC.screenCenter(Y);
+			songNameC.x = -songNameC.fieldWidth - 100;
+			songNameC.y -= 175;
+			songNameD.setFormat(Paths.font("w95.otf"), 32, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK); 
+			songNameD.scrollFactor.set();
+			songNameD.screenCenter(Y);
+			songNameD.x = -songNameC.fieldWidth - 100;
+			songNameD.y -= 125;
+			var black:FlxSprite = new FlxSprite(songNameC.x - 600, songNameC.y - 20).makeGraphic(600, Std.int(songNameC.height * 2.75), FlxColor.BLACK);
+			black.scrollFactor.set();
+			add(black);
+			add(songNameC);
+			add(songNameD);
+			trace(songNameC.fieldWidth);
+			FlxTween.tween(songNameC, {x: songNameC.fieldWidth - 20}, 1, {
+				ease: FlxEase.backInOut,
+				onComplete: function(twn:FlxTween)
+				{
+					new FlxTimer().start(2, function(tmr:FlxTimer)
+					{
+						FlxTween.tween(songNameC, {x: -songNameC.fieldWidth - 100}, 1, {
+							ease: FlxEase.backInOut,
+							onComplete: function(twn:FlxTween)
+							{
+								songNameC.destroy();
+							}
+						});
+					});
+				}
+			});
+			FlxTween.tween(songNameD, {x: songNameD.fieldWidth - 20}, 1, {
+				ease: FlxEase.backInOut,
+				onComplete: function(twn:FlxTween)
+				{
+					new FlxTimer().start(2, function(tmr:FlxTimer)
+					{
+						FlxTween.tween(songNameD, {x: -songNameD.fieldWidth - 100}, 1, {
+							ease: FlxEase.backInOut,
+							onComplete: function(twn:FlxTween)
+							{
+								songNameD.destroy();
+							}
+						});
+					});
+				}
+			});
+			FlxTween.tween(black, {x: 86 - 200}, 1, {
+				ease: FlxEase.backInOut,
+				onComplete: function(twn:FlxTween)
+				{
+					new FlxTimer().start(2, function(tmr:FlxTimer)
+					{
+						FlxTween.tween(black, {x: -songNameC.x - 600}, 1, {
+							ease: FlxEase.backInOut,
+							onComplete: function(twn:FlxTween)
+							{
+								black.destroy();
+							}
+						});
+					});
+				}
+			});
 		}
 	}
 
