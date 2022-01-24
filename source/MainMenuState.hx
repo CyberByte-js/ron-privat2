@@ -32,6 +32,7 @@ using StringTools;
 // k -ekical
 
 // hi -sz
+// hi -cyber
 class MainMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
