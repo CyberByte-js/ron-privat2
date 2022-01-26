@@ -31,6 +31,9 @@ class GameOverSubstate extends MusicBeatSubstate
 				daBf = 'bf';
 		}
 
+		if (PlayState.SONG.player2 == 'hellron' || PlayState.SONG.player2 == 'devilron' || PlayState.storyWeek == 2)
+			stageSuffix = '-bloodshed';
+
 		if (FlxG.save.data.siteenable)
 		{
 			switch (daStage)
@@ -94,7 +97,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
-		{
+		{ 
 			FlxG.sound.playMusic(Paths.music('gameOver' + stageSuffix));
 		}
 
