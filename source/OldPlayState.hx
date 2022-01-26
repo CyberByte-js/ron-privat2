@@ -20,7 +20,7 @@ import Discord.DiscordClient;
 
 using StringTools;
 
-class NormalPlayState extends MusicBeatState
+class OldPlayState extends MusicBeatState
 {
 	var songs:Array<FreeplayState.SongMetadata> = [];
 
