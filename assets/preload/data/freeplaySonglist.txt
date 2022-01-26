@@ -24,3 +24,10 @@ Slammed:bambi:2
 Meme-Machine:bambi:2
 Frosting-Over:bambi:2
 ANTI-PIRACY:HELLRON:1
+Old-Ron:oldron:1
+Old-Ayo:oldron-mad:1
+Old-Bloodshed:oldhellron:1
+Old-Trojan-Virus:oldron-usb:2
+Old-File-Manipulation:oldron-usb:2
+Old-Atelophobia:oldateloron:2
+Old-Factory-Reset:oldfactorytankman:2

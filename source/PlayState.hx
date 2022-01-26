@@ -1317,6 +1317,86 @@ class PlayState extends MusicBeatState
 				add(fence);
 				add(sign);
 			}
+			case 'oldmad':
+			{
+				defaultCamZoom = 0.9;
+				curStage = 'oldmad';
+				var bg:FlxSprite = new FlxSprite(300, 200).loadGraphic(Paths.image('ron/bg/ron2background_edited'));
+				bg.setGraphicSize(Std.int(bg.width *5));
+				bg.setGraphicSize(Std.int(bg.height * 5));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+			}
+			case 'oldhell':
+			{
+				defaultCamZoom = 0.9;
+				curStage = 'oldhell';
+				var bg:FlxSprite = new FlxSprite(300, 200).loadGraphic(Paths.image('ron/bg/madRon_ground'));
+				bg.setGraphicSize(Std.int(bg.width * 5));
+				bg.setGraphicSize(Std.int(bg.height * 5));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+			}
+			case 'oldglitch':
+				defaultCamZoom = 0.9;
+				curStage = 'oldglitch';
+				var bg:FlxSprite = new FlxSprite(-300, -100).loadGraphic(Paths.image('ron/bg/png'));
+					bg.setGraphicSize(Std.int(bg.width * 1.7));
+					bg.setGraphicSize(Std.int(bg.height * 1.7));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.9, 0.9);
+					bg.active = false;
+					add(bg);
+					case 'oldNOGFHAHA':
+						defaultCamZoom = 0.9;
+						curStage = 'oldNOGFHAHA';
+						var bg:FlxSprite = new FlxSprite(-300, -100).loadGraphic(Paths.image('ron/bg/png'));
+							bg.setGraphicSize(Std.int(bg.width * 1.7));
+							bg.setGraphicSize(Std.int(bg.height * 1.7));
+							bg.antialiasing = true;
+							bg.scrollFactor.set(0.9, 0.9);
+							bg.active = false;
+							add(bg);
+			case 'oldbaka':
+				{
+					defaultCamZoom = 0.9;
+					curStage = 'oldbaka';
+					var bg:FlxSprite = new FlxSprite(300, 200).loadGraphic(Paths.image('ron/bg/unknown'));
+					bg.setGraphicSize(Std.int(bg.width * 4));
+					bg.setGraphicSize(Std.int(bg.height * 4));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.9, 0.9);
+					bg.active = false;
+					add(bg);
+				}
+			case 'oldwin':
+				{
+					defaultCamZoom = 0.9;
+					curStage = 'oldwin';
+					var bg:FlxSprite = new FlxSprite(-100, -100).loadGraphic(Paths.image('ron/bg/bg'));
+					bg.setGraphicSize(Std.int(bg.width * 2));
+					bg.setGraphicSize(Std.int(bg.height * 2));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.9, 0.9);
+					bg.active = false;
+					add(bg);
+				}
+			case 'olddefault':
+			{
+				defaultCamZoom = 0.9;
+				curStage = 'oldstage';
+				var bg:FlxSprite = new FlxSprite(300, 200).loadGraphic(Paths.image('ron/bg/kd'));
+				bg.setGraphicSize(Std.int(bg.width * 5));
+				bg.setGraphicSize(Std.int(bg.height * 5));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+			}
 			default:
 			{
 				defaultCamZoom = 0.9;
@@ -2722,7 +2802,7 @@ class PlayState extends MusicBeatState
 				case 'trojan-virus-b':
 					credits = 'Tigression';
 				case 'file-manipulation-b':
-					credits = 'Tigression';
+					credits = 'Tigression & Sz';
 				case 'atelophobia-b':
 					credits = 'Tigression';
 				case 'factory-reset-b':
