@@ -1879,6 +1879,11 @@ class PlayState extends MusicBeatState
 					add(fx);
 					add(Estatic);
 					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
+				case 'bleeding':
+					startCountdown();
+					add(fx);
+					add(Estatic);
+					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 				case 'not-bloodshed':
 					startCountdown();
 					add(fx);
@@ -5158,6 +5163,98 @@ class PlayState extends MusicBeatState
 			else
 			{
 				if ((curStep == 1071) || (curStep == 519))
+					FlxTween.cancelTweensOf(satan);
+				if (satan.angle != 0)
+					FlxTween.angle(satan, satan.angle, 359.99, 0.5, {ease: FlxEase.quadIn});
+				if (fx.alpha > 0.3)
+					fx.alpha -= 0.05;
+			}
+			Estatic.alpha = (((2-health)/3)+0.2);
+		}
+		
+		// 256 - 384 Intense
+		// 384 - 512 Very Intense
+		// 664 - 672 Zoom
+		// 768 - 832 Intense
+		// 832 - 896 Very Intense
+		// 896 - 1024 Extremely Intense
+		// 1024 - 1040 Oh No
+		// 1040 - 1168 - Very Intense
+		// 1168 - 1296 - Zoom
+		
+		if (curSong == 'Bleeding') {
+			healthBarBG.alpha = 0;
+			healthBar.alpha = 0;
+			iconP1.visible = true;
+			iconP2.visible = true;
+			iconP2.alpha = (2-(health)-0.25)/2+0.2;
+			iconP1.alpha = (health-0.25)/2+0.2;
+			switch (curStep)
+			{
+				case 256:
+					defaultCamZoom += 0.1;
+				case 384:
+					defaultCamZoom += 0.15;
+				case 512:
+					defaultCamZoom -= 0.25;
+				case 664:
+					defaultCamZoom += 0.3;
+				case 672:
+					defaultCamZoom -= 0.3;
+				case 768:
+					FlxTween.tween(firebg, {alpha: 1}, 1, {ease: FlxEase.quadInOut});
+					defaultCamZoom += 0.1;
+				case 832:
+					defaultCamZoom += 0.1;
+				case 896:
+					defaultCamZoom += 0.1;
+				case 1024:
+					defaultCamZoom += 0.1;
+				case 1040:
+					defaultCamZoom -= 0.2;
+				case 1168:
+					defaultCamZoom -= 0.1;
+				case 1296:
+					FlxTween.tween(firebg, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
+					defaultCamZoom -= 0.1;
+			}
+			if ((curStep >= 256) && (curStep <= 512))
+			{
+				if (fx.alpha < 0.6)
+					fx.alpha += 0.05;			
+				if (curStep == 256)
+				{
+					FlxTween.angle(satan, 0, 359.99, 1.5, { 
+						ease: FlxEase.quadIn, 
+						onComplete: function(twn:FlxTween) 
+						{
+							FlxTween.angle(satan, 0, 359.99, 0.75, { type: FlxTween.LOOPING } );
+						}} 
+					);
+				}
+				FlxG.camera.shake(0.01, 0.1);
+				camHUD.shake(0.001, 0.15);
+			}
+			else if ((curStep >= 768) && (curStep <= 1296))
+			{
+				if (fx.alpha > 0)
+					fx.alpha -= 0.05;
+				if (curStep == 768)
+				{
+					FlxTween.angle(satan, 0, 359.99, 0.75, { 
+						ease: FlxEase.quadIn, 
+						onComplete: function(twn:FlxTween) 
+						{
+							FlxTween.angle(satan, 0, 359.99, 0.35, { type: FlxTween.LOOPING } );
+						}} 
+					);
+				}
+				FlxG.camera.shake(0.015, 0.1);
+				camHUD.shake(0.0015, 0.15);
+			}
+			else
+			{
+				if ((curStep == 1297) || (curStep == 614))
 					FlxTween.cancelTweensOf(satan);
 				if (satan.angle != 0)
 					FlxTween.angle(satan, satan.angle, 359.99, 0.5, {ease: FlxEase.quadIn});
