@@ -5053,6 +5053,10 @@ class PlayState extends MusicBeatState
 		});
 
 	}
+	function cancelTween()
+		{
+			FlxTween.cancelTweensOf(FlxG.camera);
+		}
 
 	var danced:Bool = false;
 
@@ -5429,7 +5433,7 @@ class PlayState extends MusicBeatState
 						
 				}
 			}
-		if (curSong == 'File-Manipulation')
+		if (curSong == 'file-manipulation')
 		{
 			switch (curStep) {
 				case 460:
@@ -5438,26 +5442,14 @@ class PlayState extends MusicBeatState
 					ronAnimation.y = dad.y+55;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
-				case 507:
-					camHUD.visible = false;
-					trace('work');
-				case 513:
-					FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
-					trace("workk");
-				case 532:
-					FlxTween.cancelTweensOf(FlxG.camera);
-				case 535:
-					FlxTween.tween(FlxG.camera, {zoom: 0.8}, 2);
-					trace("also work");
-				case 545:
-					FlxTween.cancelTweensOf(FlxG.camera);
-				case 544:
-					camHUD.visible = true;
-					trace('work');
-				case 560:
-					defaultCamZoom = 1;
-				case 563:
-					defaultCamZoom = 0.88;
+				case 507: camHUD.visible = false;
+				case 513: FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
+				case 532: cancelTween();
+				case 535: FlxTween.tween(FlxG.camera, {zoom: 0.8}, 2);
+				case 545: cancelTween();
+				case 544: camHUD.visible = true;
+				case 560: defaultCamZoom = 1;
+				case 563: defaultCamZoom = 0.88;
 				case 538:
 					PlayStateChangeables.scrollSpeed = 3.5;
 					var xx = dad.x-20;
@@ -5467,8 +5459,7 @@ class PlayState extends MusicBeatState
 					add(dad);
 					iconP2.animation.play('ateloron');
 					ronAnimation.visible = false;
-				case 544:
-					camHUD.visible = true;
+				case 544: camHUD.visible = true;
 				case 556:
 					defaultCamZoom = 0.2;
 					FlxTween.tween(FlxG.camera, {angle: 180}, 0.1, {ease: FlxEase.expoOut,});
