@@ -73,6 +73,7 @@ class StoryMenuState extends MusicBeatState
 	var bg:FlxSprite;
 	var bg2:FlxSprite;
 	var secret:String = "";
+	var warning:String = "";
 	var secretPng:FlxSprite;
 	public var video:MP4Handler = new MP4Handler();
 
@@ -234,10 +235,15 @@ class StoryMenuState extends MusicBeatState
 
 		difficultySelectors.visible = weekUnlocked[curWeek];
 		
-		if (!FlxG.save.data.coolronweekcopyright)
-			copyright.text = "Copyright mode: Off\rC: toggle\r(It's suggested to be off anyways!)";
+		if ((curDifficulty == 3) && (curWeek == 1))
+			warning = "(Hard mode recommended)";
 		else
-			copyright.text = "Copyright mode: On\rC: toggle\r(It's suggested to be off anyways!)";
+			warning = "";
+		
+		if (!FlxG.save.data.coolronweekcopyright)
+			copyright.text = "Copyright mode: Off\rC: toggle\r" + warning;
+		else
+			copyright.text = "Copyright mode: On\rC: toggle\r" + warning;
 		if (FlxG.keys.justPressed.C)
 				FlxG.save.data.coolronweekcopyright = !FlxG.save.data.coolronweekcopyright;
 
@@ -392,9 +398,15 @@ class StoryMenuState extends MusicBeatState
 					leftArrow.animation.play('idle');
 
 				if (controls.RIGHT_P)
+				{
 					changeDifficulty(1);
+					updateText();
+				}
 				if (controls.LEFT_P)
+				{
 					changeDifficulty(-1);
+					updateText();
+				}
 			}
 
 			if (controls.ACCEPT)
@@ -436,6 +448,8 @@ class StoryMenuState extends MusicBeatState
 
 
 			PlayState.storyDifficulty = curDifficulty;
+			if ((curDifficulty == 3) && (curWeek == 1))
+				PlayState.storyPlaylist = ['Ron', 'Wasted', 'Ayo', 'Bleeding'];
 
 			// adjusting the song name to be compatible
 			var songFormat = StringTools.replace(PlayState.storyPlaylist[0], " ", "-");
@@ -573,6 +587,8 @@ class StoryMenuState extends MusicBeatState
 
 		txtTracklist.text = "Tracks\n";
 		var stringThing:Array<String> = weekData[curWeek];
+		if ((curDifficulty == 3) && (curWeek == 1))
+			stringThing = ['Ron', 'Wasted', 'Ayo', 'Bleeding'];
 
 		for (i in stringThing)
 			txtTracklist.text += "\n" + i;
