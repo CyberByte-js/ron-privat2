@@ -5189,6 +5189,7 @@ class PlayState extends MusicBeatState
 		if (curSong == 'bloodbath'){ // hi it me chromasen and im proud of this code because i made it:)
 			healthBarBG.alpha = 0;
 			healthBar.alpha = 0;
+			scoreTxt.alpha = 0;
 			iconP1.visible = true;
 			iconP2.visible = true;
 			iconP2.alpha = (2-(health)-0.25)/2+0.2;
