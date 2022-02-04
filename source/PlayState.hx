@@ -1884,6 +1884,11 @@ class PlayState extends MusicBeatState
 					add(fx);
 					add(Estatic);
 					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
+				case 'bloodbath':
+					startCountdown();
+					add(fx);
+					add(Estatic);
+					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 				case 'not-bloodshed':
 					startCountdown();
 					add(fx);
@@ -5181,7 +5186,76 @@ class PlayState extends MusicBeatState
 		// 1024 - 1040 Oh No
 		// 1040 - 1168 - Very Intense
 		// 1168 - 1296 - Zoom
-		
+		if (curSong == 'bloodbath'){ // hi it me chromasen and im proud of this code because i made it:)
+			healthBarBG.alpha = 0;
+			healthBar.alpha = 0;
+			iconP1.visible = true;
+			iconP2.visible = true;
+			iconP2.alpha = (2-(health)-0.25)/2+0.2;
+			iconP1.alpha = (health-0.25)/2+0.2;
+			switch (curStep)
+			{
+				case 128:
+					 defaultCamZoom = 0.9;
+				case 253:
+					 defaultCamZoom = 1.2;
+				case 409:
+					 defaultCamZoom = 1.1;
+				case 413: 
+					defaultCamZoom = 0.95;		
+				case 520: 
+					 defaultCamZoom = 0.85;
+				case 768: 
+					 defaultCamZoom = 1.1;
+				case 1039:
+					 defaultCamZoom = 0.85;
+			}
+					if ((curStep >= 254) && (curStep <= 518))
+						{
+							if (fx.alpha < 0.6)
+								fx.alpha += 0.05;			
+							if (curStep == 256)
+							{
+								FlxTween.angle(satan, 0, 359.99, 1.5, { 
+									ease: FlxEase.quadIn, 
+									onComplete: function(twn:FlxTween) 
+									{
+										FlxTween.angle(satan, 0, 359.99, 0.75, { type: FlxTween.LOOPING } );
+									}} 
+								);
+							}
+							FlxG.camera.shake(0.01, 0.1);
+							camHUD.shake(0.001, 0.15);
+						}
+						else if ((curStep >= 768) && (curStep <= 1040))
+							{
+								if (fx.alpha > 0)
+									fx.alpha -= 0.05;
+								if (curStep == 768)
+								{
+									FlxTween.angle(satan, 0, 359.99, 0.75, { 
+										ease: FlxEase.quadIn, 
+										onComplete: function(twn:FlxTween) 
+										{
+											FlxTween.angle(satan, 0, 359.99, 0.35, { type: FlxTween.LOOPING } );
+										}} 
+									);
+								}
+								FlxG.camera.shake(0.015, 0.1);
+								camHUD.shake(0.0015, 0.15);
+							}
+						else
+							{
+								if ((curStep == 519) || (curStep == 1041))
+									FlxTween.cancelTweensOf(satan);
+								if (satan.angle != 0)
+									FlxTween.angle(satan, satan.angle, 359.99, 0.5, {ease: FlxEase.quadIn});
+								if (fx.alpha > 0.3)
+									fx.alpha -= 0.05;
+							}
+							Estatic.alpha = (((2-health)/3)+0.2);
+				}
+						
 		if (curSong == 'Bleeding') {
 			healthBarBG.alpha = 0;
 			healthBar.alpha = 0;
