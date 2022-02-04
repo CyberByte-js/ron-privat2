@@ -5203,7 +5203,7 @@ class PlayState extends MusicBeatState
 					 defaultCamZoom = 1.1;
 				case 413: 
 					defaultCamZoom = 0.95;		
-				case 520: 
+				case 516: 
 					 defaultCamZoom = 0.85;
 				case 768: 
 					 defaultCamZoom = 1.1;
