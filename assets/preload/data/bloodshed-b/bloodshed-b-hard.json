@@ -1,7 +1,7 @@
 {
 	"song": {
-		"player1": "bf",
-		"player2": "dad",
+		"player1": "bf-b",
+		"player2": "hellron-2",
 		"events": [],
 		"notes": [
 			{
@@ -6838,10 +6838,9 @@
 				"mustHitSection": true
 			}
 		],
-		"gfVersion": "gf",
+		"gfVersion": "gf-b",
 		"player3": null,
-		"splashSkin": "noteSplashes",
-		"song": "bloodshed-b-sides",
+		"song": "bloodshed-b",
 		"stage": "stage",
 		"validScore": true,
 		"arrowSkin": "",
