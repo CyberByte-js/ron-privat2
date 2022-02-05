@@ -1210,6 +1210,19 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				playAnim('idle');
+			case 'chezburgir':
+				tex = Paths.getSparrowAtlas('updateron/characters/chezburgir');
+				frames = tex;
+				animation.addByPrefix('idle', "idle", 24);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singLEFT");
+				addOffset("singRIGHT");
+				addOffset("singDOWN");
 		}
 
 		dance();

@@ -99,6 +99,10 @@ class HealthIcon extends FlxSprite
 		animation.add('oldfactorytankman-2', [82, 83], 0, false, isPlayer);
 		animation.add('oldhellron-2', [78, 79], 0, false, isPlayer);
 		animation.add('gf-in', [44], 0, false, isPlayer);
+
+		// the
+		animation.add('chezburgir', [2, 3], 0, false, isPlayer);
+
 		animation.play(char);
 
 		scrollFactor.set();
