@@ -5210,7 +5210,9 @@ class PlayState extends MusicBeatState
 				case 592: defaultCamZoom = 0.98;
 				case 599: defaultCamZoom = 1.15;
 				case 639: defaultCamZoom = 0.85;
-				case 768: defaultCamZoom = 1.1;
+				case 768:
+					 defaultCamZoom = 1.1;
+					 FlxTween.tween(firebg, {alpha: 1}, 1, {ease: FlxEase.quadInOut});
 				case 1039: defaultCamZoom = 0.85; // shit ton of code because yeah
 			}
 					if ((curStep >= 254) && (curStep <= 518))
