@@ -260,6 +260,10 @@ class DialogueBox extends FlxSpriteGroup
 			dialogueList[0] = dialogueList[0].substr(4).trim();
 			emote = true;
 			box.y = 315;
+		} else if (StringTools.contains(dialogueList[0], 'sussy'))
+		{
+			dialogueList[0] = dialogueList[0].substr(5).trim();
+			FlxG.sound.play(Paths.sound('among'), 1);
 		}
 		else
 		{

@@ -403,41 +403,20 @@ class PlayState extends MusicBeatState
 						dialogue = CoolUtil.coolTextFile(Paths.txt('bloodshed-old/diamane'));
 			case 'trojan-virus':
 				{
-					#if desktop		
 					dialogue = [
-						":ronPortraitPower:Yooooooo Whats up Bitch",
-						":bf:what why tf are you here again",
-						":ronPortraitPower:cuz you posted tha video on the internet",
+						":ronPortraitPower:Yooooooo Whats up again POO POO man",
+						":bf:what why are you here again",
+						":ronPortraitPower:cuz you posted  a video of us Fighting on the internet",
 						":ronPortraitPower:i hate u for that and i want you to Spontaneously Combust",
 						":bf:oh ok",
 						":bf:btw why tf are you glowing",
-						":ronPortraitPower:so basicaly i went to buy free power and I got it!!!",
-						":bf:guh?? wt",
-						":ronPortraitPower:yea someone called " + user + " gave it to me",
-						":bf:huh",
-						":bf:who",
-						":ronPortraitPower:idk but theyre pretty based",
-						":ronPortraitPower:anyway I pull up Motherfucker!!! Get ready for your world to be Rocked",
-						":bf:alr lmao"
+						":ronPortraitPower:so basicaly i entered into a site and it gave me an ad on how to get free power gain 2021 not clickbait (working)",
+						":bf:what",
+						":bf:sussydont you think thats a bit sus",
+						":ronPortraitPower:idk but it looks to be Working",
+						":ronPortraitPower:anyway I pull up Motherfricker Get ready for your world to be Rocked",
+						":bf:alright Then"
 						];
-					#else
-					dialogue = [
-						":ronPortraitPower:Yooooooo Whats up Bitch",
-						":bf:what why tf are you here again",
-						":ronPortraitPower:cuz you posted tha video on the internet",
-						":ronPortraitPower:i hate u for that and i want you to Spontaneously Combust",
-						":bf:oh ok",
-						":bf:btw why tf are you glowing",
-						":ronPortraitPower:so basicaly i went to buy free power and I got it!!!",
-						":bf:guh?? wt",
-						":ronPortraitPower:yea someone called Admin gave it to me",
-						":bf:huh",
-						":bf:who",
-						":ronPortraitPower:idk but theyre pretty based",
-						":ronPortraitPower:anyway I pull up Motherfucker!!! Get ready for your world to be Rocked",
-						":bf:alr lmao"
-						];
-					#end
 				}
 			case 'file-manipulation':
 				{
