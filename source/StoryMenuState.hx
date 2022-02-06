@@ -29,12 +29,13 @@ class StoryMenuState extends MusicBeatState
 		['Trojan Virus', 'Recycle-Bin', 'File-Manipulation', 'Factory-Reset'],
 		['Raw-Meaty-Meats', 'Assassination', 'Steak'],
 		['Holy-Shit-Dave-Fnf', 'Slammed', 'Meme-Machine', 'Frosting-Over'],
+		['Bijuu', 'Goncy', 'Scrub-Of-The-Day']
 		['Pretty-Wacky','He-Hates-Me', 'Atypical']
 	];
 
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, false];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, false];
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
@@ -42,6 +43,7 @@ class StoryMenuState extends MusicBeatState
 		['ron2', 'bf', 'gf'],
 		['cookron', 'bf', 'gf'],
 		['bambi', 'ronMain', ''],
+		['', 'bf', 'gf'],
 		['douyhe', 'bf', 'gf']
 	];
 
@@ -51,7 +53,8 @@ class StoryMenuState extends MusicBeatState
 		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron",
 		"THE MEAT IS RAW BOYFRIEND, THE MEAT IS RAW *SLAP*",
 		"bm mabmabi hory sheet bambir IRL!!!!!!!!!!!!!!!!!!!!!!!!!!!! *vine tuhd*",
-		"thy tongue deviseth mischiefs"
+		"Folder turned Weeaboo",
+		"what"
 	];
 
 	var txtWeekTitle:FlxText;
