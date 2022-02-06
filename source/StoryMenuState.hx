@@ -29,7 +29,7 @@ class StoryMenuState extends MusicBeatState
 		['Trojan Virus', 'Recycle-Bin', 'File-Manipulation', 'Factory-Reset'],
 		['Raw-Meaty-Meats', 'Assassination', 'Steak'],
 		['Holy-Shit-Dave-Fnf', 'Slammed', 'Meme-Machine', 'Frosting-Over'],
-		['Bijuu', 'Goncy', 'Scrub-Of-The-Day']
+		['Bijuu', 'Goncy', 'Scrub-Of-The-Day'],
 		['Pretty-Wacky','He-Hates-Me', 'Atypical']
 	];
 
