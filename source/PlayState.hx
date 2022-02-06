@@ -5050,6 +5050,20 @@ class PlayState extends MusicBeatState
 		boyfriend.playAnim('scared', true);
 		gf.playAnim('scared', true);
 	}
+	function wherenote()
+		{
+            for (note in playerStrums)
+                     {
+                        note.alpha = 0;
+                    }
+		}
+	function ohheresnote()
+		{
+			for (note in playerStrums)
+				{
+				   note.alpha = 1;
+			   }
+		}
 	
 	function RonIngameTransform()
 	{
@@ -5432,6 +5446,7 @@ class PlayState extends MusicBeatState
 				healthBar.alpha = 0;
 				iconP1.visible = true;
 				iconP2.visible = true;
+				ohheresnote();
 				iconP2.alpha = (2-(health)-0.25)/2+0.2;
 				iconP1.alpha = (health-0.25)/2+0.2;
 				Estatic.alpha = (2-health)/2;
@@ -5443,6 +5458,7 @@ class PlayState extends MusicBeatState
 				iconP2.visible = false;
 				healthBar.alpha = 0;
 				healthBarBG.alpha = 0;
+				wherenote();
 				var xx = dad.x;
 				var yy = dad.y;
 				dad.alpha = 0;
