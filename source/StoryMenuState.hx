@@ -209,7 +209,7 @@ class StoryMenuState extends MusicBeatState
 		// add(rankText);
 		add(scoreText);
 		add(txtWeekTitle);
-		add(copyright);
+		//add(copyright);
 		
 		secretPng = new FlxSprite().loadGraphic(Paths.image('holdup'));
 		secretPng.scale.set(0.66,0.66);
@@ -247,8 +247,8 @@ class StoryMenuState extends MusicBeatState
 			copyright.text = "Copyright mode: Off\rC: toggle\r" + warning;
 		else
 			copyright.text = "Copyright mode: On\rC: toggle\r" + warning;
-		if (FlxG.keys.justPressed.C)
-				FlxG.save.data.coolronweekcopyright = !FlxG.save.data.coolronweekcopyright;
+		//if (FlxG.keys.justPressed.C)
+		//		FlxG.save.data.coolronweekcopyright = !FlxG.save.data.coolronweekcopyright;
 
 		if (FlxG.keys.justPressed.ANY)
 		{
