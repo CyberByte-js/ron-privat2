@@ -2304,12 +2304,7 @@ class PlayState extends MusicBeatState
 
 		if (!paused)
 		{			
-			if ((FlxG.save.data.coolronweekcopyright) && ((PlayState.SONG.song.toLowerCase() == 'atelophobia') || (PlayState.SONG.song.toLowerCase() == 'ayo') || (PlayState.SONG.song.toLowerCase() == 'factory-reset') ||	(PlayState.SONG.song.toLowerCase() == 'ayo-b') || (PlayState.SONG.song.toLowerCase() == 'factory-reset-b')))
-			{
-				FlxG.sound.playMusic(Paths.censoredinst(PlayState.SONG.song), 1, false);
-			}
-			else
-				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
+			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		}
 
 		FlxG.sound.music.onComplete = endSong;
