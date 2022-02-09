@@ -877,7 +877,7 @@ class PlayState extends MusicBeatState
 				ground.antialiasing = true;
 				add(ground);
 				ronAnimation = new FlxSprite();
-				ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ronPower-transformation');
+				ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ronPower-transformation', 'shared');
 				ronAnimation.animation.addByPrefix('idle', 'ron transformation instance 1', 24, false);
 				ronAnimation.animation.play('idle');
 				ronAnimation.visible = false;
@@ -1011,38 +1011,9 @@ class PlayState extends MusicBeatState
 				}
 			case 'win':
 				{
+					DoCaching();
 					defaultCamZoom = 0.8;
 					curStage = 'win';
-					
-					#if PRELOAD_ALL			
-						var images = [];
-						var xml = [];
-						trace("caching images...");
-			
-						for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/")))
-						{
-							if (!i.endsWith(".png"))
-								continue;
-							images.push(i);
-			
-							if (!i.endsWith(".xml"))
-								continue;
-							xml.push(i);
-						}
-						for (i in images)
-						{
-							var replaced = i.replace(".png","");
-							FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
-							trace("cached " + replaced);
-						}
-					
-					for (i in xml)
-						{
-							var replaced = i.replace(".xml","");
-							FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
-							trace("cached " + replaced);
-						}
-					#end
 					var bg:FlxSprite = new FlxSprite();
 					bg.frames = Paths.getSparrowAtlas('updateron/bg/trojan_bg');
 					bg.scale.set(4,4);
@@ -1100,7 +1071,7 @@ class PlayState extends MusicBeatState
 					Estatic.scrollFactor.set();
 					Estatic.screenCenter();
 					ronAnimation = new FlxSprite();
-					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ateloron-Transform');
+					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ateloron-Transform', 'shared');
 					ronAnimation.animation.addByPrefix('idle', 'transformation instance 1', 24);
 					ronAnimation.animation.play('idle');
 					ronAnimation.visible = false;
@@ -5038,7 +5009,36 @@ class PlayState extends MusicBeatState
 				   note.alpha = 1;
 			   }
 		}
-	
+	function DoCaching()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
 	function RonIngameTransform()
 	{
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
@@ -5051,10 +5051,6 @@ class PlayState extends MusicBeatState
 		});
 
 	}
-	function cancelTween()
-		{
-			FlxTween.cancelTweensOf(FlxG.camera);
-		}
 
 	var danced:Bool = false;
 
@@ -5599,7 +5595,7 @@ class PlayState extends MusicBeatState
 						
 				}
 			}
-		if (curSong == 'file-manipulation')
+		if (curSong == 'File-Manipulation')
 		{
 			switch (curStep) {
 				case 460:
@@ -5608,14 +5604,22 @@ class PlayState extends MusicBeatState
 					ronAnimation.y = dad.y+55;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
-				case 507: camHUD.visible = false;
-				case 513: FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
-				case 532: cancelTween();
-				case 535: FlxTween.tween(FlxG.camera, {zoom: 0.8}, 2);
-				case 545: cancelTween();
-				case 544: camHUD.visible = true;
-				case 560: defaultCamZoom = 1;
-				case 563: defaultCamZoom = 0.88;
+				case 507:
+					 camHUD.visible = false;
+				case 513:
+					 FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
+				case 532:
+					FlxTween.cancelTweensOf(FlxG.camera);
+				case 535:
+					 FlxTween.tween(FlxG.camera, {zoom: 0.8}, 2);
+				case 545:
+					FlxTween.cancelTweensOf(FlxG.camera);
+				case 544:
+					 camHUD.visible = true;
+				case 560:
+					 defaultCamZoom = 1;
+				case 563:
+					 defaultCamZoom = 0.88;
 				case 538:
 					PlayStateChangeables.scrollSpeed = 3.5;
 					var xx = dad.x-20;
@@ -5625,7 +5629,8 @@ class PlayState extends MusicBeatState
 					add(dad);
 					iconP2.animation.play('ateloron');
 					ronAnimation.visible = false;
-				case 544: camHUD.visible = true;
+				case 544:
+					 camHUD.visible = true;
 				case 556:
 					defaultCamZoom = 0.2;
 					FlxTween.tween(FlxG.camera, {angle: 180}, 0.1, {ease: FlxEase.expoOut,});

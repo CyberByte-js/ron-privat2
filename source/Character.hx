@@ -699,7 +699,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 50, -38);
 				addOffset("crazy", 93, 36);
 			case 'ateloron':
-				tex = Paths.getSparrowAtlas('updateron/characters/ateloron', 'shared');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/ateloron', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -740,7 +740,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
 			case 'ron-usb':
-				tex = Paths.getSparrowAtlas('updateron/characters/ron-usb', 'shared');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/ron-usb', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
