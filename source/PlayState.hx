@@ -5891,7 +5891,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 
-		if (curBeat == 2 && curSong == 'Ron')
+		/*if (curBeat == 2 && curSong == 'Ron')
 			{
 				var bruh:FlxSprite = new FlxSprite();
 				bruh.loadGraphic(Paths.image('ron/longbob'));
@@ -5907,26 +5907,33 @@ class PlayState extends MusicBeatState
 						bruh.destroy();
 					}
 				});
-			}
+			}*/
 
-		if (curSong == 'Ron')
+		if (curSong == 'ron')
 			{
-				if (curBeat == 7)
+				if (curBeat == 36)
 				{
 					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
 					dad.playAnim('cheer', true);
 				}
-				else if (curBeat == 119)
-				{
+				else if (curBeat == 81)
 					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
-					dad.playAnim('cheer', true);
-				}
-				else if (curBeat == 215)
+				else if (curBeat == 147)
+					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
+				else if (curBeat == 151)
+					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
+				else if (curBeat == 159)
+					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
+				else if (curBeat == 172)
+					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
+				else if (curBeat == 187)
+					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
+				/*else if (curBeat == 215)
 				{
 					FlxG.camera.follow(dad, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
 					FlxTween.tween(FlxG.camera, {zoom: 1.5}, 0.4, {ease: FlxEase.expoOut,});
 					dad.playAnim('cheer', true);
-				}
+				}*/
 				else
 				{
 					FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
