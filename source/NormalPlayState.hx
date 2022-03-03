@@ -350,7 +350,7 @@ class NormalPlayState extends MusicBeatState
 				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 1:
 				FlxG.camera.shake(0.0025, 0.05);
-				/*if (curBeat == 1)
+				if (curBeat == 1)
 				{
 					var bruh:FlxSprite = new FlxSprite();
 					bruh.loadGraphic(Paths.image('longbob'));
@@ -365,7 +365,7 @@ class NormalPlayState extends MusicBeatState
 						{
 							bruh.destroy();
 						}
-					});*/
+					});
 				}
 			case 2:
 				FlxG.camera.y += 5;

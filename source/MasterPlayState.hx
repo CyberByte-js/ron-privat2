@@ -202,8 +202,6 @@ class MasterPlayState extends MusicBeatState
 					FlxG.switchState(new BSidePlayState());
 				case 2:
 					FlxG.switchState(new ExtrasPlayState());
-				case 3:
-					FlxG.switchState(new OldPlayState());
 			}
 		}
 	}
