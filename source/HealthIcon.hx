@@ -77,28 +77,10 @@ class HealthIcon extends FlxSprite
 		animation.add('tankman', [56, 57], 0, false, isPlayer);
 		animation.add('dave', [58, 59], 0, false, isPlayer);	
 		animation.add('bambi', [56, 57], 0, false, isPlayer);	
+		animation.add('Gray_BF', [0, 1], 0, false, isPlayer);
 		
 		// idk why this exists but ill put it in just in case
 		animation.add('gf-in', [59], 0, false, isPlayer);
-		
-		// old tab
-		animation.add('oldbf', [60, 61], 0, false, isPlayer);
-		animation.add('oldron', [64, 65], 0, false, isPlayer);
-		animation.add('oldron-mad', [66, 67], 0, false, isPlayer);		
-		animation.add('oldhellron', [68, 69], 0, false, isPlayer);		
-		animation.add('oldateloron', [68, 69], 0, false, isPlayer);
-		animation.add('oldron-usb', [70, 71], 0, false, isPlayer);		
-		animation.add('oldfactorytankman', [72, 73], 0, false, isPlayer);
-		animation.add('oldronb', [74, 75], 0, false, isPlayer);
-		animation.add('oldronmad-b', [76, 77], 0, false, isPlayer);
-		animation.add('oldhellron-b', [78, 79], 0, false, isPlayer);
-		animation.add('oldateloron-b', [78, 79], 0, false, isPlayer);	
-		animation.add('oldron-usb-b', [80, 81], 0, false, isPlayer);
-		animation.add('oldfactorytankman-b', [82, 83], 0, false, isPlayer);
-		animation.add('oldtankmantrojan-2', [80, 81], 0, false, isPlayer);
-		animation.add('oldfactorytankman-2', [82, 83], 0, false, isPlayer);
-		animation.add('oldhellron-2', [78, 79], 0, false, isPlayer);
-		animation.add('gf-in', [44], 0, false, isPlayer);
 
 		// the
 		animation.add('chezburgir', [2, 3], 0, false, isPlayer);
