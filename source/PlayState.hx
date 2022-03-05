@@ -1674,12 +1674,6 @@ class PlayState extends MusicBeatState
 				boyfriend.y -= 120;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
-			case 'bambi':
-				dad.y += 400;
-				gf.visible = false;
-				boyfriend.y -= 120;
-				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-				healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
 			case 'ron':
 				dad.x += 70;
 				dad.y += 250;
@@ -1781,6 +1775,10 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'blue':
+				healthBar.createFilledBar(0xFF1D1E35, bfcolor);
+			case 'blueSad':
+				dad.y += 150;
+				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFF1D1E35, bfcolor);
 		}
 
@@ -2463,6 +2461,8 @@ class PlayState extends MusicBeatState
 						case 'ronDave':
 							skin = 'NOTEold_assets';
 						case 'blue':
+							skin = 'NOTE_assets';
+						case 'blueSad':
 							skin = 'NOTE_assets';
 					}
 				}

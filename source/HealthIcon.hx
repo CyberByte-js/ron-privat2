@@ -76,9 +76,9 @@ class HealthIcon extends FlxSprite
 		animation.add('helldouyhe', [52, 53], 0, false, isPlayer);
 		animation.add('tankman', [56, 57], 0, false, isPlayer);
 		animation.add('dave', [58, 59], 0, false, isPlayer);	
-		animation.add('bambi', [56, 57], 0, false, isPlayer);	
 		animation.add('Gray_BF', [0, 1], 0, false, isPlayer);
-		animation.add('blue', [56, 57], 0, false, isPlayer);	
+		animation.add('blue', [56, 57], 0, false, isPlayer);
+		animation.add('blueSad', [56, 57], 0, false, isPlayer);	
 		
 		// idk why this exists but ill put it in just in case
 		animation.add('gf-in', [59], 0, false, isPlayer);

@@ -1001,6 +1001,19 @@ class Character extends FlxSprite
 				addOffset("singUP");
 				addOffset("singLEFT");
 				addOffset("singRIGHT");
+				addOffset("singDOWN");
+			case 'blueSad':
+				tex = Paths.getSparrowAtlas('updateron/characters/vine_boom');
+				frames = tex;
+				animation.addByPrefix('idle', "Idle", 24);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singLEFT");
+				addOffset("singRIGHT");
 				addOffset("singDOWN");			
 		}
 
