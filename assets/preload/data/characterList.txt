@@ -27,6 +27,7 @@ bf-inv
 hellron-pov
 bfbloodshed-death
 chezburgir
-Gray_BF
+bf_Gray
 blue
 blueSad
+bf-g

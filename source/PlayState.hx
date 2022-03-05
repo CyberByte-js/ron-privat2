@@ -1404,6 +1404,8 @@ class PlayState extends MusicBeatState
 				curGf = 'gf-d';
 			case 'grayGf':
 				curGf = 'grayGf';
+			case 'gf-g':
+				curGf = 'gf-g';
 			default:
 				curGf = 'gf';
 		}
