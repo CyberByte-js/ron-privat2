@@ -2462,6 +2462,8 @@ class PlayState extends MusicBeatState
 							skin = 'NOTEold_assets';
 						case 'ronDave':
 							skin = 'NOTEold_assets';
+						case 'blue':
+							skin = 'NOTE_assets';
 					}
 				}
 
