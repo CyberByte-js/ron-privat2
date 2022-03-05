@@ -1014,7 +1014,15 @@ class Character extends FlxSprite
 				addOffset("singUP");
 				addOffset("singLEFT");
 				addOffset("singRIGHT");
-				addOffset("singDOWN");			
+				addOffset("singDOWN");
+			case 'grayGf':
+				// GIRLFRIEND CODE
+				tex = Paths.getSparrowAtlas('updateron/characters/Gray_GF');
+				frames = tex;
+				animation.addByPrefix('idle', 'Gray GF Idle', 24, false);
+				addOffset('idle');
+
+				playAnim('idle');
 		}
 
 		dance();
