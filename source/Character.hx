@@ -988,7 +988,20 @@ class Character extends FlxSprite
 	
 				playAnim('idle');
 	
-				flipX = true;				
+				flipX = true;
+			case 'blue':
+				tex = Paths.getSparrowAtlas('updateron/characters/WhittyWatchRed');
+				frames = tex;
+				animation.addByPrefix('idle', "Idle", 24);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singLEFT");
+				addOffset("singRIGHT");
+				addOffset("singDOWN");			
 		}
 
 		dance();

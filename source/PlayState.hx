@@ -1780,10 +1780,8 @@ class PlayState extends MusicBeatState
 				dad.y += 250;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
-			case 'tankman':
-				dad.x += 70;
-				dad.y += 250;
-				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			case 'blue':
+				healthBar.createFilledBar(0xFF1D1E35, bfcolor);
 		}
 
 		strumLineNotes.cameras = [camHUD];

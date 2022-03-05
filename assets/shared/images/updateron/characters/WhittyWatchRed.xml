@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="WhittyWatchRed.png">
+	<!-- Created with Adobe Animate version 22.0.2.168 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Down0000" x="0" y="0" width="413" height="769"/>
+	<SubTexture name="Down0001" x="413" y="0" width="413" height="769"/>
+	<SubTexture name="Idle0000" x="826" y="0" width="413" height="769"/>
+	<SubTexture name="Idle0001" x="826" y="0" width="413" height="769"/>
+	<SubTexture name="Idle0002" x="1239" y="0" width="413" height="769"/>
+	<SubTexture name="Idle0003" x="1239" y="0" width="413" height="769"/>
+	<SubTexture name="Idle0004" x="1652" y="0" width="413" height="769"/>
+	<SubTexture name="Idle0005" x="1652" y="0" width="413" height="769"/>
+	<SubTexture name="Idle0006" x="2065" y="0" width="413" height="769"/>
+	<SubTexture name="Idle0007" x="2065" y="0" width="413" height="769"/>
+	<SubTexture name="Left0000" x="2478" y="0" width="413" height="769"/>
+	<SubTexture name="Left0001" x="2891" y="0" width="413" height="769"/>
+	<SubTexture name="Right0000" x="3304" y="0" width="413" height="769"/>
+	<SubTexture name="Right0001" x="0" y="769" width="413" height="769"/>
+	<SubTexture name="Up0000" x="413" y="769" width="413" height="769"/>
+	<SubTexture name="Up0001" x="826" y="769" width="413" height="769"/>
+</TextureAtlas>

@@ -13,7 +13,7 @@ class NoteSplash extends FlxSprite
 	public function new(x:Float = 0, y:Float = 0, ?note:Int = 0) {
 		super(x, y);
 
-		var skin:String = 'noteSplashes';
+		var skin:String = 'NOTE_splashes_explode';
 
 		loadAnims(skin);
 		
@@ -27,22 +27,22 @@ class NoteSplash extends FlxSprite
 		setPosition(x - Note.swagWidth * 0.95, y - Note.swagWidth);
 		alpha = 0.6;
 
-		var skin:String = 'noteSplashes';
+		var skin:String = 'NOTE_splashes_explode';
 		loadAnims(skin);
-		offset.set(10, 10);
+		offset.set(10, 0);
 
 		var animNum:Int = FlxG.random.int(1, 2);
-		animation.play('note' + note + '-' + animNum, true);
+		animation.play('note' + note + '-' + 1, true);
 		animation.curAnim.frameRate = 24 + FlxG.random.int(-2, 2);
 	}
 
 	function loadAnims(skin:String) {
 		frames = Paths.getSparrowAtlas(skin);
 		for (i in 1...3) {
-			animation.addByPrefix("note1-" + i, "note splash blue " + i, 24, false);
-			animation.addByPrefix("note2-" + i, "note splash green " + i, 24, false);
-			animation.addByPrefix("note0-" + i, "note splash purple " + i, 24, false);
-			animation.addByPrefix("note3-" + i, "note splash red " + i, 24, false);
+			animation.addByPrefix("note1-" + 1, "note splash explode blue " + 1, 24, false);
+			animation.addByPrefix("note2-" + 1, "note splash explode green " + 1, 24, false);
+			animation.addByPrefix("note0-" + 1, "note splash explode purple " + 1, 24, false);
+			animation.addByPrefix("note3-" + 1, "note splash explode red " + 1, 24, false);
 		}
 	}
 

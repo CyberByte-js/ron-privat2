@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="NOTE_splashes_explode.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="note splash explode blue 10000" x="0" y="0" width="82" height="106" frameX="-100" frameY="-165" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode blue 10001" x="82" y="0" width="208" height="265" frameX="-25" frameY="-69" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode blue 10002" x="290" y="0" width="267" height="331" frameX="-1" frameY="-16" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode blue 10003" x="557" y="0" width="311" height="363"/>
+	<SubTexture name="note splash explode green 10000" x="868" y="0" width="82" height="106" frameX="-104" frameY="-165" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode green 10001" x="950" y="0" width="208" height="265" frameX="-25" frameY="-69" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode green 10002" x="1158" y="0" width="267" height="331" frameX="-4" frameY="-16" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode green 10003" x="1425" y="0" width="311" height="363"/>
+	<SubTexture name="note splash explode purple 10000" x="1736" y="0" width="82" height="106" frameX="-101" frameY="-165" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode purple 10001" x="1818" y="0" width="208" height="265" frameX="-25" frameY="-69" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode purple 10002" x="0" y="363" width="267" height="331" frameX="-1" frameY="-16" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode purple 10003" x="267" y="363" width="311" height="363"/>
+	<SubTexture name="note splash explode red 10000" x="578" y="363" width="82" height="106" frameX="-104" frameY="-165" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode red 10001" x="660" y="363" width="208" height="265" frameX="-25" frameY="-69" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode red 10002" x="868" y="363" width="267" height="331" frameX="-4" frameY="-16" frameWidth="311" frameHeight="363"/>
+	<SubTexture name="note splash explode red 10003" x="1135" y="363" width="311" height="363"/>
+</TextureAtlas>
