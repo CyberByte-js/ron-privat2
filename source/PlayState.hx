@@ -1623,7 +1623,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.screenCenter(X);
 
 		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY", 20);
-		if ((SONG.stage == 'bambiFarm') || (SONG.stage == 'daveHouse'))
+		if (SONG.stage == 'daveHouse')
 			replayTxt.setFormat(Paths.font("comic.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		else
 			replayTxt.setFormat(Paths.font("w95.otf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -1835,11 +1835,6 @@ class PlayState extends MusicBeatState
 					add(Estatic);
 					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 				case 'bloodbath':
-					startCountdown();
-					add(fx);
-					add(Estatic);
-					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
-				case 'not-bloodshed':
 					startCountdown();
 					add(fx);
 					add(Estatic);
