@@ -932,8 +932,6 @@ class Character extends FlxSprite
 				var tex = Paths.getSparrowAtlas('updateron/characters/grayfriend', 'shared');
 				frames = tex;
 
-				trace(tex.frames.length);
-
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
 				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
 				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
@@ -1000,6 +998,24 @@ class Character extends FlxSprite
 				addOffset('scared', -2, -17);
 
 				playAnim('danceRight');
+			case 'armand':
+				tex = Paths.getSparrowAtlas('updateron/characters/ArmandRonan');
+				frames = tex;
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('altidle', 'altidle', 24, false);
+				animation.addByPrefix('singUP', 'right', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('cheer', 'lol', 24, false);
+
+				addOffset('idle');
+				addOffset('altidle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+				addOffset("cheer");
 		}
 
 		dance();

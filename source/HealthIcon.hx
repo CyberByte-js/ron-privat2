@@ -42,7 +42,7 @@ class HealthIcon extends FlxSprite
 		animation.add('ron-mad', [6, 7], 0, false, isPlayer);		
 		animation.add('hellron', [8, 9], 0, false, isPlayer);	
 		animation.add('hellron-crazy', [8, 9], 0, false, isPlayer);		
-		animation.add('demonron', [44, 45], 0, false, isPlayer);				
+		animation.add('demonron', [62, 63], 0, false, isPlayer);				
 		
 		// week 2
 		animation.add('ronPower', [12, 13], 0, false, isPlayer);
@@ -80,7 +80,8 @@ class HealthIcon extends FlxSprite
 		animation.add('blue', [56, 57], 0, false, isPlayer);
 		animation.add('blueSad', [56, 57], 0, false, isPlayer);	
 		animation.add('bf-g', [0, 1], 0, false, isPlayer);
-		
+		animation.add('armand', [87, 88], 0 , false, isPlayer);
+
 		// idk why this exists but ill put it in just in case
 		animation.add('gf-in', [59], 0, false, isPlayer);
 

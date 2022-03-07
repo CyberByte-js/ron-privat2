@@ -266,6 +266,8 @@ class PlayState extends MusicBeatState
 
 	var uhoh:Bool = false;
 
+	var daStatic:FlxSprite = new FlxSprite(0, 0);
+
 	override public function create()
 	{
 		var charInputs:String = "";
@@ -1541,6 +1543,32 @@ class PlayState extends MusicBeatState
 
 		add(camFollow);
 
+		if (curSong.toLowerCase() == 'omnipresent')
+		{
+			var vcr:VCRDistortionShader;
+			vcr = new VCRDistortionShader();
+			
+			daStatic.frames = Paths.getSparrowAtlas('updateron/bg/daSTAT');
+
+			daStatic.setGraphicSize(FlxG.width, FlxG.height);
+
+			daStatic.alpha = 0.05;
+
+			daStatic.screenCenter();
+
+			daStatic.cameras = [camHUD];
+
+			daStatic.animation.addByPrefix('static', 'staticFLASH', 24, true);
+
+			add(daStatic);
+
+			daStatic.animation.play('static');
+
+			camGame.setFilters([new ShaderFilter(vcr)]);
+
+			camHUD.setFilters([new ShaderFilter(vcr)]);
+		}
+
 		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
@@ -2730,7 +2758,7 @@ class PlayState extends MusicBeatState
 			switch (curSong.toLowerCase())
 			{
 				case 'ron':
-					credits = 'wildythomas';
+					credits = 'Sic';
 				case 'wasted':
 					credits = 'coquers_';
 				case 'ayo':
@@ -2738,7 +2766,7 @@ class PlayState extends MusicBeatState
 				case 'bloodshed':
 					credits = 'BlueBoyeet';
 				case 'trojan-virus':
-					credits = 'Tigression';
+					credits = 'DeepFriedBolonese';
 				case 'file-manipulation':
 					credits = 'Rareblin';
 				case 'atelophobia':
@@ -2937,6 +2965,19 @@ class PlayState extends MusicBeatState
 		#if windows
 		DiscordClient.changePresence(detailsText + " " + SONG.song + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "\nAcc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC);
 		#end
+	}
+
+	function omnichange(character:String)
+	{
+		daStatic.alpha = 1;
+		var xx = dad.x;
+		var yy = dad.y;
+		dad.alpha = 0;
+		remove(dad);
+		dad = new Character(xx, yy, character);
+		add(dad);
+		iconP2.animation.play(character);
+		daStatic.alpha = 0.05;
 	}
 
 	private var paused:Bool = false;
@@ -3666,8 +3707,11 @@ class PlayState extends MusicBeatState
 									multiplier = 1;
 								else
 									multiplier = multiplier + ((1-health));
-								FlxG.camera.shake(0.025 * multiplier, 0.1);
-								camHUD.shake(0.0055 * multiplier, 0.15);
+								if (curSong.toLowerCase() != 'omnipresent')
+								{
+									FlxG.camera.shake(0.025 * multiplier, 0.1);
+									camHUD.shake(0.0055 * multiplier, 0.15);
+								}
 								if (health > 0.03)
 									health -= 0.014;
 								else
@@ -5660,6 +5704,15 @@ class PlayState extends MusicBeatState
 						FlxG.camera.shake(0.11, 0.11);
 				}
 			}
+		
+		if (curSong.toLowerCase() == 'omnipresent')
+		{
+			switch (curStep)
+			{
+				case 1038:
+					omnichange('armand');
+			}
+		}
 	
 		super.stepHit();
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
