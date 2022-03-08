@@ -302,6 +302,13 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		if ((Date.now().getDay() == 2) && (Date.now().getMonth() == 2))
+		{
+			#if desktop
+			Sys.exit(0);
+			#end
+		} // lmao women day checker
+
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
