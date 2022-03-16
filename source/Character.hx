@@ -878,17 +878,17 @@ class Character extends FlxSprite
 				animation.addByPrefix('deathConfirm', "Gray BF Death", 24, false);
 
 				addOffset('idle', -5);
-				addOffset("singUP", -29, 277);
+				addOffset("singUP", -29, 197);
 				addOffset("singRIGHT", 16, 13);
 				addOffset("singLEFT", 76, -6);
-				addOffset("singDOWN", 80, 50);
+				addOffset("singDOWN", 80, 20);
 				addOffset("singUPmiss", -11, 9);
 				addOffset("singRIGHTmiss", -11, 9);
 				addOffset("singLEFTmiss", -11, 9);
 				addOffset("singDOWNmiss", -11, 9);
 				addOffset('firstDeath', 37, 11);
-				addOffset('deathLoop', 37, 5);
-				addOffset('deathConfirm', 37, 69);
+				addOffset('deathLoop', 37, 11);
+				addOffset('deathConfirm', 37, 11);
 	
 				playAnim('idle');
 	
@@ -1024,11 +1024,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'Gron Left', 24, false);
 				animation.addByPrefix('singRIGHT', 'Gron Right', 24, false);
 				addOffset('idle');
-				addOffset("singUP");
-				addOffset("singLEFT");
-				addOffset("singRIGHT");
-				addOffset("singDOWN");
-				addOffset("Ugh");
+				addOffset("singUP", 0, -10);
+				addOffset("singLEFT", 0, -20);
+				addOffset("singRIGHT", 0, -20);
+				addOffset("singDOWN", 0, -190);
 		}
 
 		dance();
