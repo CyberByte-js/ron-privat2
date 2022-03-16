@@ -740,14 +740,13 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", 0, -126);
 				addOffset("singDOWN", 55, -143);
 			case 'ron-usb-b':
-				tex = Paths.getSparrowAtlas('ron/characters/Tankmantrojan');
+				tex = Paths.getSparrowAtlas('updateron/characters/FMronB');
 				frames = tex;
-				animation.addByPrefix('idle', "Idle", 24);
-				animation.addByPrefix('singUP', 'Sing Up', 24, false);
-				animation.addByPrefix('singDOWN', 'Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Sing Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Sing Right', 24, false);
-				animation.addByPrefix('cheer', 'Ugh', 24, false);
+				animation.addByPrefix('idle', "FMronB Idle", 24);
+				animation.addByPrefix('singUP', 'FMronB Up', 24, false);
+				animation.addByPrefix('singDOWN', 'FMronB Down', 24, false);
+				animation.addByPrefix('singLEFT', 'FMronB Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'FMronB Right', 24, false);
 				addOffset('idle');
 				addOffset("singUP", 42, 38);
 				addOffset("singLEFT", 98, -27);

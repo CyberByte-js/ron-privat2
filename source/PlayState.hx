@@ -1793,7 +1793,7 @@ class PlayState extends MusicBeatState
 				healthBar.createFilledBar(0xFF8E007B, bfcolor);
 			case 'ron-usb-b':
 				dad.x += 70;
-				dad.y += 250;
+				dad.y += 210;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 			case 'hellron-2':
