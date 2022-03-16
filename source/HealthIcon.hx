@@ -49,6 +49,9 @@ class HealthIcon extends FlxSprite
 		animation.add('ron-usb', [16, 17], 0, false, isPlayer);	
 		animation.add('ateloron', [18, 19], 0, false, isPlayer);	
 		animation.add('factorytankman', [46, 47], 0, false, isPlayer);
+
+		// week 3
+		animation.add('gron', [42, 43], 0, false, isPlayer);
 		
 		// week 1 b
 		animation.add('ronb', [22, 23], 0, false, isPlayer);

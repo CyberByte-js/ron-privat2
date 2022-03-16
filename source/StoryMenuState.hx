@@ -27,8 +27,8 @@ class StoryMenuState extends MusicBeatState
 		['Tutorial'],
 		['Ron', 'Wasted', 'Ayo', 'Bloodshed'],
 		['Trojan Virus', 'Recycle-Bin', 'File-Manipulation', 'Factory-Reset'],
+		['Gron'],
 		['Raw-Meaty-Meats', 'Assassination', 'Steak'],
-		['Holy-Shit-Dave-Fnf', 'Slammed', 'Meme-Machine', 'Frosting-Over'],
 		['Bijuu', 'Goncy', 'Scrub-Of-The-Day'],
 		['Pretty-Wacky','He-Hates-Me', 'Atypical']
 	];
@@ -41,8 +41,8 @@ class StoryMenuState extends MusicBeatState
 		['', 'bf', 'gf'],
 		['ron', 'bf', 'gf'],
 		['ron2', 'bf', 'gf'],
-		['cookron', 'bf', 'gf'],
-		['bambi', 'ronMain', ''],
+		['', 'bf', 'gf'],
+		['cookron', 'bf', ''],
 		['', 'bf', 'gf'],
 		['douyhe', 'bf', 'gf']
 	];
@@ -51,8 +51,8 @@ class StoryMenuState extends MusicBeatState
 		"Tutorial but less cooler B(",
 		"VS COOL GUY B)",
 		"O shit ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron ron",
+		"",
 		"THE MEAT IS RAW BOYFRIEND, THE MEAT IS RAW *SLAP*",
-		"bm mabmabi hory sheet bambir IRL!!!!!!!!!!!!!!!!!!!!!!!!!!!! *vine tuhd*",
 		"Folder turned Weeaboo",
 		"what"
 	];
@@ -482,7 +482,7 @@ class StoryMenuState extends MusicBeatState
 					{
 						video.playMP4(Paths.video('trojanvirus'), new PlayState(), false, false, false);
 					});
-				case 3:
+				case 4:
 					new FlxTimer().start(1, function(tmr:FlxTimer)
 					{
 						video.playMP4(Paths.video('cookron'), new PlayState(), false, false, false);

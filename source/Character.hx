@@ -878,14 +878,14 @@ class Character extends FlxSprite
 				animation.addByPrefix('deathConfirm', "Gray BF Death", 24, false);
 
 				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", -38, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
+				addOffset("singUP", -29, 277);
+				addOffset("singRIGHT", 16, 13);
+				addOffset("singLEFT", 76, -6);
+				addOffset("singDOWN", 80, 50);
+				addOffset("singUPmiss", -11, 9);
+				addOffset("singRIGHTmiss", -11, 9);
+				addOffset("singLEFTmiss", -11, 9);
+				addOffset("singDOWNmiss", -11, 9);
 				addOffset('firstDeath', 37, 11);
 				addOffset('deathLoop', 37, 5);
 				addOffset('deathConfirm', 37, 69);
@@ -1010,11 +1010,25 @@ class Character extends FlxSprite
 
 				addOffset('idle');
 				addOffset('altidle');
-				addOffset("singUP");
+				addOffset("singUP", 0, -100);
 				addOffset("singRIGHT");
 				addOffset("singLEFT");
 				addOffset("singDOWN");
 				addOffset("cheer");
+			case 'gron':
+				tex = Paths.getSparrowAtlas('updateron/characters/Gron');
+				frames = tex;
+				animation.addByPrefix('idle', "Gron Idle", 24);
+				animation.addByPrefix('singUP', 'Gron Up', 24, false);
+				animation.addByPrefix('singDOWN', 'Gron Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Gron Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Gron Right', 24, false);
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singLEFT");
+				addOffset("singRIGHT");
+				addOffset("singDOWN");
+				addOffset("Ugh");
 		}
 
 		dance();

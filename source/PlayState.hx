@@ -1414,6 +1414,8 @@ class PlayState extends MusicBeatState
 		
 		gf = new Character(400, 130, curGf);
 		gf.scrollFactor.set(0.95, 0.95);
+		if (curGf == 'grayGf')
+			gf.y += 20;
 
 		dad = new Character(100, 100, SONG.player2);
 		dad2 = new Character(800, 150, 'ronslaught-pov');
@@ -1812,6 +1814,11 @@ class PlayState extends MusicBeatState
 				dad.y += 150;
 				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 				healthBar.createFilledBar(0xFF1D1E35, bfcolor);
+			case 'gron':
+				dad.y += 250;
+				boyfriend.y += -100;
+				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+				healthBar.createFilledBar(0xFFFFFFFF, bfcolor);
 		}
 
 		strumLineNotes.cameras = [camHUD];
