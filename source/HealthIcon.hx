@@ -52,6 +52,7 @@ class HealthIcon extends FlxSprite
 
 		// week 3
 		animation.add('gron', [42, 43], 0, false, isPlayer);
+		animation.add('bf_Gray', [60, 61], 0, false, isPlayer);
 		
 		// week 1 b
 		animation.add('ronb', [22, 23], 0, false, isPlayer);
@@ -79,7 +80,6 @@ class HealthIcon extends FlxSprite
 		animation.add('helldouyhe', [52, 53], 0, false, isPlayer);
 		animation.add('tankman', [56, 57], 0, false, isPlayer);
 		animation.add('dave', [58, 59], 0, false, isPlayer);	
-		animation.add('bf_Gray', [0, 1], 0, false, isPlayer);
 		animation.add('blue', [56, 57], 0, false, isPlayer);
 		animation.add('blueSad', [56, 57], 0, false, isPlayer);	
 		animation.add('bf-g', [0, 1], 0, false, isPlayer);

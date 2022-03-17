@@ -1349,6 +1349,28 @@ class PlayState extends MusicBeatState
 				bg.active = false;
 				add(bg);
 			}
+			case 'greystage':
+			{
+				defaultCamZoom = 0.9;
+				curStage = 'stage';
+				var bg:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/greyRon_sky'));
+				bg.updateHitbox();
+				bg.scale.x = 1.2;
+				bg.scale.y = 1.2;
+				bg.active = false;
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.1, 0.1);
+				add(bg);
+				/*var glitchEffect = new FlxGlitchEffect(8,10,0.4,FlxGlitchDirection.HORIZONTAL);
+				var glitchSprite = new FlxEffectSprite(bg, [glitchEffect]);
+				add(glitchSprite);*/
+				
+				var ground:FlxSprite = new FlxSprite(-537, -290).loadGraphic(Paths.image('updateron/bg/greyRon_ground'));
+				ground.updateHitbox();
+				ground.active = false;
+				ground.antialiasing = true;
+				add(ground);
+			}
 			default:
 			{
 				defaultCamZoom = 0.9;
@@ -1426,6 +1448,8 @@ class PlayState extends MusicBeatState
 		var bfcolor = 0xFF31B0D1;
 		if (SONG.player1 == 'bf-b')
 			bfcolor = 0xFFFF45FF;
+		else if (SONG.player1 == 'bf_Gray')
+			bfcolor = 0xFFFFFFFF;
 
 		// REPOSITIONING PER STAGE
 		switch (curStage)
@@ -2498,6 +2522,8 @@ class PlayState extends MusicBeatState
 							skin = 'NOTE_assets';
 						case 'blueSad':
 							skin = 'NOTE_assets';
+						case 'gron':
+							skin = 'gron_notes';
 					}
 				}
 
@@ -2644,6 +2670,8 @@ class PlayState extends MusicBeatState
 								skin = 'NOTEold_assets';
 							case 'ronDave':
 								skin = 'NOTEold_assets';
+							case 'gron':
+								skin = 'gron_notes';
 						}
 						
 						if (force)
@@ -2830,6 +2858,8 @@ class PlayState extends MusicBeatState
 					credits = 'BlueBoyeet';
 				case 'withered':
 					credits = 'ZeroDawn & Sz';
+				case 'gron':
+					credits = 'ArmandRonan';
 			}
 			var rSongname = curSong;
 			if (rSongname.toLowerCase().endsWith('-b'))
@@ -3455,6 +3485,10 @@ class PlayState extends MusicBeatState
 				if (luaModchart != null)
 					luaModchart.executeState('playerOneTurn', []);
 				#end
+
+				if (SONG.player1 == 'bf_Gray')
+					camFollow.x = boyfriend.getMidpoint().x;
+					camFollow.y = boyfriend.getMidpoint().y += -100;
 
 				switch (curStage)
 				{

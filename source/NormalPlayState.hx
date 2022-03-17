@@ -528,6 +528,8 @@ class NormalPlayState extends MusicBeatState
 				clr = 0xFF202020;
 			case 8:
 				clr = FlxColor.MAGENTA;
+			case 9:
+				clr = FlxColor.GRAY;
 				
 		}
 		
