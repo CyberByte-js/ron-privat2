@@ -1028,6 +1028,20 @@ class Character extends FlxSprite
 				addOffset("singLEFT", 0, -20);
 				addOffset("singRIGHT", 0, -20);
 				addOffset("singDOWN", 0, -190);
+			case 'napkin':
+				tex = Paths.getSparrowAtlas('updateron/characters/Used_Napkin');
+				frames = tex;
+				animation.addByPrefix('singDOWN', 'Used Napkin Down', 24, false);
+				animation.addByPrefix('idle', "Used Napkin Idle", 24);
+				animation.addByPrefix('singLEFT', 'Used Napkin Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Used Napkin Right', 24, false);
+				animation.addByPrefix('singUP', 'Used Napkin Up', 24, false);
+				
+				addOffset('songDOWN');
+				addOffset("idle");
+				addOffset("singLEFT");
+				addOffset("singRIGHT");
+				addOffset("singUP");
 		}
 
 		dance();

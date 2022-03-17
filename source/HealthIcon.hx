@@ -72,7 +72,7 @@ class HealthIcon extends FlxSprite
 		
 		// bonus songs for the future
 		animation.add('ronDave', [2, 3], 0, false, isPlayer);
-		animation.add('bijuuron', [42, 43], 0, false, isPlayer);
+		animation.add('bijuuron', [64, 65], 0, false, isPlayer);
 		animation.add('hellron-pov', [54, 55], 0, false, isPlayer);	
 		animation.add('ronslaught-pov', [54, 55], 0, false, isPlayer);	
 		animation.add('devilron', [44, 45], 0, false, isPlayer);
@@ -84,6 +84,7 @@ class HealthIcon extends FlxSprite
 		animation.add('blueSad', [56, 57], 0, false, isPlayer);	
 		animation.add('bf-g', [0, 1], 0, false, isPlayer);
 		animation.add('armand', [87, 88], 0 , false, isPlayer);
+		animation.add('napkin', [87, 88], 0 , false, isPlayer);
 
 		// idk why this exists but ill put it in just in case
 		animation.add('gf-in', [59], 0, false, isPlayer);
