@@ -29,7 +29,7 @@ class NoteSplash extends FlxSprite
 
 		var skin:String = 'NOTE_splashes_explode';
 		loadAnims(skin);
-		offset.set(10, 0);
+		offset.set(80, 40);
 
 		var animNum:Int = FlxG.random.int(1, 2);
 		animation.play('note' + note + '-' + 1, true);
@@ -39,10 +39,10 @@ class NoteSplash extends FlxSprite
 	function loadAnims(skin:String) {
 		frames = Paths.getSparrowAtlas(skin);
 		for (i in 1...3) {
-			animation.addByPrefix("note1-" + 1, "note splash explode blue " + 1, 24, false);
-			animation.addByPrefix("note2-" + 1, "note splash explode green " + 1, 24, false);
-			animation.addByPrefix("note0-" + 1, "note splash explode purple " + 1, 24, false);
-			animation.addByPrefix("note3-" + 1, "note splash explode red " + 1, 24, false);
+			animation.addByPrefix("note1-" + 1, "note splash blue " + 1, 24, false);
+			animation.addByPrefix("note2-" + 1, "note splash green " + 1, 24, false);
+			animation.addByPrefix("note0-" + 1, "note splash purple " + 1, 24, false);
+			animation.addByPrefix("note3-" + 1, "note splash red " + 1, 24, false);
 		}
 	}
 
