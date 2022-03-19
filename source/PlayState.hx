@@ -879,8 +879,8 @@ class PlayState extends MusicBeatState
 				ground.antialiasing = true;
 				add(ground);
 				ronAnimation = new FlxSprite();
-				ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ronPower-transformation', 'shared');
-				ronAnimation.animation.addByPrefix('idle', 'ron transformation instance 1', 24, false);
+				ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron', 'shared');
+				ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
 				ronAnimation.animation.play('idle');
 				ronAnimation.visible = false;
 			}
@@ -5656,8 +5656,8 @@ class PlayState extends MusicBeatState
 					camHUD.visible = false;
 				case 768:
 					dad.visible = false;
-					ronAnimation.x = dad.x-360;
-					ronAnimation.y = dad.y-430;
+					ronAnimation.x = dad.x/*-360*/;
+					ronAnimation.y = dad.y/*-430*/;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
 					defaultCamZoom = 1;
