@@ -485,20 +485,20 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
 			case 'ronPower':
-				tex = Paths.getSparrowAtlas('updateron/characters/ronPower');
+				tex = Paths.getSparrowAtlas('updateron/characters/Trojan_Ron');
 				frames = tex;
-				animation.addByPrefix('idle', "Idle", 24);
-				animation.addByPrefix('singUP', 'Sing Up', 24, false);
-				animation.addByPrefix('singDOWN', 'Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Sing Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Sing Right', 24, false);
-				animation.addByPrefix('cheer', 'Ugh', 24, false);
+				animation.addByPrefix('idle', "Trojan Ron Idle", 24);
+				animation.addByPrefix('singUP', 'Trojan Ron Up', 24, false);
+				animation.addByPrefix('singDOWN', 'Trojan Ron Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Trojan Ron Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Trojan Ron Right', 24, false);
+				animation.addByPrefix('cheer', 'Trojan Ron Bruh', 24, false);
 				addOffset('idle');
-				addOffset("singUP", 42, 38);
-				addOffset("singLEFT", 98, -27);
-				addOffset("singRIGHT", -89, -51);
-				addOffset("singDOWN", 40, -120);
-				addOffset("Ugh", 71, -40);
+				addOffset("singUP", 42, -172);
+				addOffset("singLEFT", 158, -177);
+				addOffset("singRIGHT", -169, -200);
+				addOffset("singDOWN", 40, -280);
+				addOffset("cheer", 71, -40);
 			case 'demonron':
 				tex = Paths.getSparrowAtlas('updateron/characters/demonron');
 				frames = tex;

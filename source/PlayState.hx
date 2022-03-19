@@ -1740,7 +1740,7 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'ronPower':
 				dad.x += 70;
-				dad.y += 250;
+				dad.y += 200;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'ron-angry':
 				dad.x += 70;
@@ -2211,24 +2211,6 @@ class PlayState extends MusicBeatState
 						}
 					});
 					FlxG.sound.play(Paths.sound('introGo' + altSuffix), 0.6);
-				case 4:
-					if (curSong == "Trojan-Virus")
-						{
-						var bruh:FlxSprite = new FlxSprite();
-						bruh.loadGraphic(Paths.image('ron/longbob'));
-						bruh.antialiasing = true;
-						bruh.active = false;
-						bruh.scrollFactor.set();
-						bruh.screenCenter();
-						add(bruh);
-						FlxTween.tween(bruh, {alpha: 0}, 1, {
-							ease: FlxEase.cubeInOut,
-							onComplete: function(twn:FlxTween)
-							{
-								bruh.destroy();
-							}
-				});
-						}
 			}
 
 			swagCounter += 1;
@@ -5947,42 +5929,6 @@ class PlayState extends MusicBeatState
 				lightningStrikeShit();
 			}
 		}
-
-		if (curBeat == 0 && curSong == 'Trojan-Virus')
-			{
-				var bruh:FlxSprite = new FlxSprite();
-				bruh.loadGraphic(Paths.image('ron/longbob'));
-				bruh.antialiasing = true;
-				bruh.active = false;
-				bruh.scrollFactor.set();
-				bruh.screenCenter();
-				add(bruh);
-				FlxTween.tween(bruh, {alpha: 0},1, {
-					ease: FlxEase.cubeInOut,
-					onComplete: function(twn:FlxTween) 
-					{
-						bruh.destroy();
-					}
-				});
-			}
-
-		if (curBeat == 8 && curSong == 'Trojan-Virus')
-			{
-				var bruh:FlxSprite = new FlxSprite();
-				bruh.loadGraphic(Paths.image('ron/longbob'));
-				bruh.antialiasing = true;
-				bruh.active = false;
-				bruh.scrollFactor.set();
-				bruh.screenCenter();
-				add(bruh);
-				FlxTween.tween(bruh, {alpha: 0},1, {
-					ease: FlxEase.cubeInOut,
-					onComplete: function(twn:FlxTween) 
-					{
-						bruh.destroy();
-					}
-				});
-			}
 
 		/*if (curBeat == 2 && curSong == 'Ron')
 			{
