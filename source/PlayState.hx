@@ -2842,6 +2842,8 @@ class PlayState extends MusicBeatState
 					credits = 'ZeroDawn & Sz';
 				case 'gron':
 					credits = 'ArmandRonan';
+				case 'defecation':
+					credits = 'ArmandRonan';
 			}
 			var rSongname = curSong;
 			if (rSongname.toLowerCase().endsWith('-b'))
@@ -5736,6 +5738,12 @@ class PlayState extends MusicBeatState
 					omnichange('armand');
 			}
 		}
+
+		if (curSong.toLowerCase() == 'defecation')
+		{
+			if (curStep == 402)
+				boyfriend.playAnim('firstDeath');
+		}
 	
 		super.stepHit();
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
@@ -5854,7 +5862,7 @@ class PlayState extends MusicBeatState
 			gf.dance();
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+		if (!boyfriend.animation.curAnim.name.startsWith("sing") && !boyfriend.animation.curAnim.name.startsWith("first"))
 		{
 			boyfriend.playAnim('idle');
 		}

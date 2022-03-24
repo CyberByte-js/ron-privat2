@@ -180,34 +180,24 @@ class TitleState extends MusicBeatState
 		persistentUpdate = true;
 
 
-				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('bg'));
-				bg.setGraphicSize(Std.int(bg.width * 4));
-				bg.setGraphicSize(Std.int(bg.height * 4));
-				bg.antialiasing = true;
-				bg.scrollFactor.set();
-				bg.screenCenter(XY);
-				bg.active = false;
-				add(bg);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('bg'));
+		bg.setGraphicSize(Std.int(bg.width * 4));
+		bg.setGraphicSize(Std.int(bg.height * 4));
+		bg.antialiasing = true;
+		bg.scrollFactor.set();
+		bg.screenCenter(XY);
+		bg.active = false;
+		add(bg);
 
-		if(Main.watermarks) {
-			logoBl = new FlxSprite(-150, -100);
-			logoBl.frames = Paths.getSparrowAtlas('KadeEngineLogoBumpin');
-			logoBl.antialiasing = true;
-			logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
-			logoBl.animation.play('bump');
-			logoBl.updateHitbox();
-			// logoBl.screenCenter();
-			// logoBl.color = FlxColor.BLACK;
-		} else {
-			logoBl = new FlxSprite(-100, -90);
-			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-			logoBl.antialiasing = true;
-			logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
-			logoBl.animation.play('bump');
-			logoBl.updateHitbox();
-			// logoBl.screenCenter();
-			// logoBl.color = FlxColor.BLACK;
-		}
+	
+		logoBl = new FlxSprite(-100, -90);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.antialiasing = true;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+		logoBl.animation.play('bump');
+		logoBl.updateHitbox();
+		// logoBl.screenCenter();
+		// logoBl.color = FlxColor.BLACK;
 
 		gfDance = new FlxSprite(FlxG.width * 0.62, FlxG.height * 0.3);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
