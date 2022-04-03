@@ -2774,7 +2774,7 @@ class PlayState extends MusicBeatState
 				case 'wasted':
 					credits = 'coquers_';
 				case 'ayo':
-					credits = 'ArmandRonan & kurtfan5468 & Sz & Tigression';
+					credits = 'ArmandRonan & kurtfan5468 & Sz';
 				case 'bloodshed':
 					credits = 'BlueBoyeet';
 				case 'trojan-virus':
@@ -2784,7 +2784,7 @@ class PlayState extends MusicBeatState
 				case 'atelophobia':
 					credits = 'firey';
 				case 'factory-reset':	
-					credits = 'Tigression';
+					credits = 'ArmandRonan';
 				case 'ron-b':
 					credits = 'DeepFriedBolonese';
 				case 'wasted-b':
@@ -2792,9 +2792,9 @@ class PlayState extends MusicBeatState
 				case 'ayo-b':
 					credits = 'Tigression';
 				case 'bloodshed-b':
-					credits = 'Tigression';
+					credits = 'Sic';
 				case 'trojan-virus-b':
-					credits = 'Tigression';
+					credits = 'Sic';
 				case 'file-manipulation-b':
 					credits = 'Tigression & Sz';
 				case 'atelophobia-b':
