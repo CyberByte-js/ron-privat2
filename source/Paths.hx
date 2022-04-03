@@ -104,11 +104,6 @@ class Paths
 	inline static public function voices(song:String)
 	{
 		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
-			switch (PlayState.storyDifficulty)
-			{
-				case 3:
-					songLowercase = songLowercase + "-b";
-			}
 
 
 			switch (songLowercase) {
