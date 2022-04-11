@@ -1925,6 +1925,8 @@ class PlayState extends MusicBeatState
 					add(Estatic);
 					startCountdown();
 				case 'file-manipulation-b':
+					add(Estatic2);
+					FlxTween.tween(Estatic2, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 					add(Estatic);
 					startCountdown();
 				case 'atelophobia':
@@ -2796,7 +2798,7 @@ class PlayState extends MusicBeatState
 				case 'trojan-virus-b':
 					credits = 'Sic';
 				case 'file-manipulation-b':
-					credits = 'Tigression & Sz';
+					credits = 'Sic';
 				case 'atelophobia-b':
 					credits = 'Tigression';
 				case 'factory-reset-b':

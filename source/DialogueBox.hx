@@ -272,6 +272,10 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			dialogueList[0] = dialogueList[0].substr(4).trim();
 			FlxG.sound.play(Paths.sound('vine'), 1);
+		} else if (StringTools.contains(dialogueList[0], 'bruh'))
+		{
+			dialogueList[0] = dialogueList[0].substr(4).trim();
+			FlxG.sound.play(Paths.sound('dialog-wasted-slowbruh'), 1);
 		}
 		else
 		{
