@@ -2823,8 +2823,6 @@ class PlayState extends MusicBeatState
 					credits = 'nobody yet';
 				case 'trouble':
 					credits = 'KyleGFX & kurtfan5468';
-				case 'bijuu':
-					credits = 'Tigression';
 				case 'double-trouble':
 					credits = 'yourlocalmusician';
 				case 'bloodshed-two':
@@ -2839,6 +2837,8 @@ class PlayState extends MusicBeatState
 					credits = 'ArmandRonan';
 				case 'defecation':
 					credits = 'ArmandRonan';
+				case 'raw':
+					credits = 'ZesCrew2';
 			}
 			var rSongname = curSong;
 			if (rSongname.toLowerCase().endsWith('-b'))

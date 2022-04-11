@@ -336,7 +336,7 @@ class ExtrasPlayState extends MusicBeatState
 	{
 		switch (curSelected)
 		{
-			case 2:
+			case 3:
 				if (curBeat % 2 == 1)
 					FlxG.camera.zoom = 1.02;
 				else
@@ -420,21 +420,21 @@ class ExtrasPlayState extends MusicBeatState
 		var clr = 0xFFE51F89;
 		switch (curSelected)
 		{
-			case 0:
-				clr = FlxColor.GRAY;
 			case 1:
+				clr = FlxColor.GRAY;
+			case 2:
 				clr = FlxColor.LIME;
-			case 2:
-				clr = FlxColor.RED;
-			case 2:
-				clr = FlxColor.BLACK;
 			case 3:
-				clr = FlxColor.YELLOW;
-			case 4:
-				clr = FlxColor.BLUE;
-			case 5:
 				clr = FlxColor.RED;
+			case 4:
+				clr = FlxColor.BLACK;
+			case 5:
+				clr = FlxColor.YELLOW;
 			case 6:
+				clr = FlxColor.BLUE;
+			case 7:
+				clr = FlxColor.RED;
+			case 8:
 				clr = FlxColor.BLACK;
 		}
 		

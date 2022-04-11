@@ -1,11 +1,4 @@
 stage
-halloween
-philly
-limo
-mall
-mallEvil
-school
-schoolEvil
 mad
 hell
 glitch
@@ -14,6 +7,5 @@ win
 trouble
 void
 glitch-factory
-bambiFarm
 daveHouse
 greystage
