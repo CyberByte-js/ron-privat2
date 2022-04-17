@@ -50,9 +50,22 @@ class HealthIcon extends FlxSprite
 		animation.add('ateloron', [18, 19], 0, false, isPlayer);	
 		animation.add('factorytankman', [46, 47], 0, false, isPlayer);
 
-		// week 3
+		// gron
 		animation.add('gron', [42, 43], 0, false, isPlayer);
 		animation.add('bf_Gray', [60, 61], 0, false, isPlayer);
+		
+		// shuttle man
+		animation.add('shuttleman', [66, 67], 0, false, isPlayer);
+		animation.add('weedron', [68, 69], 0, false, isPlayer);
+		animation.add('ronbadminton', [70, 71], 0, false, isPlayer);
+		animation.add('rondvd', [72, 73], 0, false, isPlayer);
+		
+		// cook ron
+		animation.add('cookron', [74, 75], 0, false, isPlayer);
+		
+		// dave and bambi
+		animation.add('dave', [58, 59], 0, false, isPlayer);
+		animation.add('bambi', [76, 77], 0, false, isPlayer);
 		
 		// week 1 b
 		animation.add('ronb', [22, 23], 0, false, isPlayer);
@@ -71,6 +84,7 @@ class HealthIcon extends FlxSprite
 		// eh factory reset bsides doesnt even exist anymore so
 		
 		// bonus songs for the future
+		animation.add('admin', [94, 94], 0, false, isPlayer);
 		animation.add('ronDave', [2, 3], 0, false, isPlayer);
 		animation.add('bijuuron', [64, 65], 0, false, isPlayer);
 		animation.add('hellron-pov', [54, 55], 0, false, isPlayer);	
@@ -78,8 +92,7 @@ class HealthIcon extends FlxSprite
 		animation.add('devilron', [44, 45], 0, false, isPlayer);
 		animation.add('douyhe', [48, 49], 0, false, isPlayer);
 		animation.add('helldouyhe', [52, 53], 0, false, isPlayer);
-		animation.add('tankman', [56, 57], 0, false, isPlayer);
-		animation.add('dave', [58, 59], 0, false, isPlayer);	
+		animation.add('tankman', [56, 57], 0, false, isPlayer);	
 		animation.add('blue', [56, 57], 0, false, isPlayer);
 		animation.add('blueSad', [56, 57], 0, false, isPlayer);	
 		animation.add('bf-g', [0, 1], 0, false, isPlayer);

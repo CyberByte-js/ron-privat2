@@ -1,3 +1,7 @@
-Canon:ron:1
-Bsides:ronb:1
-Extras:bijuuron:1
+Main:ron:1
+Cook:cookron:1
+Shuttle Man:shuttleman:1
+Bijuu:bijuuron:1
+Dave:dave:1
+Extras:gron:1
+Infernal:demonron:1

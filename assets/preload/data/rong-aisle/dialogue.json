@@ -1,0 +1,100 @@
+{
+	"dialogue": [
+		{
+			"sound": "",
+			"speed": 0.06,
+			"portrait": "ron",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "*is in walmart now*"
+		},
+		{
+			"sound": "",
+			"speed": 0.02,
+			"portrait": "ron",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "woah HOLY SHIT Is that the new family guy on dvd season 17 shoutouts to t money iudshajsdajnksafdiknjdfskfkndsnjkfdsnj"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "excited",
+			"text": "beep"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "ron",
+			"boxState": "normal",
+			"expression": "wtf",
+			"text": ""
+		},
+		{
+			"sound": "",
+			"speed": 0.09,
+			"portrait": "ron",
+			"boxState": "normal",
+			"expression": "wtf",
+			"text": "what the fuck are you doing here"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": ""
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "ron",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "dude im trying to buy new family guy dvd season 17 shoutouts to t money"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "fuck yo family guy bitch"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "ron",
+			"boxState": "normal",
+			"expression": "sad",
+			"text": ""
+		},
+		{
+			"sound": "",
+			"speed": 0.00500000000000001,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "also why do you look like that"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "ron",
+			"boxState": "normal",
+			"expression": "sad",
+			"text": "i felt like beimg in flash dude dont judge just cause you dont understand"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "what"
+		}
+	]
+}

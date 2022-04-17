@@ -27,6 +27,7 @@ class MasterPlayState extends MusicBeatState
 	var selector:FlxText;
 	var curSelected:Int = 0;
 	var bg:FlxSprite;
+	var fire:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 
@@ -37,6 +38,7 @@ class MasterPlayState extends MusicBeatState
 
 	override function create()
 	{
+		FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('masterlist'));
 
 		for (i in 0...initSonglist.length)
@@ -73,6 +75,17 @@ class MasterPlayState extends MusicBeatState
 		bg.screenCenter(XY);
 		bg.color = 0xFFE51F89;
 		add(bg);
+		
+		fire = new FlxSprite();
+		fire.frames = Paths.getSparrowAtlas('escape_fire');
+		fire.scale.set(4,4);
+		fire.animation.addByPrefix('idle', 'fire instance 1', 24, true);
+		fire.animation.play('idle');
+		fire.scrollFactor.set();
+		fire.screenCenter();
+		fire.y += 120;
+		fire.alpha = 0;
+		add(fire);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -152,6 +165,11 @@ class MasterPlayState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		
+		if (curSelected == 6)
+			setChrome(FlxG.save.data.rgbintense/200);
+		else
+			setChrome(0.0);
 
 		if (FlxG.sound.music.volume < 0.7)
 		{
@@ -247,16 +265,41 @@ class MasterPlayState extends MusicBeatState
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
+		
+		if (curSelected == 6)
+		{
+			FlxTween.cancelTweensOf(fire);
+			fire.alpha = 0;
+			FlxTween.tween(fire, {alpha: 0.5}, 1);
+			FlxTween.cancelTweensOf(FlxG.camera);
+			FlxTween.tween(FlxG.camera, {zoom: 1.05}, 0.5, {ease: FlxEase.quadInOut});
+		}
+		else
+		{
+			FlxTween.cancelTweensOf(fire);
+			if (fire.alpha > 0)
+			{
+				FlxTween.tween(fire, {alpha: 0}, fire.alpha*2);
+			}
+			FlxTween.cancelTweensOf(FlxG.camera);
+			FlxTween.tween(FlxG.camera, {zoom: 1}, 1, {ease: FlxEase.quadInOut});
+		}
 
 		var clr = FlxColor.YELLOW;
 		switch (curSelected)
 		{
 			case 1:
-				clr = FlxColor.MAGENTA;
+				clr = FlxColor.RED;
 			case 2:
-				clr = FlxColor.LIME;
+				clr = FlxColor.WHITE;
 			case 3:
-				clr = FlxColor.BROWN;
+				clr = FlxColor.LIME;
+			case 4:
+				clr = FlxColor.BLUE;
+			case 5:
+				clr = FlxColor.MAGENTA;
+			case 6:
+				clr = FlxColor.BLACK;
 		}
 		
 		if(clr != intendedColor) {
