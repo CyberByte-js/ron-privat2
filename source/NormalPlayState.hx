@@ -256,7 +256,9 @@ class NormalPlayState extends MusicBeatState
 			
 			trace(songs[curSelected].songName);
 
-			var poop:String = Highscore.formatSong(songFormat + "-b", curDifficulty);
+			var poop:String = Highscore.formatSong(songFormat, curDifficulty);
+			if (isB)
+				poop = Highscore.formatSong(songFormat + "-b", curDifficulty);
 
 			trace(poop);
 			
