@@ -105,6 +105,11 @@ class HealthIcon extends FlxSprite
 		// the
 		animation.add('chezburgir', [2, 3], 0, false, isPlayer);
 
+		// ignore this plss i know im lazy
+		animation.add('ron-b', [22, 23], 0, false, isPlayer);
+		animation.add('ron-angry-b', [24, 25], 0, false, isPlayer);	
+		animation.add('ron-mad-b', [26, 27], 0, false, isPlayer);
+
 		animation.play(char);
 
 		scrollFactor.set();

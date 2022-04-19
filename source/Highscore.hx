@@ -99,6 +99,8 @@ class Highscore
 			daSong += '-hard';
 		else if (diff == 3)
 			daSong += '-cool';
+		else if (diff == 4)
+			daSong += '-flip';
 
 		return daSong;
 	}

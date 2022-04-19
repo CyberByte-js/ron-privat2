@@ -44,6 +44,8 @@ class NormalPlayState extends MusicBeatState
 
 	private var iconArray:Array<HealthIcon> = [];
 
+	var isB:Bool = false;
+
 	override function create()
 	{
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglistn'));
@@ -143,23 +145,6 @@ class NormalPlayState extends MusicBeatState
 		// add(selector);
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
-
-		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/* 
-			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
-
-			var texFel:TextField = new TextField();
-			texFel.width = FlxG.width;
-			texFel.height = FlxG.height;
-			// texFel.
-			texFel.htmlText = md;
-
-			FlxG.stage.addChild(texFel);
-
-			// scoreText.textField.htmlText = md;
-
-			trace(md);
-		 */
 
 		super.create();
 	}
@@ -261,7 +246,6 @@ class NormalPlayState extends MusicBeatState
 
 		if (accepted)
 		{
-		
 			FlxG.camera.antialiasing = true;
 			// adjusting the song name to be compatible
 			var songFormat = StringTools.replace(songs[curSelected].songName, " ", "-");
@@ -272,7 +256,7 @@ class NormalPlayState extends MusicBeatState
 			
 			trace(songs[curSelected].songName);
 
-			var poop:String = Highscore.formatSong(songFormat, curDifficulty);
+			var poop:String = Highscore.formatSong(songFormat + "-b", curDifficulty);
 
 			trace(poop);
 			
@@ -285,6 +269,8 @@ class NormalPlayState extends MusicBeatState
 				PlayState.storyDifficulty = 2;
 				PlayState.SONG = Song.loadFromJson(poop, 'Bloodshed-old');
 			}
+			else if (isB)
+				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName + "-b");
 			else
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName);
 
@@ -309,9 +295,19 @@ class NormalPlayState extends MusicBeatState
 		else
 		{
 			if (curDifficulty < 0)
-				curDifficulty = 3;
+			{
+				modeSwap();
+				curDifficulty = 4;
+			}
 			if (curDifficulty > 3)
+				modeSwap();
+			if (curDifficulty > 4)
+			{	
+				modeSwapA();
 				curDifficulty = 0;
+			}
+			if (change == -1 && curDifficulty == 3)
+				modeSwapA();
 		}
 
 		// adjusting the highscore song name to be compatible (changeDiff)
@@ -325,7 +321,10 @@ class NormalPlayState extends MusicBeatState
 			curDifficulty = 2;
 		
 		#if !switch
-		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
+		if (!isB)
+			intendedScore = Highscore.getScore(songHighscore, curDifficulty);
+		else
+			intendedScore = Highscore.getScore(songHighscore + "-b", curDifficulty);
 		combo = Highscore.getCombo(songHighscore, curDifficulty);
 		#end
 
@@ -454,9 +453,15 @@ class NormalPlayState extends MusicBeatState
 		else
 		{
 			if (curDifficulty < 0)
-				curDifficulty = 3;
-			if (curDifficulty > 3)
+			{
+				modeSwap();
+				curDifficulty = 4;
+			}
+			if (curDifficulty > 4)
+			{
+				modeSwapA();
 				curDifficulty = 0;
+			}
 		}
 		
 		FlxG.camera.antialiasing = true;
@@ -478,10 +483,16 @@ class NormalPlayState extends MusicBeatState
 		#end
 
 		#if PRELOAD_ALL
-		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+		if (isB)
+			FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName + "-b"), 0);
+		else
+			FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
 		#end
 		
-		Conductor.changeBPM(Song.loadFromJson(songs[curSelected].songName.toLowerCase(), songs[curSelected].songName.toLowerCase()).bpm/2);
+		if (!isB)
+			Conductor.changeBPM(Song.loadFromJson(songs[curSelected].songName.toLowerCase(), songs[curSelected].songName.toLowerCase()).bpm/2);
+		else
+			Conductor.changeBPM(Song.loadFromJson(songs[curSelected].songName.toLowerCase() + "-b", songs[curSelected].songName.toLowerCase() + "-b").bpm/2);
 
 		var bullShit:Int = 0;
 
@@ -510,28 +521,53 @@ class NormalPlayState extends MusicBeatState
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 
 		var clr = 0xFFE51F89;
-		switch (curSelected)
+
+		if (!isB)
 		{
-			case 1:
-				clr = FlxColor.YELLOW;
-			case 2:
-				clr = FlxColor.ORANGE;
-			case 3:
-				clr = FlxColor.BROWN;
-			case 4:
-				clr = FlxColor.BLACK;
-			case 5:
-				clr = 0xFF6E7896;
-			case 6:
-				clr = FlxColor.GREEN;
-			case 7:
-				clr = 0xFF202020;
-			case 8:
-				clr = FlxColor.MAGENTA;
-			case 9:
-				clr = FlxColor.GRAY;
-				
+			switch (curSelected)
+			{
+				case 1:
+					clr = FlxColor.YELLOW;
+				case 2:
+					clr = FlxColor.ORANGE;
+				case 3:
+					clr = FlxColor.BROWN;
+				case 4:
+					clr = FlxColor.BLACK;
+				case 5:
+					clr = 0xFF6E7896;
+				case 6:
+					clr = FlxColor.GREEN;
+				case 7:
+					clr = 0xFF202020;
+				case 8:
+					clr = FlxColor.MAGENTA;
+				case 9:
+					clr = FlxColor.GRAY;
+			}
+		} else
+		{
+			switch (curSelected)
+			{
+				case 1:
+					clr = FlxColor.MAGENTA;
+				case 2:
+					clr = FlxColor.PURPLE;
+				case 3:
+					clr = 0xFF8200AA;
+				case 4:
+					clr = FlxColor.WHITE;
+				case 5:
+					clr = 0xFF966E6E;
+				case 6:
+					clr = FlxColor.BLUE;
+				case 7:
+					clr = 0xFFDCDCDC;
+				case 8:
+					clr = FlxColor.CYAN;				
+			}
 		}
+		
 		
 		if(clr != intendedColor) {
 			if(colorTween != null) {
@@ -544,5 +580,86 @@ class NormalPlayState extends MusicBeatState
 				}
 			});
 		}
+	}
+
+	function modeSwap()
+	{
+		FlxG.camera.flash(FlxColor.WHITE, 0.5);
+		isB = true;
+
+		for (i in 0...songs.length)
+			remove(iconArray[i]);
+		untyped iconArray.length = 0;
+		for (i in 0...songs.length)
+		{
+			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter + "-b");
+			icon.sprTracker = grpSongs.members[i];
+
+			iconArray.push(icon);
+			add(icon);
+		}
+
+		switch (curSelected)
+		{
+			case 1:
+				bg.color = FlxColor.MAGENTA;
+			case 2:
+				bg.color = FlxColor.PURPLE;
+			case 3:
+				bg.color = 0xFF8200AA;
+			case 4:
+				bg.color = FlxColor.WHITE;
+			case 5:
+				bg.color = 0xFF966E6E;
+			case 6:
+				bg.color = FlxColor.BLUE;
+			case 7:
+				bg.color = 0xFFDCDCDC;
+			case 8:
+				bg.color = FlxColor.CYAN;				
+		}
+		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName + "-b"), 0);
+		Conductor.changeBPM(Song.loadFromJson(songs[curSelected].songName.toLowerCase() + "-b", songs[curSelected].songName.toLowerCase() + "-b").bpm/2);
+	}
+	function modeSwapA()
+	{
+		FlxG.camera.flash(FlxColor.WHITE, 0.5);
+		isB = false;
+
+		for (i in 0...songs.length)
+			remove(iconArray[i]);
+		untyped iconArray.length = 0;
+		for (i in 0...songs.length)
+		{
+			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
+			icon.sprTracker = grpSongs.members[i];
+
+			iconArray.push(icon);
+			add(icon);
+		}
+
+		switch (curSelected)
+		{
+			case 1:
+				bg.color = FlxColor.YELLOW;
+			case 2:
+				bg.color = FlxColor.ORANGE;
+			case 3:
+				bg.color = FlxColor.BROWN;
+			case 4:
+				bg.color = FlxColor.BLACK;
+			case 5:
+				bg.color = 0xFF6E7896;
+			case 6:
+				bg.color = FlxColor.GREEN;
+			case 7:
+				bg.color = 0xFF202020;
+			case 8:
+				bg.color = FlxColor.MAGENTA;
+			case 9:
+				bg.color = FlxColor.GRAY;
+		}
+		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+		Conductor.changeBPM(Song.loadFromJson(songs[curSelected].songName.toLowerCase(), songs[curSelected].songName.toLowerCase()).bpm/2);
 	}
 }
