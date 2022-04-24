@@ -12,6 +12,7 @@ import openfl.Lib;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import GameJolt;
 
 class Main extends Sprite
 {
@@ -24,6 +25,8 @@ class Main extends Sprite
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 
 	public static var watermarks = true; // Whether to put Kade Engine liteartly anywhere
+
+	public static var gjToastManager:GJToastManager;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -109,6 +112,9 @@ class Main extends Sprite
 		toggleFPS(FlxG.save.data.fps);
 
 		#end
+
+		gjToastManager = new GJToastManager();
+		addChild(gjToastManager);
 	}
 
 	var game:FlxGame;

@@ -42,6 +42,8 @@ import Discord.DiscordClient;
 import sys.thread.Thread;
 #end
 
+import GameJolt.GameJoltAPI;
+
 using StringTools;
 
 class TitleState extends MusicBeatState
@@ -133,6 +135,9 @@ class TitleState extends MusicBeatState
 			startIntro();
 		});
 		#end
+
+		GameJoltAPI.connect();
+        GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
 	}
 
 	var logoBl:FlxSprite;
@@ -353,12 +358,12 @@ class TitleState extends MusicBeatState
 				{
 					returnedData[0] = data.substring(0, data.indexOf(';'));
 					returnedData[1] = data.substring(data.indexOf('-'), data.length);
-					FlxG.switchState(new WarningSubState());
+					FlxG.switchState(new GameJolt.GameJoltLogin());
 				}
 				
 				http.onError = function (error) {
 				  trace('error: $error');
-				  FlxG.switchState(new MainMenuState()); // fail but we go anyway
+				  FlxG.switchState(new GameJolt.GameJoltLogin()); // fail but we go anyway
 				}
 				
 				http.request();
@@ -384,6 +389,7 @@ class TitleState extends MusicBeatState
 				// testing purposes
 				pressedSkip = true;
 				FlxG.switchState(new AntiPiracyState());
+				GameJoltAPI.getTrophy(161626);
 			}
 		}
 
