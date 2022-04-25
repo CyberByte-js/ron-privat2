@@ -214,7 +214,8 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
                 var bool:Bool = false;
                 if (data.exists("message"))
                     bool = true;
-                Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Unlocked a new trophy"+(bool ? "... again?" : "!"), "description\ndescription", true);
+                var the:Map<String,String> = GameJoltAPI.pullTrophy(trophyID);
+                Main.gjToastManager.createToast(GameJoltInfo.imagePath, Std.string(the.get("title")), "ok", true);
             });
         }
     }
