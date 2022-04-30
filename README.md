@@ -16,3 +16,5 @@ VS Ron V2.5 is the latest edition of VS Ron which adds in epic cool stuff!!!1!!!
 - Small Tweaks to Optimize Code
 - Small Visual Tweaks to enhance THE mod experience
 - So much more that we can't even list here
+
+Hi, a Vs Ron dev here. Goddamn this didnt age too well
