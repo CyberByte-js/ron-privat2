@@ -208,6 +208,9 @@ class PlayState extends MusicBeatState
 	var cloudsa:FlxSprite;
 	var witheredRa:FlxSprite;
 	var bgLol:FlxSprite;
+	var groundt:FlxSprite;
+	var lampt:FlxSprite;
+	var groundover:FlxSprite;
 
 	var fc:Bool = true;
 	var fx:FlxSprite;
@@ -873,11 +876,26 @@ class PlayState extends MusicBeatState
 				var glitchSprite = new FlxEffectSprite(bg, [glitchEffect]);
 				add(glitchSprite);*/
 				
-				var ground:FlxSprite = new FlxSprite(-537, -250).loadGraphic(Paths.image('updateron/bg/veryAngreRon_ground'));
-				ground.updateHitbox();
-				ground.active = false;
-				ground.antialiasing = true;
-				add(ground);
+				lampt = new FlxSprite(900, 100);
+				lampt.frames = Paths.getSparrowAtlas('updateron/bg/glitch_lamp');
+				lampt.scale.set(2,2);
+				lampt.animation.addByPrefix('idle', 'lamppost', 24, true);
+				lampt.animation.play('idle');
+				lampt.scrollFactor.set(0.9, 0.9);
+				add(lampt);
+				lampt.alpha = 0;
+				groundt = new FlxSprite(-537, -290).loadGraphic(Paths.image('updateron/bg/trojan_ground'));
+				groundt.updateHitbox();
+				groundt.active = false;
+				groundt.antialiasing = true;
+				add(groundt);
+				groundt.alpha = 0;
+				
+				groundover = new FlxSprite(-537, -250).loadGraphic(Paths.image('updateron/bg/veryAngreRon_ground'));
+				groundover.updateHitbox();
+				groundover.active = false;
+				groundover.antialiasing = true;
+				add(groundover);
 				ronAnimation = new FlxSprite();
 				ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron', 'shared');
 				ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
@@ -3052,10 +3070,14 @@ class PlayState extends MusicBeatState
 				member.y = luaModchart.getVar("strum" + i + "Y", "float");
 				member.angle = luaModchart.getVar("strum" + i + "Angle", "float");
 			}*/
-
-			FlxG.camera.angle = luaModchart.getVar('cameraAngle', 'float');
-			camHUD.angle = luaModchart.getVar('camHudAngle','float');
-			camHUD.alpha = luaModchart.getVar('camHudAlpha','float');
+			
+			//hacky fix but whatever
+			if (curSong != 'Trojan-Virus')
+			{
+				FlxG.camera.angle = luaModchart.getVar('cameraAngle', 'float');
+				camHUD.angle = luaModchart.getVar('camHudAngle','float');
+				camHUD.alpha = luaModchart.getVar('camHudAlpha','float');
+			}
 
 			if (luaModchart.getVar("showOnlyStrums",'bool'))
 			{
@@ -4985,6 +5007,8 @@ class PlayState extends MusicBeatState
 			});
 		}
 	}
+	
+	var appearscreen:Bool = true;
 
 	var trainMoving:Bool = false;
 	var trainFrameTiming:Float = 0;
@@ -5625,17 +5649,49 @@ class PlayState extends MusicBeatState
 		if (curSong == 'Trojan-Virus')
 		{
 			switch (curStep) {
-				case 384:
+				case 256:
 					FlxTween.tween(cloudsa, {alpha: 0}, 1, {ease: FlxEase.quadIn});
 					FlxTween.tween(witheredRa, {alpha: 0}, 1, {ease: FlxEase.quadIn});
 					FlxTween.tween(bgLol, {alpha: 0}, 1, {ease: FlxEase.quadIn});
 					camHUD.shake(0.002);
 					defaultCamZoom += 0.2;
 				case 640:
+					defaultCamZoom -= 0.3;
+				case 896 | 900 | 904:
+					defaultCamZoom += 0.05;
+				case 908:
+					defaultCamZoom += 0.05;
+					FlxTween.tween(lampt, {alpha: 1}, 1, {ease: FlxEase.quadOut});
+					FlxTween.tween(groundover, {alpha: 0}, 1, {ease: FlxEase.quadOut});
+					FlxTween.tween(groundt, {alpha: 1}, 0.25, {ease: FlxEase.quadOut});
+				case 1160:
+					camHUD.alpha = 0;
+					FlxG.camera.angle = 10;
+					defaultCamZoom += 0.15;
+					FlxG.camera.zoom += 0.15;
+				case 1164:
+					FlxG.camera.angle = -10;
+					defaultCamZoom += 0.15;
+					FlxG.camera.zoom += 0.15;
+					FlxTween.tween(camHUD, {alpha: 1}, 0.25, {ease: FlxEase.quadOut});
+				case 1166:
+					FlxG.camera.angle = 10;
+					defaultCamZoom += 0.15;
+					FlxG.camera.zoom += 0.15;
+				case 1168:
+					FlxG.camera.angle = -10;
+					FlxTween.tween(camHUD, {angle: 0}, 1, {ease: FlxEase.quadOut});
+					FlxTween.tween(camGame, {angle: 0}, 1, {ease: FlxEase.quadOut});
+					FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
+					camHUD.setFilters([ShadersHandler.chromaticAberration]);
+					defaultCamZoom -= 0.45;
+				case 1424:
 					defaultCamZoom -= 0.2;
-				case 770:
-					camHUD.visible = false;
-				case 768:
+				case 1584:
+					//error popup
+				case 1692:
+					FlxTween.tween(camHUD, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
+				case 1708:
 					dad.visible = false;
 					ronAnimation.x = dad.x/*-360*/;
 					ronAnimation.y = dad.y/*-430*/;
@@ -5643,11 +5699,42 @@ class PlayState extends MusicBeatState
 					ronAnimation.animation.play('idle', true);
 					defaultCamZoom = 1;
 					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.4, {ease: FlxEase.expoOut,});
-				case 870:
-					camHUD.visible = true;
 			}
-			if ((curStep >= 384) && (curStep <= 640))
+			if ((curStep >= 256) && (curStep <= 640))
 				FlxG.camera.shake(0.00625, 0.1);
+			if ((curStep >= 908) && (curStep <= 1424))
+			{
+				FlxG.camera.shake(0.00625, 0.1);
+				var amount = curBeat/20;
+				if (FlxG.random.bool(amount) && appearscreen)
+				{
+					var randomthing:FlxSprite = new FlxSprite(FlxG.random.int(300, 1077), FlxG.random.int(0, 622));
+					FlxG.sound.play(Paths.sound("pop_up"), 1);
+					randomthing.loadGraphic(Paths.image('updateron/PopUps/popup' + FlxG.random.int(1,8), 'shared'));
+					randomthing.updateHitbox();
+					randomthing.alpha = 0;
+					randomthing.antialiasing = true;
+					add(randomthing);
+					randomthing.cameras = [camHUD];
+					appearscreen = false;
+					if (storyDifficulty == 0)
+					{
+						FlxTween.tween(randomthing, {width: 1, alpha: 0.5}, 0.2, {ease: FlxEase.sineOut});
+					}
+					else
+					{
+						FlxTween.tween(randomthing, {width: 1, alpha: 1}, 0.2, {ease: FlxEase.sineOut});
+					}
+					new FlxTimer().start(1.5 , function(tmr:FlxTimer)
+					{
+						appearscreen = true;
+					});
+					new FlxTimer().start(2 , function(tmr:FlxTimer)
+					{
+						remove(randomthing);
+					});
+				}
+			}
 			
 			camHUD.shake(0.00125, 0.15);
 		}
