@@ -216,6 +216,7 @@ class PlayState extends MusicBeatState
 	var fc:Bool = true;
 	var fx:FlxSprite;
 	var blackeffect:FlxSprite;
+	var bgbleffect:FlxSprite;
 	var ronAnimation:FlxSprite;
 
 	var bgGirls:BackgroundGirls;
@@ -900,12 +901,6 @@ class PlayState extends MusicBeatState
 				groundover.active = false;
 				groundover.antialiasing = true;
 				add(groundover);
-				ronAnimation = new FlxSprite();
-				ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron');
-				ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
-				ronAnimation.animation.play('idle');
-				ronAnimation.visible = false;
-				add(ronAnimation);
 			}
 			case 'hell':
 			{
@@ -965,6 +960,100 @@ class PlayState extends MusicBeatState
 				Estatic.screenCenter();
 				Estatic.alpha = 0;
 				Estatic2 = new FlxSprite();
+				Estatic2.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
+				Estatic2.scale.set(4,4);
+				Estatic2.animation.addByPrefix('idle', 'static instance 1', 24, true);
+				Estatic2.animation.play('idle');
+				Estatic2.scrollFactor.set();
+				Estatic2.screenCenter();
+				Estatic2.alpha = 0;
+			}
+			case 'snow':
+			{
+				defaultCamZoom = 0.85;
+				curStage = 'snow';
+				bgLol = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/ss_sky'));
+				bgLol.updateHitbox();
+				bgLol.scale.x = 1;
+				bgLol.scale.y = 1;
+				bgLol.active = false;
+				bgLol.antialiasing = true;
+				bgLol.screenCenter();
+				bgLol.scrollFactor.set(0.1, 0.1);
+				add(bgLol);
+				var graadienter:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/ss_gradient'));
+				graadienter.updateHitbox();
+				graadienter.screenCenter();
+				graadienter.active = false;
+				graadienter.antialiasing = true;
+				graadienter.scrollFactor.set(0.2, 0.2);
+				add(graadienter);
+				cloudsa = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/ss_clouds'));
+				cloudsa.updateHitbox();
+				cloudsa.scale.x = 0.7;
+				cloudsa.scale.y = 0.7;
+				cloudsa.screenCenter();
+				cloudsa.active = false;
+				cloudsa.antialiasing = true;
+				cloudsa.scrollFactor.set(0.2, 0.2);
+				add(cloudsa);
+				var icicleb:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/ss_iciclesbehind'));
+				icicleb.updateHitbox();
+				icicleb.scale.set(0.65,0.65);
+				icicleb.screenCenter();
+				icicleb.active = false;
+				icicleb.antialiasing = true;
+				icicleb.scrollFactor.set(0.3, 0.3);
+				add(icicleb);
+				var iciclef:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/ss_iciclesnbulb'));
+				iciclef.updateHitbox();
+				iciclef.scale.set(0.65,0.65);
+				iciclef.screenCenter();
+				iciclef.active = false;
+				iciclef.antialiasing = true;
+				iciclef.scrollFactor.set(0.3, 0.3);
+				add(iciclef);
+				bgbleffect = new FlxSprite().makeGraphic(FlxG.width*3, FlxG.height*3, FlxColor.BLACK);
+				bgbleffect.updateHitbox();
+				bgbleffect.antialiasing = true;
+				bgbleffect.screenCenter(XY);
+				bgbleffect.scrollFactor.set();
+				bgbleffect.alpha = 0.5;
+				add(bgbleffect);
+				satan = new FlxSprite(300, 200).loadGraphic(Paths.image('updateron/bg/ss_pentagram'));
+				satan.antialiasing = true;
+				satan.scale.set(1.2,1.2);
+				satan.screenCenter(XY);
+				satan.scrollFactor.set(0.15, 0.15);
+				satan.y -= 100;
+				satan.active = true;
+				add(satan);	
+				var diamond:FlxSprite = new FlxSprite(-100,10).loadGraphic(Paths.image('updateron/bg/ss_diamond'));
+				diamond.updateHitbox();
+				diamond.screenCenter();
+				diamond.active = false;
+				diamond.antialiasing = true;
+				diamond.scrollFactor.set(0.15, 0.15);
+				diamond.y -= 160;
+				add(diamond);
+				var ground:FlxSprite = new FlxSprite(300,200).loadGraphic(Paths.image('updateron/bg/ss_ground'));
+				ground.antialiasing = true;
+				ground.screenCenter(XY);
+				ground.scrollFactor.set(0.9, 0.9);
+				ground.active = false;
+				add(ground);
+				fx = new FlxSprite().loadGraphic(Paths.image('updateron/bg/effect'));
+				fx.setGraphicSize(Std.int(2560 * 0.75));
+				fx.updateHitbox();
+				fx.antialiasing = true;
+				fx.screenCenter(XY);
+				fx.scrollFactor.set(0, 0);
+				fx.alpha = 0.3;		
+				Estatic = new FlxSprite().loadGraphic(Paths.image('updateron/bg/deadly2'));
+				Estatic.scrollFactor.set();
+				Estatic.screenCenter();
+				Estatic.alpha = 0;
+					Estatic2 = new FlxSprite();
 				Estatic2.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
 				Estatic2.scale.set(4,4);
 				Estatic2.animation.addByPrefix('idle', 'static instance 1', 24, true);
@@ -1906,6 +1995,19 @@ class PlayState extends MusicBeatState
 					add(fx);
 					add(Estatic);
 					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
+				case 'bloodshed-b':
+					schoolIntro(doof);
+					add(fx);
+					gf.visible = false;
+					add(Estatic);
+					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
+					blackeffect = new FlxSprite().makeGraphic(FlxG.width*3, FlxG.height*3, FlxColor.BLACK);
+					blackeffect.updateHitbox();
+					blackeffect.antialiasing = true;
+					blackeffect.screenCenter(XY);
+					blackeffect.scrollFactor.set();
+					blackeffect.alpha = 0.25;
+					add(blackeffect);
 				case 'bleeding':
 					startCountdown();
 					add(fx);
@@ -1932,6 +2034,12 @@ class PlayState extends MusicBeatState
 				case 'trojan-virus':
 					schoolIntro(doof);
 					add(Estatic);
+					ronAnimation = new FlxSprite();
+					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron');
+					ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
+					ronAnimation.animation.play('idle');
+					ronAnimation.visible = false;
+					add(ronAnimation);
 				case 'file-manipulation':
 					schoolIntro(doof);
 					add(Estatic2);
@@ -1956,10 +2064,6 @@ class PlayState extends MusicBeatState
 					camFollow.x = dad.getMidpoint().x + 300;
 					FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
 					schoolIntro(doof);
-				case 'bloodshed-b':
-					schoolIntro(doof);
-					add(fx);
-					gf.visible = false;
 				case 'holy-shit-dave-fnf':
 					schoolIntro2(doof2, false);
 				default:
@@ -5456,7 +5560,54 @@ class PlayState extends MusicBeatState
 			Estatic.alpha = (((2-health)/3)+0.2);
 		}
 		
-		if (curSong == 'Bloodshed-b') {
+		if (curSong == 'bloodshed-b') {
+			healthBarBG.alpha = 0;
+			healthBar.alpha = 0;
+			iconP1.visible = true;
+			iconP2.visible = true;
+			iconP2.alpha = (2-(health)-0.25)/2+0.2;
+			iconP1.alpha = (health-0.25)/2+0.2;
+			Estatic.alpha = (((2-health)/3)+0.2);
+			switch (curStep)
+			{
+				case 240:
+					defaultCamZoom += 0.1;
+				case 256:
+					FlxTween.tween(blackeffect, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
+					FlxTween.tween(bgbleffect, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
+					defaultCamZoom += 0.1;
+			}		
+			if ((curStep >= 256) && (curStep <= 512))
+			{
+				FlxG.camera.shake(0.01, 0.1);
+				camHUD.shake(0.001, 0.15);
+				if (fx.alpha < 0.6)
+					fx.alpha += 0.05;			
+				if (curStep == 256)
+				{
+					FlxTween.angle(satan, 0, 359.99, 1.5, { 
+						ease: FlxEase.quadIn, 
+						onComplete: function(twn:FlxTween) 
+						{
+							FlxTween.angle(satan, 0, 359.99, 0.75, { type: FlxTween.LOOPING } );
+						}} 
+					);
+				}
+				if (health > 0.2)
+					health -= 0.05;
+			}
+			else
+			{
+				if ((curStep == 1297) || (curStep == 614))
+					FlxTween.cancelTweensOf(satan);
+				if (satan.angle != 0)
+					FlxTween.angle(satan, satan.angle, 359.99, 0.5, {ease: FlxEase.quadIn});
+				if (fx.alpha > 0.3)
+					fx.alpha -= 0.05;
+			}
+		}
+		
+		if (curSong == 'bloodshed-b-old') {
 			healthBarBG.alpha = 0;
 			healthBar.alpha = 0;
 			iconP1.visible = true;
