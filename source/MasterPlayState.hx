@@ -2,6 +2,7 @@ package;
 
 import flixel.input.gamepad.FlxGamepad;
 import flash.text.TextField;
+import flixel.addons.display.FlxBackdrop;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -27,6 +28,7 @@ class MasterPlayState extends MusicBeatState
 	var selector:FlxText;
 	var curSelected:Int = 0;
 	var bg:FlxSprite;
+	var bgScroll:FlxBackdrop;
 	var fire:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
@@ -75,6 +77,12 @@ class MasterPlayState extends MusicBeatState
 		bg.screenCenter(XY);
 		bg.color = 0xFFE51F89;
 		add(bg);
+		
+		bgScroll = new FlxBackdrop(Paths.image('checkerboard'), 5, 5, true, true);
+		bgScroll.scrollFactor.set();
+		bgScroll.screenCenter();
+		bgScroll.velocity.set(50, 50);
+		add(bgScroll);
 		
 		fire = new FlxSprite();
 		fire.frames = Paths.getSparrowAtlas('escape_fire');
@@ -165,8 +173,9 @@ class MasterPlayState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		bgScroll.color = bg.color;
 		
-		if (curSelected == 6)
+		if (curSelected == 7)
 			setChrome(FlxG.save.data.rgbintense/200);
 		else
 			setChrome(0.0);
@@ -266,7 +275,7 @@ class MasterPlayState extends MusicBeatState
 			}
 		}
 		
-		if (curSelected == 6)
+		if (curSelected == 7)
 		{
 			FlxTween.cancelTweensOf(fire);
 			fire.alpha = 0;
@@ -297,8 +306,10 @@ class MasterPlayState extends MusicBeatState
 			case 4:
 				clr = FlxColor.BLUE;
 			case 5:
-				clr = FlxColor.MAGENTA;
+				clr = FlxColor.ORANGE;
 			case 6:
+				clr = FlxColor.MAGENTA;
+			case 7:
 				clr = FlxColor.BLACK;
 		}
 		

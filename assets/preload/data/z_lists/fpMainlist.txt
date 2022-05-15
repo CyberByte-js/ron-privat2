@@ -1,0 +1,9 @@
+Tutorial:gf:0
+Ron:ron:1
+Wasted:ron-angry:1
+Ayo:ron-mad:1
+Bloodshed-b:hellron:1
+Trojan-Virus:ronPower:2
+File-Manipulation:ron-usb:2
+Recycle-bin:ateloron:2
+Factory-Reset:ateloron:2

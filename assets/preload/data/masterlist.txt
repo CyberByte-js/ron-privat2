@@ -3,5 +3,6 @@ Cook:cookron:1
 Shuttle Man:shuttleman:1
 Bijuu:bijuuron:1
 Dave:dave:1
+Doynhe:douyhe:1
 Extras:gron:1
 Infernal:demonron:1
