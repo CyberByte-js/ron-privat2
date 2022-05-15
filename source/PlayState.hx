@@ -177,6 +177,7 @@ class PlayState extends MusicBeatState
 	public var iconP2:HealthIcon; //what could go wrong?
 	public var camHUD:FlxCamera;
 	private var camGame:FlxCamera;
+	public var camOverlay:FlxCamera;
 
 	public static var offsetTesting:Bool = false;
 
@@ -350,10 +351,13 @@ class PlayState extends MusicBeatState
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
+		camOverlay = new FlxCamera();
+		camOverlay.bgColor.alpha = 0;	
 		camHUD.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD);
+		FlxG.cameras.add(camOverlay);
 
 		FlxCamera.defaultCameras = [camGame];
 		persistentUpdate = true;
@@ -897,10 +901,11 @@ class PlayState extends MusicBeatState
 				groundover.antialiasing = true;
 				add(groundover);
 				ronAnimation = new FlxSprite();
-				ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron', 'shared');
+				ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron');
 				ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
 				ronAnimation.animation.play('idle');
 				ronAnimation.visible = false;
+				add(ronAnimation);
 			}
 			case 'hell':
 			{
@@ -1090,11 +1095,6 @@ class PlayState extends MusicBeatState
 					Estatic.animation.play('idle');
 					Estatic.scrollFactor.set();
 					Estatic.screenCenter();
-					ronAnimation = new FlxSprite();
-					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ateloron-Transform', 'shared');
-					ronAnimation.animation.addByPrefix('idle', 'transformation instance 1', 24);
-					ronAnimation.animation.play('idle');
-					ronAnimation.visible = false;
 					add(Estatic2);
 				}
 			case 'trouble' :
@@ -1932,13 +1932,17 @@ class PlayState extends MusicBeatState
 				case 'trojan-virus':
 					schoolIntro(doof);
 					add(Estatic);
-					add(ronAnimation);
 				case 'file-manipulation':
 					schoolIntro(doof);
-					add(ronAnimation);
 					add(Estatic2);
 					FlxTween.tween(Estatic2, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 					add(Estatic);
+					ronAnimation = new FlxSprite();
+					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ateloron-Transform');
+					ronAnimation.animation.addByPrefix('idle', 'transformation instance 1', 24);
+					ronAnimation.animation.play('idle');
+					ronAnimation.visible = false;
+					add(ronAnimation);
 				case 'trojan-virus-b':
 					add(Estatic);
 					startCountdown();
@@ -1970,6 +1974,39 @@ class PlayState extends MusicBeatState
 		super.create();
 	}
 	
+	function windowSpawn():Void
+	{
+		var amount = curBeat/20;
+		if (FlxG.random.bool(amount) && appearscreen)
+		{
+			var randomthing:FlxSprite = new FlxSprite(FlxG.random.int(300, 1077), FlxG.random.int(0, 622));
+			FlxG.sound.play(Paths.sound("pop_up"), 1);
+			randomthing.loadGraphic(Paths.image('updateron/PopUps/popup' + FlxG.random.int(1,8), 'shared'));
+			randomthing.updateHitbox();
+			randomthing.alpha = 0;
+			randomthing.antialiasing = true;
+			add(randomthing);
+			randomthing.cameras = [camHUD];
+			appearscreen = false;
+			if (storyDifficulty == 0)
+			{
+				FlxTween.tween(randomthing, {width: 1, alpha: 0.5}, 0.2, {ease: FlxEase.sineOut});
+			}
+			else
+			{
+				FlxTween.tween(randomthing, {width: 1, alpha: 1}, 0.2, {ease: FlxEase.sineOut});
+			}
+			new FlxTimer().start(1.5 , function(tmr:FlxTimer)
+			{
+				appearscreen = true;
+			});
+			new FlxTimer().start(2 , function(tmr:FlxTimer)
+			{
+				remove(randomthing);
+			});
+		}
+	}
+
 	function gfdies():Void
 	{
 		//PlayState.atelophobiaCutsceneDone = true;
@@ -2883,6 +2920,9 @@ class PlayState extends MusicBeatState
 			add(black);
 			add(songNameC);
 			add(songNameD);
+			black.cameras = [camOverlay];
+			songNameC.cameras = [camOverlay];
+			songNameD.cameras = [camOverlay];
 			trace(songNameC.fieldWidth);
 			FlxTween.tween(songNameC, {x: songNameC.fieldWidth - 20}, 1, {
 				ease: FlxEase.backInOut,
@@ -3072,7 +3112,7 @@ class PlayState extends MusicBeatState
 			}*/
 			
 			//hacky fix but whatever
-			if (curSong != 'Trojan-Virus')
+			if ((curSong != 'Trojan-Virus') || (curSong != 'File-Manipulation'))
 			{
 				FlxG.camera.angle = luaModchart.getVar('cameraAngle', 'float');
 				camHUD.angle = luaModchart.getVar('camHudAngle','float');
@@ -5688,52 +5728,39 @@ class PlayState extends MusicBeatState
 				case 1424:
 					defaultCamZoom -= 0.2;
 				case 1584:
-					//error popup
-				case 1692:
+					FlxTween.tween(camGame, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
 					FlxTween.tween(camHUD, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
-				case 1708:
-					dad.visible = false;
-					ronAnimation.x = dad.x/*-360*/;
-					ronAnimation.y = dad.y/*-430*/;
-					ronAnimation.visible = true;
-					ronAnimation.animation.play('idle', true);
+					var randomthing:FlxSprite = new FlxSprite();
+					randomthing.loadGraphic(Paths.image('updateron/PopUps/bsod', 'shared'));
+					randomthing.updateHitbox();
+					randomthing.antialiasing = true;
+					add(randomthing);
+					randomthing.screenCenter();
+					randomthing.scale.set(1.2,1.2);
+					randomthing.cameras = [camOverlay];
+					FlxTween.tween(randomthing,{'scale.x':1,'scale.y':1}, 0.25, {ease: FlxEase.sineOut});
+					new FlxTimer().start(5 , function(tmr:FlxTimer)
+					{
+						FlxTween.tween(randomthing, {alpha: 0}, 1, {ease: FlxEase.sineOut});
+						FlxTween.tween(randomthing, {'scale.y':0}, 0.5, {ease: FlxEase.backIn});
+					});
+				case 1692:
+					FlxTween.tween(camGame, {alpha: 1}, 1, {ease: FlxEase.quadInOut});
 					defaultCamZoom = 1;
 					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.4, {ease: FlxEase.expoOut,});
+				case 1708:
+					dad.visible = false;
+					ronAnimation.x = dad.x;
+					ronAnimation.y = dad.y;
+					ronAnimation.visible = true;
+					ronAnimation.animation.play('idle', true);
 			}
 			if ((curStep >= 256) && (curStep <= 640))
 				FlxG.camera.shake(0.00625, 0.1);
 			if ((curStep >= 908) && (curStep <= 1424))
 			{
 				FlxG.camera.shake(0.00625, 0.1);
-				var amount = curBeat/20;
-				if (FlxG.random.bool(amount) && appearscreen)
-				{
-					var randomthing:FlxSprite = new FlxSprite(FlxG.random.int(300, 1077), FlxG.random.int(0, 622));
-					FlxG.sound.play(Paths.sound("pop_up"), 1);
-					randomthing.loadGraphic(Paths.image('updateron/PopUps/popup' + FlxG.random.int(1,8), 'shared'));
-					randomthing.updateHitbox();
-					randomthing.alpha = 0;
-					randomthing.antialiasing = true;
-					add(randomthing);
-					randomthing.cameras = [camHUD];
-					appearscreen = false;
-					if (storyDifficulty == 0)
-					{
-						FlxTween.tween(randomthing, {width: 1, alpha: 0.5}, 0.2, {ease: FlxEase.sineOut});
-					}
-					else
-					{
-						FlxTween.tween(randomthing, {width: 1, alpha: 1}, 0.2, {ease: FlxEase.sineOut});
-					}
-					new FlxTimer().start(1.5 , function(tmr:FlxTimer)
-					{
-						appearscreen = true;
-					});
-					new FlxTimer().start(2 , function(tmr:FlxTimer)
-					{
-						remove(randomthing);
-					});
-				}
+				windowSpawn();
 			}
 			
 			camHUD.shake(0.00125, 0.15);
@@ -5756,22 +5783,14 @@ class PlayState extends MusicBeatState
 					ronAnimation.y = dad.y+55;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
-				case 507:
-					 camHUD.visible = false;
-				case 513:
-					 FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
-				case 532:
-					FlxTween.cancelTweensOf(FlxG.camera);
-				case 535:
-					 FlxTween.tween(FlxG.camera, {zoom: 0.8}, 2);
-				case 545:
-					FlxTween.cancelTweensOf(FlxG.camera);
-				case 544:
-					 camHUD.visible = true;
-				case 560:
-					 defaultCamZoom = 1;
-				case 563:
-					 defaultCamZoom = 0.88;
+				case 507: camHUD.visible = false;
+				case 513: FlxTween.tween(FlxG.camera, {zoom: 2.2}, 4);
+				case 532: FlxTween.cancelTweensOf(FlxG.camera);
+				case 535: FlxTween.tween(FlxG.camera, {zoom: 0.8}, 2);
+				case 545: FlxTween.cancelTweensOf(FlxG.camera);
+				case 544: camHUD.visible = true;
+				case 560: defaultCamZoom = 1;
+				case 563: defaultCamZoom = 0.88;
 				case 538:
 					PlayStateChangeables.scrollSpeed = 3.5;
 					var xx = dad.x-20;
@@ -5781,29 +5800,45 @@ class PlayState extends MusicBeatState
 					add(dad);
 					iconP2.animation.play('ateloron');
 					ronAnimation.visible = false;
-				case 544:
-					 camHUD.visible = true;
+				case 544: camHUD.visible = true;
 				case 556:
-					defaultCamZoom = 0.2;
-					FlxTween.tween(FlxG.camera, {angle: 180}, 0.1, {ease: FlxEase.expoOut,});
+					defaultCamZoom = 0.58;
+					FlxTween.tween(FlxG.camera, {angle: 359.99}, 0.5, {ease: FlxEase.expoOut,});
 				case 562:
-					defaultCamZoom = 0.9;
+					FlxTween.cancelTweensOf(FlxG.camera);
 					FlxG.camera.angle = 0;
-				case 912:
+					defaultCamZoom = 0.88;
+				case 816|820|824|828|848|852|856|880|884|888|892|912|916|920|924:
+					FlxG.camera.angle = 5;
+					defaultCamZoom += 0.0125;
+					FlxG.camera.zoom += 0.0125;
+				case 818|822|826|830|850|854|858|882|886|890|894|914|918|922|926:
+					FlxG.camera.angle = -5;
+					defaultCamZoom += 0.0125;
+					FlxG.camera.zoom += 0.0125;	
+				case 832|864|896:
+					FlxTween.tween(FlxG.camera, {angle: 0}, 0.25, {ease: FlxEase.expoOut,});
+					defaultCamZoom = 0.88;			
+				case 928: 
+					FlxTween.tween(FlxG.camera, {angle: 0}, 0.25, {ease: FlxEase.expoOut,});
 					defaultCamZoom = 0.9;
-				case 1046:
-					FlxTween.tween(camGame, {alpha: 0}, 0.25, {ease: FlxEase.expoOut,});
+				case 1046: FlxTween.tween(camGame, {alpha: 0}, 0.25, {ease: FlxEase.expoOut,});
 				case 1056:
 					camGame.alpha = 1;
 					FlxG.camera.setFilters([ShadersHandler.MosaicShader]);
 					camHUD.setFilters([ShadersHandler.MosaicShader]);
-				case 1131:
+				case 1302: FlxTween.tween(camGame, {alpha: 0}, 0.25, {ease: FlxEase.expoOut,});
+				case 1312:
+					camGame.alpha = 1;
 					FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
 					camHUD.setFilters([ShadersHandler.chromaticAberration]);
 			}
 	
 			if ((curStep >= 538) && (Estatic2.alpha < 0.5))
 				Estatic2.alpha += 0.02;
+				
+			if ((curStep >= 1312))
+				windowSpawn();
 		}
 		if (curSong.toLowerCase() == 'trojan-virus-b')
 			{
